@@ -1,0 +1,169 @@
+15:21:43.029 INFO  --- [main] c.l.example.LStudyRestApplication : Starting LStudyRestApplication on DESKTOP-DJ0B1L0 with PID 12816 (C:\Users\belle\l_study_rest\bin\main started by belle in C:\Users\belle\l_study_rest) 
+15:21:43.038 DEBUG --- [main] c.l.example.LStudyRestApplication : Running with Spring Boot v2.3.2.RELEASE, Spring v5.2.8.RELEASE 
+15:21:43.039 INFO  --- [main] c.l.example.LStudyRestApplication : The following profiles are active: local 
+15:21:45.810 DEBUG --- [main] c.l.example.config.AuthTokenFilter : Filter 'authenticationJwtTokenFilter' configured for use 
+15:21:46.774 INFO  --- [main] c.l.example.LStudyRestApplication : Started LStudyRestApplication in 4.526 seconds (JVM running for 7.066) 
+15:22:28.109 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : testLoginRequest [username=admin, password=admin] 
+15:22:28.461 DEBUG --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:22:28.486 DEBUG --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : ==> Parameters: admin(String) 
+15:22:28.525 TRACE --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:22:28.526 TRACE --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : <==        Row: admin, $2a$10$8W9863VNExQCOIPRm426JeHCj3fVGsM4KOZ40hd2Vn/ZjkT5ITC56, admin, admin, 1, 1, 1, 1 
+15:22:28.529 DEBUG --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:22:28.535 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:22:28.535 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: admin(String) 
+15:22:28.538 TRACE --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:22:28.538 TRACE --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_ADMIN 
+15:22:28.539 TRACE --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:22:28.539 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==      Total: 2 
+15:22:29.767 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : ddddUser [username=admin, password=$2a$10$8W9863VNExQCOIPRm426JeHCj3fVGsM4KOZ40hd2Vn/ZjkT5ITC56, name=admin, phone=admin, uDateTime=null, authorities=[ROLE_ADMIN, ROLE_USER], isAccountNonExpired=true, isAccountNonLocked=true, isCredentialsNonExpired=true, isEnabled=true] 
+15:22:36.332 DEBUG --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:22:36.333 DEBUG --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : ==> Parameters: admin(String) 
+15:22:36.335 TRACE --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:22:36.336 TRACE --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : <==        Row: admin, $2a$10$8W9863VNExQCOIPRm426JeHCj3fVGsM4KOZ40hd2Vn/ZjkT5ITC56, admin, admin, 1, 1, 1, 1 
+15:22:36.337 DEBUG --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:22:36.339 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:22:36.339 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: admin(String) 
+15:22:36.341 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:22:36.342 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_ADMIN 
+15:22:36.342 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:22:36.343 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==      Total: 2 
+15:22:36.360 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AdminController : SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@55231166] 
+15:22:36.360 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : ==>  Preparing: SELECT ta.u_id username, ta.u_name name, ta.u_phone phone, tb.u_auth auth FROM userlist ta LEFT join ( SELECT ta.u_id, GROUP_CONCAT(ta.u_auth SEPARATOR ",") u_auth FROM userauth ta GROUP BY ta.u_id ) tb ON ta.u_id = tb.u_id 
+15:22:36.361 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : ==> Parameters:  
+15:22:36.417 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==    Columns: username, name, phone, auth 
+15:22:36.417 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 11, 11, 11, <<BLOB>> 
+15:22:36.419 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 1111, 111, 111, <<BLOB>> 
+15:22:36.419 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 123, 123, 123, <<BLOB>> 
+15:22:36.419 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 333, 333, 333, <<BLOB>> 
+15:22:36.420 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: aaa, aaa, aaa, <<BLOB>> 
+15:22:36.420 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: aaaa, aaaa, aaaa, <<BLOB>> 
+15:22:36.420 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: ab, ab, ab, <<BLOB>> 
+15:22:36.421 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: abc, abc, aaaadsfadsd, <<BLOB>> 
+15:22:36.421 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: admin, admin, admin, <<BLOB>> 
+15:22:36.421 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: ccc, ccc, ccc, <<BLOB>> 
+15:22:36.421 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: hello, hello, 121212, <<BLOB>> 
+15:22:36.421 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: lcom, lcomputer, 0537107965, <<BLOB>> 
+15:22:36.422 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==      Total: 12 
+15:22:36.422 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AdminController : [UserInfo [username=11, password=null, name=11, phone=11, authorities=[ROLE_USER], auth=null], UserInfo [username=1111, password=null, name=111, phone=111, authorities=[ROLE_USER], auth=null], UserInfo [username=123, password=null, name=123, phone=123, authorities=[ROLE_USER], auth=null], UserInfo [username=333, password=null, name=333, phone=333, authorities=[ROLE_USER], auth=null], UserInfo [username=aaa, password=null, name=aaa, phone=aaa, authorities=[ROLE_ADMIN, ROLE_USER], auth=null], UserInfo [username=aaaa, password=null, name=aaaa, phone=aaaa, authorities=[ROLE_USER], auth=null], UserInfo [username=ab, password=null, name=ab, phone=ab, authorities=[ROLE_USER], auth=null], UserInfo [username=abc, password=null, name=abc, phone=aaaadsfadsd, authorities=[ROLE_USER], auth=null], UserInfo [username=admin, password=null, name=admin, phone=admin, authorities=[ROLE_ADMIN, ROLE_USER], auth=null], UserInfo [username=ccc, password=null, name=ccc, phone=ccc, authorities=[ROLE_USER], auth=null], UserInfo [username=hello, password=null, name=hello, phone=121212, authorities=[ROLE_USER], auth=null], UserInfo [username=lcom, password=null, name=lcomputer, phone=0537107965, authorities=[ROLE_USER], auth=null]] 
+15:23:11.843 DEBUG --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:23:11.843 DEBUG --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.readUser : ==> Parameters: admin(String) 
+15:23:11.844 TRACE --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:23:11.844 TRACE --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.readUser : <==        Row: admin, $2a$10$8W9863VNExQCOIPRm426JeHCj3fVGsM4KOZ40hd2Vn/ZjkT5ITC56, admin, admin, 1, 1, 1, 1 
+15:23:11.845 DEBUG --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:23:11.846 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:23:11.846 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: admin(String) 
+15:23:11.848 TRACE --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:23:11.849 TRACE --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_ADMIN 
+15:23:11.849 TRACE --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:23:11.849 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.readAuthorities : <==      Total: 2 
+15:23:11.962 DEBUG --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.createUser : ==>  Preparing: INSERT INTO userlist ( u_id, u_password, u_name, u_phone, u_isAccountNonExpired, u_isAccountNonLocked, u_isCredentialNonExpired, u_isEnabled ) VALUES ( ?, ?, ?, ?, ?, ?, ?, ? ) 
+15:23:11.963 DEBUG --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.createUser : ==> Parameters: user(String), $2a$10$2iEH7v4uTRaLdtaecdgxyu9zf1lIVmHu.BAHOvgB8I63l5GE9uf3G(String), user(String), user(String), true(Boolean), true(Boolean), true(Boolean), true(Boolean) 
+15:23:11.977 DEBUG --- [http-nio-9000-exec-7] c.l.e.mapper.UserMapper.createUser : <==    Updates: 1 
+15:23:12.004 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.createAuthority : ==>  Preparing: INSERT INTO userauth ( u_id, u_auth ) VALUES (?, ?) ON DUPLICATE KEY UPDATE u_id = ? 
+15:23:12.006 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.createAuthority : ==> Parameters: user(String), ROLE_USER(String), user(String) 
+15:23:12.009 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.UserMapper.createAuthority : <==    Updates: 1 
+15:23:21.290 DEBUG --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:23:21.291 DEBUG --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : ==> Parameters: admin(String) 
+15:23:21.292 TRACE --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:23:21.292 TRACE --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : <==        Row: admin, $2a$10$8W9863VNExQCOIPRm426JeHCj3fVGsM4KOZ40hd2Vn/ZjkT5ITC56, admin, admin, 1, 1, 1, 1 
+15:23:21.293 DEBUG --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:23:21.294 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:23:21.295 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: admin(String) 
+15:23:21.296 TRACE --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:23:21.296 TRACE --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_ADMIN 
+15:23:21.297 TRACE --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:23:21.297 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==      Total: 2 
+15:23:21.299 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : testLoginRequest [username=user, password=user] 
+15:23:21.300 DEBUG --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:23:21.301 DEBUG --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : ==> Parameters: user(String) 
+15:23:21.303 TRACE --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:23:21.303 TRACE --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : <==        Row: user, $2a$10$2iEH7v4uTRaLdtaecdgxyu9zf1lIVmHu.BAHOvgB8I63l5GE9uf3G, user, user, 1, 1, 1, 1 
+15:23:21.303 DEBUG --- [http-nio-9000-exec-10] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:23:21.304 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:23:21.304 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: user(String) 
+15:23:21.306 TRACE --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:23:21.307 TRACE --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:23:21.307 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.UserMapper.readAuthorities : <==      Total: 1 
+15:23:21.437 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : ddddUser [username=user, password=$2a$10$2iEH7v4uTRaLdtaecdgxyu9zf1lIVmHu.BAHOvgB8I63l5GE9uf3G, name=user, phone=user, uDateTime=null, authorities=[ROLE_USER], isAccountNonExpired=true, isAccountNonLocked=true, isCredentialsNonExpired=true, isEnabled=true] 
+15:23:28.552 DEBUG --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:23:28.553 DEBUG --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : ==> Parameters: user(String) 
+15:23:28.554 TRACE --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:23:28.554 TRACE --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : <==        Row: user, $2a$10$2iEH7v4uTRaLdtaecdgxyu9zf1lIVmHu.BAHOvgB8I63l5GE9uf3G, user, user, 1, 1, 1, 1 
+15:23:28.555 DEBUG --- [http-nio-9000-exec-1] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:23:28.556 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:23:28.557 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: user(String) 
+15:23:28.558 TRACE --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:23:28.558 TRACE --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:23:28.558 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.UserMapper.readAuthorities : <==      Total: 1 
+15:23:35.727 DEBUG --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+15:23:35.729 DEBUG --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : ==> Parameters: user(String) 
+15:23:35.734 TRACE --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+15:23:35.735 TRACE --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : <==        Row: user, $2a$10$2iEH7v4uTRaLdtaecdgxyu9zf1lIVmHu.BAHOvgB8I63l5GE9uf3G, user, user, 1, 1, 1, 1 
+15:23:35.736 DEBUG --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+15:23:35.737 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+15:23:35.738 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: user(String) 
+15:23:35.739 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+15:23:35.740 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+15:23:35.740 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==      Total: 1 
+15:23:35.744 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readUser_refresh : ==>  Preparing: SELECT ta.u_id username, ta.u_name name, ta.u_phone phone, tb.u_auth auth FROM userlist ta LEFT join ( SELECT ta.u_id, GROUP_CONCAT(ta.u_auth SEPARATOR ",") u_auth FROM userauth ta GROUP BY ta.u_id ) tb ON ta.u_id = tb.u_id WHERE ta.u_id = ? 
+15:23:35.745 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readUser_refresh : ==> Parameters: user(String) 
+15:23:35.792 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readUser_refresh : <==    Columns: username, name, phone, auth 
+15:23:35.792 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readUser_refresh : <==        Row: user, user, user, <<BLOB>> 
+15:23:35.792 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readUser_refresh : <==      Total: 1 
+15:23:35.793 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : ddddUserInfo [username=user, password=null, name=user, phone=user, authorities=[ROLE_USER], auth=null] 
+15:23:40.253 ERROR --- [http-nio-9000-exec-4] c.l.example.config.JwtUtils : Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
+15:23:40.259 ERROR --- [http-nio-9000-exec-4] c.l.e.config.AuthEntryPointJwt : Unauthorized error: Full authentication is required to access this resource 
+16:25:57.556 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=4m58s875ms300ns). 
+16:37:06.707 INFO  --- [main] c.l.example.LStudyRestApplication : Starting LStudyRestApplication on DESKTOP-DJ0B1L0 with PID 27348 (C:\Users\belle\l_study_rest\bin\main started by belle in C:\Users\belle\l_study_rest) 
+16:37:06.711 DEBUG --- [main] c.l.example.LStudyRestApplication : Running with Spring Boot v2.3.2.RELEASE, Spring v5.2.8.RELEASE 
+16:37:06.711 INFO  --- [main] c.l.example.LStudyRestApplication : The following profiles are active: local 
+16:37:08.752 DEBUG --- [main] c.l.example.config.AuthTokenFilter : Filter 'authenticationJwtTokenFilter' configured for use 
+16:37:09.547 INFO  --- [main] c.l.example.LStudyRestApplication : Started LStudyRestApplication in 3.612 seconds (JVM running for 5.559) 
+17:28:47.012 ERROR --- [http-nio-9000-exec-1] c.l.example.config.JwtUtils : Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
+17:28:47.088 ERROR --- [http-nio-9000-exec-1] c.l.e.config.AuthEntryPointJwt : Unauthorized error: Full authentication is required to access this resource 
+17:28:50.280 ERROR --- [http-nio-9000-exec-3] c.l.example.config.JwtUtils : Invalid JWT token: JWT strings must contain exactly 2 period characters. Found: 0 
+17:28:50.347 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : testLoginRequest [username=aaa, password=aaa] 
+17:28:50.726 DEBUG --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+17:28:50.761 DEBUG --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : ==> Parameters: aaa(String) 
+17:28:50.815 TRACE --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+17:28:50.816 TRACE --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : <==        Row: aaa, $2a$10$cpMOcl3EMkjZTTScB6kyBu24JHCFZB3OUpi5OHAvUD7fifGbAAWl6, aaa, aaa, 1, 1, 1, 1 
+17:28:50.819 DEBUG --- [http-nio-9000-exec-3] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+17:28:50.826 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+17:28:50.827 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: aaa(String) 
+17:28:50.831 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+17:28:50.831 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_ADMIN 
+17:28:50.832 TRACE --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+17:28:50.832 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.UserMapper.readAuthorities : <==      Total: 2 
+17:28:52.054 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : ddddUser [username=aaa, password=$2a$10$cpMOcl3EMkjZTTScB6kyBu24JHCFZB3OUpi5OHAvUD7fifGbAAWl6, name=aaa, phone=aaa, uDateTime=null, authorities=[ROLE_ADMIN, ROLE_USER], isAccountNonExpired=true, isAccountNonLocked=true, isCredentialsNonExpired=true, isEnabled=true] 
+17:28:54.548 DEBUG --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : ==>  Preparing: SELECT u_id as username, u_password as password, u_name as name, u_phone as phone, u_isAccountNonExpired as isAccountNonExpired, u_isAccountNonLocked as isAccountNonLocked, u_isCredentialNonExpired as isCredentialsNonExpired, u_isEnabled as isEnabled FROM userlist WHERE 1=1 AND u_id = ? 
+17:28:54.549 DEBUG --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : ==> Parameters: aaa(String) 
+17:28:54.550 TRACE --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : <==    Columns: username, password, name, phone, isAccountNonExpired, isAccountNonLocked, isCredentialsNonExpired, isEnabled 
+17:28:54.551 TRACE --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : <==        Row: aaa, $2a$10$cpMOcl3EMkjZTTScB6kyBu24JHCFZB3OUpi5OHAvUD7fifGbAAWl6, aaa, aaa, 1, 1, 1, 1 
+17:28:54.551 DEBUG --- [http-nio-9000-exec-4] c.l.e.mapper.UserMapper.readUser : <==      Total: 1 
+17:28:54.552 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : ==>  Preparing: SELECT u_auth FROM userauth WHERE 1=1 AND u_id = ? 
+17:28:54.554 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : ==> Parameters: aaa(String) 
+17:28:54.556 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==    Columns: u_auth 
+17:28:54.557 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_ADMIN 
+17:28:54.557 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==        Row: ROLE_USER 
+17:28:54.557 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.readAuthorities : <==      Total: 2 
+17:28:54.565 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AdminController : SecurityContextHolderAwareRequestWrapper[ org.springframework.security.web.header.HeaderWriterFilter$HeaderWriterRequest@54057f2a] 
+17:28:54.565 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : ==>  Preparing: SELECT ta.u_id username, ta.u_name name, ta.u_phone phone, tb.u_auth auth FROM userlist ta LEFT join ( SELECT ta.u_id, GROUP_CONCAT(ta.u_auth SEPARATOR ",") u_auth FROM userauth ta GROUP BY ta.u_id ) tb ON ta.u_id = tb.u_id 
+17:28:54.566 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : ==> Parameters:  
+17:28:54.622 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==    Columns: username, name, phone, auth 
+17:28:54.623 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 11, 11, 11, <<BLOB>> 
+17:28:54.624 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 1111, 111, 111, <<BLOB>> 
+17:28:54.625 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 123, 123, 123, <<BLOB>> 
+17:28:54.625 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: 333, 333, 333, <<BLOB>> 
+17:28:54.625 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: aaa, aaa, aaa, <<BLOB>> 
+17:28:54.626 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: aaaa, aaaa, aaaa, <<BLOB>> 
+17:28:54.626 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: ab, ab, ab, <<BLOB>> 
+17:28:54.626 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: abc, abc, aaaadsfadsd, <<BLOB>> 
+17:28:54.626 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: admin, admin, admin, <<BLOB>> 
+17:28:54.627 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: ccc, ccc, ccc, <<BLOB>> 
+17:28:54.627 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: hello, hello, 121212, <<BLOB>> 
+17:28:54.627 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: lcom, lcomputer, 0537107965, <<BLOB>> 
+17:28:54.627 TRACE --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==        Row: user, user, user, <<BLOB>> 
+17:28:54.628 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.UserMapper.read_user_list : <==      Total: 13 
+17:28:54.628 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AdminController : [UserInfo [username=11, password=null, name=11, phone=11, authorities=[ROLE_USER], auth=null], UserInfo [username=1111, password=null, name=111, phone=111, authorities=[ROLE_USER], auth=null], UserInfo [username=123, password=null, name=123, phone=123, authorities=[ROLE_USER], auth=null], UserInfo [username=333, password=null, name=333, phone=333, authorities=[ROLE_USER], auth=null], UserInfo [username=aaa, password=null, name=aaa, phone=aaa, authorities=[ROLE_ADMIN, ROLE_USER], auth=null], UserInfo [username=aaaa, password=null, name=aaaa, phone=aaaa, authorities=[ROLE_USER], auth=null], UserInfo [username=ab, password=null, name=ab, phone=ab, authorities=[ROLE_USER], auth=null], UserInfo [username=abc, password=null, name=abc, phone=aaaadsfadsd, authorities=[ROLE_USER], auth=null], UserInfo [username=admin, password=null, name=admin, phone=admin, authorities=[ROLE_ADMIN, ROLE_USER], auth=null], UserInfo [username=ccc, password=null, name=ccc, phone=ccc, authorities=[ROLE_USER], auth=null], UserInfo [username=hello, password=null, name=hello, phone=121212, authorities=[ROLE_USER], auth=null], UserInfo [username=lcom, password=null, name=lcomputer, phone=0537107965, authorities=[ROLE_USER], auth=null], UserInfo [username=user, password=null, name=user, phone=user, authorities=[ROLE_USER], auth=null]] 
+17:43:11.007 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=1m20s176ms651µs800ns). 
+18:02:07.081 WARN  --- [HikariPool-1 housekeeper] com.zaxxer.hikari.pool.HikariPool : HikariPool-1 - Thread starvation or clock leap detected (housekeeper delta=56s45ms13µs700ns). 
