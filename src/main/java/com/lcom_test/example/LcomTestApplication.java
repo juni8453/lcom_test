@@ -8,6 +8,7 @@ public class LcomTestApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(LcomTestApplication.class, args);
+		System.out.println("Hi");
 	}
 
 }

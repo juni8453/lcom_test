@@ -111,7 +111,7 @@ public class AuthController {
 		if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
 			token =  token.substring(7, token.length());
 		}
-		String username = jwtUtils.getUserEmailFromToken(token);
+		String username = JwtUtils.getUserEmailFromToken(token);
 		UserInfo user = userService.readUser_refresh(username);
 
 		 return new ResponseEntity<>(user, HttpStatus.OK);

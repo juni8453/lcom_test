@@ -4,39 +4,56 @@
         <v-flex xs12>
             <v-card class="elevation-12">
                 <v-toolbar
-                color="primary"
+                color="#FBC02D"
                 dark
                 flat
                 >
                 <v-toolbar-title>
-                    Login
+                    Sign Up 
                 </v-toolbar-title>
                 <v-spacer></v-spacer>
                 </v-toolbar>
                 <v-card-text>
                 <v-form>
                     <v-text-field
-                    label="ID"
+                    label="Id"
                     name="username"
-                    v-model="username"
                     prepend-icon="mdi-account"
+                    v-model="username"
                     type="text"
                     ></v-text-field>
 
                     <v-text-field
-                    id="Password"
+                    id="UserPassword"
                     label="Password"
-                    v-model="password"
                     name="password"
                     prepend-icon="mdi-lock"
+                    v-model="password"
                     type="password"
+                    ></v-text-field>
+
+                    <v-text-field
+                    id="UserName"
+                    label="Name"
+                    name="name"
+                    v-model="name"
+                    prepend-icon="mdi-card-account-details"
+                    type="text"
+                    ></v-text-field>
+
+                    <v-text-field
+                    id="UserPhone"
+                    label="Phone"
+                    v-model="phone"
+                    name="phone"
+                    prepend-icon="mdi-phone"
+                    type="text"
                     ></v-text-field>
                 </v-form>
                 </v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="primary" @click="login({username: username, password: password})">Login</v-btn>
-                <v-btn color="#ECEFF1" router :to="{name:'SignUp'}">Sign Up</v-btn>
+                <v-btn color="#FBC02D" @click="SignUp({username: username, password: password, name:name, phone:phone})">Sign Up</v-btn>
                 </v-card-actions>
             </v-card>
         </v-flex>
@@ -45,23 +62,19 @@
 </template>
 
 <script>
-import {mapActions,mapState} from "vuex"
+import { mapActions } from 'vuex'
+
   export default {
     data() {
       return {
         username:null,
         password:null,
+        name:null,
+        phone:null
       }
     },
     methods: {
-   // ...mapActions(["Login"])
-    login(payload) {
-        this.$store.dispatch('loginProcess', payload)
+      ...mapActions(['SignUp']),
     }
-
-  },
-  computed: {
-    ...mapState(["login_err","login_success"])
   }
-}
 </script>

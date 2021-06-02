@@ -23,6 +23,7 @@
 		WHERE			1=1
 		AND				u_id	=	#{username}
 	</select>
+	
 	  <!-- 회원 불러오기(새로고침) --> 
     <select id="readUser_refresh"  resultType="UserInfo">
     	SELECT		ta.u_id					username,
@@ -38,6 +39,7 @@
 							) tb ON ta.u_id = tb.u_id
 		WHERE		ta.u_id = #{username}
 	 </select>
+	 
 	<!-- 권한 읽기(새로고침) -->
     <select id="readAuthorities_refresh" parameterType="String" resultType="org.springframework.security.core.authority.SimpleGrantedAuthority">
     	SELECT			u_auth
@@ -68,6 +70,7 @@
 			#{isEnabled}
 		)
 	</insert>	
+	
 	<!-- 회원 목록 불러오기(admin) -->
     <select id="read_user_list"  resultType="UserInfo">
     	SELECT		ta.u_id					username,
@@ -82,6 +85,7 @@
 									GROUP BY		ta.u_id
 							) tb ON ta.u_id = tb.u_id
 	</select>
+	
 	 <!-- 유저 권한 추가 -->
     <insert id="createAuthority" parameterType="org.springframework.security.core.GrantedAuthority">
     	INSERT INTO userauth (
