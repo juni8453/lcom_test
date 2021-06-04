@@ -5,7 +5,7 @@
       app
     >
       <v-list dense>
-        <v-list-item router :to="{name: 'Login'}">
+        <v-list-item router :to="{name:'Login'}">
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -13,13 +13,12 @@
             <v-list-item-title>Login</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        
-        <v-list-item router :to="{name: 'BoardList'}">
+         <v-list-item router :to="{name:'admin'}">
           <v-list-item-action>
             <v-icon>mdi-card-text-outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>BoardList</v-list-item-title>
+            <v-list-item-title>관리자</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -31,7 +30,8 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>Board</v-toolbar-title>
+      <v-toolbar-title>LcomputerStudy</v-toolbar-title>
+      <v-btn @click="logout()">로그아웃</v-btn>
     </v-app-bar>
 
     <v-main>
@@ -39,7 +39,7 @@
         class="fill-height"
         fluid
       >
-        <router-view></router-view>
+        <router-view/>
       </v-container>
     </v-main>
     <v-footer
@@ -52,12 +52,23 @@
 </template>
 
 <script>
+import {mapMutations, mapState} from "vuex"
+
   export default {
-    props: {
-      source: String,
-    },
     data: () => ({
       drawer: null,
     }),
+    computed: {
+      ...mapState(["Userinfo"])
+    },
+    methods: {
+      ...mapMutations(["logout"])
+    },
+    created() {
+      if(this.Userinfo.User_token === null && localStorage.getItem("token") !== null) {
+        this.$store.commit("INSERT_TOKEN"),
+        this.$store.dispatch('UnpackToken')
+      }
+    }
   }
 </script>
