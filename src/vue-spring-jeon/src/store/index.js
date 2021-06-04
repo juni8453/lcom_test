@@ -6,7 +6,7 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    Userinfo:{User_Id:null,User_Name:null,User_auth:[],User_token:null},
+    Userinfo:{User_Id:null,User_Name:null,User_auth:null,User_token:null},
     boardlist:[],
     board_detail:[],
     UserList:[]
@@ -43,10 +43,10 @@ export default new Vuex.Store({
     localStorage.removeItem("token")
     console.log(state.Userinfo)
     console.log("로그아웃됐니?"+localStorage.getItem("token"))
+    Route.push('/login')
    }
   },
   actions: {
-
     loginProcess({ commit }, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {

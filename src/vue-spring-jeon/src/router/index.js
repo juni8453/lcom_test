@@ -4,7 +4,8 @@ import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import User from '../views/User.vue'
-import admin from '../views/Admin.vue'
+import admin from '../views/admin.vue'
+import BoardList from '../views/BoardList.vue'
 
 Vue.use(VueRouter)
 
@@ -37,8 +38,8 @@ const routes = [
   {
     path: '/admin',
     name: 'admin',
-    component:admin
-  }
+    component: admin
+  },
   
 ]
 
@@ -49,4 +50,3 @@ const router = new VueRouter({
 })
 
 export default router
-​
