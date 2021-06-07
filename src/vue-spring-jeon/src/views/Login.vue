@@ -3,6 +3,20 @@
     <v-layout>
         <v-flex xs12>
             <v-card class="elevation-12">
+               <v-alert
+                  class="mb-3"
+                  :value="isLoginError"
+                  type="error"
+                >
+                  아이디 또는 비밀번호를 확인하세요.
+                </v-alert>
+                <v-alert
+                  class="mb-3"
+                  :value="isLogin"
+                  type="success"
+                >
+                  로그인에 성공했습니다.
+                </v-alert>
                 <v-toolbar
                 color="primary"
                 dark
@@ -53,6 +67,10 @@ import {mapActions,mapState} from "vuex"
         password:null,
       }
     },
+    computed:{
+      ...mapState(['isLogin', 'isLoginError'])
+    },
+
     methods: {
    // ...mapActions(["Login"])
     login(payload) {

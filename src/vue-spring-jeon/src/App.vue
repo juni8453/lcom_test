@@ -5,9 +5,21 @@
       app
     >
       <v-list dense>
-        
-        {{Userinfo.User_auth[0].authority}}
-        <v-list-item router :to="{name:'Login'}">
+        <v-list-item 
+          router :to="{name:'Home'}"
+          >
+          <v-list-item-action>
+            <v-icon>mdi-home</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>Home</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item 
+          v-if="isLogin === false"
+          router :to="{name:'Login'}"
+          >
           <v-list-item-action>
             <v-icon>mdi-home</v-icon>
           </v-list-item-action>
@@ -15,15 +27,28 @@
             <v-list-item-title>Login</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-         <v-list-item 
+
+        <v-list-item
+          v-if="isLogin === true && Userinfo.User_Name === '관리자'" 
           router :to="{name:'admin'}"
-          v-if=" Userinfo.User_auth[0].authority === 'ROLE_ADMIN'"         
           >
           <v-list-item-action>
             <v-icon>mdi-card-text-outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>관리자</v-list-item-title>
+            <v-list-item-title>유저 목록 / 관리자 전용
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
+        <v-list-item 
+          router :to="{name:'BoardList'}"
+          >
+          <v-list-item-action>
+            <v-icon>mdi-card-text-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>게시판 목록</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -36,8 +61,14 @@
       dark
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-toolbar-title>LcomputerStudy</v-toolbar-title>
-      <v-btn @click="logout()">로그아웃</v-btn>
+      <v-toolbar-title>Jeon Board Page</v-toolbar-title>
+      <v-btn
+       v-if="isLogin === true"
+       @click="logout()"
+       small
+      >
+        로그아웃
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -65,7 +96,7 @@ import {mapMutations, mapState} from "vuex"
       drawer: null,
     }),
     computed: {
-      ...mapState(["Userinfo"])
+      ...mapState(["Userinfo", 'isLogin']),
     },
     methods: {
       ...mapMutations(["logout"])

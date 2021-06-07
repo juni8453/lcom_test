@@ -1,5 +1,5 @@
 <template>
-    <div>
+   <!-- <div>
         <h1>회원리스트</h1>
         <table>
           <tr style="font-weight:900;">
@@ -8,18 +8,65 @@
             <td>PHONE</td>
             <td>AUTH</td>
           </tr>
-         <tr v-for="(item, i) in UserList" :key="i">
+         <tr 
+          v-for="(item, i) in UserList" :key="i"
+         >
            <td>{{item.username}}</td>
            <td>{{item.name}}</td>
            <td>{{item.phone}}</td>
            <td>
-            <span v-for="(items, index) in item.authorities" :key="index">
+            <span
+              v-for="(items, index) in item.authorities" :key="index"
+            >
               {{items.authority}}
             </span>
            </td>    
          </tr>
         </table>
-    </div>
+    </div>  -->
+  <div>
+    <v-simple-table 
+      dense
+      
+    >
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-center">
+            ID
+          </th>
+          <th class="text-center">
+            NAME
+          </th>
+          <th class="text-center">
+            PHONE
+          </th>
+          <th class="text-center">
+            AUTHORITY
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in UserList"
+          :key="item.username"
+        >
+          <td>{{ item.username }}</td>
+          <td>{{ item.name }}</td>
+          <td>{{ item.phone }}</td>
+          <td>
+            <span
+              v-for="(items, index) in item.authorities" 
+              :key="index"
+            >
+              {{ items.authority }}
+            </span>
+          </td>
+        </tr>
+      </tbody>
+    </template>
+  </v-simple-table>
+  </div>
 </template>
 <style scoped>
 div {

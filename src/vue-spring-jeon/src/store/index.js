@@ -2,14 +2,28 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import Route from '../router/index'
 import axios from 'axios'
+import createPersistedState from 'vuex-persistedstate'
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
+  plugins:[
+    createPersistedState()
+  ],
+  
   state: {
-    Userinfo:{User_Id:null,User_Name:null,User_auth:null,User_token:null},
+    Userinfo:
+    {
+      User_Id:null,
+      User_Name:null,
+      User_auth:null,
+      User_token:null
+    },
     boardlist:[],
     board_detail:[],
-    UserList:[]
+    UserList:[],
+    isLogin: false,
+    isLoginError: false
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -40,10 +54,20 @@ export default new Vuex.Store({
     state.Userinfo.User_Name = null
     state.Userinfo.User_auth = null
     state.Userinfo.User_token = null
+    state.isLogin = false,
+    state.isLoginError = false
     localStorage.removeItem("token")
     console.log(state.Userinfo)
     console.log("로그아웃됐니?"+localStorage.getItem("token"))
     Route.push('/login')
+   },
+   loginSuccess(state){
+    state.isLoginError = false
+    state.isLogin = true
+   },
+   loginError(state){
+     state.isLogin = false
+     state.isLoginError = true
    }
   },
   actions: {
@@ -56,12 +80,14 @@ export default new Vuex.Store({
                   if (Response.data.username != null) {
                       axios.defaults.headers.common['Authorization'] = `Bearer ${Response.data.token}`
                       localStorage.setItem("token",Response.data.token)
-                      commit('SET_USER', Response.data)      
+                      commit('SET_USER', Response.data)  
+                      commit('loginSuccess')    
                   }
               })
               .catch(Error => {
                   console.log('error')
                   reject(Error)
+                  commit('loginError')
               })
       })
    },
