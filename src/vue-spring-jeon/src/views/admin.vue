@@ -1,33 +1,7 @@
 <template>
-   <!-- <div>
-        <h1>회원리스트</h1>
-        <table>
-          <tr style="font-weight:900;">
-            <td>ID</td>
-            <td>NAME</td>
-            <td>PHONE</td>
-            <td>AUTH</td>
-          </tr>
-         <tr 
-          v-for="(item, i) in UserList" :key="i"
-         >
-           <td>{{item.username}}</td>
-           <td>{{item.name}}</td>
-           <td>{{item.phone}}</td>
-           <td>
-            <span
-              v-for="(items, index) in item.authorities" :key="index"
-            >
-              {{items.authority}}
-            </span>
-           </td>    
-         </tr>
-        </table>
-    </div>  -->
   <div>
-    <v-simple-table 
+    <v-simple-table style="width:90%"
       dense
-      
     >
     <template v-slot:default>
       <thead>
@@ -48,7 +22,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in UserList"
+          v-for="item in calData"
           :key="item.username"
         >
           <td>{{ item.username }}</td>
@@ -65,7 +39,13 @@
         </tr>
       </tbody>
     </template>
-  </v-simple-table>
+    </v-simple-table>
+    <div>
+      <v-pagination
+      v-model="curPageNum"
+      :length="numOfPages" 
+    ></v-pagination>
+    </div>
   </div>
 </template>
 <style scoped>
@@ -74,25 +54,35 @@ div {
   height:100%;
   text-align: center;
 }
-  table {
-    width:400px;
-    margin:50px auto;
-    border-collapse:collapse;
-    text-align: center;
-  }
-  table tr td {
-    border:1px solid #818181;
-    padding:5px;
-  }
 </style>
 <script>
 import { mapState, mapActions } from "vuex"
 export default {
+  data(){
+    return{
+      curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
+      dataPerPage: 20,   // 한 페이지당 보여지는 UserList 갯수
+    }
+  },
+
   created() {
     this.$store.dispatch('admin')
   },
   computed: {
-      ...mapState(["UserList"])
+      ...mapState(["UserList"]),
+      startOfset(){
+        return((this.curPageNum-1)*this.dataPerPage)
+      },
+      endOfset(){
+        return (this.startOfset + this.dataPerPage)
+      },
+      numOfPages(){
+        return Math.ceil(this.UserList.length / this.dataPerPage)
+      },
+      calData(){
+        return this.UserList.slice(this.startOfset, this.endOfset)
+      }
+
   }
 }
 </script>

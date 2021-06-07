@@ -23,7 +23,7 @@ export default new Vuex.Store({
     board_detail:[],
     UserList:[],
     isLogin: false,
-    isLoginError: false
+    isLoginError: false,
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -33,7 +33,7 @@ export default new Vuex.Store({
     SET_USER(state, data) {
       state.Userinfo.User_Id = data.username
       state.Userinfo.User_Name = data.name
-      state.Userinfo.User_auth = data.authorities
+      state.Userinfo.User_auth = data.roles
       state.Userinfo.User_token = data.token
       Route.push("/user")
    },
@@ -77,6 +77,7 @@ export default new Vuex.Store({
           axios.post('http://localhost:9000/api/auth/signin', payload)
               .then(Response => {
                   console.log(Response.data)
+                  //console.log(Response.data.roles[0])
                   if (Response.data.username != null) {
                       axios.defaults.headers.common['Authorization'] = `Bearer ${Response.data.token}`
                       localStorage.setItem("token",Response.data.token)

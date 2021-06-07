@@ -29,7 +29,7 @@
         </v-list-item>
 
         <v-list-item
-          v-if="isLogin === true && Userinfo.User_Name === '관리자'" 
+          v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')" 
           router :to="{name:'admin'}"
           >
           <v-list-item-action>

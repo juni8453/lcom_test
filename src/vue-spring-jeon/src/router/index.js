@@ -6,6 +6,7 @@ import SignUp from '../views/SignUp.vue'
 import User from '../views/User.vue'
 import admin from '../views/admin.vue'
 import BoardList from '../views/BoardList.vue'
+import TestPage from '../views/TestPage'
 
 Vue.use(VueRouter)
 
@@ -39,6 +40,11 @@ const routes = [
     path: '/admin',
     name: 'admin',
     component: admin
+  },
+  {
+    path: '/test',
+    name: 'test',
+    component: TestPage
   },
   
 ]
