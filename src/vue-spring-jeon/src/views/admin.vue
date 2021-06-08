@@ -1,5 +1,14 @@
 <template>
-  <div>
+  <div>    
+    <div style="height:10%">
+      <v-text-field
+      label="유저를 검색하세요"
+      clearable
+      style="width:28%"
+      append-icon="mdi-magnify"
+      > 
+      </v-text-field>
+    </div>
     <v-simple-table style="width:90%"
       dense
     >
@@ -49,12 +58,14 @@
   </div>
 </template>
 <style scoped>
+
 div {
   width:100%;
   height:100%;
   text-align: center;
 }
 </style>
+
 <script>
 import { mapState, mapActions } from "vuex"
 export default {

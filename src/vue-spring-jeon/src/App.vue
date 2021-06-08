@@ -62,6 +62,12 @@
     >
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title>Jeon Board Page</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <div
+       v-if="isLogin === true"
+      >
+        {{Userinfo.User_Name}}님 환영합니다.
+      </div>  
       <v-btn
        v-if="isLogin === true"
        @click="logout()"
