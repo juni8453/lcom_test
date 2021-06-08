@@ -4,6 +4,7 @@ import Route from '../router/index'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
 
+
 Vue.use(Vuex)
 
 export default new Vuex.Store({
@@ -68,7 +69,8 @@ export default new Vuex.Store({
    loginError(state){
      state.isLogin = false
      state.isLoginError = true
-   }
+   },
+
   },
   actions: {
     loginProcess({ commit }, payload) {
@@ -123,7 +125,7 @@ export default new Vuex.Store({
               console.log('admin_error')
               Route.push("/")
           })
-  })
+      })
   },
   UnpackToken({commit}) {
     return new Promise((resolve, reject) => {
@@ -137,7 +139,7 @@ export default new Vuex.Store({
             console.log(Error)
               console.log('unpackToken_error')
           })
-  })
-  }
+    })
+  },
 }
 })

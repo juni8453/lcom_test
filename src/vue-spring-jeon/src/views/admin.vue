@@ -6,6 +6,7 @@
       clearable
       style="width:28%"
       append-icon="mdi-magnify"
+      @click:append="Search()"
       > 
       </v-text-field>
     </div>
@@ -79,6 +80,7 @@ export default {
   created() {
     this.$store.dispatch('admin')
   },
+
   computed: {
       ...mapState(["UserList"]),
       startOfset(){
@@ -92,8 +94,14 @@ export default {
       },
       calData(){
         return this.UserList.slice(this.startOfset, this.endOfset)
-      }
+      },
+  },
 
-  }
+  methods: {
+    Search(){
+      console.log('Search run')
+    }
+  },
+
 }
 </script>

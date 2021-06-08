@@ -50,4 +50,5 @@ public class AdminController {
 			logger.info(userList.toString());
 			  return new ResponseEntity<>(userList, HttpStatus.OK);
 		}
+		
 }
