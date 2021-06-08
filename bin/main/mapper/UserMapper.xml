@@ -73,17 +73,20 @@
 	
 	<!-- 회원 목록 불러오기(admin) -->
     <select id="read_user_list"  resultType="UserInfo">
-    	SELECT		ta.u_id					username,
-		    				ta.u_name			name,
-		    				ta.u_phone			phone,
-							tb.u_auth			auth
-		FROM			userlist ta
-		LEFT join	(
-									SELECT		ta.u_id,
-									GROUP_CONCAT(ta.u_auth SEPARATOR ",") u_auth
-									FROM			userauth ta
-									GROUP BY		ta.u_id
-							) tb ON ta.u_id = tb.u_id
+    	SELECT		ta.u_id				username,
+		    		ta.u_name			name,
+		    		ta.u_phone			phone,
+					tb.u_auth			auth
+		FROM		userlist 			ta
+		LEFT join
+						(
+						SELECT								  ta.u_id,
+						GROUP_CONCAT(ta.u_auth SEPARATOR ",") u_auth
+						FROM								  userauth ta
+						GROUP BY							  ta.u_id
+						) 		
+				 		tb ON ta.u_id = tb.u_id
+		
 	</select>
 	
 	 <!-- 유저 권한 추가 -->

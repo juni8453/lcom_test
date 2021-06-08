@@ -41,6 +41,9 @@ export default new Vuex.Store({
    READ_USER_LIST(state,data) {
     state.UserList = data
    },
+   READ_PAYLOAD_LIST(state,payload) {
+   state.UserList = payload
+   }, 
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },
@@ -112,14 +115,21 @@ export default new Vuex.Store({
             })
     })
    },
-  admin({commit,state}) {
+  admin({commit,state}, payload) {
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
       axios.get('http://localhost:9000/api/admin/adminPage')
           .then(Response => {
             console.log(Response.data)
-             commit('READ_USER_LIST',Response.data)
-          })
+            console.log(payload)
+            console.log(Response.data[0].username)
+              if(payload === null){
+                commit('READ_USER_LIST',Response.data)
+              }
+              if(payload !== null){
+                commit('READ_PAYLOAD_LIST', Response.data)
+              }
+            })
           .catch(Error => {
             // console.log(Error)
               console.log('admin_error')

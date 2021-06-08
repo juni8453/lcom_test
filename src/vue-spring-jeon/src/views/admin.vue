@@ -5,11 +5,14 @@
       label="유저를 검색하세요"
       clearable
       style="width:28%"
+      v-model="search"
       append-icon="mdi-magnify"
-      @click:append="Search()"
+      @click:append="Search(search)"
+      
       > 
       </v-text-field>
     </div>
+   
     <v-simple-table style="width:90%"
       dense
     >
@@ -17,7 +20,7 @@
       <thead>
         <tr>
           <th class="text-center">
-            ID
+            ID 
           </th>
           <th class="text-center">
             NAME
@@ -55,6 +58,7 @@
       v-model="curPageNum"
       :length="numOfPages" 
     ></v-pagination>
+
     </div>
   </div>
 </template>
@@ -74,6 +78,7 @@ export default {
     return{
       curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
       dataPerPage: 20,   // 한 페이지당 보여지는 UserList 갯수
+      search: '',
     }
   },
 
@@ -98,8 +103,9 @@ export default {
   },
 
   methods: {
-    Search(){
+    Search(payload){
       console.log('Search run')
+      this.$store.dispatch('admin', payload)
     }
   },
 
