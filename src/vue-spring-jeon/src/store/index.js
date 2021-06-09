@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Route from '../router/index'
@@ -41,9 +42,6 @@ export default new Vuex.Store({
    READ_USER_LIST(state,data) {
       state.UserList = data
    },
-   READ_PAYLOAD_LIST(state,payload) {
-   state.UserList = payload
-   }, 
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },
@@ -124,7 +122,9 @@ export default new Vuex.Store({
             // read_user_list(); 실행 > userlist 변수에 db값 대입 
             console.log(Response.data)
             console.log(payload)
-
+            commit('READ_USER_LIST',Response.data)
+            //db에서 가져온 데이터를 commit 
+          })
           .catch(Error => {
             // console.log(Error)
               console.log('admin_error')
