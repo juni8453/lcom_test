@@ -47,11 +47,13 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public List<UserInfo>read_user_list() {
-		return userMapper.read_user_list();
+	public List<UserInfo>read_user_list(String keyword) {
+		return userMapper.read_user_list(keyword);
 	}
 	//유저읽기 새로고침
-		public UserInfo readUser_refresh(String username) {
-			return userMapper.readUser_refresh(username);
-		}
+	public UserInfo readUser_refresh(String username) {
+		return userMapper.readUser_refresh(username);
+	}
+
+
 }

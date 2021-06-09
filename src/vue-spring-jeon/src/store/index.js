@@ -39,7 +39,7 @@ export default new Vuex.Store({
       Route.push("/user")
    },
    READ_USER_LIST(state,data) {
-    state.UserList = data
+      state.UserList = data
    },
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
@@ -112,13 +112,17 @@ export default new Vuex.Store({
             })
     })
    },
-  admin({commit,state}) {
+  admin({commit,state}, payload) {
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.get('http://localhost:9000/api/admin/adminPage')
+      axios.get('http://localhost:9000/api/admin/adminPage', payload)
           .then(Response => {
+            // Response.data = {username, name, phone, auth}
+            // read_user_list(); 실행 > userlist 변수에 db값 대입 
             console.log(Response.data)
-             commit('READ_USER_LIST',Response.data)
+            console.log(payload)
+            commit('READ_USER_LIST',Response.data)
+            //db에서 가져온 데이터를 commit 
           })
           .catch(Error => {
             // console.log(Error)

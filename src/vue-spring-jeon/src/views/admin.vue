@@ -3,10 +3,11 @@
     <div style="height:10%">
       <v-text-field
       label="유저를 검색하세요"
+      v-model="search"
       clearable
       style="width:28%"
       append-icon="mdi-magnify"
-      @click:append="Search()"
+      @click:append="Search(search)"
       > 
       </v-text-field>
     </div>
@@ -74,6 +75,7 @@ export default {
     return{
       curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
       dataPerPage: 20,   // 한 페이지당 보여지는 UserList 갯수
+      search:''
     }
   },
 
@@ -98,10 +100,16 @@ export default {
   },
 
   methods: {
-    Search(){
+    Search(keyword){
       console.log('Search run')
+      let payload = {
+        params: {
+          keyword: keyword
+        }
+      }; // params로 넘겨주는 방법
+      this.$store.dispatch('admin', payload)
+      //  let tmp = {params: {ID: 12345}} 예시
     }
   },
-
 }
 </script>

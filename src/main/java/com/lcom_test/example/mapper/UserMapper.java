@@ -15,9 +15,10 @@ public interface UserMapper {
 		 //유저생성
 			public void createUser(User user);
 		//회원목록 불러오기
-			public List<UserInfo>read_user_list();
+			public List<UserInfo>read_user_list(String keyword);
 		 // 권한 읽기
 			public List<GrantedAuthority> readAuthorities(String username);
 		 // 권한 생성
 			public void createAuthority(User user);
+			
 }

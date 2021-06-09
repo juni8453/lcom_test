@@ -17,6 +17,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.User;
@@ -44,11 +45,11 @@ public class AdminController {
 	
 		@GetMapping("/adminPage")
 		@PreAuthorize("hasRole('ROLE_ADMIN')")
-		public ResponseEntity<?>  AccessAdmin(HttpServletRequest request) {
-			logger.info(request.toString());
-			List<UserInfo> userList = userService.read_user_list();
-			logger.info(userList.toString());
-			  return new ResponseEntity<>(userList, HttpStatus.OK);
-		}
+		public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, @RequestParam(value="keyword", required=false) String keyword) {
+			logger.info(request.toString());			
+				List<UserInfo> userList = userService.read_user_list(keyword);
+				logger.info(userList.toString());	
+				  return new ResponseEntity<>(userList, HttpStatus.OK);
 		
-}
+		}
+	}
