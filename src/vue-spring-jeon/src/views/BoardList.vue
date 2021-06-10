@@ -1,52 +1,98 @@
 <template>
-  <v-container fluid fill-height>
-    <v-card width="100vw">
-      <v-data-table
-        :headers="headers"
-        :items="desserts"
-        class="elevation-1"
-      >
-        <template slot="items" slot-scope="props">
-          <td>{{ props.item.idx }}</td>
-          <td class="text-xs-right">{{props.item.content}}</td>
-          <td class="text-xs-right">{{ props.item.writer }}</td>
-          <td class="text-xs-right">{{ props.item.date }}</td>
-          <td class="text-xs-right">{{ props.item.views }}</td>
-        </template>
-      </v-data-table>
-    </v-card>
-  </v-container>  
+  <div>    
+    <div style="height:10%">
+      <v-text-field
+      label="키워드를 검색하세요"
+      clearable
+      style="width:28%"
+      append-icon="mdi-magnify"
+      > 
+      </v-text-field>
+    </div>
+    <v-simple-table style="width:90%"
+      dense
+    >
+    <template v-slot:default>
+      <thead>
+        <tr>
+          <th class="text-center">
+            번호
+          </th>
+          <th class="text-center">
+            제목
+          </th>
+          <th class="text-center">
+            작성자
+          </th>
+          <th class="text-center">
+            작성일자
+          </th>
+          <th class="text-center">
+            조회수
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr
+          v-for="item in calData"
+          :key="item.bId"
+        >
+          <td>{{ item.bId }}</td>
+          <td>{{ item.bTitle }}</td>
+          <td>{{ item.bWriter }}</td>
+          <td>{{ item.bDateTime}}</td>
+          <td>{{ item.bViews}}</td>  
+        </tr>
+      </tbody>
+    </template>
+    </v-simple-table>
+    <div>
+      <v-pagination
+      v-model="curPageNum"
+      :length="numOfPages" 
+    ></v-pagination>
+    </div>
+  </div>
 </template>
+<style scoped>
 
+div {
+  width:100%;
+  height:100%;
+  text-align: center;
+}
+</style>
 
 <script>
-import { mapState } from "vuex"
-  export default {
-    data () {
-      return {
-        headers: [
-          {
-            text: '게시물 번호',
-            align: 'left',
-            sortable: false,
-            value: 'idx'
-          },
-          { text: '제목', value: 'content' },
-          { text: '작성자', value: 'writer' },
-          { text: '작성일자', value: 'date' },
-          { text: '조회수', value: 'views' }
-        ],
-        desserts: []
-      }
-    },
+import { mapState, mapActions } from "vuex"
+export default {
+  data(){
+    return{
+      curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
+      dataPerPage: 20,   // 한 페이지당 보여지는 boardlist 갯수
+
+    }
+  },
     created() {
       this.$store.dispatch('BoardList')
     },
     computed: {
       ...mapState(["boardlist"]),
+      startOfset(){
+        return((this.curPageNum-1)*this.dataPerPage)
+      },
+      endOfset(){
+        return((this.startOfset + this.dataPerPage))
+      },
+      numOfPages(){
+        return Math.ceil(this.boardlist.length / this.dataPerPage)
+      },
+      calData(){
+        return this.boardlist.slice(this.startOfset, this.endOfset)
+      }
     },
-    methods: {
-
-    }
-  }
+  methods: {
+   
+  },
+  }  
 </script>

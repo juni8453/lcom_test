@@ -51,6 +51,18 @@
             <v-list-item-title>게시판 목록</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+
+        <v-list-item 
+          router :to="{name:'BoardWrite'}"
+          >
+          <v-list-item-action>
+            <v-icon>mdi-card-text-outline</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>글 작성</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+
       </v-list>
       
     </v-navigation-drawer>

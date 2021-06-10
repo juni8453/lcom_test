@@ -43,7 +43,7 @@ export default new Vuex.Store({
     state.UserList = data
    },
    READ_BOARD_LIST(state,data) {
-    state.BoardList = data
+    state.boardlist = data
    },
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
@@ -155,6 +155,7 @@ export default new Vuex.Store({
       axios.get('http://localhost:9000/api/auth/boardlist')
       .then(Response => {
         console.log(Response.data)
+        
         commit('READ_BOARD_LIST', Response.data)
       })
       .catch(Error => {

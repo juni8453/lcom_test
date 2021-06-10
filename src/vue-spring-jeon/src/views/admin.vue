@@ -109,6 +109,7 @@ export default {
       }; // params로 넘겨주는 방법
       this.$store.dispatch('admin', payload)
       //  let tmp = {params: {ID: 12345}} 예시
+
     }
   },
 }
