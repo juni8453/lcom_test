@@ -132,4 +132,14 @@ public class AuthController {
 		logger.info(boardlist.toString());
 		return new ResponseEntity<>(boardlist, HttpStatus.OK);
 	}
+	
+	@PostMapping("/boardwrite")
+	public ResponseEntity<?> boardwirte(@RequestBody Board board){
+		board.getbTitle();
+		board.getbContent();
+		board.getUsername();
+		
+		boardService.insertBoard(board);
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
 }

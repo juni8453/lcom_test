@@ -39,7 +39,7 @@
         >
           <td>{{ item.bId }}</td>
           <td>{{ item.bTitle }}</td>
-          <td>{{ item.bWriter }}</td>
+          <td>{{ item.username }}</td>
           <td>{{ item.bDateTime}}</td>
           <td>{{ item.bViews}}</td>  
         </tr>

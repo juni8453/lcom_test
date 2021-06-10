@@ -5,6 +5,7 @@ public class JoinRequest {
 	private String password;
 	private String name;
 	private String phone;
+	
 	public String getUsername() {
 		return username;
 	}
@@ -29,6 +30,7 @@ public class JoinRequest {
 	public void setPhone(String phone) {
 		this.phone = phone;
 	}
+	
 	@Override
 	public String toString() {
 		return "JoinRequest [username=" + username + ", password=" + password + ", name=" + name + ", phone=" + phone

@@ -8,4 +8,6 @@ import com.lcom_test.example.domain.Board;
 public interface BoardMapper {
 	public List<Board> selectBoardList();
 
+	public void insertBoard(Board board);
+
 }

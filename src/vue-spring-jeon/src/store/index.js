@@ -103,6 +103,7 @@ export default new Vuex.Store({
     return new Promise((resolve, reject) => {
         axios.post('http://localhost:9000/api/auth/signup', payload)
             .then(Response => {
+                console.log(payload)
                 console.log(Response.data)
                 if(Response.data === "success") {
                   Route.push("/login")
@@ -163,6 +164,25 @@ export default new Vuex.Store({
         Route.push("/")
       })
     })
+  },
+  BoardWrite({commit, state}, payload){
+    return new Promise((resolve, reject) => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+      axios.post('http://localhost:9000/api/auth/boardwrite', payload)
+        .then(Response => {
+          console.log(payload)
+          console.log(Response.data)
+          if(Response.data === "success") {
+            Route.push("/boardlist")
+          }
+      })
+      .catch(Error => {
+          console.log('error')
+          reject(Error)
+          alert("Error!")
+          Route.push("/boardlist")
+        })
+      })
+    },
   }
-}
 })

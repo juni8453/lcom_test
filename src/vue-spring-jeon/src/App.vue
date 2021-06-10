@@ -111,7 +111,6 @@ import {mapMutations, mapState} from "vuex"
 
   export default {
     data: () => ({
-      boardvo : null,
       drawer: null,
     }),
     computed: {
