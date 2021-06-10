@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.lcom_test.example.mapper.BoardMapper">
+	<select id="selectBoardList" resultType="Board">
+	     SELECT 		b_id		as bId,
+	     				b_writer 	as bWriter,
+	     				b_title 	as bTitle,
+	     				b_content   as bContent,
+	     				b_datetime  as bDateTime,
+	     				b_views		as bViews,
+	     				b_group		as bGroup,
+	     				b_order		as bOrder,
+	     				b_depth		as bDepth,
+	     				u_id		as username
+	     					
+		 FROM 			vue_board	
+	</select>
+</mapper>

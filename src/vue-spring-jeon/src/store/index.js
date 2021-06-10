@@ -40,7 +40,10 @@ export default new Vuex.Store({
       Route.push("/user")
    },
    READ_USER_LIST(state,data) {
-      state.UserList = data
+    state.UserList = data
+   },
+   READ_BOARD_LIST(state,data) {
+    state.BoardList = data
    },
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
@@ -146,5 +149,19 @@ export default new Vuex.Store({
           })
     })
   },
+  BoardList({commit, state}){
+    return new Promise((resolve, reject) => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+      axios.get('http://localhost:9000/api/auth/boardlist')
+      .then(Response => {
+        console.log(Response.data)
+        commit('READ_BOARD_LIST', Response.data)
+      })
+      .catch(Error => {
+        console.log(Error)
+        Route.push("/")
+      })
+    })
+  }
 }
 })

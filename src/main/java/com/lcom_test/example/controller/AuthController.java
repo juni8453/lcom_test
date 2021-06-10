@@ -3,6 +3,7 @@ package com.lcom_test.example.controller;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -20,20 +21,25 @@ import org.springframework.security.core.authority.AuthorityUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.ui.Model;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.lcom_test.example.config.JwtUtils;
+import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 import com.lcom_test.example.request.JoinRequest;
 import com.lcom_test.example.request.LoginRequest;
 import com.lcom_test.example.response.JwtResponse;
+import com.lcom_test.example.service.BoardService;
 import com.lcom_test.example.service.UserService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -54,6 +60,8 @@ public class AuthController {
 	
 	@Autowired
 	UserService userService;
+	
+	@Autowired BoardService boardService;
 	
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {
@@ -82,7 +90,6 @@ public class AuthController {
 	   public ResponseEntity<?> sinupUser(@Validated @RequestBody JoinRequest joinRequest) {
 	      
 	      String encodedPassword = new BCryptPasswordEncoder().encode(joinRequest.getPassword());
-	      
 	      User user = new User();
 	      
 	      //유저 데이터 세팅
@@ -103,8 +110,10 @@ public class AuthController {
 	      
 	      return new ResponseEntity<>("success", HttpStatus.OK);
 	   }
+	
 	@GetMapping("/unpackToken")
 	public ResponseEntity<?> unpackToken(HttpServletRequest request) {
+		
 		String token = new String();
 		token =  request.getHeader("Authorization");
 		
@@ -117,4 +126,10 @@ public class AuthController {
 		 return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
+	@GetMapping("/boardlist")
+	public ResponseEntity<?> boardlist(Board board) {
+		List<Board> boardlist = boardService.selectBoardList();
+		logger.info(boardlist.toString());
+		return new ResponseEntity<>(boardlist, HttpStatus.OK);
+	}
 }

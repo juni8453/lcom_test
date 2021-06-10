@@ -99,13 +99,16 @@ import {mapMutations, mapState} from "vuex"
 
   export default {
     data: () => ({
+      boardvo : null,
       drawer: null,
     }),
     computed: {
       ...mapState(["Userinfo", 'isLogin']),
     },
     methods: {
-      ...mapMutations(["logout"])
+      ...mapMutations(["logout"]),
+       
+     
     },
     created() {
       if(this.Userinfo.User_token === null && localStorage.getItem("token") !== null) {
