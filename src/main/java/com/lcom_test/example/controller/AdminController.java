@@ -45,7 +45,9 @@ public class AdminController {
 	
 		@GetMapping("/adminPage")
 		@PreAuthorize("hasRole('ROLE_ADMIN')")
-		public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, @RequestParam(value="keyword", required=false) String keyword) {
+		public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, 
+			@RequestParam(value="keyword", required=false) String keyword) {
+			
 			logger.info(request.toString());			
 				List<UserInfo> userList = userService.read_user_list(keyword);
 				logger.info(userList.toString());	

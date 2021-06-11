@@ -150,13 +150,13 @@ export default new Vuex.Store({
           })
     })
   },
-  BoardList({commit, state}){
+  BoardList({commit, state}, payload){
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.get('http://localhost:9000/api/auth/boardlist')
+      axios.get('http://localhost:9000/api/auth/boardlist',payload)
       .then(Response => {
         console.log(Response.data)
-        
+        console.log(payload)
         commit('READ_BOARD_LIST', Response.data)
       })
       .catch(Error => {

@@ -1,14 +1,33 @@
 <template>
-  <div>    
-    <div style="height:10%">
-      <v-text-field
-      label="키워드를 검색하세요"
-      clearable
-      style="width:28%"
-      append-icon="mdi-magnify"
-      > 
-      </v-text-field>
-    </div>
+  <div>  
+    <!-- <v-container>
+      <v-row align="center">
+        <v-col
+          class="d-flex"
+          cols="12"
+          sm="2"
+        >
+          <v-select
+            :items="items"
+            label="선택하세요"
+            dense
+            outlined
+          ></v-select>
+        </v-col>  
+          <v-col
+            class="d-flex"
+            cols="12"
+            sm="5"
+          >
+            <v-text-field
+              v-model="message3"
+              filled
+              label="입력해주세요"
+              clearable
+            ></v-text-field>
+          </v-col>
+      </v-row>
+    </v-container> -->
     <v-simple-table style="width:90%"
       dense
     >
@@ -38,7 +57,7 @@
           :key="item.bId"
         >
           <td>{{ item.bId }}</td>
-          <td>{{ item.bTitle }}</td>
+          <td>{{ item.bTitle }}</td>        
           <td>{{ item.username }}</td>
           <td>{{ item.bDateTime}}</td>
           <td>{{ item.bViews}}</td>  
@@ -58,9 +77,10 @@
 
 div {
   width:100%;
-  height:100%;
+ /* height:100%;*/
   text-align: center;
 }
+
 </style>
 
 <script>
@@ -69,8 +89,10 @@ export default {
   data(){
     return{
       curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
-      dataPerPage: 20,   // 한 페이지당 보여지는 boardlist 갯수
-
+      dataPerPage: 10,   // 한 페이지당 보여지는 boardlist 갯수
+      search: '',
+      // items: ['제목', '아이디'],
+      // message3: 'Hey!',
     }
   },
     created() {
@@ -92,7 +114,14 @@ export default {
       }
     },
   methods: {
-   
+    SearchBoard(keyword){
+      let payload = {
+        params: {
+          keyword:keyword
+        }
+      }
+      this.$store.dispatch('BoardList', payload)  
+    }
   },
-  }  
+}  
 </script>
