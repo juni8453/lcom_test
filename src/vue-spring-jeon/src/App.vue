@@ -43,6 +43,7 @@
 
         <v-list-item 
           router :to="{name:'BoardList'}"
+          @click="BoardList()"
           >
           <v-list-item-action>
             <v-icon>mdi-card-text-outline</v-icon>
@@ -54,6 +55,7 @@
 
         <v-list-item 
           router :to="{name:'BoardWrite'}"
+          @click="BoardWrite()"
           >
           <v-list-item-action>
             <v-icon>mdi-card-text-outline</v-icon>
@@ -87,6 +89,32 @@
       >
         로그아웃
       </v-btn>
+      <div class="text-center">
+        <v-menu offset-y>
+          <template v-slot:activator="{ on,attrs }">
+            <v-btn
+              color="primary"
+              dark
+              v-bind="attrs"
+              v-on="on"
+            >상세 메뉴
+            </v-btn>
+          </template>
+
+          <v-list>
+            <v-list-item
+              v-for="(item,index) in items"
+              :key="index"
+            >
+              <v-list-item-title
+              >
+                {{item.title}}
+              </v-list-item-title>
+            </v-list-item>
+          </v-list>
+
+        </v-menu>
+      </div>
     </v-app-bar>
 
     <v-main>
@@ -108,17 +136,33 @@
 
 <script>
 import {mapMutations, mapState} from "vuex"
+import Route from '../src/router/index'
 
   export default {
     data: () => ({
       drawer: null,
+      items:[
+        {title: '마이페이지'},
+        {title: '로그아웃'}
+      ]
     }),
     computed: {
-      ...mapState(["Userinfo", 'isLogin']),
+      ...mapState(["Userinfo", 'isLogin', 'isLoginError']),
     },
     methods: {
       ...mapMutations(["logout"]),
-       
+       BoardList(){
+         if(this.isLogin === false){
+          alert('로그인이 필요한 서비스입니다.')
+          Route.push("/login")
+         }
+       },
+       BoardWrite(){
+         if(this.isLogin === false){
+           alert('로그인이 필요한 서비스입니다.')
+           Route.push("/login")
+         }
+       }
      
     },
     created() {

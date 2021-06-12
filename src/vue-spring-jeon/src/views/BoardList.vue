@@ -1,76 +1,58 @@
 <template>
-  <div>  
-    <!-- <v-container>
-      <v-row align="center">
-        <v-col
-          class="d-flex"
-          cols="12"
-          sm="2"
+  <div>
+    <v-container>
+      <v-row no-gutters justify="left">  
+        <v-simple-table style="width:90%"
+          dense
         >
-          <v-select
-            :items="items"
-            label="선택하세요"
-            dense
-            outlined
-          ></v-select>
-        </v-col>  
-          <v-col
-            class="d-flex"
-            cols="12"
-            sm="5"
-          >
-            <v-text-field
-              v-model="message3"
-              filled
-              label="입력해주세요"
-              clearable
-            ></v-text-field>
-          </v-col>
+        <template 
+         v-slot:default
+        >
+          <thead>
+            <tr>
+              <th class="text-center">
+                번호
+              </th>
+              <th class="text-center">
+                제목
+              </th>
+              <th class="text-center">
+                작성자
+              </th>
+             <th class="text-center">
+                작성일자
+             </th>
+              <th class="text-center">
+                조회수
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr
+              v-for="item in calData"
+              :key="item.bId"
+              >
+              <td>{{ item.bId }}</td>
+              <td>{{ item.bTitle }}</td>        
+              <td>{{ item.username }}</td>
+              <td>{{ item.bDateTime}}</td>
+              <td>{{ item.bViews}}</td>  
+            </tr>
+          </tbody>
+        </template>
+        </v-simple-table>
       </v-row>
-    </v-container> -->
-    <v-simple-table style="width:90%"
-      dense
-    >
-    <template v-slot:default>
-      <thead>
-        <tr>
-          <th class="text-center">
-            번호
-          </th>
-          <th class="text-center">
-            제목
-          </th>
-          <th class="text-center">
-            작성자
-          </th>
-          <th class="text-center">
-            작성일자
-          </th>
-          <th class="text-center">
-            조회수
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr
-          v-for="item in calData"
-          :key="item.bId"
-        >
-          <td>{{ item.bId }}</td>
-          <td>{{ item.bTitle }}</td>        
-          <td>{{ item.username }}</td>
-          <td>{{ item.bDateTime}}</td>
-          <td>{{ item.bViews}}</td>  
-        </tr>
-      </tbody>
-    </template>
-    </v-simple-table>
-    <div>
-      <v-pagination
-      v-model="curPageNum"
-      :length="numOfPages" 
-    ></v-pagination>
-    </div>
+    </v-container>  
+  <div>
+      <v-container>  
+        <v-row no-gutters justify="center" class="pa-8"
+        ><v-pagination
+          v-model="curPageNum"
+          :length="numOfPages" 
+          ></v-pagination>
+        </v-row>
+      </v-container>  
+    </div>  
   </div>
 </template>
 <style scoped>
@@ -89,7 +71,7 @@ export default {
   data(){
     return{
       curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
-      dataPerPage: 10,   // 한 페이지당 보여지는 boardlist 갯수
+      dataPerPage: 8,   // 한 페이지당 보여지는 boardlist 갯수
       search: '',
       // items: ['제목', '아이디'],
       // message3: 'Hey!',
@@ -114,14 +96,14 @@ export default {
       }
     },
   methods: {
-    SearchBoard(keyword){
-      let payload = {
-        params: {
-          keyword:keyword
-        }
-      }
-      this.$store.dispatch('BoardList', payload)  
-    }
+    // SearchBoard(keyword){
+    //   let payload = {
+    //     params: {
+    //       keyword:keyword
+    //     }
+    //   }
+    //   this.$store.dispatch('BoardList', payload)  
+    // }
   },
 }  
 </script>
