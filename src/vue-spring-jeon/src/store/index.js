@@ -184,5 +184,23 @@ export default new Vuex.Store({
         })
       })
     },
+    UserDelete({commit, state}, payload){
+      return new Promise((resolve,reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        axios.post('http://localhost:9000/api/admin/userdelete', payload)
+          .then(Response => {
+            console.log(Response.data)
+            console.log(payload)
+            if(Response.data === 'success'){
+              alert('유저가 삭제되었습니다.')
+              Route.push('/')
+            }
+          })
+          .catch(Error => {
+            console.log('error')
+            Route.push("/")
+          })
+      })
+    }
   }
 })

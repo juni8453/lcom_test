@@ -15,11 +15,15 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.lcom_test.example.config.JwtUtils;
+import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 import com.lcom_test.example.response.JwtResponse;
@@ -43,15 +47,23 @@ public class AdminController {
 	@Autowired
 	UserService userService;
 	
-		@GetMapping("/adminPage")
-		@PreAuthorize("hasRole('ROLE_ADMIN')")
-		public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, 
-			@RequestParam(value="keyword", required=false) String keyword) {
-			
-			logger.info(request.toString());			
-				List<UserInfo> userList = userService.read_user_list(keyword);
-				logger.info(userList.toString());	
-				  return new ResponseEntity<>(userList, HttpStatus.OK);
-		
-		}
+	@GetMapping("/adminPage")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, 
+		@RequestParam(value="keyword", required=false) String keyword) {
+		logger.info(request.toString());			
+			List<UserInfo> userList = userService.read_user_list(keyword);
+			logger.info(userList.toString());	
+			  return new ResponseEntity<>(userList, HttpStatus.OK);
 	}
+	
+	@PostMapping("/userdelete")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> deleteUser(
+			@RequestBody User user){
+		logger.info(user.toString());
+			userService.deleteUser(user);
+			userService.deleteAuth(user);
+			return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+}

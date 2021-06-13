@@ -16,9 +16,16 @@ public interface UserMapper {
 			public void createUser(User user);
 		//회원목록 불러오기
 			public List<UserInfo>read_user_list(String keyword);
+			
+			public List<UserInfo> read_user_list(User user);
+			
 		 // 권한 읽기
 			public List<GrantedAuthority> readAuthorities(String username);
 		 // 권한 생성
 			public void createAuthority(User user);
+			
+			public void deleteUser(User user);
+			
+			public void deleteAuth(User user);
 			
 }

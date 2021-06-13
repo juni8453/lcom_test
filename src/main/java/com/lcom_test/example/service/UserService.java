@@ -17,9 +17,16 @@ public interface UserService extends UserDetailsService{
 			public void createUser(User user);
 		//회원목록 불러오기
 		   public List<UserInfo>read_user_list(String keyword);
+		   
+		   public List<UserInfo>read_user_list(User user);
+		   
 		// 시큐리티 권한 얻기
 		   	Collection<GrantedAuthority> getAuthorities(String username);
 		// 권한 생성
 		   	public void createAuthority(User user);
+		   	
+			public void deleteUser(User user);
+			
+			public void deleteAuth(User user);
 		   	
 }

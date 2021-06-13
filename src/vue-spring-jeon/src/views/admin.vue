@@ -29,6 +29,15 @@
           <th class="text-center">
             AUTHORITY
           </th>
+          <th class="text-center">
+            DETALE IMPORMAION      
+          </th>
+          <th class="text-center">
+            PATCH      
+          </th>
+          <th class="text-center">
+            DELETE      
+          </th>
         </tr>
       </thead>
       <tbody>
@@ -46,6 +55,25 @@
             >
               {{ items.authority }}
             </span>
+          </td>
+          <td>
+            <v-btn
+              router :to="{name:'UserDetail'}"
+            >
+              <v-icon>mdi-note-search</v-icon>
+            </v-btn>
+          </td>
+          <td>
+            <v-btn>
+              <v-icon>mdi-file-document-edit</v-icon>
+            </v-btn>
+          </td>
+          <td>
+            <v-btn>
+              <v-icon
+               @click="UserDelete({username:item.username})"
+              >mdi-delete</v-icon>
+            </v-btn>
           </td>
         </tr>
       </tbody>
@@ -110,6 +138,13 @@ export default {
       this.$store.dispatch('admin', payload)
       //  let tmp = {params: {ID: 12345}} 예시
 
+    },
+    // ...mapActions(['UserDelete']) 
+    // mapActions와 같은 헬퍼 사용 시 payload 정의 안해줘도 store에서 사용 가능
+    UserDelete(payload){
+      if(confirm('정말로 유저를 삭제하시겠습니까?')===true){
+        this.$store.dispatch('UserDelete', payload)
+      }
     }
   },
 }

@@ -50,9 +50,26 @@ public class UserServiceImpl implements UserService{
 	public List<UserInfo>read_user_list(String keyword) {
 		return userMapper.read_user_list(keyword);
 	}
+	
+	@Override
+	public List<UserInfo>read_user_list(User user) {
+		return userMapper.read_user_list(user);
+	}
+	
 	//유저읽기 새로고침
 	public UserInfo readUser_refresh(String username) {
 		return userMapper.readUser_refresh(username);
+	}
+
+	@Override
+	public void deleteUser(User user) {
+		userMapper.deleteUser(user);
+	}
+
+	@Override
+	public void deleteAuth(User user) {
+		userMapper.deleteAuth(user);
+		
 	}
 
 

@@ -8,6 +8,7 @@ import admin from '../views/admin.vue'
 import BoardList from '../views/BoardList.vue'
 import TestPage from '../views/TestPage'
 import BoardWrite from '../views/BoardWrite'
+import UserDetail from '../views/UserDetail'
 
 Vue.use(VueRouter)
 
@@ -52,7 +53,11 @@ const routes = [
     name: 'BoardWrite',
     component: BoardWrite
   },
-  
+  {
+    path: '/userdetail',
+    name: 'UserDetail',
+    component: UserDetail
+  },
 ]
 
 const router = new VueRouter({

@@ -105,4 +105,16 @@
 			UPDATE
 				u_id = #{username}
     </insert>
+    
+    <delete id="deleteUser" parameterType="User">
+    	DELETE
+    	FROM	userlist
+    	WHERE	u_id = #{username}
+    </delete>
+    
+    <delete id="deleteAuth" parameterType="User">
+    	DELETE
+    	FROM	userauth
+    	WHERE	u_id = #{username}
+    </delete>
 </mapper>
