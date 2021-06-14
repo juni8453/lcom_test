@@ -25,6 +25,15 @@
               <th class="text-center">
                 조회수
               </th>
+             <th class="text-center">
+                글 상세보기
+              </th>
+             <th class="text-center">
+                수정
+              </th>
+             <th class="text-center">
+                삭제
+              </th>      
             </tr>
           </thead>
           <tbody>
@@ -36,7 +45,26 @@
               <td>{{ item.bTitle }}</td>        
               <td>{{ item.username }}</td>
               <td>{{ item.bDateTime}}</td>
-              <td>{{ item.bViews}}</td>  
+              <td>{{ item.bViews}}</td>
+              <td>
+                <v-btn
+                  router :to="{name:'BoardDetail'}"
+                >
+                  <v-icon>mdi-note-search</v-icon>
+                </v-btn>
+              </td>
+              <td>
+                <v-btn>
+                  <v-icon>mdi-file-document-edit</v-icon>
+                </v-btn>
+              </td>
+              <td>
+                <v-btn>
+                  <v-icon
+                  @click="BoardDelete({bId:item.bId})"
+                  >mdi-delete</v-icon>
+                </v-btn>
+              </td>  
             </tr>
           </tbody>
         </template>
@@ -96,14 +124,11 @@ export default {
       }
     },
   methods: {
-    // SearchBoard(keyword){
-    //   let payload = {
-    //     params: {
-    //       keyword:keyword
-    //     }
-    //   }
-    //   this.$store.dispatch('BoardList', payload)  
-    // }
+    BoardDelete(payload){
+      if(confirm('정말로 글을 삭제하시겠습니까?')===true){
+        this.$store.dispatch('BoardDelete', payload)
+      }
+    }
   },
 }  
 </script>

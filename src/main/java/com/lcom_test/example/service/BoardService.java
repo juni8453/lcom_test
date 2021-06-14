@@ -7,4 +7,6 @@ public interface BoardService {
 	public List<Board> selectBoardList();
 
 	public void insertBoard(Board board);
+
+	public void deleteBoard(Board board);
 }

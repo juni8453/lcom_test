@@ -142,4 +142,12 @@ public class AuthController {
 		boardService.insertBoard(board);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+	
+	@PostMapping("/boarddelete")
+	public ResponseEntity<?> deleteBoard(
+			@RequestBody Board board){
+		logger.info(board.toString());
+			boardService.deleteBoard(board);
+			return new ResponseEntity<>("success", HttpStatus.OK);
+	}
 }

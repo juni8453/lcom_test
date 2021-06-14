@@ -23,4 +23,10 @@ public class BoardServiceImpl implements BoardService {
 	public void insertBoard(Board board) {
 		boardMapper.insertBoard(board);
 	}
+
+	@Override
+	public void deleteBoard(Board board) {
+		boardMapper.deleteBoard(board);
+		
+	}
 }

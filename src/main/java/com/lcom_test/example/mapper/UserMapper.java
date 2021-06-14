@@ -3,6 +3,8 @@ package com.lcom_test.example.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.security.core.GrantedAuthority;
+
+import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 
@@ -15,9 +17,9 @@ public interface UserMapper {
 		 //유저생성
 			public void createUser(User user);
 		//회원목록 불러오기
-			public List<UserInfo>read_user_list(String keyword);
+			public List<UserInfo>read_user_list(Pagination pagination);
 			
-			public List<UserInfo> read_user_list(User user);
+			public List<UserInfo>read_user_list(User user);
 			
 		 // 권한 읽기
 			public List<GrantedAuthority> readAuthorities(String username);
@@ -27,5 +29,7 @@ public interface UserMapper {
 			public void deleteUser(User user);
 			
 			public void deleteAuth(User user);
+			
+			public int getUserCount();
 			
 }

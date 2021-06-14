@@ -42,7 +42,7 @@
       </thead>
       <tbody>
         <tr
-          v-for="item in calData"
+          v-for="item in UserList"
           :key="item.username"
         >
           <td>{{ item.username }}</td>
@@ -81,9 +81,8 @@
     </v-simple-table>
     <div>
       <v-pagination
-      v-model="curPageNum"
-      :length="numOfPages" 
-    ></v-pagination>
+         
+      ></v-pagination>
     </div>
   </div>
 </template>
@@ -101,45 +100,21 @@ import { mapState, mapActions } from "vuex"
 export default {
   data(){
     return{
-      curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
-      dataPerPage: 20,   // 한 페이지당 보여지는 UserList 갯수
-      search:''
+      search:'',
+      page: 1
     }
   },
 
   created() {
-    this.$store.dispatch('admin')
+    this.$store.dispatch('admin', {page: this.page})
   },
 
   computed: {
-      ...mapState(["UserList"]),
-      startOfset(){
-        return((this.curPageNum-1)*this.dataPerPage)
-      },
-      endOfset(){
-        return (this.startOfset + this.dataPerPage)
-      },
-      numOfPages(){
-        return Math.ceil(this.UserList.length / this.dataPerPage)
-      },
-      calData(){
-        return this.UserList.slice(this.startOfset, this.endOfset)
-      },
+      ...mapState(["UserList", "Pagination"]),
   },
 
   methods: {
-    Search(keyword){
-      console.log('Search run')
-      let payload = {
-        params: {
-          keyword: keyword
-        }
-      }; // params로 넘겨주는 방법
-      this.$store.dispatch('admin', payload)
-      //  let tmp = {params: {ID: 12345}} 예시
-
-    },
-    // ...mapActions(['UserDelete']) 
+    ...mapActions(['UserDelete']), 
     // mapActions와 같은 헬퍼 사용 시 payload 정의 안해줘도 store에서 사용 가능
     UserDelete(payload){
       if(confirm('정말로 유저를 삭제하시겠습니까?')===true){

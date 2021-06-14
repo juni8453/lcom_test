@@ -24,6 +24,13 @@ export default new Vuex.Store({
     boardlist:[],
     board_detail:[],
     UserList:[],
+    Pagination:
+    {
+      page:null,
+      count:null,
+      pageUnit:5,
+      perPage:5
+    },
     isLogin: false,
     isLoginError: false,
   },
@@ -31,6 +38,9 @@ export default new Vuex.Store({
     NewUsers: (state,payload) => {
       state.UserList.push(payload)
       Route.push("/login")
+    },
+    SET_PAGINATION(state,payload){
+      state.Pagination.page = payload
     },
     SET_USER(state, data) {
       state.Userinfo.User_Id = data.username
@@ -122,12 +132,10 @@ export default new Vuex.Store({
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
       axios.get('http://localhost:9000/api/admin/adminPage', payload)
           .then(Response => {
-            // Response.data = {username, name, phone, auth}
-            // read_user_list(); 실행 > userlist 변수에 db값 대입 
+            console.log(payload) 
             console.log(Response.data)
-            console.log(payload)
             commit('READ_USER_LIST',Response.data)
-            //db에서 가져온 데이터를 commit 
+            commit('SET_PAGINATION',payload)
           })
           .catch(Error => {
             // console.log(Error)
@@ -193,13 +201,31 @@ export default new Vuex.Store({
             console.log(payload)
             if(Response.data === 'success'){
               alert('유저가 삭제되었습니다.')
-              Route.push('/')
+              // Route.push('/')
             }
           })
           .catch(Error => {
             console.log('error')
-            Route.push("/")
+            // Route.push("/")
           })
+      })
+    },
+    BoardDelete({commit, state}, payload){
+      return new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        axios.post('http://localhost:9000/api/auth/boarddelete', payload)
+        .then(Response => {
+          console.log(Response.data)
+          console.log(payload)
+          if(Response.data === 'success'){
+            alert('글이 삭제되었습니다.')
+            Route.push('/')
+          }
+        })
+        .catch(Error => {
+          console.log('error')
+          Route.push('/')
+        })
       })
     }
   }

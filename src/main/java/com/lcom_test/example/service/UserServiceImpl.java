@@ -7,6 +7,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
+
+import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 import com.lcom_test.example.mapper.UserMapper;
@@ -47,8 +49,8 @@ public class UserServiceImpl implements UserService{
 	}
 	
 	@Override
-	public List<UserInfo>read_user_list(String keyword) {
-		return userMapper.read_user_list(keyword);
+	public List<UserInfo>read_user_list(Pagination pagination) {
+		return userMapper.read_user_list(pagination);
 	}
 	
 	@Override
@@ -70,6 +72,11 @@ public class UserServiceImpl implements UserService{
 	public void deleteAuth(User user) {
 		userMapper.deleteAuth(user);
 		
+	}
+
+	@Override
+	public int getUserCount() {
+		return userMapper.getUserCount();
 	}
 
 

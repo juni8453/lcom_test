@@ -10,4 +10,6 @@ public interface BoardMapper {
 
 	public void insertBoard(Board board);
 
+	public void deleteBoard(Board board);
+
 }

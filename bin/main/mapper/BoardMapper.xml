@@ -30,5 +30,12 @@
 			#{bContent},
 			#{username}
 		)
-	</insert>			
+	</insert>
+	
+<delete id="deleteBoard" parameterType="Board">
+    	DELETE
+    	FROM	vue_board
+    	WHERE	b_id = #{bId}
+    </delete>
+				
 </mapper>

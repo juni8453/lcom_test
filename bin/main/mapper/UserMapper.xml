@@ -84,12 +84,9 @@
 						GROUP_CONCAT(ta.u_auth SEPARATOR ",") u_auth
 						FROM			userauth ta
 						GROUP BY		ta.u_id
-						) tb ON ta.u_id = tb.u_id
-		<where>		
-			<if test="keyword != null">
-					and ta.u_id LIKE CONCAT('%',#{keyword},'%')
-			</if>	
-		</where>				
+						) tb ON ta.u_id = tb.u_id	
+				
+		LIMIT			#{pageNum},#{perPage}
 	</select>
 	
 	 <!-- 유저 권한 추가 -->
@@ -117,4 +114,10 @@
     	FROM	userauth
     	WHERE	u_id = #{username}
     </delete>
+    
+    <select id="getUserCount" resultType="int">
+		SELECT		COUNT(*)					as count
+					
+		FROM		userlist
+	</select>
 </mapper>
