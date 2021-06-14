@@ -99,7 +99,7 @@ export default {
   data(){
     return{
       curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
-      dataPerPage: 8,   // 한 페이지당 보여지는 boardlist 갯수
+      dataPerPage: 5,   // 한 페이지당 보여지는 boardlist 갯수
       search: '',
       // items: ['제목', '아이디'],
       // message3: 'Hey!',

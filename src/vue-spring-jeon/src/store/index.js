@@ -21,16 +21,23 @@ export default new Vuex.Store({
       User_auth:null,
       User_token:null
     },
+
     boardlist:[],
     board_detail:[],
     UserList:[],
+
     Pagination:
     {
-      page:null,
+      page:null,        // 현재 페이지
       count:null,
-      pageUnit:5,
-      perPage:5
+      startPage: null,
+      endPage: null,
+      lastPage:null,    // 총 페이지 사이즈
+      nextPage:null,
+      prevPage:null,
+      pageNum:null
     },
+
     isLogin: false,
     isLoginError: false,
   },
@@ -38,9 +45,6 @@ export default new Vuex.Store({
     NewUsers: (state,payload) => {
       state.UserList.push(payload)
       Route.push("/login")
-    },
-    SET_PAGINATION(state,payload){
-      state.Pagination.page = payload
     },
     SET_USER(state, data) {
       state.Userinfo.User_Id = data.username
@@ -50,7 +54,8 @@ export default new Vuex.Store({
       Route.push("/user")
    },
    READ_USER_LIST(state,data) {
-    state.UserList = data
+    state.UserList = data.userlist
+    state.Pagination = data.pagination
    },
    READ_BOARD_LIST(state,data) {
     state.boardlist = data
@@ -134,8 +139,9 @@ export default new Vuex.Store({
           .then(Response => {
             console.log(payload) 
             console.log(Response.data)
+            console.log(Response.data.userlist)
+            console.log(Response.data.pagination)
             commit('READ_USER_LIST',Response.data)
-            commit('SET_PAGINATION',payload)
           })
           .catch(Error => {
             // console.log(Error)

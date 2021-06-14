@@ -63,11 +63,11 @@ public class AdminController {
 		Pagination pagination = new Pagination(page, usercount);
 		
 		logger.info(request.toString());			
-			List<UserInfo> userList = userService.read_user_list(pagination);
-			logger.info(userList.toString());	
+			List<UserInfo> userlist = userService.read_user_list(pagination);
+			logger.info(userlist.toString());	
 //			  return new ResponseEntity<>(userList, HttpStatus.OK);
 			return ResponseEntity.ok(new ListResponse(
-					userList, pagination));
+					userlist, pagination));
 	}
 //	return ResponseEntity.ok(new JwtResponse(jwt, 
 //			 user.getUsername(), 
