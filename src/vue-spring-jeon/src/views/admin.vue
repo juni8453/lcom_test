@@ -81,9 +81,9 @@
     </v-simple-table>
     <div class="text-center">
       <v-pagination
-         v-model="Pagination.page"
-         :length="Pagination.lastPage"
-         circle
+        v-model="Pagination.page"
+        :length="Pagination.lastPage"
+        circle
       ></v-pagination>
     </div>
   </div>
@@ -102,7 +102,7 @@ import { mapState, mapActions } from "vuex"
 export default {
   data(){
     return{
-      page: 1, // 변동값 들어가야함
+      page: 1, 
       search:'',
       pageUnit:5, // 한 페이지에 출력될 페이지네이션 갯수 (1,2,3,4,5)
       perPage:5   // 한 페이지에 출력하고 싶은 게시물 갯수 (5개)
@@ -111,7 +111,6 @@ export default {
 
   created() {
     this.$store.dispatch('admin', {page: this.page})
-    console.log(this.Pagination.page)
   },
 
   computed: {
