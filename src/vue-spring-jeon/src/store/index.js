@@ -27,13 +27,13 @@ export default new Vuex.Store({
     Pagination:
     {
       page:null, // 현재 페이지
-      count:null,
-      startPage: null,
-      endPage: null,
       lastPage:null,    // 총 페이지 사이즈
-      nextPage:null,
-      prevPage:null,
-      pageNum:null
+      // count:null,
+      // startPage: null,
+      // endPage: null,
+      // nextPage:null,
+      // prevPage:null,
+      // pageNum:null
     },
     isLogin: false,
     isLoginError: false,
@@ -58,7 +58,8 @@ export default new Vuex.Store({
     state.Pagination = data.pagination
    },
    READ_BOARD_LIST(state,data) {
-    state.boardlist = data
+    state.boardlist = data.boardlist
+    state.Pagination = data.pagination
    },
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
@@ -167,10 +168,12 @@ export default new Vuex.Store({
   BoardList({commit, state}, payload){
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.get('http://localhost:9000/api/auth/boardlist',payload)
+      axios.get(`http://localhost:9000/api/auth/boardlist/${payload.page}`)
       .then(Response => {
-        console.log(Response.data)
         console.log(payload)
+        console.log(Response.data)
+        console.log(Response.data.boardlist)
+        console.log(Response.data.pagination)
         commit('READ_BOARD_LIST', Response.data)
       })
       .catch(Error => {
@@ -207,26 +210,25 @@ export default new Vuex.Store({
             console.log(payload)
             if(Response.data === 'success'){
               alert('유저가 삭제되었습니다.')
-              // Route.push('/')
             }
           })
           .catch(Error => {
             console.log('error')
-            // Route.push("/")
+            Route.push("/")
           })
       })
     },
     BoardDelete({commit, state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-        axios.post('http://localhost:9000/api/auth/boarddelete', payload)
+        axios.post(`http://localhost:9000/api/auth/boarddelete/${payload.page}`, payload.bId)
         .then(Response => {
-          console.log(Response.data)
           console.log(payload)
-          if(Response.data === 'success'){
-            alert('글이 삭제되었습니다.')
-            Route.push('/')
-          }
+          console.log(payload.page)
+          console.log(payload.bId)
+          console.log(Response.data)
+          commit('READ_BOARD_LIST', Response.data)
+          alert('글이 삭제되었습니다.')
         })
         .catch(Error => {
           console.log('error')
@@ -236,3 +238,4 @@ export default new Vuex.Store({
     }
   }
 })
+

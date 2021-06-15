@@ -34,11 +34,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.Board;
+import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 import com.lcom_test.example.request.JoinRequest;
 import com.lcom_test.example.request.LoginRequest;
 import com.lcom_test.example.response.JwtResponse;
+import com.lcom_test.example.response.ListResponse;
 import com.lcom_test.example.service.BoardService;
 import com.lcom_test.example.service.UserService;
 
@@ -126,11 +128,20 @@ public class AuthController {
 		 return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
-	@GetMapping("/boardlist")
-	public ResponseEntity<?> boardlist(Board board) {
-		List<Board> boardlist = boardService.selectBoardList();
-		logger.info(boardlist.toString());
-		return new ResponseEntity<>(boardlist, HttpStatus.OK);
+	@GetMapping({"/boardlist", "boardlist/{pageOpt}"})
+	public ResponseEntity<?> boardlist(Board board,
+			@PathVariable Optional<Integer> pageOpt) {
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int boardcount = boardService.getBoardCount();
+		
+		Pagination pagination = new Pagination(page, boardcount);
+		
+		logger.info(board.toString());
+			List<Board> boardlist = boardService.selectBoardList(pagination);
+			logger.info(boardlist.toString());
+			return ResponseEntity.ok(new ListResponse(
+					pagination,boardlist));
 	}
 	
 	@PostMapping("/boardwrite")
@@ -143,11 +154,19 @@ public class AuthController {
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
-	@PostMapping("/boarddelete")
+	@PostMapping({"/boarddelete", "/boarddelete/{pageOpt}"})
 	public ResponseEntity<?> deleteBoard(
-			@RequestBody Board board){
+			@RequestBody Board board,
+			@PathVariable Optional<Integer> pageOpt){
 		logger.info(board.toString());
-			boardService.deleteBoard(board);
-			return new ResponseEntity<>("success", HttpStatus.OK);
+		boardService.deleteBoard(board);
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int boardcount = boardService.getBoardCount();
+		
+		Pagination pagination = new Pagination(page, boardcount);
+		List<Board> boardlist = boardService.selectBoardList(pagination);
+			return ResponseEntity.ok(new ListResponse(
+					pagination,boardlist));
 	}
 }

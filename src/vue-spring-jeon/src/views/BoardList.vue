@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-container>
-      <v-row no-gutters justify="left">  
-        <v-simple-table style="width:90%"
+      <v-row no-gutters>  
+        <v-simple-table style="width:100%"
           dense
         >
         <template 
@@ -38,7 +38,7 @@
           </thead>
           <tbody>
             <tr
-              v-for="item in calData"
+              v-for="item in boardlist"
               :key="item.bId"
               >
               <td>{{ item.bId }}</td>
@@ -61,7 +61,10 @@
               <td>
                 <v-btn>
                   <v-icon
-                  @click="BoardDelete({bId:item.bId})"
+                  @click="BoardDelete(
+                    {bId: item.bId,
+                     page: page,
+                     })"
                   >mdi-delete</v-icon>
                 </v-btn>
               </td>  
@@ -70,17 +73,20 @@
         </template>
         </v-simple-table>
       </v-row>
-    </v-container>  
+    </v-container>
+    
   <div>
-      <v-container>  
-        <v-row no-gutters justify="center" class="pa-8"
-        ><v-pagination
-          v-model="curPageNum"
-          :length="numOfPages" 
-          ></v-pagination>
-        </v-row>
-      </v-container>  
-    </div>  
+    <v-container>  
+      <v-row class="pa-8"
+      ><v-pagination
+        v-model="page"
+        :length="Pagination.lastPage" 
+        circle
+        @input="move({page:page})"
+      ></v-pagination>
+      </v-row>
+    </v-container>  
+  </div>  
   </div>
 </template>
 <style scoped>
@@ -98,36 +104,28 @@ import { mapState, mapActions } from "vuex"
 export default {
   data(){
     return{
-      curPageNum: 1,    // 현재 UI에 보여지고 있는 페이지 숫자
-      dataPerPage: 5,   // 한 페이지당 보여지는 boardlist 갯수
       search: '',
-      // items: ['제목', '아이디'],
-      // message3: 'Hey!',
+      page:1,
+      pageUnit:5,
+      perPage:5
     }
   },
     created() {
-      this.$store.dispatch('BoardList')
+      this.$store.dispatch('BoardList', {page:this.page})
     },
     computed: {
-      ...mapState(["boardlist"]),
-      startOfset(){
-        return((this.curPageNum-1)*this.dataPerPage)
-      },
-      endOfset(){
-        return((this.startOfset + this.dataPerPage))
-      },
-      numOfPages(){
-        return Math.ceil(this.boardlist.length / this.dataPerPage)
-      },
-      calData(){
-        return this.boardlist.slice(this.startOfset, this.endOfset)
-      }
+      ...mapState(["boardlist", 'Pagination']),
     },
-  methods: {
-    BoardDelete(payload){
-      if(confirm('정말로 글을 삭제하시겠습니까?')===true){
-        this.$store.dispatch('BoardDelete', payload)
-      }
+    methods: {
+      BoardDelete(payload){
+        if(confirm('정말로 글을 삭제하시겠습니까?')===true){
+          this.$store.dispatch('BoardDelete', payload)
+        }
+    },
+    move(payload){
+      console.log('next')
+      console.log(payload)
+      this.$store.dispatch('BoardList', payload)
     }
   },
 }  

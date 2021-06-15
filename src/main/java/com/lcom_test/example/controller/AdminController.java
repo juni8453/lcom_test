@@ -67,7 +67,7 @@ public class AdminController {
 			logger.info(userlist.toString());	
 //			  return new ResponseEntity<>(userList, HttpStatus.OK);
 			return ResponseEntity.ok(new ListResponse(
-					userlist, pagination));
+					userlist,pagination));
 	}
 //	return ResponseEntity.ok(new JwtResponse(jwt, 
 //			 user.getUsername(), 

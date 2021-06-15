@@ -16,6 +16,7 @@
      				u_id		as username
      					
 	 FROM 			vue_board	
+	 LIMIT			#{pageNum},#{perPage}
 </select>
 
 <!-- board insert -->
@@ -31,6 +32,12 @@
 			#{username}
 		)
 	</insert>
+	
+<select id="getBoardCount" resultType="int">
+	SELECT		COUNT(*)					as count
+				
+	FROM		vue_board
+</select>	
 	
 <delete id="deleteBoard" parameterType="Board">
     	DELETE

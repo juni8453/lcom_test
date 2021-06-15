@@ -80,7 +80,7 @@
     </template>
     </v-simple-table>
     <div class="text-center">
-      <v-pagination
+       <v-pagination
         v-model="page"
         :length="Pagination.lastPage"
         circle
@@ -93,7 +93,7 @@
 
 div {
   width:100%;
-  /*height:100%;*/
+  height:80%;
   text-align: center;
 }
 </style>
@@ -120,7 +120,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['UserDelete', 'admin']), 
+    // ...mapActions(['UserDelete', 'admin']), 
     // mapActions와 같은 헬퍼 사용 시 payload 정의 안해줘도 store에서 사용 가능
     UserDelete(payload){
       if(confirm('정말로 유저를 삭제하시겠습니까?')===true){
