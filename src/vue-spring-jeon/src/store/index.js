@@ -21,14 +21,12 @@ export default new Vuex.Store({
       User_auth:null,
       User_token:null
     },
-
     boardlist:[],
     board_detail:[],
     UserList:[],
-
     Pagination:
     {
-      page:null,        // 현재 페이지
+      page:null, // 현재 페이지
       count:null,
       startPage: null,
       endPage: null,
@@ -37,7 +35,6 @@ export default new Vuex.Store({
       prevPage:null,
       pageNum:null
     },
-
     isLogin: false,
     isLoginError: false,
   },
@@ -45,6 +42,9 @@ export default new Vuex.Store({
     NewUsers: (state,payload) => {
       state.UserList.push(payload)
       Route.push("/login")
+    },
+    SET_PAGINATION(state,payload){
+      state.Pagination.page = payload
     },
     SET_USER(state, data) {
       state.Userinfo.User_Id = data.username
@@ -135,7 +135,7 @@ export default new Vuex.Store({
   admin({commit,state}, payload) {
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.get('http://localhost:9000/api/admin/adminPage', payload)
+      axios.get(`http://localhost:9000/api/admin/adminPage/${payload.page}`)
           .then(Response => {
             console.log(payload) 
             console.log(Response.data)

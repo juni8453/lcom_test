@@ -81,9 +81,10 @@
     </v-simple-table>
     <div class="text-center">
       <v-pagination
-        v-model="Pagination.page"
+        v-model="page"
         :length="Pagination.lastPage"
         circle
+        @input="move({page:page})"
       ></v-pagination>
     </div>
   </div>
@@ -92,39 +93,45 @@
 
 div {
   width:100%;
-  height:100%;
+  /*height:100%;*/
   text-align: center;
 }
 </style>
 
 <script>
 import { mapState, mapActions } from "vuex"
+
 export default {
   data(){
     return{
-      page: 1, 
       search:'',
+      page: 1, // 페이지 최소값 (아무값이나 상관없음 / 나중에 바뀌는 값이기 때문)
       pageUnit:5, // 한 페이지에 출력될 페이지네이션 갯수 (1,2,3,4,5)
       perPage:5   // 한 페이지에 출력하고 싶은 게시물 갯수 (5개)
     }
   },
 
   created() {
-    this.$store.dispatch('admin', {page: this.page})
+    this.$store.dispatch('admin', {page: this.page}) // 최초 실행당시 1페이지 넘김
   },
 
   computed: {
-      ...mapState(["UserList", "Pagination"])
+      ...mapState(["UserList", "Pagination"]),
   },
 
   methods: {
-    ...mapActions(['UserDelete']), 
+    ...mapActions(['UserDelete', 'admin']), 
     // mapActions와 같은 헬퍼 사용 시 payload 정의 안해줘도 store에서 사용 가능
     UserDelete(payload){
       if(confirm('정말로 유저를 삭제하시겠습니까?')===true){
         this.$store.dispatch('UserDelete', payload)
       }
+    },
+    move(payload){
+      console.log('next')
+      console.log(payload)
+      this.$store.dispatch('admin', payload)
     }
-  },
+  }
 }
 </script>
