@@ -61,10 +61,9 @@
               <td>
                 <v-btn>
                   <v-icon
-                  @click="BoardDelete(
-                    {bId: item.bId,
-                     page: page,
-                     })"
+                  @click="BoardDelete({
+                    // bId: item.bId, page: page
+                    })"
                   >mdi-delete</v-icon>
                 </v-btn>
               </td>  
@@ -101,6 +100,7 @@ div {
 
 <script>
 import { mapState, mapActions } from "vuex"
+
 export default {
   data(){
     return{

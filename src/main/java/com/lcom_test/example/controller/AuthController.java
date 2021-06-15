@@ -169,4 +169,19 @@ public class AuthController {
 			return ResponseEntity.ok(new ListResponse(
 					pagination,boardlist));
 	}
+	
+//	@GetMapping({"/boarddelete", "/boarddelete/{pageOpt}"})
+//	public ResponseEntity<?> deleteBoard(
+//			@RequestParam(value="bId", required=false) int bId,
+//			@PathVariable Optional<Integer> pageOpt){		
+//		boardService.deleteBoard(bId);
+//		
+//		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+//		int boardcount = boardService.getBoardCount();
+//		
+//		Pagination pagination = new Pagination(page, boardcount);
+//		List<Board> boardlist = boardService.selectBoardList(pagination);
+//			return ResponseEntity.ok(new ListResponse(
+//					pagination,boardlist));
+//	}
 }

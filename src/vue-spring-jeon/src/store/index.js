@@ -221,7 +221,7 @@ export default new Vuex.Store({
     BoardDelete({commit, state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-        axios.post(`http://localhost:9000/api/auth/boarddelete/${payload.page}`, payload.bId)
+        axios.get(`http://localhost:9000/api/auth/boarddelete/${payload.page}`, payload.bId)
         .then(Response => {
           console.log(payload)
           console.log(payload.page)
