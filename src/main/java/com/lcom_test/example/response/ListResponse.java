@@ -7,13 +7,18 @@ import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.Search;
 import com.lcom_test.example.domain.UserInfo;
 
-public class ListResponse {
-	private List<UserInfo> userlist;
-	private List<Board> boardlist;
+public class ListResponse<T> {
+	private List<T> list;
 	private Pagination pagination;
+	//private List<UserInfo> userlist;
+	//private List<Board> boardlist;
 	
+	public ListResponse(Pagination pagination, List<T> list) {
+		this.pagination = pagination;
+		this.list = list;
+	}
 
-	public ListResponse(List<UserInfo> userlist,Pagination pagination) {
+/*	public ListResponse(List<UserInfo> userlist,Pagination pagination) {
 		this.userlist = userlist;
 		this.pagination = pagination;
 	}
@@ -41,7 +46,7 @@ public class ListResponse {
 
 	public void setBoardlist(List<Board> boardlist) {
 		this.boardlist = boardlist;
-	}
+	}*/
 
 
 
@@ -52,6 +57,14 @@ public class ListResponse {
 
 	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
+	}
+
+	public List<T> getList() {
+		return list;
+	}
+
+	public void setList(List<T> list) {
+		this.list = list;
 	}
 }	
 

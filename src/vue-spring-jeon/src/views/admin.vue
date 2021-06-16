@@ -71,7 +71,10 @@
           <td>
             <v-btn>
               <v-icon
-               @click="UserDelete({username:item.username})"
+               @click="UserDelete({
+                username:item.username,
+                page:page
+                })"
               >mdi-delete</v-icon>
             </v-btn>
           </td>

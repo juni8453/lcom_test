@@ -128,7 +128,7 @@ public class AuthController {
 		 return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
-	@GetMapping({"/boardlist", "boardlist/{pageOpt}"})
+	@GetMapping({"/boardlist", "/boardlist/{pageOpt}"})
 	public ResponseEntity<?> boardlist(Board board,
 			@PathVariable Optional<Integer> pageOpt) {
 		
@@ -140,9 +140,20 @@ public class AuthController {
 		logger.info(board.toString());
 			List<Board> boardlist = boardService.selectBoardList(pagination);
 			logger.info(boardlist.toString());
-			return ResponseEntity.ok(new ListResponse(
+			return ResponseEntity.ok(new ListResponse<Board>(
 					pagination,boardlist));
 	}
+	
+	@GetMapping({"/boarddetail", "/boarddetail/{bId}"})
+	public ResponseEntity<?> boarddetail(Board board,
+			@PathVariable int bId){
+		logger.debug("bId:"+bId);
+		
+		board = boardService.getBoard(bId);
+		logger.info(board.toString());		
+		return new ResponseEntity<>(board, HttpStatus.OK);
+	}
+	
 	
 	@PostMapping("/boardwrite")
 	public ResponseEntity<?> boardwirte(@RequestBody Board board){
@@ -166,22 +177,7 @@ public class AuthController {
 		
 		Pagination pagination = new Pagination(page, boardcount);
 		List<Board> boardlist = boardService.selectBoardList(pagination);
-			return ResponseEntity.ok(new ListResponse(
+			return ResponseEntity.ok(new ListResponse<Board>(
 					pagination,boardlist));
 	}
-	
-//	@GetMapping({"/boarddelete", "/boarddelete/{pageOpt}"})
-//	public ResponseEntity<?> deleteBoard(
-//			@RequestParam(value="bId", required=false) int bId,
-//			@PathVariable Optional<Integer> pageOpt){		
-//		boardService.deleteBoard(bId);
-//		
-//		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
-//		int boardcount = boardService.getBoardCount();
-//		
-//		Pagination pagination = new Pagination(page, boardcount);
-//		List<Board> boardlist = boardService.selectBoardList(pagination);
-//			return ResponseEntity.ok(new ListResponse(
-//					pagination,boardlist));
-//	}
 }

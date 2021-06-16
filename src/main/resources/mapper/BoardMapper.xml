@@ -19,6 +19,24 @@
 	 LIMIT			#{pageNum},#{perPage}
 </select>
 
+<select id="getBoard" resultType="Board">
+     SELECT 		b_id		as bId,
+     				b_writer 	as bWriter,
+     				b_title 	as bTitle,
+     				b_content   as bContent,
+     				b_datetime  as bDateTime,   						   				
+     				u_id		as username
+     					
+	 FROM 			vue_board	
+	 WHERE			b_id = #{bId}
+</select>
+
+<update id="getBoardViews" parameterType="int">
+	UPDATE		vue_board
+	SET			b_views = b_views+1
+	WHERE 		b_id = #{bId}	
+</update>
+
 <!-- board insert -->
 <insert id="insertBoard" parameterType="Board">
 	      INSERT INTO vue_board(

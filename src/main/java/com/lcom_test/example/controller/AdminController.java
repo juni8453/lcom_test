@@ -65,22 +65,25 @@ public class AdminController {
 		logger.info(request.toString());			
 			List<UserInfo> userlist = userService.read_user_list(pagination);
 			logger.info(userlist.toString());	
-//			  return new ResponseEntity<>(userList, HttpStatus.OK);
-			return ResponseEntity.ok(new ListResponse(
-					userlist,pagination));
+			return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
 	}
-//	return ResponseEntity.ok(new JwtResponse(jwt, 
-//			 user.getUsername(), 
-//			 user.getName(),  
-//			 roles));
-	
-	@PostMapping("/userdelete")
+
+	@PostMapping({"/userdelete", "/userdelete/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteUser(
-			@RequestBody User user){
+			@RequestBody User user,
+			@PathVariable Optional<Integer> pageOpt){
 		logger.info(user.toString());
 			userService.deleteUser(user);
 			userService.deleteAuth(user);
-			return new ResponseEntity<>("success", HttpStatus.OK);
+			
+			int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+			int usercount = userService.getUserCount();
+			
+			Pagination pagination = new Pagination(page, usercount);
+			List<UserInfo> userlist = userService.read_user_list(pagination);
+				return ResponseEntity.ok(
+						new ListResponse<UserInfo>(pagination, userlist));
+			
 	}
 }

@@ -35,4 +35,10 @@ public class BoardServiceImpl implements BoardService {
 	public int getBoardCount() {
 		return boardMapper.getBoardCount();
 	}
+
+	@Override
+	public Board getBoard(int bId) {
+		boardMapper.getBoardViews(bId);
+		return boardMapper.getBoard(bId);
+	}
 }

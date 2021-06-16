@@ -12,4 +12,6 @@ public interface BoardService {
 	public void deleteBoard(Board board);
 
 	public int getBoardCount();
+
+	public Board getBoard(int bId);
 }

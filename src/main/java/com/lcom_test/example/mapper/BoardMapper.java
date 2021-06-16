@@ -15,4 +15,8 @@ public interface BoardMapper {
 
 	public int getBoardCount();
 
+	public Board getBoard(int bId);
+
+	public void getBoardViews(int bId);
+
 }

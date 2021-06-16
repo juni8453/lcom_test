@@ -54,13 +54,18 @@ export default new Vuex.Store({
       Route.push("/user")
    },
    READ_USER_LIST(state,data) {
-    state.UserList = data.userlist
+    state.UserList = data.list
     state.Pagination = data.pagination
    },
    READ_BOARD_LIST(state,data) {
-    state.boardlist = data.boardlist
+    state.boardlist = data.list
     state.Pagination = data.pagination
    },
+
+   READ_BOARD_DETAIL_LIST(state,data){
+     state.boardlist.bViews = data.bViews + 1
+   },
+  
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },
@@ -140,7 +145,8 @@ export default new Vuex.Store({
           .then(Response => {
             console.log(payload) 
             console.log(Response.data)
-            console.log(Response.data.userlist)
+            // console.log(Response.data.userlist)
+            console.log(Response.data.list)
             console.log(Response.data.pagination)
             commit('READ_USER_LIST',Response.data)
           })
@@ -172,7 +178,8 @@ export default new Vuex.Store({
       .then(Response => {
         console.log(payload)
         console.log(Response.data)
-        console.log(Response.data.boardlist)
+        // console.log(Response.data.boardlist)
+        console.log(Response.data.list)
         console.log(Response.data.pagination)
         commit('READ_BOARD_LIST', Response.data)
       })
@@ -182,6 +189,21 @@ export default new Vuex.Store({
       })
     })
   },
+  BoardDetail({commit, state}, payload){
+    return new Promise((resolve, reject) => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+      axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}`)
+      .then(Response => {
+        console.log(payload)
+        console.log(Response.data)
+        commit('READ_BOARD_DETAIL_LIST', Response.data)
+      })
+      .catch(Error => {
+        console.log(Error)
+      })
+    })
+  },
+
   BoardWrite({commit, state}, payload){
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
@@ -204,13 +226,14 @@ export default new Vuex.Store({
     UserDelete({commit, state}, payload){
       return new Promise((resolve,reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-        axios.post('http://localhost:9000/api/admin/userdelete', payload)
+        axios.post(`http://localhost:9000/api/admin/userdelete/${payload.page}`)
           .then(Response => {
-            console.log(Response.data)
             console.log(payload)
-            if(Response.data === 'success'){
+            console.log(payload.page)
+            console.log(payload.username)
+            console.log(Response.data)
+            commit('READ_USER_LIST', Response.data)
               alert('유저가 삭제되었습니다.')
-            }
           })
           .catch(Error => {
             console.log('error')
@@ -221,7 +244,7 @@ export default new Vuex.Store({
     BoardDelete({commit, state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-        axios.get(`http://localhost:9000/api/auth/boarddelete/${payload.page}`, payload.bId)
+        axios.post(`http://localhost:9000/api/auth/boarddelete/${payload.page}`, payload)
         .then(Response => {
           console.log(payload)
           console.log(payload.page)

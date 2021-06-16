@@ -50,7 +50,12 @@
                 <v-btn
                   router :to="{name:'BoardDetail'}"
                 >
-                  <v-icon>mdi-note-search</v-icon>
+                  <v-icon
+                    @click="BoardDetail({
+                    bId: item.bId,
+                    })"
+
+                  >mdi-note-search</v-icon>
                 </v-btn>
               </td>
               <td>
@@ -61,8 +66,9 @@
               <td>
                 <v-btn>
                   <v-icon
-                  @click="BoardDelete({
-                    // bId: item.bId, page: page
+                    @click="BoardDelete({
+                    bId: item.bId, 
+                    page: page
                     })"
                   >mdi-delete</v-icon>
                 </v-btn>
@@ -121,12 +127,25 @@ export default {
         if(confirm('정말로 글을 삭제하시겠습니까?')===true){
           this.$store.dispatch('BoardDelete', payload)
         }
-    },
-    move(payload){
-      console.log('next')
-      console.log(payload)
-      this.$store.dispatch('BoardList', payload)
+      },
+      move(payload){
+        console.log('next')
+        console.log(payload)
+        this.$store.dispatch('BoardList', payload)
+      },
+      // UpdateView(payload){
+      //   console.log('UpdateView')
+      //   console.log(payload)
+      //   if(payload.bViews < 0){
+      //     ++payload.bViews
+      //     this.$store.commit('UPDATE_VIES', payload)
+      //   }
+      // }
+      BoardDetail(payload){
+        console.log('BoardDetail Run')
+        console.log(payload)
+        this.$store.dispatch('BoardDetail', payload)
+      }
     }
-  },
-}  
+  }  
 </script>
