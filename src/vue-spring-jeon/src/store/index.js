@@ -62,10 +62,6 @@ export default new Vuex.Store({
     state.Pagination = data.pagination
    },
 
-   READ_BOARD_DETAIL_LIST(state,data){
-     state.boardlist.bViews = data.bViews + 1
-   },
-  
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },
@@ -179,6 +175,7 @@ export default new Vuex.Store({
         console.log(payload)
         console.log(Response.data)
         // console.log(Response.data.boardlist)
+        console.log('boarlist data를 받았습니다')
         console.log(Response.data.list)
         console.log(Response.data.pagination)
         commit('READ_BOARD_LIST', Response.data)
@@ -189,19 +186,19 @@ export default new Vuex.Store({
       })
     })
   },
-  BoardDetail({commit, state}, payload){
-    return new Promise((resolve, reject) => {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}`, payload)
-      .then(Response => {
-        console.log(Response.data)
-        commit('READ_BOARD_DETAIL_LIST', Response.data)
-      })
-      .catch(Error => {
-        console.log(Error)
-      })
-    })
-  },
+  // BoardDetail({commit, state}, payload){
+  //   return new Promise((resolve, reject) => {
+  //     axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+  //     axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}`, payload)
+  //     .then(Response => {
+  //       console.log(Response.data)
+  //       commit('UPDATE_VIEWS', Response.data)
+  //     })
+  //     .catch(Error => {
+  //       console.log(Error)
+  //     })
+  //   })
+  // },
 
   BoardWrite({commit, state}, payload){
     return new Promise((resolve, reject) => {

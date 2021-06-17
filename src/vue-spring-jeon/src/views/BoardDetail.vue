@@ -3,14 +3,14 @@
         <v-row dense>
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="text-center pa-3" outlined tile style="height: 40px;" color="White">
-                    Title
+                    {{board.bTitle}}
                 </v-card>
             </v-col>
         </v-row>
         <v-row dense> 
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="text-center pa-3" outlined tile style="height: 600px;" color="Whtie">
-                    content
+                    {{board.bContent}}
                 </v-card>
             </v-col>
         </v-row>
@@ -30,7 +30,7 @@ import axios from 'axios'
 
 export default {
     props: ['bid'],
-    // params로 데이터 전달할 경우 
+    // params로 key 받을 때 소문자로 적을 것
     data(){
         return{
             board: null
@@ -41,6 +41,7 @@ export default {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
             axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bid}`)
             .then(Response => {
+                console.log('return board vo')
                 console.log(Response.data)
                 this.board = Response.data
             })
@@ -49,9 +50,10 @@ export default {
             })
         })
     },
-
-    computed:{
-          
+    
+    methods:{
+        
+        }
     }
-}
+
 </script>
