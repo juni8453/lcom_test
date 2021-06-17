@@ -186,6 +186,7 @@ export default new Vuex.Store({
       })
     })
   },
+  
   // BoardDetail({commit, state}, payload){
   //   return new Promise((resolve, reject) => {
   //     axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`

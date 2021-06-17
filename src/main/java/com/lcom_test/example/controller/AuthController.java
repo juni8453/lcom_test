@@ -155,7 +155,6 @@ public class AuthController {
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
-	
 	@PostMapping("/boardwrite")
 	public ResponseEntity<?> boardwirte(@RequestBody Board board){
 		board.getbTitle();
@@ -180,5 +179,19 @@ public class AuthController {
 		List<Board> boardlist = boardService.selectBoardList(pagination);
 			return ResponseEntity.ok(new ListResponse<Board>(
 					pagination,boardlist));
+	}
+	
+	@PostMapping({"/boardedit", "/boardedit/{bId}"})
+	public ResponseEntity<?> boardedit(@RequestBody Board board,
+			@PathVariable int bId){
+		board.setbId(bId);
+		board.getbId();
+		board.getbTitle();
+		board.getbContent();
+		board.getUsername();
+		
+//		boardService.insertBoard(board);
+		boardService.insertEdit(board);
+		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 }

@@ -19,4 +19,6 @@ public interface BoardMapper {
 
 	public void getBoardViews(int bId);
 
+	public void insertEdit(Board board);
+
 }

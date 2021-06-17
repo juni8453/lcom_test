@@ -50,7 +50,7 @@
 			#{bContent},
 			#{username}
 		)
-	</insert>
+</insert>
 	
 <select id="getBoardCount" resultType="int">
 	SELECT		COUNT(*)					as count
@@ -59,9 +59,16 @@
 </select>	
 	
 <delete id="deleteBoard" parameterType="Board">
-    	DELETE
-    	FROM	vue_board
-    	WHERE	b_id = #{bId}
-    </delete>
+   	DELETE
+   	FROM	vue_board
+   	WHERE	b_id = #{bId}
+</delete>
+
+<update id="insertEdit" parameterType="Board">
+	UPDATE	vue_board
+	SET		b_title = #{bTitle},
+			b_content = #{bContent}
+	WHERE	b_id = #{bId}
+</update>
 				
 </mapper>

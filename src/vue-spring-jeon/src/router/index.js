@@ -10,6 +10,7 @@ import TestPage from '../views/TestPage'
 import BoardWrite from '../views/BoardWrite'
 import UserDetail from '../views/UserDetail'
 import BoardDetail from '../views/BoardDetail'
+import BoardEdit from '../views/BoardEdit'
 
 Vue.use(VueRouter)
 
@@ -65,6 +66,13 @@ const routes = [
     component: BoardDetail,
     props: true
      // params로 데이터 전달할 경우 props:ture 설정 필수
+  },
+  {
+    path: '/boardedit',
+    name: 'BoardEdit',
+    component: BoardEdit,
+    props: true
+    // params로 데이터 전달할 경우 props:ture 설정 필수
   },
 ]
 

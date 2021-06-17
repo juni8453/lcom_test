@@ -57,7 +57,9 @@
               </td>
               <td>
                 <v-btn
-                v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
+                  v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
+                  router :to="{name:'BoardEdit',
+                  params: {bid:item.bId} }"
                 >
                   <v-icon>mdi-file-document-edit</v-icon>
                 </v-btn>
@@ -96,13 +98,11 @@
   </div>
 </template>
 <style scoped>
-
 div {
   width:100%;
  /* height:100%;*/
   text-align: center;
 }
-
 </style>
 
 <script>
