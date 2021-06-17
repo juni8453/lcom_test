@@ -38,7 +38,7 @@
                     {
                       bTitle:bTitle, 
                       bContent:bContent, 
-                      username:Userinfo.User_Name
+                      username:Userinfo.User_Id
                     }
                   )">등록
                 </v-btn>

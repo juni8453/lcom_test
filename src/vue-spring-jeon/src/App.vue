@@ -80,7 +80,7 @@
       <div
        v-if="isLogin === true"
       >
-        {{Userinfo.User_Name}}님 환영합니다.
+        {{Userinfo.User_Id}}님 환영합니다.
       </div>  
       <v-btn
        v-if="isLogin === true"

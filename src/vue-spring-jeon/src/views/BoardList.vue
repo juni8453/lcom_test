@@ -53,18 +53,23 @@
                   <v-icon
                     @click="BoardDetail({
                     bId: item.bId,
+                  
                     })"
 
                   >mdi-note-search</v-icon>
                 </v-btn>
               </td>
               <td>
-                <v-btn>
+                <v-btn
+                v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
+                >
                   <v-icon>mdi-file-document-edit</v-icon>
                 </v-btn>
               </td>
               <td>
-                <v-btn>
+                <v-btn
+                v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
+                >
                   <v-icon
                     @click="BoardDelete({
                     bId: item.bId, 
@@ -120,7 +125,7 @@ export default {
       this.$store.dispatch('BoardList', {page:this.page})
     },
     computed: {
-      ...mapState(["boardlist", 'Pagination']),
+      ...mapState(["boardlist", 'Pagination', 'Userinfo']),
     },
     methods: {
       BoardDelete(payload){
@@ -133,14 +138,7 @@ export default {
         console.log(payload)
         this.$store.dispatch('BoardList', payload)
       },
-      // UpdateView(payload){
-      //   console.log('UpdateView')
-      //   console.log(payload)
-      //   if(payload.bViews < 0){
-      //     ++payload.bViews
-      //     this.$store.commit('UPDATE_VIES', payload)
-      //   }
-      // }
+     
       BoardDetail(payload){
         console.log('BoardDetail Run')
         console.log(payload)
