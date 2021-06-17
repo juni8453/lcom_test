@@ -24,7 +24,8 @@
      				b_writer 	as bWriter,
      				b_title 	as bTitle,
      				b_content   as bContent,
-     				b_datetime  as bDateTime,   						   				
+     				b_datetime  as bDateTime,   	
+     				b_views 	as bViews,					   				
      				u_id		as username
      					
 	 FROM 			vue_board	

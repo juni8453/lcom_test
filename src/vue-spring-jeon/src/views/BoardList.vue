@@ -48,28 +48,20 @@
               <td>{{ item.bViews}}</td>
               <td>
                 <v-btn
-                  router :to="{name:'BoardDetail'}"
+                  router :to="{name:'BoardDetail', 
+                  params: {bid:item.bId}}"
                 >
                   <v-icon
-                    @click="BoardDetail({
-                    bId: item.bId,
-                  
-                    })"
-
                   >mdi-note-search</v-icon>
                 </v-btn>
               </td>
               <td>
-                <v-btn
-                v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
-                >
+                <v-btn>
                   <v-icon>mdi-file-document-edit</v-icon>
                 </v-btn>
               </td>
               <td>
-                <v-btn
-                v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
-                >
+                <v-btn>
                   <v-icon
                     @click="BoardDelete({
                     bId: item.bId, 
@@ -138,7 +130,7 @@ export default {
         console.log(payload)
         this.$store.dispatch('BoardList', payload)
       },
-     
+
       BoardDetail(payload){
         console.log('BoardDetail Run')
         console.log(payload)

@@ -62,7 +62,9 @@ const routes = [
   {
     path: '/boarddetail',
     name: 'BoardDetail',
-    component: BoardDetail
+    component: BoardDetail,
+    props: true
+     // params로 데이터 전달할 경우 props:ture 설정 필수
   },
 ]
 

@@ -1,5 +1,5 @@
 <template>
-<v-container style="max-width:500px">
+<v-container style="max-width:1000px">
     <v-layout>
         <v-flex xs12>
             <v-card class="elevation-12">
@@ -25,6 +25,8 @@
 
                   <v-textarea
                     outlined
+                    auto-grow
+                    height="600"
                     label="내용을 입력하세요"
                     name="bContent"
                     v-model="bContent"

@@ -145,8 +145,9 @@ public class AuthController {
 	}
 	
 	@GetMapping({"/boarddetail", "/boarddetail/{bId}"})
-	public ResponseEntity<?> boarddetail(Board board,
-			@PathVariable int bId){
+	public ResponseEntity<?> boarddetail(
+			@PathVariable int bId,
+			Board board){
 		logger.debug("bId:"+bId);
 		
 		board = boardService.getBoard(bId);
