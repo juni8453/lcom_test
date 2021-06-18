@@ -16,4 +16,6 @@ public interface BoardService {
 	public Board getBoard(int bId);
 
 	public void insertEdit(Board board);
+
+	public Board getlist(int bId);
 }

@@ -21,4 +21,6 @@ public interface BoardMapper {
 
 	public void insertEdit(Board board);
 
+	public Board getlist(int bId);
+
 }

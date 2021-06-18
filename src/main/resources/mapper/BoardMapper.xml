@@ -19,6 +19,14 @@
 	 LIMIT			#{pageNum},#{perPage}
 </select>
 
+<select id="getlist" resultType="Board">
+	SELECT			b_title		as bTitle,
+					b_content 	as bContent
+	FROM			vue_board
+	WHERE			b_id = #{bId}
+</select>
+
+
 <select id="getBoard" resultType="Board">
      SELECT 		b_id		as bId,
      				b_writer 	as bWriter,

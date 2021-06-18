@@ -49,7 +49,7 @@
               <td>
                 <v-btn
                   router :to="{name:'BoardDetail', 
-                  params: {bid:item.bId} }"
+                  params: {bId:item.bId} }"
                 >
                   <v-icon
                   >mdi-note-search</v-icon>
@@ -59,7 +59,7 @@
                 <v-btn
                   v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
                   router :to="{name:'BoardEdit',
-                  params: {bid:item.bId} }"
+                  params: {bId:item.bId} }"
                 >
                   <v-icon>mdi-file-document-edit</v-icon>
                 </v-btn>

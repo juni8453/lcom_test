@@ -19,7 +19,7 @@
                   label="제목을 입력하세요"
                   name="bTitle"
                   prepend-icon="mdi-account"
-                  v-model="bTitle"
+                  v-model="board.bTitle"
                   type="text"
                   ></v-text-field>
 
@@ -29,20 +29,16 @@
                     height="600"
                     label="내용을 입력하세요"
                     name="bContent"
-                    v-model="bContent"
+                    v-model="board.bContent"
                   ></v-textarea>
                 </v-form>
                 </v-card-text>
                 <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="#FBC02D" 
-                  @click="BoardEdit(
-                    {
-                      bTitle:bTitle, 
-                      bContent:bContent, 
-                      username:Userinfo.User_Id
-                    }
-                  )">수정
+                  @click="BoardEdit(board)"
+                >
+                  수정
                 </v-btn>
                 </v-card-actions>
             </v-card>
@@ -57,36 +53,51 @@ import Route from '../router/index'
 import { mapActions, mapState } from 'vuex'
 
 export default {
-    props:['bid'], //BoardList.vue에서 params로 넘긴 값 (item.bId)
+    props:['bId'], //BoardList.vue에서 params로 넘긴 값 (item.bId)
     data(){
         return {
-        board: null
+            board: {}
         }
     },
     created(){
         console.log('BoardEidt Run')
+        console.log(this.bId) // props에서 bId 잘 가지고 오는지 확인
+        this.getBoard() // 수정하기전 원래 쓰여있던 제목, 내용 불러오기위한 메서드
+        console.log('BoardEidt Run end')
+
     },
     computed:{
         ...mapState(['Userinfo'])
     },
     methods: {
-        // ...mapActions(['BoardEdit']),
-        BoardEdit(payload){ // payload = {bTitle, bContent, username}
+        BoardEdit(payload){ 
             new Promise((resolve, reject) => {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post(`http://localhost:9000/api/auth/boardedit/${this.bid}`, payload)
+                axios.post(`http://localhost:9000/api/auth/boardedit/`, payload)
                 .then(Response => {
                     console.log('return board vo')
                     console.log(payload)
                     console.log(Response.data)
-                    this.board = Response.data
                     Route.push('/boardlist')
                 })
                 .catch(Error => {
                     console.log(Error)
                 })
             })
-
+        }, 
+        getBoard() {
+            new Promise((resolve,reject)=> {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+                axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`) // boarddetail 소스 재활용
+                .then(Response => {
+                    console.log(Response.data)
+                    this.board = Response.data
+                    console.dir(this.board)
+                })
+                .catch(Error => {
+                    console.log(Error)
+                })
+            })
         }
     }
 }

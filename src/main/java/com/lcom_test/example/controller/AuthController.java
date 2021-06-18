@@ -181,16 +181,14 @@ public class AuthController {
 					pagination,boardlist));
 	}
 	
-	@PostMapping({"/boardedit", "/boardedit/{bId}"})
-	public ResponseEntity<?> boardedit(@RequestBody Board board,
-			@PathVariable int bId){
-		board.setbId(bId);
+	@PostMapping({"/boardedit"})
+	public ResponseEntity<?> boardedit(@RequestBody Board board){
+		
 		board.getbId();
 		board.getbTitle();
 		board.getbContent();
 		board.getUsername();
 		
-//		boardService.insertBoard(board);
 		boardService.insertEdit(board);
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}

@@ -29,21 +29,22 @@
 import axios from 'axios'
 
 export default {
-    props: ['bid'],
+    props: ['bId'],
     // params로 key 받을 때 소문자로 적을 것
     data(){
         return{
-            board: null
+            board: {} // Object Type은 null 대신 []
         }
     },
     created(){
         new Promise((resolve, reject) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-            axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bid}`)
+            axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`)
             .then(Response => {
                 console.log('return board vo')
                 console.log(Response.data)
                 this.board = Response.data
+                console.log(this.board)
             })
             .catch(Error => {
                 console.log(Error)

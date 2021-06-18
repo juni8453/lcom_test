@@ -186,20 +186,6 @@ export default new Vuex.Store({
       })
     })
   },
-  
-  // BoardDetail({commit, state}, payload){
-  //   return new Promise((resolve, reject) => {
-  //     axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-  //     axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}`, payload)
-  //     .then(Response => {
-  //       console.log(Response.data)
-  //       commit('UPDATE_VIEWS', Response.data)
-  //     })
-  //     .catch(Error => {
-  //       console.log(Error)
-  //     })
-  //   })
-  // },
 
   BoardWrite({commit, state}, payload){
     return new Promise((resolve, reject) => {
@@ -220,6 +206,7 @@ export default new Vuex.Store({
         })
       })
     },
+
     UserDelete({commit, state}, payload){
       return new Promise((resolve,reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
@@ -238,6 +225,7 @@ export default new Vuex.Store({
           })
       })
     },
+    
     BoardDelete({commit, state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`

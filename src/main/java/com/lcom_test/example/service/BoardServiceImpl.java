@@ -47,4 +47,9 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.insertEdit(board);
 		
 	}
+
+	@Override
+	public Board getlist(int bId) {
+		return boardMapper.getlist(bId);
+	}
 }
