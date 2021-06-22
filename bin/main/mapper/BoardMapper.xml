@@ -15,7 +15,8 @@
      				b_depth		as bDepth,
      				u_id		as username
      					
-	 FROM 			vue_board	
+	 FROM 			vue_board
+	 ORDER BY 		b_group DESC, b_order ASC	
 	 LIMIT			#{pageNum},#{perPage}
 </select>
 
@@ -56,6 +57,42 @@
 		)VALUES(
 			#{bTitle},
 			#{bContent},
+			#{username}
+		)
+	<selectKey keyProperty="bId" resultType="int">
+		SELECT LAST_INSERT_ID() 
+	</selectKey>
+</insert>
+
+<update id="updateGroup" parameterType="Board">
+	UPDATE		vue_board
+	SET			b_group = #{bId}
+	WHERE 		b_id = #{bId}	
+</update>
+
+<update id="updateOrder" parameterType="Board">
+		UPDATE		vue_board
+		SET			b_order = b_order +1
+		WHERE 		b_group = #{bGroup}
+		AND			b_order >= #{bOrder}
+		AND			b_id != #{bId}
+</update>
+
+<insert id="insertReply" parameterType="Board">
+	      INSERT INTO vue_board(
+			b_title,
+			b_content,
+			b_group,
+			b_order,
+			b_depth,
+			u_id
+			
+		)VALUES(
+			#{bTitle},
+			#{bContent},
+			#{bGroup},
+			#{bOrder},
+			#{bDepth}+1,
 			#{username}
 		)
 </insert>

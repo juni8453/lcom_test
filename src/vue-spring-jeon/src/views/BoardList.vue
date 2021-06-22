@@ -28,15 +28,15 @@
              <th class="text-center">
                 글 상세보기
               </th>
-             <th class="text-center">
-                수정
-              </th>
-             <th class="text-center">
-                삭제
-              </th>
               <th class="text-center">
                 대댓글 작성  
               </th>      
+             <th class="text-center">
+                수정
+              </th>
+              <th class="text-center">
+                삭제
+              </th>
             </tr>
           </thead>
           <tbody>
@@ -48,7 +48,7 @@
               <td>{{ item.bTitle }}</td>        
               <td>{{ item.username }}</td>
               <td>{{ item.bDateTime}}</td>
-              <td>{{ item.bViews}}</td>
+              <td>{{ item.bViews}}</td>             
               <td>
                 <v-btn
                   router :to="{name:'BoardDetail', 
@@ -58,6 +58,16 @@
                   >mdi-note-search</v-icon>
                 </v-btn>
               </td>
+
+              <td>
+                <v-btn
+                  router :to="{name:'BoardReply',
+                  params: {bId:item.bId, bGroup: item.bGroup, bOrder: item.bOrder, bDepth: item.bDepth} }"
+                >
+                  <v-icon>mdi-pencil</v-icon>
+                </v-btn>  
+              </td>  
+
               <td>
                 <v-btn
                   v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
@@ -67,6 +77,7 @@
                   <v-icon>mdi-file-document-edit</v-icon>
                 </v-btn>
               </td>
+
               <td>
                 <v-btn
                 v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
@@ -78,10 +89,8 @@
                     })"
                   >mdi-delete</v-icon>
                 </v-btn>
-              </td>
-              <v-btn>
-                <v-icon>mdi-pencil</v-icon>
-                </v-btn>  
+              </td>              
+             
             </tr>
           </tbody>
         </template>
@@ -140,12 +149,6 @@ export default {
         console.log(payload)
         this.$store.dispatch('BoardList', payload)
       },
-     
-      // BoardDetail(payload){
-      //   console.log('BoardDetail Run')
-      //   console.log(payload)
-      //   this.$store.dispatch('BoardDetail', payload)
-      // }
     }
   }  
 </script>

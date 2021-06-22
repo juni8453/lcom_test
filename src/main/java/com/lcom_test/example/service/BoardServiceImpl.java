@@ -22,7 +22,14 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void insertBoard(Board board) {
-		boardMapper.insertBoard(board);
+		if(board.getbGroup() == 0) {
+			boardMapper.insertBoard(board);
+			boardMapper.updateGroup(board);
+		}
+		if(board.getbGroup() != 0) {
+			boardMapper.insertReply(board);
+			boardMapper.updateOrder(board);
+		}
 	}
 
 	@Override

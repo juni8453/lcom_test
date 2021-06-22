@@ -23,4 +23,10 @@ public interface BoardMapper {
 
 	public Board getlist(int bId);
 
+	public void insertReply(Board board);
+
+	public void updateGroup(Board board);
+
+	public void updateOrder(Board board);
+
 }

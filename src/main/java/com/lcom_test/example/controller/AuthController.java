@@ -207,4 +207,17 @@ public class AuthController {
 		boardService.insertEdit(board);
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
+	
+	@PostMapping("/boardreply")
+	public ResponseEntity<?> boardreply(@RequestBody Board board){
+		board.getbTitle();
+		board.getbContent();
+		board.getUsername();
+		board.getbGroup(); // bGroup, bOrder, bDepth 추가 예정
+		board.getbOrder();
+		board.getbDepth();
+		
+		boardService.insertBoard(board);
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
 }

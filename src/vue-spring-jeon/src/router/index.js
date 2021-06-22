@@ -11,6 +11,7 @@ import BoardWrite from '../views/BoardWrite'
 import UserDetail from '../views/UserDetail'
 import BoardDetail from '../views/BoardDetail'
 import BoardEdit from '../views/BoardEdit'
+import BoardReply from '../views/BoardReply'
 
 Vue.use(VueRouter)
 
@@ -73,6 +74,12 @@ const routes = [
     component: BoardEdit,
     props: true
     // params로 데이터 전달할 경우 props:ture 설정 필수
+  },
+  {
+    path: '/boardreply',
+    name: 'BoardReply',
+    component: BoardReply,
+    props: true
   },
 ]
 
