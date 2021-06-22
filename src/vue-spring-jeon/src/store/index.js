@@ -243,7 +243,26 @@ export default new Vuex.Store({
           Route.push('/')
         })
       })
-    }
+    },
+
+    // BoardDelete({commit, state}, payload){
+    //   return new Promise((resolve, reject) => {
+    //     axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+    //     axios.post('http://localhost:9000/api/auth/boarddelete', payload)
+    //     .then(Response => {
+    //       console.log(payload)
+    //       console.log(payload.page)
+    //       console.log(payload.bId)
+    //       console.log(Response.data)
+    //       commit('READ_BOARD_LIST', Response.data)
+    //       alert('글이 삭제되었습니다.')
+    //     })
+    //     .catch(Error => {
+    //       console.log('error')
+    //       Route.push('/')
+    //     })
+    //   })
+    // }
   }
 })
 

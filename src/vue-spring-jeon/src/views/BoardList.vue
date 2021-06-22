@@ -33,6 +33,9 @@
               </th>
              <th class="text-center">
                 삭제
+              </th>
+              <th class="text-center">
+                대댓글 작성  
               </th>      
             </tr>
           </thead>
@@ -75,7 +78,10 @@
                     })"
                   >mdi-delete</v-icon>
                 </v-btn>
-              </td>  
+              </td>
+              <v-btn>
+                <v-icon>mdi-pencil</v-icon>
+                </v-btn>  
             </tr>
           </tbody>
         </template>

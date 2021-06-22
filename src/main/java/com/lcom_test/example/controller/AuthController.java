@@ -181,6 +181,21 @@ public class AuthController {
 					pagination,boardlist));
 	}
 	
+//	@PostMapping("/boarddelete")
+//	public ResponseEntity<?> deleteBoard(@RequestBody Board board, @RequestBody Pagination pagination){
+//		logger.info(board.toString());
+//		logger.info(pagination.toString());
+//		boardService.deleteBoard(board);
+//		
+//		int page = pagination.getPage();
+//		int boardcount = boardService.getBoardCount();
+//		
+//		pagination = new Pagination(page, boardcount);
+//		List<Board> boardlist = boardService.selectBoardList(pagination);
+//	
+//		return ResponseEntity.ok(new ListResponse<Board>(pagination, boardlist));
+//	}
+	
 	@PostMapping({"/boardedit"})
 	public ResponseEntity<?> boardedit(@RequestBody Board board){
 		

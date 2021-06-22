@@ -11,6 +11,7 @@ public class Board {
 	private String bContent;
 	private String bWriter;
 	private String bDateTime;
+	private Pagination pagination;
 	
 	public int getbId() {
 		return bId;
@@ -71,6 +72,12 @@ public class Board {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public Pagination getPagination() {
+		return pagination;
+	}
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 }	
 	
