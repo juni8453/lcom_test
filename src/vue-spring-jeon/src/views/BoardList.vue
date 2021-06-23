@@ -45,7 +45,12 @@
               :key="item.bId"
               >
               <td>{{ item.bId }}</td>
-              <td>{{ item.bTitle }}</td>        
+
+              <td v-if="item.bDepth > 0">
+                [답글] {{ item.bTitle }}  
+              </td>       
+        
+              <td v-else>{{item.bTitle}}</td> 
               <td>{{ item.username }}</td>
               <td>{{ item.bDateTime}}</td>
               <td>{{ item.bViews}}</td>             
@@ -62,7 +67,13 @@
               <td>
                 <v-btn
                   router :to="{name:'BoardReply',
-                  params: {bId:item.bId, bGroup: item.bGroup, bOrder: item.bOrder, bDepth: item.bDepth} }"
+                  params: {
+                    bId:item.bId, 
+                    bGroup: item.bGroup, 
+                    bOrder: item.bOrder, 
+                    bDepth: item.bDepth
+                    } 
+                  }"
                 >
                   <v-icon>mdi-pencil</v-icon>
                 </v-btn>  
@@ -123,13 +134,15 @@ div {
 <script>
 import { mapState, mapActions } from "vuex"
 
+
+
 export default {
   data(){
     return{
       search: '',
       page:1,
       pageUnit:5,
-      perPage:5
+      perPage:5,
     }
   },
     created() {

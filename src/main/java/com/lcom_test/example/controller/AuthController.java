@@ -213,7 +213,7 @@ public class AuthController {
 		board.getbTitle();
 		board.getbContent();
 		board.getUsername();
-		board.getbGroup(); // bGroup, bOrder, bDepth 추가 예정
+		board.getbGroup(); 
 		board.getbOrder();
 		board.getbDepth();
 		
