@@ -22,8 +22,10 @@
                     </v-toolbar>
                      <v-simple-table>
                         <template v-slot:default>
+
                             <thead>
                                 <tr>
+                                    <th class="text-left">댓글 번호</th>
                                     <th class="text-left">ID</th>
                                     <th class="text-left">Content</th>
                                     <th class="text-left">작성일자</th>
@@ -32,10 +34,14 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                <td>jbj</td>
-                                <td>Content Form</td>
-                                <td>2021-06-21</td>
+                                <tr
+                                    v-for="item in commentlist"
+                                    :key="item.cId"
+                                >
+                                <td>{{item.cId}}</td>
+                                <td>{{item.username}}</td>
+                                <td>{{item.cContent}}</td>
+                                <td>{{item.cDateTime}}</td>
                                 <td>
                                     <v-btn small>수정</v-btn>
                                 </td>
@@ -44,6 +50,7 @@
                                 </td>
                             </tr>
                             </tbody>
+                            
                         </template>
                     </v-simple-table>
                 </v-card>
@@ -65,7 +72,14 @@
                             v-model="cContent"
                         >
                         </v-textarea>
-                        <v-btn small>댓글 작성</v-btn>
+                        <v-btn small
+                            @click="CommentWrite(
+                                {
+                                    cContent:cContent,                                     
+                                    username:Userinfo.User_Id,
+                                    bId:bId
+                                })"
+                        >댓글 작성</v-btn>
                     </v-form>
                 </v-card>
             </v-col>
@@ -73,17 +87,18 @@
     </v-container>
 </template>
 
-
 <script>
 import axios from 'axios'
 import Route from '../router/index'
+import { mapState } from 'vuex'
 
 export default {
     props: ['bId'],
-    // params로 key 받을 때 소문자로 적을 것
     data(){
         return{
-            board: {} // Object Type은 null 대신 {} 객체로 받아야함
+            board: {}, // Object Type은 null 대신 {} 객체로 받아야함
+            cContent: null,
+            username:null
         }
     },
     created(){
@@ -92,6 +107,7 @@ export default {
             axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`)
             .then(Response => {
                 console.log('return board vo')
+                console.log(this.commentlist)
                 console.log(Response.data)
                 this.board = Response.data
                 console.log(this.board)
@@ -103,8 +119,30 @@ export default {
             })
         })
     },
-    methods: {
-    }
-}
 
+    methods: {
+        CommentWrite(payload) {
+            new Promise((resolve, reject) => {
+                axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+                axios.post('http://localhost:9000/api/auth/boardcomment', payload)
+                .then(Response => {
+                    console.log('CommentWrite Run')
+                    console.log(payload)
+                    console.log(Response.data)
+                    this.$store.commit('READ_COMMENT_LIST', Response.data)    
+                             
+            })
+            .catch(Error => {
+                console.log('error')
+                reject(Error)
+                alert("Error!")
+                Route.push("/")
+            })
+            })
+        }   
+    },
+    computed:{
+        ...mapState(['Userinfo', 'commentlist'])
+    }
+}    
 </script>

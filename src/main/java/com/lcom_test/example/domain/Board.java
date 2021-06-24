@@ -12,6 +12,7 @@ public class Board {
 	private String bWriter;
 	private String bDateTime;
 	private Pagination pagination;
+	private Comment comment;
 	
 	public int getbId() {
 		return bId;
@@ -78,6 +79,12 @@ public class Board {
 	}
 	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
+	}
+	public Comment getComment() {
+		return comment;
+	}
+	public void setComment(Comment comment) {
+		this.comment = comment;
 	}
 }	
 	

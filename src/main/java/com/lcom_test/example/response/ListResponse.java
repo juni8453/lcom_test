@@ -17,6 +17,10 @@ public class ListResponse<T> {
 		this.pagination = pagination;
 		this.list = list;
 	}
+	
+	public ListResponse(List<T> list) {
+		this.list = list;
+	}
 
 /*	public ListResponse(List<UserInfo> userlist,Pagination pagination) {
 		this.userlist = userlist;

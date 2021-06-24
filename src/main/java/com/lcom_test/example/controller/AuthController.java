@@ -34,6 +34,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.Board;
+import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
@@ -147,13 +148,28 @@ public class AuthController {
 	@GetMapping({"/boarddetail", "/boarddetail/{bId}"})
 	public ResponseEntity<?> boarddetail(
 			@PathVariable int bId,
-			Board board){
+			Board board, Comment comment){
 		logger.debug("bId:"+bId);
 		
 		board = boardService.getBoard(bId);
+//		board.setComment(comment);
+//		List<Comment> commentlist = boardService.selectCommentList();
 		logger.info(board.toString());		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
+	
+//	@GetMapping({"/boarddetail", "/boarddetail/{bId}"})
+//	public ResponseEntity<?> boarddetail(
+//			@PathVariable int bId,
+//			Board board){
+//		logger.debug("bId:"+bId);
+//		
+//		board = boardService.getBoard(bId);
+////		List<Comment> commentlist = boardService.selectCommentList();
+//		logger.info(board.toString());		
+//		return new ResponseEntity<>(board, HttpStatus.OK);
+//	}
+	
 	
 	@PostMapping("/boardwrite")
 	public ResponseEntity<?> boardwirte(@RequestBody Board board){
@@ -181,21 +197,6 @@ public class AuthController {
 					pagination,boardlist));
 	}
 	
-//	@PostMapping("/boarddelete")
-//	public ResponseEntity<?> deleteBoard(@RequestBody Board board, @RequestBody Pagination pagination){
-//		logger.info(board.toString());
-//		logger.info(pagination.toString());
-//		boardService.deleteBoard(board);
-//		
-//		int page = pagination.getPage();
-//		int boardcount = boardService.getBoardCount();
-//		
-//		pagination = new Pagination(page, boardcount);
-//		List<Board> boardlist = boardService.selectBoardList(pagination);
-//	
-//		return ResponseEntity.ok(new ListResponse<Board>(pagination, boardlist));
-//	}
-	
 	@PostMapping({"/boardedit"})
 	public ResponseEntity<?> boardedit(@RequestBody Board board){
 		
@@ -210,14 +211,28 @@ public class AuthController {
 	
 	@PostMapping("/boardreply")
 	public ResponseEntity<?> boardreply(@RequestBody Board board){
-		board.getbTitle();
-		board.getbContent();
-		board.getUsername();
-		board.getbGroup(); 
-		board.getbOrder();
-		board.getbDepth();
-		
+//		board.getbTitle();
+//		board.getbContent();
+//		board.getUsername();
+//		board.getbGroup(); 
+//		board.getbOrder();
+//		board.getbDepth();
+//		
 		boardService.insertBoard(board);
 		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+	
+	
+	@PostMapping("/boardcomment")
+	public ResponseEntity<?> boardcomment(@RequestBody Comment comment){
+		comment.getcContent();
+		comment.getUsername();
+		comment.getbId();
+		boardService.insertComment(comment);
+		
+		logger.info(comment.toString());
+		List<Comment> commentlist = boardService.selectCommentList();
+		logger.info(commentlist.toString());
+		return ResponseEntity.ok(new ListResponse<Comment>(commentlist));
 	}
 }

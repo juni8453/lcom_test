@@ -3,6 +3,7 @@ package com.lcom_test.example.mapper;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import com.lcom_test.example.domain.Board;
+import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Pagination;
 
 @Mapper
@@ -28,5 +29,11 @@ public interface BoardMapper {
 	public void updateGroup(Board board);
 
 	public void updateOrder(Board board);
+
+	public void insertComment(Comment comment);
+
+	public int getCommentCount();
+
+	public List<Comment> selectCommentList();
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import com.lcom_test.example.domain.Board;
+import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.mapper.BoardMapper;
@@ -58,5 +59,21 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public Board getlist(int bId) {
 		return boardMapper.getlist(bId);
+	}
+
+	@Override
+	public void insertComment(Comment comment) {
+		boardMapper.insertComment(comment);
+		
+	}
+
+	@Override
+	public int getCommentCount() {
+		return boardMapper.getCommentCount();
+	}
+
+	@Override
+	public List<Comment> selectCommentList() {
+		return boardMapper.selectCommentList();
 	}
 }
