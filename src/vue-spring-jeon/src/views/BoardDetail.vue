@@ -107,14 +107,26 @@ export default {
             axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`)
             .then(Response => {
                 console.log('return board vo')
-                console.log(this.commentlist)
                 console.log(Response.data)
+                Response.data === this.board
                 this.board = Response.data
-                console.log(this.board)
             })
             .catch(Error => {
                 console.log(Error)
                 alert('새로고침 이후에는 홈으로 이동합니다.')
+                Route.push("/")
+            })
+        })
+        new Promise((resolve, reject) =>{
+            axios.get('http://localhost:9000/api/auth/commentlist')
+            .then(Response => {
+                console.log('CommentList 뿌리기')
+                console.log(Response.data)
+                this.$store.commit('READ_COMMENT_LIST', Response.data)
+            })
+            .catch(Error => {
+                console.log('Error')
+                alert('에러 발생!')
                 Route.push("/")
             })
         })
@@ -124,23 +136,25 @@ export default {
         CommentWrite(payload) {
             new Promise((resolve, reject) => {
                 axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post('http://localhost:9000/api/auth/boardcomment', payload)
+                axios.post('http://localhost:9000/api/auth/commentwrite', payload)
                 .then(Response => {
                     console.log('CommentWrite Run')
                     console.log(payload)
                     console.log(Response.data)
-                    this.$store.commit('READ_COMMENT_LIST', Response.data)    
-                             
-            })
-            .catch(Error => {
-                console.log('error')
-                reject(Error)
-                alert("Error!")
-                Route.push("/")
-            })
-            })
-        }   
-    },
+                    if(Response.data === "success") {
+                        // this.$store.commit('READ_COMMENT_LIST', payload)
+                        Route.push("/")
+                    }   
+                })
+                .catch(Error => {
+                    console.log('error')
+                    reject(Error)
+                    alert("Error!")
+                    Route.push("/")
+                })
+                })
+            }   
+        },
     computed:{
         ...mapState(['Userinfo', 'commentlist'])
     }

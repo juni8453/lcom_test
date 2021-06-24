@@ -152,31 +152,14 @@ public class AuthController {
 		logger.debug("bId:"+bId);
 		
 		board = boardService.getBoard(bId);
-//		board.setComment(comment);
+		
 //		List<Comment> commentlist = boardService.selectCommentList();
 		logger.info(board.toString());		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
-//	@GetMapping({"/boarddetail", "/boarddetail/{bId}"})
-//	public ResponseEntity<?> boarddetail(
-//			@PathVariable int bId,
-//			Board board){
-//		logger.debug("bId:"+bId);
-//		
-//		board = boardService.getBoard(bId);
-////		List<Comment> commentlist = boardService.selectCommentList();
-//		logger.info(board.toString());		
-//		return new ResponseEntity<>(board, HttpStatus.OK);
-//	}
-	
-	
 	@PostMapping("/boardwrite")
 	public ResponseEntity<?> boardwirte(@RequestBody Board board){
-		board.getbTitle();
-		board.getbContent();
-		board.getUsername();
-		
 		boardService.insertBoard(board);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
@@ -199,37 +182,25 @@ public class AuthController {
 	
 	@PostMapping({"/boardedit"})
 	public ResponseEntity<?> boardedit(@RequestBody Board board){
-		
-		board.getbId();
-		board.getbTitle();
-		board.getbContent();
-		board.getUsername();
-		
 		boardService.insertEdit(board);
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
 	@PostMapping("/boardreply")
-	public ResponseEntity<?> boardreply(@RequestBody Board board){
-//		board.getbTitle();
-//		board.getbContent();
-//		board.getUsername();
-//		board.getbGroup(); 
-//		board.getbOrder();
-//		board.getbDepth();
-//		
+	public ResponseEntity<?> boardreply(@RequestBody Board board){		
 		boardService.insertBoard(board);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
 	
-	@PostMapping("/boardcomment")
+	@PostMapping("/commentwrite")
 	public ResponseEntity<?> boardcomment(@RequestBody Comment comment){
-		comment.getcContent();
-		comment.getUsername();
-		comment.getbId();
 		boardService.insertComment(comment);
-		
+		return new ResponseEntity<>("success", HttpStatus.OK); 
+	}
+	
+	@GetMapping("/commentlist")
+	public ResponseEntity<?> commentlist(Comment comment){
 		logger.info(comment.toString());
 		List<Comment> commentlist = boardService.selectCommentList();
 		logger.info(commentlist.toString());
