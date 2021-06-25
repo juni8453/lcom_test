@@ -25,7 +25,7 @@
 
                             <thead>
                                 <tr>
-                                    <th class="text-left">댓글 번호</th>
+                                    <!-- <th class="text-left">댓글 번호</th> -->
                                     <th class="text-left">ID</th>
                                     <th class="text-left">Content</th>
                                     <th class="text-left">작성일자</th>
@@ -35,21 +35,30 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="item in commentlist"
+                                    v-for="item in board.commentList"
                                     :key="item.cId"
                                 >
-                                <td>{{item.cId}}</td>
+                                <!-- <td>{{item.cId}}</td> -->
                                 <td>{{item.username}}</td>
                                 <td>{{item.cContent}}</td>
                                 <td>{{item.cDateTime}}</td>
                                 <td>
-                                    <v-btn small>수정</v-btn>
+                                    <v-icon>mdi-pencil</v-icon>
                                 </td>
                                 <td>
-                                    <v-btn small>삭제</v-btn>
+                                    <v-icon>mdi-delete</v-icon>
                                 </td>
                             </tr>
                             </tbody>
+                            <tfoot>
+                                <v-pagination
+                                v-model="page"
+                                :length="Pagination.lastPage"
+                                circle
+                                @input="move({page:page})"
+                                >
+                                </v-pagination>
+                            </tfoot>
                             
                         </template>
                     </v-simple-table>
@@ -66,8 +75,7 @@
                         <v-textarea
                             outlined
                             auto-grow
-                            height="50"
-                            label="내용을 입력하세요"
+                            label="댓글을 입력하세요"
                             name="cContent"
                             v-model="cContent"
                         >
@@ -98,17 +106,19 @@ export default {
         return{
             board: {}, // Object Type은 null 대신 {} 객체로 받아야함
             cContent: null,
-            username:null
+            username:null,
+            page:1,
+            pageUnit:5,
+            perPage:5,
         }
     },
     created(){
         new Promise((resolve, reject) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-            axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`)
+            axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}/${this.page}`)
             .then(Response => {
                 console.log('return board vo')
                 console.log(Response.data)
-                Response.data === this.board
                 this.board = Response.data
             })
             .catch(Error => {
@@ -117,19 +127,21 @@ export default {
                 Route.push("/")
             })
         })
-        new Promise((resolve, reject) =>{
-            axios.get('http://localhost:9000/api/auth/commentlist')
-            .then(Response => {
-                console.log('CommentList 뿌리기')
-                console.log(Response.data)
-                this.$store.commit('READ_COMMENT_LIST', Response.data)
-            })
-            .catch(Error => {
-                console.log('Error')
-                alert('에러 발생!')
-                Route.push("/")
-            })
-        })
+
+        // new Promise((resolve, reject) =>{
+        //     axios.get(`http://localhost:9000/api/auth/commentlist/${this.bId}`)
+        //     .then(Response => {
+        //         console.log('CommentList 뿌리기')
+        //         console.log(this.bId)
+        //         console.log(Response.data)
+        //         this.$store.commit('READ_COMMENT_LIST', Response.data)
+                
+        //     })
+        //     .catch(Error => {
+        //         console.log('Error')
+        //     })
+        // })
+
     },
 
     methods: {
@@ -140,23 +152,29 @@ export default {
                 .then(Response => {
                     console.log('CommentWrite Run')
                     console.log(payload)
-                    console.log(Response.data)
-                    if(Response.data === "success") {
-                        // this.$store.commit('READ_COMMENT_LIST', payload)
-                        Route.push("/")
-                    }   
+                    console.log(Response.data)          // 새로 작성된 댓글 insert 이후 Commentlist
+                    console.log('board.commentList')
+                    console.log(this.board.commentList) // Board Vo 내 commentList 확인
+                    this.board.commentList = Response.data
+                    this.cContent = null // 댓글 입력 후 입력 창 초기화
                 })
                 .catch(Error => {
                     console.log('error')
                     reject(Error)
                     alert("Error!")
-                    Route.push("/")
+                    //Route.push("/")
                 })
                 })
-            }   
-        },
+            },
+        // move(payload){
+        //     console.log('next')
+        //     console.log(payload)
+        //     this.$store.dispatch('', payload)
+        // },
+    },
+
     computed:{
-        ...mapState(['Userinfo', 'commentlist'])
+        ...mapState(['Userinfo', 'Pagination'])
     }
 }    
 </script>

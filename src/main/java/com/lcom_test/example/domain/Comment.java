@@ -10,6 +10,7 @@ public class Comment {
 	private int cGroup;
 	private int cOrder;
 	private int cDepth;
+	private Pagination pagination;
 	
 	public int getcId() {
 		return cId;
@@ -58,6 +59,12 @@ public class Comment {
 	}
 	public void setcDepth(int cDepth) {
 		this.cDepth = cDepth;
+	}
+	public Pagination getPagination() {
+		return pagination;
+	}
+	public void setPagination(Pagination pagination) {
+		this.pagination = pagination;
 	}
 }
 

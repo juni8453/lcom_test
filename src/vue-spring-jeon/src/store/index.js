@@ -22,7 +22,7 @@ export default new Vuex.Store({
       User_token:null
     },
     boardlist:[],
-    commentlist:[],
+    // commentlist:[],
     board_detail:[],
     UserList:[],
     Pagination:
@@ -62,9 +62,9 @@ export default new Vuex.Store({
     state.boardlist = data.list
     state.Pagination = data.pagination
    },
-   READ_COMMENT_LIST(state, data){
-    state.commentlist = data.list
-   },
+  //  READ_COMMENT_LIST(state, data){
+  //   state.commentlist = data.list
+  //  },
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },

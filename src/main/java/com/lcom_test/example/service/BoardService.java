@@ -24,5 +24,5 @@ public interface BoardService {
 
 	public int getCommentCount();
 
-	public List<Comment> selectCommentList();
+	public List<Comment> selectCommentList(Comment comment);
 }

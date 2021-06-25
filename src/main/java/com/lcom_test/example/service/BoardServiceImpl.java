@@ -73,7 +73,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public List<Comment> selectCommentList() {
-		return boardMapper.selectCommentList();
+	public List<Comment> selectCommentList(Comment comment) {
+		return boardMapper.selectCommentList(comment);
 	}
 }

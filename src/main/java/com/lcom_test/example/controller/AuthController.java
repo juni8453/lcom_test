@@ -145,15 +145,23 @@ public class AuthController {
 					pagination,boardlist));
 	}
 	
-	@GetMapping({"/boarddetail", "/boarddetail/{bId}"})
+	@GetMapping({"/boarddetail", "/boarddetail/{bId}", "/boarddetail/{bId}/{pageOpt}"})
 	public ResponseEntity<?> boarddetail(
 			@PathVariable int bId,
+			@PathVariable Optional<Integer> pageOpt,
 			Board board, Comment comment){
+		
 		logger.debug("bId:"+bId);
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int commentcount = boardService.getCommentCount();
+		
+		Pagination pagination = new Pagination(page, commentcount);
 		
 		board = boardService.getBoard(bId);
+		comment.setPagination(pagination);
 		
-//		List<Comment> commentlist = boardService.selectCommentList();
+		List<Comment> commentlist = boardService.selectCommentList(comment);
+		board.setCommentList(commentlist);
 		logger.info(board.toString());		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
@@ -196,14 +204,16 @@ public class AuthController {
 	@PostMapping("/commentwrite")
 	public ResponseEntity<?> boardcomment(@RequestBody Comment comment){
 		boardService.insertComment(comment);
-		return new ResponseEntity<>("success", HttpStatus.OK); 
+		List<Comment> commentlist = boardService.selectCommentList(comment); // insert 이후 Comment list를 보내주기 위해
+		return new ResponseEntity<>(commentlist, HttpStatus.OK); 
 	}
 	
-	@GetMapping("/commentlist")
-	public ResponseEntity<?> commentlist(Comment comment){
-		logger.info(comment.toString());
-		List<Comment> commentlist = boardService.selectCommentList();
-		logger.info(commentlist.toString());
-		return ResponseEntity.ok(new ListResponse<Comment>(commentlist));
-	}
+//	@GetMapping({"/commentlist", "commentlist/{bId}"})
+//	public ResponseEntity<?> commentlist(Comment comment,
+//			@PathVariable int bId){
+//		logger.info(comment.toString());
+//		List<Comment> commentlist = boardService.selectCommentList(comment);
+//		logger.info(commentlist.toString());
+//		return ResponseEntity.ok(new ListResponse<Comment>(commentlist));
+//	}
 }

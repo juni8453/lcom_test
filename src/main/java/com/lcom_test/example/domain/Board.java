@@ -1,5 +1,7 @@
 package com.lcom_test.example.domain;
 
+import java.util.List;
+
 public class Board {
 	private int bId;
 	private int bViews;
@@ -12,7 +14,7 @@ public class Board {
 	private String bWriter;
 	private String bDateTime;
 	private Pagination pagination;
-	private Comment comment;
+	private List<Comment> commentList;
 	
 	public int getbId() {
 		return bId;
@@ -80,11 +82,11 @@ public class Board {
 	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
 	}
-	public Comment getComment() {
-		return comment;
+	public List<Comment> getCommentList() {
+		return commentList;
 	}
-	public void setComment(Comment comment) {
-		this.comment = comment;
+	public void setCommentList(List<Comment> commentList) {
+		this.commentList = commentList;
 	}
 }	
 	
