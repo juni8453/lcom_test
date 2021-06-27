@@ -22,9 +22,10 @@ export default new Vuex.Store({
       User_token:null
     },
     boardlist:[],
-    // commentlist:[],
+    commentlist:[],
     board_detail:[],
     UserList:[],
+    board:[],
     Pagination:
     {
       page:null, // 현재 페이지
@@ -62,9 +63,10 @@ export default new Vuex.Store({
     state.boardlist = data.list
     state.Pagination = data.pagination
    },
-  //  READ_COMMENT_LIST(state, data){
-  //   state.commentlist = data.list
-  //  },
+   READ_COMMENT_LIST(state, data){
+    state.commentlist = data.commentList
+    state.Pagination = data.pagination
+   },
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },
@@ -94,6 +96,9 @@ export default new Vuex.Store({
      state.isLogin = false
      state.isLoginError = true
    },
+   SET_BOARD(state, data){
+     state.board = data
+   }
 
   },
   actions: {
@@ -182,6 +187,31 @@ export default new Vuex.Store({
         console.log(Response.data.list)
         console.log(Response.data.pagination)
         commit('READ_BOARD_LIST', Response.data)
+      })
+      .catch(Error => {
+        console.log(Error)
+        Route.push("/")
+      })
+    })
+  },
+
+  CommentPaginationList({commit, state}, payload){
+    return new Promise((resolve, reject) => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+      axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}/${payload.page}`)
+      .then(Response => {
+        console.log(Response.data)
+        
+        console.log('commentlist data를 받았습니다')
+        console.log(Response.data.commentList)
+        console.log(Response.data.pagination)
+        payload.board = Response.data.commentList
+        console.log('변경된 값으로 board값 셋팅')
+        console.log(payload.board)
+
+        commit('READ_COMMENT_LIST', Response.data)
+        console.log('코멘트리스트')
+        console.log(Response.data.commentList)
       })
       .catch(Error => {
         console.log(Error)

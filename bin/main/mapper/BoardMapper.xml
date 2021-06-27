@@ -33,7 +33,7 @@
      					
 	 FROM 			vue_comment
 	 WHERE			b_id = #{bId}
-	 LIMIT			#{pageNum},#{perPage}
+	 LIMIT			#{pagination.pageNum},#{pagination.perPage}
 </select>
 
 <select id="getlist" resultType="Board">

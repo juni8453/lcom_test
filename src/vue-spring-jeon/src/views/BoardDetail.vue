@@ -35,7 +35,7 @@
                             </thead>
                             <tbody>
                                 <tr
-                                    v-for="item in board.commentList"
+                                    v-for="item in commentlist"
                                     :key="item.cId"
                                 >
                                 <!-- <td>{{item.cId}}</td> -->
@@ -55,10 +55,11 @@
                                 v-model="page"
                                 :length="Pagination.lastPage"
                                 circle
-                                @input="move({page:page})"
+                                @input="move({page:page, bId:board.bId , board:board})"
                                 >
                                 </v-pagination>
                             </tfoot>
+                            
                             
                         </template>
                     </v-simple-table>
@@ -120,6 +121,8 @@ export default {
                 console.log('return board vo')
                 console.log(Response.data)
                 this.board = Response.data
+                this.$store.commit('READ_COMMENT_LIST', Response.data)
+                //state의 Pagination 값을 변화시키고 사용할 수 있게 값 셋팅  
             })
             .catch(Error => {
                 console.log(Error)
@@ -135,7 +138,7 @@ export default {
         //         console.log(this.bId)
         //         console.log(Response.data)
         //         this.$store.commit('READ_COMMENT_LIST', Response.data)
-                
+        //         //state의 Pagination 값을 변화시키고 사용할 수 있게 값 셋팅            
         //     })
         //     .catch(Error => {
         //         console.log('Error')
@@ -162,19 +165,20 @@ export default {
                     console.log('error')
                     reject(Error)
                     alert("Error!")
-                    //Route.push("/")
                 })
                 })
             },
-        // move(payload){
-        //     console.log('next')
-        //     console.log(payload)
-        //     this.$store.dispatch('', payload)
-        // },
+        move(payload){
+            console.log('next')
+            console.log(payload)
+            console.log(payload.page)
+            console.log(payload.bId) //bId를 그냥 보내면 계속 초기화되기 때문에 payload로 넘겨줌
+            this.$store.dispatch('CommentPaginationList', payload)
+        },
     },
 
     computed:{
-        ...mapState(['Userinfo', 'Pagination'])
+        ...mapState(['Userinfo', 'Pagination','commentlist'])
     }
 }    
 </script>

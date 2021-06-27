@@ -159,6 +159,7 @@ public class AuthController {
 		
 		board = boardService.getBoard(bId);
 		comment.setPagination(pagination);
+		board.setPagination(pagination);
 		
 		List<Comment> commentlist = boardService.selectCommentList(comment);
 		board.setCommentList(commentlist);
@@ -201,19 +202,34 @@ public class AuthController {
 	}
 	
 	
-	@PostMapping("/commentwrite")
-	public ResponseEntity<?> boardcomment(@RequestBody Comment comment){
+	@PostMapping({"/commentwrite", "/commentwrite/{pageOpt}"})
+	public ResponseEntity<?> boardcomment(@RequestBody Comment comment,
+			@PathVariable Optional<Integer> pageOpt){
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int commentcount = boardService.getCommentCount();
+		
+		Pagination pagination = new Pagination(page, commentcount);
+		comment.setPagination(pagination);
 		boardService.insertComment(comment);
 		List<Comment> commentlist = boardService.selectCommentList(comment); // insert 이후 Comment list를 보내주기 위해
 		return new ResponseEntity<>(commentlist, HttpStatus.OK); 
 	}
 	
-//	@GetMapping({"/commentlist", "commentlist/{bId}"})
-//	public ResponseEntity<?> commentlist(Comment comment,
-//			@PathVariable int bId){
-//		logger.info(comment.toString());
-//		List<Comment> commentlist = boardService.selectCommentList(comment);
-//		logger.info(commentlist.toString());
-//		return ResponseEntity.ok(new ListResponse<Comment>(commentlist));
-//	}
+	@GetMapping({"/commentlist", "commentlist/{bId}", "commentlist/{bId}/{pageOpt}"})
+	public ResponseEntity<?> commentlist(Comment comment,
+			@PathVariable int bId,
+			@PathVariable Optional<Integer> pageOpt){
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int commentcount = boardService.getCommentCount();
+		
+		Pagination pagination = new Pagination(page, commentcount);
+		comment.setPagination(pagination);
+		
+		logger.info(comment.toString());
+		List<Comment> commentlist = boardService.selectCommentList(comment);
+		logger.info(commentlist.toString());
+		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
+	}
 }
