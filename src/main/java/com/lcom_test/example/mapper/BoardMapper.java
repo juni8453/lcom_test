@@ -40,4 +40,6 @@ public interface BoardMapper {
 
 	public void updateComment(Comment comment);
 
+	public void updateCommentShow(Comment comment);
+
 }

@@ -29,4 +29,6 @@ public interface BoardService {
 	public void deleteComment(Comment comment);
 
 	public void updateComment(Comment comment);
+
+	public void updateCommentShow(Comment comment);
 }

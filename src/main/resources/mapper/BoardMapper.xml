@@ -30,7 +30,7 @@
      				c_depth		as cDepth,
      				u_id		as username,
      				b_id		as bId
-     					
+     				
 	 FROM 			vue_comment
 	 WHERE			b_id = #{bId}
 	 LIMIT			#{pagination.pageNum},#{pagination.perPage}
@@ -162,5 +162,10 @@
 	SET		c_content = #{cContent}
 	WHERE	c_id = #{cId}
 </update>
-				
+
+<update id="updateCommentShow" parameterType="Comment">
+	UPDATE	vue_comment
+	SET		c_content = #{cContent}
+	WHERE	c_id = #{cId}
+</update>				
 </mapper>

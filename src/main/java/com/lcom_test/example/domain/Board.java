@@ -15,6 +15,7 @@ public class Board {
 	private String bDateTime;
 	private Pagination pagination;
 	private List<Comment> commentList;
+	private boolean show;
 	
 	public int getbId() {
 		return bId;
@@ -87,6 +88,12 @@ public class Board {
 	}
 	public void setCommentList(List<Comment> commentList) {
 		this.commentList = commentList;
+	}
+	public boolean isShow() {
+		return show;
+	}
+	public void setShow(boolean show) {
+		this.show = show;
 	}
 }	
 	

@@ -88,4 +88,9 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.updateComment(comment);
 		
 	}
+
+	@Override
+	public void updateCommentShow(Comment comment) {
+		boardMapper.updateCommentShow(comment);		
+	}
 }
