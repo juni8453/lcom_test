@@ -203,7 +203,7 @@ public class AuthController {
 	
 	
 	@PostMapping({"/commentwrite", "/commentwrite/{pageOpt}"})
-	public ResponseEntity<?> boardcomment(@RequestBody Comment comment,
+	public ResponseEntity<?> boardcomment(@RequestBody Comment comment, Board board,
 			@PathVariable Optional<Integer> pageOpt){
 		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
@@ -213,8 +213,43 @@ public class AuthController {
 		comment.setPagination(pagination);
 		boardService.insertComment(comment);
 		List<Comment> commentlist = boardService.selectCommentList(comment); // insert 이후 Comment list를 보내주기 위해
-		return new ResponseEntity<>(commentlist, HttpStatus.OK); 
+		
+		board.setCommentList(commentlist);
+		board.setPagination(pagination);
+		
+		return new ResponseEntity<>(board, HttpStatus.OK);
+//		return ResponseEntity.ok(new ListResponse<Comment>(pagination, commentlist));
 	}
+	
+	@PostMapping({"/commentdelete", "/commentdelete/{pageOpt}"})
+	public ResponseEntity<?> commentdelete(@RequestBody Comment comment, Board board,
+			@PathVariable Optional<Integer> pageOpt){
+		
+		boardService.deleteComment(comment); // 1. 댓글 삭제
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int commentcount = boardService.getCommentCount();
+		
+		Pagination pagination = new Pagination(page, commentcount); // Pagination에 따라 삭제할 수 있도록 Pagination 객체 생성
+		comment.setPagination(pagination);	// selectCommentList의 ?,? 값 대입을 위해 설정
+		List<Comment> commentlist = boardService.selectCommentList(comment); // 2. 삭제된 댓글을 제외한 나머지 리스트 뽑기 위해 설정
+		
+		board.setPagination(pagination); 
+		board.setCommentList(commentlist); // board 내부의 Pagination, CommentList를 사용하기 위해 설정
+		
+		return new ResponseEntity<>(board, HttpStatus.OK); // board 객체 return
+		
+	}
+	
+	@PostMapping({"/commentedit", "/commentedit/{pageOpt}"})
+	public ResponseEntity<?> commentedit(@RequestBody Comment comment, Board board,
+			@PathVariable Optional<Integer> pageOpt){
+		
+		boardService.updateComment(comment);
+		
+		return new ResponseEntity<>(board, HttpStatus.OK);
+	}
+	
 	
 	@GetMapping({"/commentlist", "commentlist/{bId}", "commentlist/{bId}/{pageOpt}"})
 	public ResponseEntity<?> commentlist(Comment comment,

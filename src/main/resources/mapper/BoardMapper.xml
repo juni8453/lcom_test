@@ -144,11 +144,23 @@
    	WHERE	b_id = #{bId}
 </delete>
 
+<delete id="deleteComment" parameterType="Comment">
+	DELETE
+	FROM 	vue_comment
+	WHERE	c_id = #{cId}
+</delete>
+
 <update id="insertEdit" parameterType="Board">
 	UPDATE	vue_board
 	SET		b_title = #{bTitle},
 			b_content = #{bContent}
 	WHERE	b_id = #{bId}
+</update>
+
+<update id="updateComment" parameterType="Comment">
+	UPDATE	vue_comment
+	SET		c_content = #{cContent}
+	WHERE	c_id = #{cId}
 </update>
 				
 </mapper>

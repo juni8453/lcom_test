@@ -43,12 +43,41 @@
                                 <td>{{item.cContent}}</td>
                                 <td>{{item.cDateTime}}</td>
                                 <td>
-                                    <v-icon>mdi-pencil</v-icon>
+                                    <v-icon
+                                    @click="Show()"
+                                    >
+                                    mdi-pencil
+                                    </v-icon>
                                 </td>
                                 <td>
-                                    <v-icon>mdi-delete</v-icon>
+                                    <v-icon
+                                    @click="CommentDelete({
+                                        bId: item.bId, 
+                                        cId: item.cId,
+                                        page: page
+                                    })"
+                                    >mdi-delete</v-icon>
+                                </td>       
+                                <td v-if="show === true">
+                                    <v-textarea
+                                        auto-grow
+                                        label="댓글을 수정하세요"
+                                        name="cContent"
+                                        v-model="cContent"
+                                    ></v-textarea>
                                 </td>
+                                <td v-if="show === true">
+                                    <v-icon
+                                    @click="CommentEdit({
+                                        bId: item.bId,
+                                        cId: item.cId,
+                                        cContent:cContent,
+                                        page: page
+                                    })"
+                                    >mdi-file-document-edit</v-icon>
+                                </td>                                 
                             </tr>
+                                                     
                             </tbody>
                             <tfoot>
                                 <v-pagination
@@ -66,7 +95,8 @@
                 </v-card>
             </v-col>
         </v-row>
-        <v-row dense>
+        <v-row dense
+            v-if="show === false">
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="pa-3" outlined tile style="heght:600px;" color="Withe">
                     <v-toolbar rounded color="#BBDEFB">
@@ -84,6 +114,7 @@
                         <v-btn small
                             @click="CommentWrite(
                                 {
+                                    page:page,
                                     cContent:cContent,                                     
                                     username:Userinfo.User_Id,
                                     bId:bId
@@ -111,6 +142,8 @@ export default {
             page:1,
             pageUnit:5,
             perPage:5,
+            show:false,
+            
         }
     },
     created(){
@@ -151,14 +184,15 @@ export default {
         CommentWrite(payload) {
             new Promise((resolve, reject) => {
                 axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post('http://localhost:9000/api/auth/commentwrite', payload)
+                axios.post(`http://localhost:9000/api/auth/commentwrite/${payload.page}`, payload)
                 .then(Response => {
                     console.log('CommentWrite Run')
                     console.log(payload)
                     console.log(Response.data)          // 새로 작성된 댓글 insert 이후 Commentlist
-                    console.log('board.commentList')
-                    console.log(this.board.commentList) // Board Vo 내 commentList 확인
-                    this.board.commentList = Response.data
+                    console.log(Response.data.commentList)
+                    this.$store.commit('READ_COMMENT_LIST', Response.data)
+                    // console.log(this.board.commentList) // Board Vo 내 commentList 확인
+                    // this.commentList = Response.data.list
                     this.cContent = null // 댓글 입력 후 입력 창 초기화
                 })
                 .catch(Error => {
@@ -175,6 +209,45 @@ export default {
             console.log(payload.bId) //bId를 그냥 보내면 계속 초기화되기 때문에 payload로 넘겨줌
             this.$store.dispatch('CommentPaginationList', payload)
         },
+
+        Show(){
+            this.show = !this.show            
+        },
+
+        CommentDelete(payload){
+            new Promise((resolve, reject) => {
+                axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+                axios.post(`http://localhost:9000/api/auth/commentdelete/${payload.page}`, payload)
+                .then(Response => {
+                    console.log('payload')
+                    console.log(payload)
+                    console.log(Response.data)
+                    this.$store.commit('READ_COMMENT_LIST', Response.data)
+                })
+                .catch(Error => {
+                    console.log('error')
+                    reject(Error)
+                    alert("Error!")
+                })
+            })
+        },
+
+        CommentEdit(payload){
+            new Promise((resolve,reject) => {
+                axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+                axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
+                .then(Response => {
+                    console.log(payload)
+                    console.log(Response.data)
+                    this.$stroe.commit('READ_COMMENT_LIST', Response.data)
+                })
+                .catch(Error => {
+                    console.log('error')
+                    reject(Error)
+                    alert("Error!")
+                })
+            })
+        }
     },
 
     computed:{

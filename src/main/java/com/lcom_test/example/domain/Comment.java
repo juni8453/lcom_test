@@ -11,6 +11,7 @@ public class Comment {
 	private int cOrder;
 	private int cDepth;
 	private Pagination pagination;
+	private boolean show;
 	
 	public int getcId() {
 		return cId;
@@ -65,6 +66,12 @@ public class Comment {
 	}
 	public void setPagination(Pagination pagination) {
 		this.pagination = pagination;
+	}
+	public boolean isShow() {
+		return show;
+	}
+	public void setShow(boolean show) {
+		this.show = show;
 	}
 }
 

@@ -205,9 +205,6 @@ export default new Vuex.Store({
         console.log('commentlist data를 받았습니다')
         console.log(Response.data.commentList)
         console.log(Response.data.pagination)
-        payload.board = Response.data.commentList
-        console.log('변경된 값으로 board값 셋팅')
-        console.log(payload.board)
 
         commit('READ_COMMENT_LIST', Response.data)
         console.log('코멘트리스트')
