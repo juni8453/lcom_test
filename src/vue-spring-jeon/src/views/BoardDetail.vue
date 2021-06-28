@@ -44,12 +44,7 @@
                                 <td>{{item.cDateTime}}</td>
                                 <td>
                                     <v-icon
-                                        @click="Show({
-                                            cId:item.cId,
-                                            bId:item.bId,
-                                            show:item.show,
-                                            page:page
-                                        })"
+                                        @click="Show()"
                                     >
                                     mdi-pencil
                                     </v-icon>
@@ -64,7 +59,7 @@
                                     >mdi-delete</v-icon>
                                 </td>       
 
-                                <td v-if="item.show === true">
+                                <td v-if="show === true">
                                     <v-textarea
                                         auto-grow
                                         label="댓글을 수정하세요"
@@ -82,7 +77,6 @@
                                     })"
                                     >mdi-file-document-edit</v-icon>
                                 </td>
-
                             </tr>
                                                      
                             </tbody>
@@ -217,10 +211,10 @@ export default {
             this.$store.dispatch('CommentPaginationList', payload)
         },
 
-        // Show(payload){
-        //     console.log(payload)
-        //     this.show = !this.show            
-        // },
+        Show(payload){
+            console.log(payload)
+            this.show = !this.show            
+        },
 
         CommentDelete(payload){
             new Promise((resolve, reject) => {
@@ -240,26 +234,25 @@ export default {
             })
         },
 
-        Show(payload){
-            new Promise((resolve,reject) => {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
-                .then(Response => {
-                    console.log('payload를 받았습니다')
-                    console.log(payload)
-                    console.log("Response Data를 받았습니다")
-                    console.log(Response.data)
-                    console.log(Response.data.commentList)
-                    // READ_COMMENT_LIST로 commit 하기 전 show는 true로 바껴져 있어야 함
-                    this.$store.commit('READ_COMMENT_LIST', Response.data)
-                })
-                .catch(Error => {
-                    console.log('error')
-                    reject(Error)
-                    alert("Error!")
-                })
-            })
-        }
+        // Show(payload){ // payload = {cId, bId, show, page}
+        //     new Promise((resolve,reject) => {
+        //         axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+        //         axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
+        //         .then(Response => {
+        //             console.log('payload를 받았습니다')
+        //             console.log(payload)
+        //             console.log("Response Data를 받았습니다")
+        //             console.log(Response.data)
+        //             // READ_COMMENT_LIST로 commit 하기 전 show는 true로 바껴져 있어야 함
+        //             this.$store.commit('READ_COMMENT_LIST', Response.data)
+        //         })
+        //         .catch(Error => {
+        //             console.log('error')
+        //             reject(Error)
+        //             alert("Error!")
+        //         })
+        //     })
+        // }
     },
 
     computed:{

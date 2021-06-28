@@ -21,8 +21,7 @@
 </select>
 
 <select id="selectCommentList" resultType="Comment">
-     SELECT 		
-     				c_id		as cId,     				
+     SELECT 		c_id		as cId,     				
      				c_content   as cContent,
      				c_datetime  as cDateTime,     				
      				c_group		as cGroup,
@@ -30,7 +29,7 @@
      				c_depth		as cDepth,
      				u_id		as username,
      				b_id		as bId
-     				
+     			
 	 FROM 			vue_comment
 	 WHERE			b_id = #{bId}
 	 LIMIT			#{pagination.pageNum},#{pagination.perPage}
