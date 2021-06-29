@@ -64,7 +64,6 @@ props:['bId','bGroup', 'bOrder', 'bDepth'],
     return {
       bTitle:null,
       bContent:null,
-      username:null
     }
   },
   computed:{

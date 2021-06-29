@@ -241,25 +241,40 @@ public class AuthController {
 		
 	}
 	
+	@PostMapping({"/commentedit", "/commentedit/{pageOpt}"})
+	public ResponseEntity<?> commentedit(@RequestBody Comment comment, Board board,
+			@PathVariable Optional<Integer> pageOpt){
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int commentcount = boardService.getCommentCount();
+		
+		Pagination pagination = new Pagination(page, commentcount);
+		
+		comment.setPagination(pagination);
+		
+		List<Comment> commentlist = boardService.selectCommentList(comment);
+		
+		board.setPagination(pagination);
+		board.setCommentList(commentlist);
+		
+//		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
+		return new ResponseEntity<>(board, HttpStatus.OK);
+	}
+	
 //	@PostMapping({"/commentedit", "/commentedit/{pageOpt}"})
-//	public ResponseEntity<?> commentedit(@RequestBody Comment comment, Board board,
+//	public ResponseEntity<?> commentedit(@RequestBody Comment comment, 
 //			@PathVariable Optional<Integer> pageOpt){
 //		
 //		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 //		int commentcount = boardService.getCommentCount();
 //		
 //		Pagination pagination = new Pagination(page, commentcount);
-//		
 //		comment.setPagination(pagination);
 //		
 //		List<Comment> commentlist = boardService.selectCommentList(comment);
 //		
-//		board.setPagination(pagination);
-//		board.setCommentList(commentlist);
-//		
-//		return new ResponseEntity<>(board, HttpStatus.OK);
+//		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
 //	}
-	
 	
 	@GetMapping({"/commentlist", "commentlist/{bId}", "commentlist/{bId}/{pageOpt}"})
 	public ResponseEntity<?> commentlist(Comment comment,

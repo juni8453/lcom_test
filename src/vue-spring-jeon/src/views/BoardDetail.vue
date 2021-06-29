@@ -11,6 +11,7 @@
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="text-center pa-3" outlined tile style="height: 600px;" color="Whtie">
                     {{board.bContent}}
+                  
                 </v-card>
             </v-col>
         </v-row>
@@ -42,10 +43,11 @@
                                 <td>{{item.username}}</td>
                                 <td>{{item.cContent}}</td>
                                 <td>{{item.cDateTime}}</td>
+                                <!-- <td>{{item.cShow}}</td> -->
                                 <td>
                                     <v-icon
-                                        @click="Show()"
-                                    >
+                                        @click="Show(item)"
+                                    >                    
                                     mdi-pencil
                                     </v-icon>
                                 </td>
@@ -59,7 +61,7 @@
                                     >mdi-delete</v-icon>
                                 </td>       
 
-                                <td v-if="show === true">
+                                <td v-if="item.cShow === true">
                                     <v-textarea
                                         auto-grow
                                         label="댓글을 수정하세요"
@@ -67,16 +69,18 @@
                                         v-model="cContent"
                                     ></v-textarea>
                                 </td>
-                                <td v-if="show === true">
+                                <td v-if="item.cShow === true">
                                     <v-icon
                                     @click="CommentEdit({
                                         bId: item.bId,
                                         cId: item.cId,
                                         cContent:cContent,
+                                        username:Userinfo.User_Id,
                                         page: page
                                     })"
                                     >mdi-file-document-edit</v-icon>
                                 </td>
+                                
                             </tr>
                                                      
                             </tbody>
@@ -90,14 +94,13 @@
                                 </v-pagination>
                             </tfoot>
                             
-                            
                         </template>
                     </v-simple-table>
                 </v-card>
             </v-col>
         </v-row>
         <v-row dense
-            v-if="show === false">
+           v-if="$store.state.Show.cShow === false" >
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="pa-3" outlined tile style="heght:600px;" color="Withe">
                     <v-toolbar rounded color="#BBDEFB">
@@ -144,6 +147,7 @@ export default {
             pageUnit:5,
             perPage:5,
             show:false,
+            // commentList: null,
             
         }
     },
@@ -192,8 +196,6 @@ export default {
                     console.log(Response.data)          // 새로 작성된 댓글 insert 이후 Commentlist
                     console.log(Response.data.commentList)
                     this.$store.commit('READ_COMMENT_LIST', Response.data)
-                    // console.log(this.board.commentList) // Board Vo 내 commentList 확인
-                    // this.commentList = Response.data.list
                     this.cContent = null // 댓글 입력 후 입력 창 초기화
                 })
                 .catch(Error => {
@@ -211,49 +213,58 @@ export default {
             this.$store.dispatch('CommentPaginationList', payload)
         },
 
-        Show(payload){
-            console.log(payload)
-            this.show = !this.show            
-        },
+        // Show(payload){
+        //     console.log(payload)
+        //     this.show = !this.show            
+        // },
 
         CommentDelete(payload){
-            new Promise((resolve, reject) => {
-                axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post(`http://localhost:9000/api/auth/commentdelete/${payload.page}`, payload)
-                .then(Response => {
-                    console.log('payload')
-                    console.log(payload)
-                    console.log(Response.data)
-                    this.$store.commit('READ_COMMENT_LIST', Response.data)
+            if(confirm('정말로 글을 삭제하시겠습니까?')===true){
+                new Promise((resolve, reject) => {
+                    axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+                    axios.post(`http://localhost:9000/api/auth/commentdelete/${payload.page}`, payload)
+                    .then(Response => {
+                        console.log('payload')
+                        console.log(payload)
+                        console.log(Response.data)
+                        this.$store.commit('READ_COMMENT_LIST', Response.data)
+                    })
+                    .catch(Error => {
+                        console.log('error')
+                        reject(Error)
+                        alert("Error!")
+                    
+                    })
                 })
-                .catch(Error => {
-                    console.log('error')
-                    reject(Error)
-                    alert("Error!")
-                })
+             }
+        },
+
+        Show(comment){ //commentlist의 배열 인덱스 item
+            comment.cShow =! comment.cShow
+            console.log(comment)
+            this.$store.commit('SET_SHOW', comment)
+             }
+        },
+
+        CommentEdit(payload){
+            new Promise((resolve,reject) => {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+            axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
+            .then(Response => {
+                console.log("Response Data를 받았습니다")
+                console.log(Response.data)
+                this.$store.commit('READ_COMMENT_LIST', Response.data)
+            })
+            .catch(Error => {
+                console.log('error')
+                reject(Error)
+                alert("Error!")
+            })
             })
         },
 
-        // Show(payload){ // payload = {cId, bId, show, page}
-        //     new Promise((resolve,reject) => {
-        //         axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-        //         axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
-        //         .then(Response => {
-        //             console.log('payload를 받았습니다')
-        //             console.log(payload)
-        //             console.log("Response Data를 받았습니다")
-        //             console.log(Response.data)
-        //             // READ_COMMENT_LIST로 commit 하기 전 show는 true로 바껴져 있어야 함
-        //             this.$store.commit('READ_COMMENT_LIST', Response.data)
-        //         })
-        //         .catch(Error => {
-        //             console.log('error')
-        //             reject(Error)
-        //             alert("Error!")
-        //         })
-        //     })
-        // }
-    },
+
+           
 
     computed:{
         ...mapState(['Userinfo', 'Pagination','commentlist'])

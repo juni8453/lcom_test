@@ -37,6 +37,7 @@ export default new Vuex.Store({
       // prevPage:null,
       // pageNum:null
     },
+    Show: [],
     isLogin: false,
     isLoginError: false,
   },
@@ -87,6 +88,9 @@ export default new Vuex.Store({
     console.log(state.Userinfo)
     console.log("로그아웃됐니?"+localStorage.getItem("token"))
     Route.push('/login')
+   },
+   SET_SHOW(state,data){
+    state.Show = data
    },
    loginSuccess(state){
     state.isLoginError = false
