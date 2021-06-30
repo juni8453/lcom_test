@@ -60,7 +60,7 @@ export default {
         }
     },
     created(){
-        console.log('BoardEidt Run')
+        console.log('BoardEdit Run')
         console.log(this.bId) // props에서 bId 잘 가지고 오는지 확인
         this.getBoard() // 수정하기전 원래 쓰여있던 제목, 내용 불러오기위한 메서드
         console.log('BoardEidt Run end')
@@ -71,9 +71,11 @@ export default {
     },
     methods: {
         BoardEdit(payload){ 
+            console.log('BoardEdit Run')
+            console.log(payload)
             new Promise((resolve, reject) => {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post(`http://localhost:9000/api/auth/boardedit/`, payload)
+                axios.post(`http://localhost:9000/api/auth/boardedit/${this.bId}`, payload)
                 .then(Response => {
                     console.log('return board vo')
                     console.log(payload)
@@ -88,7 +90,7 @@ export default {
         getBoard() {
             new Promise((resolve,reject)=> {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`) // boarddetail 소스 재활용
+                axios.get(`http://localhost:9000/api/auth/boarddetail/`) // boarddetail 소스 재활용
                 .then(Response => {
                     console.log(Response.data)
                     this.board = Response.data

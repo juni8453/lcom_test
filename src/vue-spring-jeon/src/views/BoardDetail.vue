@@ -100,7 +100,7 @@
             </v-col>
         </v-row>
         <v-row dense
-           v-if="$store.state.Show.cShow === false" >
+           >
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="pa-3" outlined tile style="heght:600px;" color="Withe">
                     <v-toolbar rounded color="#BBDEFB">
@@ -186,6 +186,25 @@ export default {
     },
 
     methods: {
+        CommentEdit(payload){ // payload = {bId, cId, page, username, cContent}
+            console.log(payload)
+            new Promise((resolve,reject) => {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+            axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
+            .then(Response => {
+                console.log("Response Data를 받았습니다")
+                console.log(Response.data)
+                this.$store.commit('READ_COMMENT_LIST', Response.data)
+                // this.$store.commit('SET_SHOW', Response.data)
+            })
+            .catch(Error => {
+                console.log('error')
+                reject(Error)
+                alert("Error!")
+            })
+            })
+        },
+
         CommentWrite(payload) {
             new Promise((resolve, reject) => {
                 axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
@@ -242,29 +261,27 @@ export default {
         Show(comment){ //commentlist의 배열 인덱스 item
             comment.cShow =! comment.cShow
             console.log(comment)
-            this.$store.commit('SET_SHOW', comment)
-             }
+            // this.$store.commit('SET_SHOW', comment)
         },
 
-        CommentEdit(payload){
-            new Promise((resolve,reject) => {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-            axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
-            .then(Response => {
-                console.log("Response Data를 받았습니다")
-                console.log(Response.data)
-                this.$store.commit('READ_COMMENT_LIST', Response.data)
-            })
-            .catch(Error => {
-                console.log('error')
-                reject(Error)
-                alert("Error!")
-            })
-            })
-        },
-
-
-           
+        // CommentEdit(payload){ // payload = {bId, cId, page, username, cContent}
+        //     console.log(payload)
+        //     new Promise((resolve,reject) => {
+        //     axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+        //     axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
+        //     .then(Response => {
+        //         console.log("Response Data를 받았습니다")
+        //         console.log(Response.data)
+        //         // this.$store.commit('READ_COMMENT_LIST', Response.data)
+        //     })
+        //     .catch(Error => {
+        //         console.log('error')
+        //         reject(Error)
+        //         alert("Error!")
+        //     })
+        //     })
+        // },
+    },
 
     computed:{
         ...mapState(['Userinfo', 'Pagination','commentlist'])

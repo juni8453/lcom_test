@@ -245,6 +245,8 @@ public class AuthController {
 	public ResponseEntity<?> commentedit(@RequestBody Comment comment, Board board,
 			@PathVariable Optional<Integer> pageOpt){
 		
+		boardService.updateComment(comment);
+		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int commentcount = boardService.getCommentCount();
 		
@@ -257,7 +259,6 @@ public class AuthController {
 		board.setPagination(pagination);
 		board.setCommentList(commentlist);
 		
-//		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
