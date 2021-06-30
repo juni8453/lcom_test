@@ -16,6 +16,10 @@ public class Pagination {
 	public static final int pageUnit = 5; // 한 페이지에 출력될 페이지네이션 갯수 (1~5)
 	public static final int perPage = 5; // 한 페이지에 출력될 게시물 수
 	
+	public Pagination() {
+		this(1, 0, null); // 기본생성자 (BoardEdit 사용)
+	}
+	
 	public Pagination(int page) {
 		this(page, 0, null);
 	}

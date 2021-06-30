@@ -199,7 +199,7 @@ public class AuthController {
 	public ResponseEntity<?> boardreply(@RequestBody Board board){		
 		boardService.insertBoard(board);
 		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
+	} // boardwrite와 합치기
 	
 	
 	@PostMapping({"/commentwrite", "/commentwrite/{pageOpt}"})
@@ -218,7 +218,6 @@ public class AuthController {
 		board.setPagination(pagination);
 		
 		return new ResponseEntity<>(board, HttpStatus.OK);
-//		return ResponseEntity.ok(new ListResponse<Comment>(pagination, commentlist));
 	}
 	
 	@PostMapping({"/commentdelete", "/commentdelete/{pageOpt}"})
@@ -262,20 +261,6 @@ public class AuthController {
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
-//	@PostMapping({"/commentedit", "/commentedit/{pageOpt}"})
-//	public ResponseEntity<?> commentedit(@RequestBody Comment comment, 
-//			@PathVariable Optional<Integer> pageOpt){
-//		
-//		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
-//		int commentcount = boardService.getCommentCount();
-//		
-//		Pagination pagination = new Pagination(page, commentcount);
-//		comment.setPagination(pagination);
-//		
-//		List<Comment> commentlist = boardService.selectCommentList(comment);
-//		
-//		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
-//	}
 	
 	@GetMapping({"/commentlist", "commentlist/{bId}", "commentlist/{bId}/{pageOpt}"})
 	public ResponseEntity<?> commentlist(Comment comment,

@@ -31,4 +31,6 @@ public interface BoardService {
 	public void updateComment(Comment comment);
 
 	public void updateCommentShow(Comment comment);
+
+	public void insertCommentReply(Comment comment);
 }

@@ -32,6 +32,7 @@
                                     <th class="text-left">작성일자</th>
                                     <th class="text-left">수정</th>
                                     <th class="text-left">삭제</th>
+                                    <th class="text-left">대댓글 작성</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -39,27 +40,69 @@
                                     v-for="item in commentlist"
                                     :key="item.cId"
                                 >
-                                <!-- <td>{{item.cId}}</td> -->
                                 <td>{{item.username}}</td>
-                                <td>{{item.cContent}}</td>
-                                <td>{{item.cDateTime}}</td>
-                                <!-- <td>{{item.cShow}}</td> -->
+                                <td v-if="item.cDepth > 0">
+                                    [답글] {{ item.cContent }}  
+                                </td>   
+                                <td v-else>{{item.cContent}}</td> 
+                                <td>{{item.cDateTime}}</td>             
                                 <td>
                                     <v-icon
+                                         v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
                                         @click="Show(item)"
+                                        color="amber lighten-1"
                                     >                    
                                     mdi-pencil
                                     </v-icon>
                                 </td>
                                 <td>
                                     <v-icon
+                                    v-if="item.username === Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN')"
                                     @click="CommentDelete({
                                         bId: item.bId, 
                                         cId: item.cId,
                                         page: page
                                     })"
+                                    color="red lighten-3"
+                                        fab
                                     >mdi-delete</v-icon>
+                                </td>
+
+                                <td>
+                                    <v-btn
+                                        @click="ShowReply(item)"                                    
+                                        color="grey lighten-1"
+                                        fab
+                                        small
+                                        dark
+                                        >
+                                        <v-icon>mdi-pencil</v-icon>
+                                    </v-btn>
                                 </td>       
+
+                                <td v-if="item.cShow2 === true">
+                                    <v-textarea
+                                        auto-grow
+                                        label="대댓글을 작성하세요"
+                                        name="cContent"
+                                        v-model="cContent"
+                                    ></v-textarea>
+                                </td>
+                                <td 
+                                v-if="item.cShow2 === true">
+                                    <v-icon
+                                    @click="CommentReply({
+                                        bId: item.bId,
+                                        cId: item.cId,
+                                        cContent:cContent,
+                                        username:Userinfo.User_Id,
+                                        page: page,
+                                        cGroup:item.cGroup,
+                                        cOrder:item.cOrder,
+                                        cDepth:item.cDepth
+                                    })"
+                                    >mdi-file-document-edit</v-icon>
+                                </td>
 
                                 <td v-if="item.cShow === true">
                                     <v-textarea
@@ -71,7 +114,7 @@
                                 </td>
                                 <td v-if="item.cShow === true">
                                     <v-icon
-                                    @click="CommentEdit({
+                                    @click="CommentEdit({                                        
                                         bId: item.bId,
                                         cId: item.cId,
                                         cContent:cContent,
@@ -186,6 +229,26 @@ export default {
     },
 
     methods: {
+        CommentReply(payload){
+            console.log('CommentReply Run')
+            console.log(payload)
+            new Promise((resolve,reject) => {
+            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+            axios.post(`http://localhost:9000/api/auth/commentwrite/${payload.page}`, payload)
+            .then(Response => {
+                console.log("Response Data를 받았습니다")
+                console.log(Response.data)
+                this.$store.commit('READ_COMMENT_LIST', Response.data)
+            })
+            .catch(Error => {
+                console.log('error')
+                reject(Error)
+                alert("Error!")
+            })
+            })
+
+        },
+        
         CommentEdit(payload){ // payload = {bId, cId, page, username, cContent}
             console.log(payload)
             new Promise((resolve,reject) => {
@@ -238,6 +301,8 @@ export default {
         // },
 
         CommentDelete(payload){
+            // if(item.username !== Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN') != 'ROLE_ADMIN') 
+            //     alert('삭제가 불가능합니다.')
             if(confirm('정말로 글을 삭제하시겠습니까?')===true){
                 new Promise((resolve, reject) => {
                     axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
@@ -264,23 +329,10 @@ export default {
             // this.$store.commit('SET_SHOW', comment)
         },
 
-        // CommentEdit(payload){ // payload = {bId, cId, page, username, cContent}
-        //     console.log(payload)
-        //     new Promise((resolve,reject) => {
-        //     axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-        //     axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
-        //     .then(Response => {
-        //         console.log("Response Data를 받았습니다")
-        //         console.log(Response.data)
-        //         // this.$store.commit('READ_COMMENT_LIST', Response.data)
-        //     })
-        //     .catch(Error => {
-        //         console.log('error')
-        //         reject(Error)
-        //         alert("Error!")
-        //     })
-        //     })
-        // },
+        ShowReply(comment){ 
+            comment.cShow2 =! comment.cShow2
+            console.log(comment)
+        },
     },
 
     computed:{

@@ -26,7 +26,9 @@ public interface BoardMapper {
 
 	public void insertReply(Board board);
 
-	public void updateGroup(Board board);
+	public void updateGroup(Board board); 		// board group update
+	
+	public void updateCommentGroup(Comment comment);	// comment group update
 
 	public void updateOrder(Board board);
 
@@ -41,5 +43,11 @@ public interface BoardMapper {
 	public void updateComment(Comment comment);
 
 	public void updateCommentShow(Comment comment);
+
+	public void insertCommentReply(Comment comment);
+
+	public void updateCommentOrder(Comment comment);
+
+	
 
 }

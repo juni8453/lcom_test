@@ -12,6 +12,7 @@ public class Comment {
 	private int cDepth;
 	private Pagination pagination;
 	private boolean cShow;
+	private boolean cShow2;
 	
 	public int getcId() {
 		return cId;
@@ -72,6 +73,12 @@ public class Comment {
 	}
 	public void setcShow(boolean cShow) {
 		this.cShow = cShow;
+	}
+	public boolean iscShow2() {
+		return cShow2;
+	}
+	public void setcShow2(boolean cShow2) {
+		this.cShow2 = cShow2;
 	}
 	
 }

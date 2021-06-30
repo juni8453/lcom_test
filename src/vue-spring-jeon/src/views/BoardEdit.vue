@@ -75,7 +75,7 @@ export default {
             console.log(payload)
             new Promise((resolve, reject) => {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.post(`http://localhost:9000/api/auth/boardedit/${this.bId}`, payload)
+                axios.post(`http://localhost:9000/api/auth/boardedit`, payload)
                 .then(Response => {
                     console.log('return board vo')
                     console.log(payload)
@@ -90,7 +90,7 @@ export default {
         getBoard() {
             new Promise((resolve,reject)=> {
                 axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-                axios.get(`http://localhost:9000/api/auth/boarddetail/`) // boarddetail 소스 재활용
+                axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`) // boarddetail 소스 재활용
                 .then(Response => {
                     console.log(Response.data)
                     this.board = Response.data

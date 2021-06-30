@@ -63,7 +63,15 @@ public class BoardServiceImpl implements BoardService {
 
 	@Override
 	public void insertComment(Comment comment) {
-		boardMapper.insertComment(comment);
+		if(comment.getcGroup() == 0) {
+			boardMapper.insertComment(comment);
+			boardMapper.updateCommentGroup(comment);
+		}
+		
+		if(comment.getcGroup() != 0) {
+			boardMapper.insertCommentReply(comment);
+			boardMapper.updateCommentOrder(comment);
+		}
 		
 	}
 
@@ -92,5 +100,11 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void updateCommentShow(Comment comment) {
 		boardMapper.updateCommentShow(comment);		
+	}
+
+	@Override
+	public void insertCommentReply(Comment comment) {
+		boardMapper.insertCommentReply(comment);
+		
 	}
 }

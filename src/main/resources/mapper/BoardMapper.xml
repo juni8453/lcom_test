@@ -32,6 +32,7 @@
      			
 	 FROM 			vue_comment
 	 WHERE			b_id = #{bId}
+	 ORDER BY 		c_group DESC, c_order ASC
 	 LIMIT			#{pagination.pageNum},#{pagination.perPage}
 </select>
 
@@ -90,6 +91,9 @@
 			#{username},
 			#{bId}
 		)
+	<selectKey keyProperty="cId" resultType="int">
+		SELECT LAST_INSERT_ID() 
+	</selectKey>
 </insert>
 
 <select id="getCommentCount" resultType="int">
@@ -104,6 +108,12 @@
 	WHERE 		b_id = #{bId}	
 </update>
 
+<update id="updateCommentGroup" parameterType="Comment">
+	UPDATE		vue_comment
+	SET			c_group = #{cId}
+	WHERE 		c_id = #{cId}	
+</update>
+
 <update id="updateOrder" parameterType="Board">
 		UPDATE		vue_board
 		SET			b_order = b_order +1
@@ -111,6 +121,34 @@
 		AND			b_order >= #{bOrder}
 		AND			b_id != #{bId}
 </update>
+
+<update id="updateCommentOrder" parameterType="Comment">
+		UPDATE		vue_comment
+		SET			c_order = c_order +1
+		WHERE 		c_group = #{cGroup}
+		AND			c_order >= #{cOrder}
+		AND			c_id != #{cId}
+</update>
+
+<insert id="insertCommentReply" parameterType="Comment">
+	      INSERT INTO vue_comment(
+			c_content,
+			c_group,
+			c_order,
+			c_depth,
+			u_id,
+			b_id
+			
+		)VALUES(
+			#{cContent},
+			#{cGroup},
+			#{cOrder},
+			#{cDepth}+1,
+			#{username},
+			#{bId}
+		)
+</insert>
+
 
 <insert id="insertReply" parameterType="Board">
 	      INSERT INTO vue_board(
