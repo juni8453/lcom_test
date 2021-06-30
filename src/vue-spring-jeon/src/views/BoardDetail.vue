@@ -11,7 +11,6 @@
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="text-center pa-3" outlined tile style="height: 600px;" color="Whtie">
                     {{board.bContent}}
-                  
                 </v-card>
             </v-col>
         </v-row>
@@ -119,7 +118,8 @@
                                         cId: item.cId,
                                         cContent:cContent,
                                         username:Userinfo.User_Id,
-                                        page: page
+                                        page: page,
+                                        cShow: item.cShow
                                     })"
                                     >mdi-file-document-edit</v-icon>
                                 </td>
@@ -143,6 +143,7 @@
             </v-col>
         </v-row>
         <v-row dense
+            v-if="$store.state.Show === false"
            >
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="pa-3" outlined tile style="heght:600px;" color="Withe">
@@ -189,7 +190,6 @@ export default {
             page:1,
             pageUnit:5,
             perPage:5,
-            show:false,
             // commentList: null,
             
         }
@@ -249,8 +249,11 @@ export default {
 
         },
         
-        CommentEdit(payload){ // payload = {bId, cId, page, username, cContent}
+        CommentEdit(payload){ // payload = {bId, cId, page, username, cContent, cShow}
+            console.log('payload를 받았음.')
+            console.log(payload.cShow)
             console.log(payload)
+            payload.cShow =! payload.cShow //cShow 다시 true > false로 조정
             new Promise((resolve,reject) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
             axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
@@ -258,7 +261,8 @@ export default {
                 console.log("Response Data를 받았습니다")
                 console.log(Response.data)
                 this.$store.commit('READ_COMMENT_LIST', Response.data)
-                // this.$store.commit('SET_SHOW', Response.data)
+                this.$store.commit('SET_SHOW', payload.cShow) 
+                this.cContent = null
             })
             .catch(Error => {
                 console.log('error')
@@ -295,11 +299,6 @@ export default {
             this.$store.dispatch('CommentPaginationList', payload)
         },
 
-        // Show(payload){
-        //     console.log(payload)
-        //     this.show = !this.show            
-        // },
-
         CommentDelete(payload){
             // if(item.username !== Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN') != 'ROLE_ADMIN') 
             //     alert('삭제가 불가능합니다.')
@@ -326,7 +325,8 @@ export default {
         Show(comment){ //commentlist의 배열 인덱스 item
             comment.cShow =! comment.cShow
             console.log(comment)
-            // this.$store.commit('SET_SHOW', comment)
+            console.log(comment.cShow)
+            this.$store.commit('SET_SHOW', comment.cShow)
         },
 
         ShowReply(comment){ 

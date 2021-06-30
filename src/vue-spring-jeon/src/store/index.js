@@ -37,7 +37,7 @@ export default new Vuex.Store({
       // prevPage:null,
       // pageNum:null
     },
-    // Show: [],
+    Show: false,
     isLogin: false,
     isLoginError: false,
   },
