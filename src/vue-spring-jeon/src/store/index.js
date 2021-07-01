@@ -40,6 +40,7 @@ export default new Vuex.Store({
     Show: false,
     isLogin: false,
     isLoginError: false,
+    
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -106,6 +107,7 @@ export default new Vuex.Store({
 
   },
   actions: {
+  
     loginProcess({ commit }, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {

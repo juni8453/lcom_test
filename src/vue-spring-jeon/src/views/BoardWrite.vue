@@ -23,6 +23,12 @@
                   type="text"
                   ></v-text-field>
 
+                  <v-file-input
+                   id="file"
+                   label="클릭해서 파일을 업로드하세요"
+                   v-model="fileinput"
+                   
+                  ></v-file-input>                                    
                   <v-textarea
                     outlined
                     auto-grow
@@ -36,13 +42,19 @@
                 <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="#FBC02D" 
-                  @click="BoardWrite(
-                    {
-                      bTitle:bTitle, 
-                      bContent:bContent, 
-                      username:Userinfo.User_Id
-                    }
-                  )">등록
+                  @click="
+                  [
+                    BoardWrite(
+                      {
+                        bTitle:bTitle, 
+                        bContent:bContent, 
+                        username:Userinfo.User_Id,
+                        fileinput: fileinput
+                      }
+                    ),
+                    submitFile(fileinput)
+                  ]"
+                >등록
                 </v-btn>
                 </v-card-actions>
             </v-card>
@@ -53,20 +65,55 @@
 
 <script>
 import { mapActions, mapState } from 'vuex'
+import axios from 'axios';
 
 export default {
   data(){
     return {
       bTitle : null,
       bContent : null,
-      username: null
+      username: null,
+      fileinput : null
     }
   },
   computed:{
     ...mapState(['Userinfo'])
   },
+
   methods: {
-    ...mapActions(['BoardWrite']),
+      ...mapActions(['BoardWrite']),
+    
+    submitFile(payload) {
+      console.log('payload를 받았습니다.')
+      console.log(payload)
+      console.log('submitFile Run')
+      console.log("actinos"+payload)
+      let formData = new FormData(); // 페이지 전환 없이 폼 데이터를 제출 하고 싶을 때 FormData 객체를 사용
+      formData.append('file', payload); // key(file), value(payload)
+      return new Promise((resolve, reject) => {
+        // axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}` 
+        // 로그인 시 토큰 확인 후 저장했기 때문에 굳이 필요없는 식 (다른 곳도 마찬가지)
+        axios.post('http://localhost:9000/api/auth/upload',
+          formData,
+          {
+          headers: {
+              'Content-Type': 'multipart/form-data',
+              'Access-Control-Allow-Origin': '*'
+          }
+        }
+      )
+      .then(Response => {
+        console.log(Response.data)
+        if(Response.data === "success") {
+          Route.push("/boardlist")
+        }
+      })
+      .catch(Error => {
+          console.log('에러가 발생했습니다.')
+          console.log('error')
+      })
+      })
+    }
   }
 }
 </script>
