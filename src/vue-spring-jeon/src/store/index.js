@@ -174,6 +174,7 @@ export default new Vuex.Store({
           .then(Response => {
             console.log(Response.data)
             commit('SET_USER_REFRESH',Response.data)
+            
           })
           .catch(Error => {
             console.log(Error)
@@ -193,6 +194,7 @@ export default new Vuex.Store({
         console.log(Response.data.list)
         console.log(Response.data.pagination)
         commit('READ_BOARD_LIST', Response.data)
+        console.log('정상적으로 BoardList가 작동되었습니다')
       })
       .catch(Error => {
         console.log(Error)
@@ -224,12 +226,15 @@ export default new Vuex.Store({
   },
 
   BoardWrite({commit, state}, payload){
+    console.log('BoardWrite Run')
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
       axios.post('http://localhost:9000/api/auth/boardwrite', payload)
         .then(Response => {
-          console.log(payload)
-          console.log(Response.data)
+          console.log('BoardWrite의 payload를 받았습니다.')
+          console.log("BoardWrite의 payload="+payload)
+          console.log("BoardWrite의 Response.data를 받았습니다")
+          console.log("BoardWrite의 Response.data="+Response.data)
           if(Response.data === "success") {
             Route.push("/boardlist")
           }

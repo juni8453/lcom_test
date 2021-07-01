@@ -16,7 +16,7 @@
         </v-row>
         <v-row dense>
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
-                <v-card class="pa-3" outlined tile style="height:600px;" color="Withe">
+                <v-card class="pa-3" outlined tile style="height:600px;" color="White">
                     <v-toolbar color="#BBDEFB" rounded>
                         <v-toolbar-title>Comment List</v-toolbar-title>
                     </v-toolbar>
@@ -142,11 +142,20 @@
                 </v-card>
             </v-col>
         </v-row>
+        
+        <v-row>
+            <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
+                <v-card class="pa-3" outlined tile style="height:100px;" color="White">
+                    첨부파일 다운로드 칸
+                </v-card>
+            </v-col>
+        </v-row>    
+
         <v-row dense
             v-if="$store.state.Show === false"
            >
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
-                <v-card class="pa-3" outlined tile style="heght:600px;" color="Withe">
+                <v-card class="pa-3" outlined tile style="height:300px;" color="White">
                     <v-toolbar rounded color="#BBDEFB">
                         <v-toolbar-title>Comment Edit</v-toolbar-title>
                     </v-toolbar>
@@ -262,7 +271,7 @@ export default {
                 console.log(Response.data)
                 this.$store.commit('READ_COMMENT_LIST', Response.data)
                 this.$store.commit('SET_SHOW', payload.cShow) 
-                this.cContent = null
+                this.cContent = null // 댓글 수정 후 cContent 초기화
             })
             .catch(Error => {
                 console.log('error')
@@ -332,6 +341,7 @@ export default {
         ShowReply(comment){ 
             comment.cShow2 =! comment.cShow2
             console.log(comment)
+            this.$store.commit('SET_SHOW', comment.cShow2)
         },
     },
 
