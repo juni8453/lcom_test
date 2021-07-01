@@ -150,8 +150,9 @@ public class AuthController {
 	//업로드
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public ResponseEntity<?> upload(@RequestParam("uploadFile") MultipartFile multipartFile){
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/";
-		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/";  학원
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
+		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/";
 		String thumbPath = path + "thumb/";
 		String filename = multipartFile.getOriginalFilename();
 		String ext = filename.substring(filename.lastIndexOf(".")+1);

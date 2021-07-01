@@ -66,6 +66,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import axios from 'axios';
+import Route from '../router/index'
 
 export default {
   data(){
@@ -109,6 +110,8 @@ export default {
         .then(Response => {
           console.log('submitFile의 Response.data를 받았습니다.')
           console.log(Response.data) // Response.data = success
+          // Route.push("/fileupload")
+          
         })
         .catch(Error => {
             console.log('에러가 발생했습니다.')

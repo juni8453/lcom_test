@@ -12,6 +12,7 @@ import UserDetail from '../views/UserDetail'
 import BoardDetail from '../views/BoardDetail'
 import BoardEdit from '../views/BoardEdit'
 import BoardReply from '../views/BoardReply'
+import FileUpload from '../views/FileUpload'
 
 Vue.use(VueRouter)
 
@@ -80,6 +81,11 @@ const routes = [
     name: 'BoardReply',
     component: BoardReply,
     props: true
+  },
+  {
+    path: '/fileupload',
+    name: 'FileUpload',
+    component: FileUpload,
   },
 ]
 
