@@ -109,18 +109,19 @@
       </v-row>
     </v-container>
     
-  <div>
-    <v-container>  
-      <v-row class="pa-8"
-      ><v-pagination
-        v-model="page"
-        :length="Pagination.lastPage" 
-        circle
-        @input="move({page:page})"
-      ></v-pagination>
-      </v-row>
-    </v-container>  
-  </div>  
+    <div>
+      <v-container>  
+        <v-row class="pa-8"
+        ><v-pagination
+          v-model="page"
+          :length="Pagination.lastPage" 
+          circle
+          @input="move({page:page})"
+        ></v-pagination>
+        </v-row>
+      </v-container>  
+    </div>  
+    <!-- <img src="/images/thumb/aaa.png"> 이미지 파일 뿌리기 src 파일 내 이미지 저장하지 말 것--> 
   </div>
 </template>
 <style scoped>

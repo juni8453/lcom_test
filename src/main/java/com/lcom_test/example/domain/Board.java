@@ -15,6 +15,7 @@ public class Board {
 	private String bDateTime;
 	private Pagination pagination;
 	private List<Comment> commentList;
+
 	
 	public int getbId() {
 		return bId;

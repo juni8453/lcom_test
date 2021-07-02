@@ -227,25 +227,57 @@ export default new Vuex.Store({
 
   BoardWrite({commit, state}, payload){
     console.log('BoardWrite Run')
-    return new Promise((resolve, reject) => {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.post('http://localhost:9000/api/auth/boardwrite', payload)
-        .then(Response => {
-          console.log('BoardWrite의 payload를 받았습니다.')
-          console.log("BoardWrite의 payload="+payload)
-          console.log("BoardWrite의 Response.data를 받았습니다")
-          console.log("BoardWrite의 Response.data="+Response.data)
-          if(Response.data === "success") {
-            Route.push("/boardlist")
-          }
-      })
-      .catch(Error => {
-          console.log('error')
-          reject(Error)
-          alert("Error!")
-          Route.push("/boardlist")
+    console.log('payload를 받았습니다')
+    console.log(payload)
+
+    // 파일 업로드 X
+    if(payload.fileinput === null){
+      return new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        axios.post('http://localhost:9000/api/auth/boardwrite', payload)
+          .then(Response => {
+            console.log(Response.data)
+            if(Response.data === "success") {
+              Route.push("/boardlist")
+            }
         })
-      })
+        .catch(Error => {
+            console.log('error')
+            reject(Error)
+            alert("Error!")
+            Route.push("/boardlist")
+          })
+        })
+      }
+      
+      // 파일 업로드 O
+      else {
+        return new Promise((resolve, reject) => {
+          let formData = new FormData(); // 페이지 전환 없이 폼 데이터를 제출 하고 싶을 때 FormData 객체를 사용
+          formData.append('bTitle', payload.bTitle)
+          formData.append('bContent', payload.bContent)
+          formData.append('username', payload.username)
+          formData.append('uploadFile', payload.fileinput) // key(file), value(payload)
+          axios.post('http://localhost:9000/api/auth/upload', formData,
+            {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Access-Control-Allow-Origin': '*'
+            }
+          })
+          .then(Response => {
+            console.log(Response.data)
+            console.log(payload)
+            if(Response.data === "success"){
+              Route.push("/boardlist")
+            }
+          })
+          .catch(Error => {
+            console.log(Error)
+            alert('Error 발생 !')
+          })
+        })
+      }
     },
 
     UserDelete({commit, state}, payload){

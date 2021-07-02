@@ -147,12 +147,19 @@ public class AuthController {
 		 return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
+	@PostMapping("/boardwrite")
+	public ResponseEntity<?> boardwrite(@RequestBody Board board){
+		boardService.insertBoard(board);
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+	
 	//업로드
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
-	public ResponseEntity<?> upload(@RequestParam("uploadFile") MultipartFile multipartFile){
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/";  학원
+	public ResponseEntity<?> upload(@RequestParam("uploadFile") MultipartFile multipartFile, Board board){
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/"; 
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
-		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/";
+//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/"; 데탑
+		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		String filename = multipartFile.getOriginalFilename();
 		String ext = filename.substring(filename.lastIndexOf(".")+1);
@@ -178,6 +185,7 @@ public class AuthController {
 			g.dispose();
 			ImageIO.write(thumbImageBf, ext, thmbFile);
 			
+			boardService.insertBoard(board);
 			
 		} catch(IOException e) {
 			FileUtils.deleteQuietly(file);
@@ -224,11 +232,6 @@ public class AuthController {
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
-	@PostMapping("/boardwrite")
-	public ResponseEntity<?> boardwirte(@RequestBody Board board){
-		boardService.insertBoard(board);
-		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
 	
 	@PostMapping({"/boarddelete", "/boarddelete/{pageOpt}"})
 	public ResponseEntity<?> deleteBoard(
