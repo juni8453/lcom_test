@@ -99,6 +99,13 @@
               v-on="on"
             >상세 메뉴
             </v-btn>
+            <v-btn 
+              class="ma-2" 
+              outlined 
+              href="/images/thumb/ㅁㅁㅁ.png"
+              download>
+             테스트용 첨부파일 다운로드
+          </v-btn>
           </template>
 
           <v-list>

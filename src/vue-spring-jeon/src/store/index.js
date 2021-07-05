@@ -47,6 +47,9 @@ export default new Vuex.Store({
       state.UserList.push(payload)
       Route.push("/login")
     },
+    InitData(state){
+      state.Show = false
+    },
     SET_PAGINATION(state,payload){
       state.Pagination.page = payload
     },
@@ -257,7 +260,7 @@ export default new Vuex.Store({
           formData.append('bTitle', payload.bTitle)
           formData.append('bContent', payload.bContent)
           formData.append('username', payload.username)
-          formData.append('uploadFile', payload.fileinput) // key(file), value(payload)
+          formData.append('uploadFile', payload.fileinput) // key(uploadFile), value(payload)
           axios.post('http://localhost:9000/api/auth/upload', formData,
             {
             headers: {

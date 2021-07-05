@@ -146,7 +146,7 @@
         <v-row>
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="pa-3" outlined tile style="height:100px;" color="White">
-                    첨부파일 다운로드 칸
+                    미구현
                 </v-card>
             </v-col>
         </v-row>    
@@ -199,6 +199,7 @@ export default {
             page:1,
             pageUnit:5,
             perPage:5,
+            
             // commentList: null,
             
         }
@@ -212,6 +213,7 @@ export default {
                 console.log(Response.data)
                 this.board = Response.data
                 this.$store.commit('READ_COMMENT_LIST', Response.data)
+                this.$store.commit('InitData') // boarddetail page 접속 시 항상 Show 값 false 고정
                 //state의 Pagination 값을 변화시키고 사용할 수 있게 값 셋팅  
             })
             .catch(Error => {
@@ -224,7 +226,7 @@ export default {
         // new Promise((resolve, reject) =>{
         //     axios.get(`http://localhost:9000/api/auth/commentlist/${this.bId}`)
         //     .then(Response => {
-        //         console.log('CommentList 뿌리기')
+        //         console.log('Comm'entList 뿌리기')
         //         console.log(this.bId)
         //         console.log(Response.data)
         //         this.$store.commit('READ_COMMENT_LIST', Response.data)
@@ -259,10 +261,11 @@ export default {
         },
         
         CommentEdit(payload){ // payload = {bId, cId, page, username, cContent, cShow}
-            console.log('payload를 받았음.')
+            console.log('payload를 받았습니다.')
             console.log(payload.cShow)
             console.log(payload)
             payload.cShow =! payload.cShow //cShow 다시 true > false로 조정
+            console.log(payload.cShow)
             new Promise((resolve,reject) => {
             axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
             axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)

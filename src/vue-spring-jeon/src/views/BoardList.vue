@@ -121,7 +121,8 @@
         </v-row>
       </v-container>  
     </div>  
-    <!-- <img src="/images/thumb/aaa.png"> 이미지 파일 뿌리기 src 파일 내 이미지 저장하지 말 것--> 
+    <!-- <img src="/images/thumb/ㅁㅁㅁ.png">  -->
+    <!-- 이미지 파일 뿌리기 src 파일 내 이미지 저장하지 말 것  -->
   </div>
 </template>
 <style scoped>
