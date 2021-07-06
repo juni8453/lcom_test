@@ -1,5 +1,6 @@
 package com.lcom_test.example.mapper;
 
+import java.awt.Image;
 import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import com.lcom_test.example.domain.Board;
@@ -47,6 +48,8 @@ public interface BoardMapper {
 	public void insertCommentReply(Comment comment);
 
 	public void updateCommentOrder(Comment comment);
+
+	public void insertImage(Image image);
 
 	
 

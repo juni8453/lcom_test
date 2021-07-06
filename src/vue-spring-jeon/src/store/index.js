@@ -58,7 +58,7 @@ export default new Vuex.Store({
       state.Userinfo.User_Name = data.name
       state.Userinfo.User_auth = data.roles
       state.Userinfo.User_token = data.token
-      Route.push("/user")
+      Route.push("/")
    },
    READ_USER_LIST(state,data) {
     state.UserList = data.list

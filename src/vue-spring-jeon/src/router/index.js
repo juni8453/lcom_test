@@ -12,6 +12,7 @@ import UserDetail from '../views/UserDetail'
 import BoardDetail from '../views/BoardDetail'
 import BoardEdit from '../views/BoardEdit'
 import BoardReply from '../views/BoardReply'
+import BoardOption from '../views/BoardOption'
 
 Vue.use(VueRouter)
 
@@ -80,6 +81,12 @@ const routes = [
     name: 'BoardReply',
     component: BoardReply,
     props: true
+  },
+  {
+    path: '/boardoption',
+    name: 'BoardOption',
+    component: BoardOption,
+    // props: true
   },
 ]
 

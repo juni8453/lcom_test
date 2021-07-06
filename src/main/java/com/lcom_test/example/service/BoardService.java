@@ -1,5 +1,6 @@
 package com.lcom_test.example.service;
 
+import java.awt.Image;
 import java.util.List;
 import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Comment;
@@ -33,4 +34,6 @@ public interface BoardService {
 	public void updateCommentShow(Comment comment);
 
 	public void insertCommentReply(Comment comment);
+
+	public void insertImage(Image image);
 }

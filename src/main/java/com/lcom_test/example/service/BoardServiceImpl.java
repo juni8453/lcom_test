@@ -1,5 +1,6 @@
 package com.lcom_test.example.service;
 
+import java.awt.Image;
 import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -105,6 +106,12 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public void insertCommentReply(Comment comment) {
 		boardMapper.insertCommentReply(comment);
+		
+	}
+
+	@Override
+	public void insertImage(Image image) {
+		boardMapper.insertImage(image);
 		
 	}
 }
