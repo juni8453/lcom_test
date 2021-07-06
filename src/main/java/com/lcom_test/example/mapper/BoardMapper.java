@@ -5,6 +5,7 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Comment;
+import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Pagination;
 
 @Mapper
@@ -49,7 +50,7 @@ public interface BoardMapper {
 
 	public void updateCommentOrder(Comment comment);
 
-	public void insertImage(Image image);
+	public void insertImage(Images images);
 
 	
 

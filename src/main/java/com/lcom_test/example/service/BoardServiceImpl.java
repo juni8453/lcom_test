@@ -8,6 +8,7 @@ import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
+import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.mapper.BoardMapper;
 import com.lcom_test.example.service.BoardService;
 
@@ -110,8 +111,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-	public void insertImage(Image image) {
-		boardMapper.insertImage(image);
-		
+	public void insertImage(Images images) {
+		boardMapper.insertImage(images);
 	}
 }

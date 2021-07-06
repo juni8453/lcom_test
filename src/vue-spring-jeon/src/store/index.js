@@ -277,7 +277,7 @@ export default new Vuex.Store({
           })
           .catch(Error => {
             console.log(Error)
-            alert('Error 발생 !')
+            alert('Error가 발생했습니다!')
           })
         })
       }

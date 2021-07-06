@@ -96,6 +96,14 @@
 	</selectKey>
 </insert>
 
+<insert id="insertImage" parameterType="Images">
+	INSERT INTO vue_img(
+		i_name
+	)VALUES(
+		#{iName}
+	)
+</insert>
+
 <select id="getCommentCount" resultType="int">
 	SELECT		COUNT(*)					as count
 				

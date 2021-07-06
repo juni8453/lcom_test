@@ -86,7 +86,7 @@ const routes = [
     path: '/boardoption',
     name: 'BoardOption',
     component: BoardOption,
-    // props: true
+    props: true
   },
 ]
 

@@ -16,7 +16,6 @@ public class Board {
 	private Pagination pagination;
 	private List<Comment> commentList;
 
-	
 	public int getbId() {
 		return bId;
 	}
