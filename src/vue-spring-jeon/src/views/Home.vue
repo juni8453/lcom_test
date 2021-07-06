@@ -81,15 +81,23 @@
                             <v-card class="pd-3">
                                 <v-img
                                     height="250"
-                                    src="https://cdn.vuetifyjs.com/images/cards/sunshine.jpg"
+                                    src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
                                 ></v-img>
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
+                                <!-- <v-img
+                                    height="250"
+                                    src="/images/zzz.png"
+                                ></v-img> -->
+                                <!-- <v-img
+                                    height="250"
+                                    :src="require('/public/images/' + myFilename)"
+                                ></v-img> -->
                                 <v-img
                                     height="250"
-                                    src="https://cdn.vuetifyjs.com/images/cards/docks.jpg"
+                                    :src="require('/public/images/' + myFilename)"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -125,6 +133,13 @@
 
 <script>
 export default {
-  
+    data(){
+        return{
+            //Test value
+            myFilename: "zzz.png"
+        }
+    },
+
+   
 }
 </script>
