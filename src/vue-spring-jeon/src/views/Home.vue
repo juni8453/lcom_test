@@ -89,7 +89,7 @@
                             <v-card class="pd-3">
                                 <v-img 
                                     height="250"
-                                    :src="`/images/thumb/${myFilename}`">
+                                    :src="`/images/thumb/${Filename}`">
                                 </v-img>
                             </v-card>
                         </v-col>
@@ -128,7 +128,8 @@ export default {
     data(){
         return{
             //Test value
-            myFilename: "zzz.png"
+            myFilename: "zzz.png",
+            Filename: '16256241476383.jpg',            
         }
     },
 

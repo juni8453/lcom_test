@@ -46,20 +46,36 @@ import Route from '../router/index'
       }
     },
     methods:{
+
+      // insertLogo(payload) {
+      //   console.log('payload를 받았습니다.')
+      //   console.log(payload)
+      //   this.$store.dispatch('insertLogo', payload)
+      // }
+
       insertLogo(payload){
         console.log('insetLogo')
         console.log('payload를 받았습니다.')
-        console.log('payload.name:'+payload.fileinput.name)
+        console.log(payload)
+        console.log('payload.name:' +payload.fileinput.name)
+        console.log('payload.lastModified:' +payload.fileinput.lastModified)
         new Promise((resolve, reject) => {
           let formData = new FormData(); // 페이지 전환 없이 폼 데이터를 제출 하고 싶을 때 FormData 객체를 사용
           formData.append('uploadFile', payload.fileinput) // key(uploadFile), value(payload)
           formData.append('iName',payload.fileinput.name)
-          axios.post('http://localhost:9000/api/admin/logoupload', formData)
+          formData.append('iPk', payload.fileinput.lastModified)
+          axios.post('http://localhost:9000/api/admin/logoupload', formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Origin': '*'
+          }
+        })
           .then(Response => {
             console.log(Response.data)
             console.log(payload)
             if(Response.data === "success"){
-              this.$store.commit('SET_IMAGES', payload)
+              this.$store.commit('SET_IMAGES', formData)
               Route.push("/")
             }
           })
@@ -69,6 +85,7 @@ import Route from '../router/index'
           })
         })
       }
+
     },
   }
 </script>
