@@ -114,4 +114,9 @@ public class BoardServiceImpl implements BoardService {
 	public void insertImage(Images images) {
 		boardMapper.insertImage(images);
 	}
+
+	@Override
+	public List<Images> selectImagesList() {
+		return boardMapper.selectImagesList();
+	}
 }

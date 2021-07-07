@@ -89,7 +89,7 @@
                             <v-card class="pd-3">
                                 <v-img 
                                     height="250"
-                                    :src="`/images/thumb/${Filename}`">
+                                    :src="`/images/thumb/${myFilename}`">
                                 </v-img>
                             </v-card>
                         </v-col>
@@ -124,14 +124,16 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 export default {
     data(){
         return{
             //Test value
             myFilename: "zzz.png",
-            Filename: '16256241476383.jpg',            
+            // Filename: this.$store.state.setImages,            
         }
     },
+   
 
    
 }

@@ -52,6 +52,8 @@ public interface BoardMapper {
 
 	public void insertImage(Images images);
 
+	public List<Images> selectImagesList();
+
 	
 
 }

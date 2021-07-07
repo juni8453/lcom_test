@@ -1,5 +1,7 @@
 package com.lcom_test.example.domain;
 
+import java.util.List;
+
 public class Images {
 	private int iId;
 	private String iName;

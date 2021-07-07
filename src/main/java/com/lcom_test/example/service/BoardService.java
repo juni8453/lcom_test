@@ -37,4 +37,6 @@ public interface BoardService {
 	public void insertCommentReply(Comment comment);
 
 	public void insertImage(Images images);
+
+	public List<Images> selectImagesList();
 }

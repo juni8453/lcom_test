@@ -20,6 +20,14 @@
 	 LIMIT			#{pageNum},#{perPage}
 </select>
 
+<select id="selectImagesList" resultType="Images">
+     SELECT 		i_id		as iId,
+     				i_name 		as iName,
+     				i_pk		as iPk
+     					
+	 FROM 			vue_img
+</select>
+
 <select id="selectCommentList" resultType="Comment">
      SELECT 		c_id		as cId,     				
      				c_content   as cContent,
@@ -98,9 +106,11 @@
 
 <insert id="insertImage" parameterType="Images">
 	INSERT INTO vue_img(
-		i_name
+		i_name,
+		i_pk
 	)VALUES(
-		#{iName}
+		#{iName},
+		#{iPk}
 	)
 </insert>
 

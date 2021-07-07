@@ -1,5 +1,5 @@
 +<template>
-  <v-simple-table>
+  <!-- <v-simple-table>
     <template v-slot:default>
       <tbody>
         <tr>
@@ -32,7 +32,97 @@
         </tr>
       </tbody>
     </template>
-  </v-simple-table>
+  </v-simple-table> -->
+  <v-container fluid>
+    <v-row dense>
+      <v-col cols="12" md="12" sm="12">
+        <v-card class="text-center pa-3" outlined>
+          쇼핑몰 설정 페이지
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="3" md="3">
+        <v-card class="pa-6 text-center" outlined height="140">
+          첫번째 로고 이미지 설정
+          <v-btn class="pa-1 text-center" outlined
+           @click="insertLogo({
+              fileinput:fileinput
+            })"
+          >적용</v-btn>
+        </v-card>
+      </v-col>
+      <v-col cols="9" md="9">
+        <v-card class="pa-3 text-center" outlined height="140">
+          <v-col class="text-left">
+            쇼핑몰 첫번째 로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다.
+          </v-col>
+          <v-col cols="6" md="6" class="text-left">
+            <v-file-input
+              id="uploadFile"
+              label="파일을 업로드하세요"
+              v-model="fileinput"
+            >
+            </v-file-input>
+          </v-col>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="3" md="3">
+        <v-card class="pa-6 text-center" outlined height="140">
+          두번째 로고 이미지 설정  
+          <v-btn class="pa-1 text-center" outlined>적용</v-btn>
+        </v-card>
+      </v-col>
+      <v-col cols="9" md="9">
+        <v-card class="pa-3 text-center" outlined height="140">
+          <v-col class="text-left">
+            쇼핑몰 두번째 로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다.
+          </v-col>
+          <v-col class="text-left">
+            <v-btn>파일 선택</v-btn>
+          </v-col>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="3" md="3">
+        <v-card class="pa-6 text-center" outlined height="140">
+          세번째 로고 이미지 설정
+          <v-btn class="pa-1 text-center" outlined>적용</v-btn>
+        </v-card>
+      </v-col>
+      <v-col cols="9" md="9">
+        <v-card class="pa-3 text-center" outlined height="140">
+          <v-col class="text-left">
+            쇼핑몰 세번째 로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다.
+          </v-col>
+          <v-col class="text-left">
+            <v-btn>파일 선택</v-btn>
+          </v-col>
+        </v-card>
+      </v-col>
+    </v-row>
+    <v-row dense>
+      <v-col cols="3" md="3">
+        <v-card class="pa-6 text-center" outlined height="140">
+          네번째 로고 이미지 설정
+          <v-btn class="pa-1 text-center" outlined>적용</v-btn>
+        </v-card>
+      </v-col>
+      <v-col cols="9" md="9">
+        <v-card class="pa-3 text-center" outlined height="140">
+          <v-col class="text-left">
+            쇼핑몰 네번째 로고를 직접 올릴 수 있습니다. 이미지 파일만 가능합니다.
+          </v-col>
+          <v-col class="text-left">
+            <v-btn>파일 선택</v-btn>
+          </v-col>
+        </v-card>
+      </v-col>
+    </v-row>
+  </v-container>  
 </template>
 
 <script>
@@ -55,7 +145,6 @@ import Route from '../router/index'
 
       insertLogo(payload){
         console.log('insetLogo')
-        console.log('payload를 받았습니다.')
         console.log(payload)
         console.log('payload.name:' +payload.fileinput.name)
         console.log('payload.lastModified:' +payload.fileinput.lastModified)
@@ -72,12 +161,15 @@ import Route from '../router/index'
           }
         })
           .then(Response => {
+            console.log('Response.data를 받았습니다.')
             console.log(Response.data)
-            console.log(payload)
+            console.log('fileinput'+payload.fileinput)
+            // Route.push("/")
             if(Response.data === "success"){
-              this.$store.commit('SET_IMAGES', formData)
+              this.$store.commit('SET_IMAGES', payload.fileinput)
               Route.push("/")
             }
+
           })
           .catch(Error => {
             console.log(Error)
