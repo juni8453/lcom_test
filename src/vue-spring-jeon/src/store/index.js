@@ -40,6 +40,7 @@ export default new Vuex.Store({
     Show: false,
     isLogin: false,
     isLoginError: false,
+    setImages: null,
     
   },
   mutations: {
@@ -106,7 +107,10 @@ export default new Vuex.Store({
    },
    SET_BOARD(state, data){
      state.board = data
-   }
+   },
+   SET_IMAGES(state, data){
+    state.setImages = data
+   },
 
   },
   actions: {
@@ -320,9 +324,31 @@ export default new Vuex.Store({
         })
       })
     },
-
-
-
+   
+    insertLogo(payload){
+      console.log('insetLogo')
+      console.log('payload를 받았습니다.')
+      console.log('payload.name:'+payload.fileinput.name)
+      new Promise((resolve, reject) => {
+        let formData = new FormData(); // 페이지 전환 없이 폼 데이터를 제출 하고 싶을 때 FormData 객체를 사용
+        formData.append('uploadFile', payload.fileinput) // key(uploadFile), value(payload)
+        formData.append('iName',payload.fileinput.name)
+        axios.post('http://localhost:9000/api/admin/logoupload', formData)
+        .then(Response => {
+          console.log(Response.data)
+          console.log(payload)
+          if(Response.data === "success"){
+            this.$store.commit('SET_IMAGES', payload)
+            Route.push("/")
+          }
+        })
+        .catch(Error => {
+          console.log(Error)
+          alert('Error 발생 !')
+        })
+      })
+    },
+    
   }
 })
 

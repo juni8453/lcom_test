@@ -87,18 +87,10 @@
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
-                                <!-- <v-img
+                                <v-img 
                                     height="250"
-                                    src="/images/zzz.png"
-                                ></v-img> -->
-                                <!-- <v-img
-                                    height="250"
-                                    :src="require('/public/images/' + myFilename)"
-                                ></v-img> -->
-                                <v-img
-                                    height="250"
-                                    :src="require('/public/images/' + myFilename)"
-                                ></v-img>
+                                    :src="`/images/thumb/${myFilename}`">
+                                </v-img>
                             </v-card>
                         </v-col>
                         <v-col cols="12" md="6">
