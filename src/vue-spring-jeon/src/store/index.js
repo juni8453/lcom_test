@@ -40,7 +40,8 @@ export default new Vuex.Store({
     Show: false,
     isLogin: false,
     isLoginError: false,
-    setImages: {},
+    // setImages: null,
+    imageslist:[]
     
   },
   mutations: {
@@ -108,8 +109,11 @@ export default new Vuex.Store({
    SET_BOARD(state, data){
      state.board = data
    },
-   SET_IMAGES(state, data){
-    state.setImages = data
+  //  SET_IMAGES(state, data){
+  //   state.setImages = data
+  //  },
+  SET_IMAGES_LIST(state, data){
+    state.imageslist = data
    },
 
   },

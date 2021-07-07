@@ -1,38 +1,4 @@
 +<template>
-  <!-- <v-simple-table>
-    <template v-slot:default>
-      <tbody>
-        <tr>
-          <th rowspan="2">상단로고이미지</th>
-          <td colspan="4">쇼핑몰 상단로고를 직접 올릴 수 있습니다.</td>
-        </tr>
-        <tr>
-          <td>
-            <v-file-input
-              id="uploadFile"
-              label="클릭해서 파일을 업로드하세요"
-              v-model="fileinput"
-              ></v-file-input>
-            선택된 파일 없음
-          </td>
-          <td>
-            <v-btn small>
-              삭제
-            </v-btn>
-          </td>
-          <td>
-            <v-btn small
-            type="button"
-            @click="insertLogo({
-              fileinput:fileinput
-            })">
-              등록
-            </v-btn>
-          </td>
-        </tr>
-      </tbody>
-    </template>
-  </v-simple-table> -->
   <v-container fluid>
     <v-row dense>
       <v-col cols="12" md="12" sm="12">
@@ -136,13 +102,6 @@ import Route from '../router/index'
       }
     },
     methods:{
-
-      // insertLogo(payload) {
-      //   console.log('payload를 받았습니다.')
-      //   console.log(payload)
-      //   this.$store.dispatch('insertLogo', payload)
-      // }
-
       insertLogo(payload){
         console.log('insetLogo')
         console.log(payload)
@@ -163,13 +122,14 @@ import Route from '../router/index'
           .then(Response => {
             console.log('Response.data를 받았습니다.')
             console.log(Response.data)
-            console.log('fileinput'+payload.fileinput)
+            // console.log('fileinput'+payload.fileinput)
             // Route.push("/")
-            if(Response.data === "success"){
-              this.$store.commit('SET_IMAGES', payload.fileinput)
-              Route.push("/")
-            }
-
+            // if(Response.data === "success"){
+            //   this.$store.commit('SET_IMAGES', payload.fileinput)
+            //   Route.push("/")
+            // }
+            this.$store.commit('SET_IMAGES_LIST', Response.data)
+            Route.push('/')
           })
           .catch(Error => {
             console.log(Error)
@@ -177,7 +137,6 @@ import Route from '../router/index'
           })
         })
       }
-
     },
   }
 </script>

@@ -66,14 +66,13 @@
                        </v-col>    
                    </v-row>
                 </v-card>   
-
                 <v-card class="text-center pa-3" outlined color="white">
                     <v-row dense align="center" justify="space-around">   
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
                                 <v-img
                                     height="250"
-                                    src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
+                                    :src="`/images/thumb/${imageslist.list[0].iPk}${imageslist.list[0].iName}`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -81,7 +80,7 @@
                             <v-card class="pd-3">
                                 <v-img
                                     height="250"
-                                    src="https://cdn.vuetifyjs.com/images/cards/house.jpg"
+                                    :src="`/images/thumb/${imageslist.list[1].iPk}${imageslist.list[1].iName}`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -89,7 +88,8 @@
                             <v-card class="pd-3">
                                 <v-img 
                                     height="250"
-                                    :src="`/images/thumb/${myFilename}`">
+                                    :src="`/images/thumb/${imageslist.list[2].iPk}${imageslist.list[2].iName}`"
+                                >
                                 </v-img>
                             </v-card>
                         </v-col>
@@ -97,12 +97,13 @@
                             <v-card class="pd-3">
                                 <v-img
                                     height="250"
-                                    src="https://cdn.vuetifyjs.com/images/cards/plane.jpg"
+                                    :src="`/images/thumb/${imageslist.list[3].iPk}${imageslist.list[3].iName}`"
                                 ></v-img>
                             </v-card>
                         </v-col>
                     </v-row>
                 </v-card>  
+
             </v-col>
             <v-footer>
                 <v-card>
@@ -125,16 +126,29 @@
 
 <script>
 import { mapState } from 'vuex'
+import axios from 'axios'
 export default {
     data(){
-        return{
-            //Test value
-            myFilename: "zzz.png",
-            // Filename: this.$store.state.setImages,            
+        return{      
         }
     },
-   
+    created() {
+        new Promise((resolve, reject) => {
+        axios.get(`http://localhost:9000/api/auth/home`)
+        .then(Response => {
+            console.log('Home의 created Response.data를 받았습니다.')
+            console.log(Response.data)
+            this.$store.commit('SET_IMAGES_LIST', Response.data)
+        })
+        .catch(Error => {
+            console.log(Error)
+        })
+        })
+    },
+    
+    computed:{
+        ...mapState(['imageslist'])
+    },
 
-   
 }
 </script>

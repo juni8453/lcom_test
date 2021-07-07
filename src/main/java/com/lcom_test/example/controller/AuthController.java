@@ -53,6 +53,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Comment;
+import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
@@ -145,6 +146,12 @@ public class AuthController {
 		UserInfo user = userService.readUser_refresh(username);
 
 		 return new ResponseEntity<>(user, HttpStatus.OK);
+	}
+	
+	@GetMapping("/home")
+	public ResponseEntity<?> home(Images images) {
+			List<Images> imageslist = boardService.selectImagesList();
+			return ResponseEntity.ok(new ListResponse<Images>(imageslist));
 	}
 	
 	@PostMapping("/boardwrite")
