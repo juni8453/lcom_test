@@ -63,6 +63,7 @@ import com.lcom_test.example.response.JwtResponse;
 import com.lcom_test.example.response.ListResponse;
 import com.lcom_test.example.service.BoardService;
 import com.lcom_test.example.service.UserService;
+import com.lcom_test.example.service.ProductService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -84,6 +85,8 @@ public class AuthController {
 	UserService userService;
 	
 	@Autowired BoardService boardService;
+	
+	@Autowired ProductService productService;
 	
 	@PostMapping("/signin")
 	public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {

@@ -13,6 +13,11 @@ import BoardDetail from '../views/BoardDetail'
 import BoardEdit from '../views/BoardEdit'
 import BoardReply from '../views/BoardReply'
 import BoardOption from '../views/BoardOption'
+import HotItems from '../views/HotItems'
+import SaleItems from '../views/SaleItems'
+import BwBar from '../components/BwBar'
+import ProductInsert from '../views/ProductInsert'
+
 
 Vue.use(VueRouter)
 
@@ -87,6 +92,26 @@ const routes = [
     name: 'BoardOption',
     component: BoardOption,
     props: true
+  },
+  {
+    path: '/hotitems',
+    name: 'HotItems',
+    component: HotItems,
+  },
+  {
+    path: '/saleitems',
+    name: 'SaleItems',
+    component: SaleItems,
+  },
+  {
+    path: '/bwbar',
+    name: 'BwBar',
+    component: BwBar,
+  },
+  {
+    path: '/productinsert',
+    name: 'ProductInsert',
+    component: ProductInsert,
   },
 ]
 

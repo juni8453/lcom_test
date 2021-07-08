@@ -41,12 +41,14 @@ import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Pagination;
+import com.lcom_test.example.domain.Product;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 import com.lcom_test.example.response.JwtResponse;
 import com.lcom_test.example.response.ListResponse;
 import com.lcom_test.example.service.UserService;
 import com.lcom_test.example.service.BoardService;
+import com.lcom_test.example.service.ProductService;
 
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RestController
@@ -68,6 +70,16 @@ public class AdminController {
 	
 	@Autowired
 	BoardService boardService;
+	
+	@Autowired
+	ProductService productService;
+	
+	@PostMapping("/productinsert")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> productinsert(@RequestBody Product product){
+		boardService.insertProduct(product);
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
 	
 	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -92,9 +104,9 @@ public class AdminController {
 //				String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/"; 
 //				String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
 //				String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/"; 데탑
-//				String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+				String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		String filename = images.getiPk() + multipartFile.getOriginalFilename();
 		String ext = filename.substring(filename.lastIndexOf(".")+1);
