@@ -41,8 +41,9 @@ export default new Vuex.Store({
     isLogin: false,
     isLoginError: false,
     // setImages: null,
-    imageslist:[]
-    
+    imageslist:[],
+    productlist:[],
+
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -74,6 +75,10 @@ export default new Vuex.Store({
     state.commentlist = data.commentList
     state.Pagination = data.pagination
    },
+   READ_PRODUCT_LIST(state, data){
+    state.productlist = data.list
+   },
+
    INSERT_TOKEN(state) {
      state.Userinfo.User_token = localStorage.getItem("token")
    },
@@ -193,6 +198,46 @@ export default new Vuex.Store({
           })
     })
   },
+
+  insertProduct({commit, state},payload){
+    console.log('produtInsert Run')
+    console.log(payload)
+    return new Promise((resolve, reject) => {
+      axios.post('http://localhost:9000/api/admin/insertproduct', payload)
+        .then(Response => {
+          console.log(Response.data)
+          console.log(payload)
+          if(Response.data === "success") {
+            Route.push("/latestitems")
+          }
+      })
+      .catch(Error => {
+          console.log('error')
+          reject(Error)
+          alert("Error!")
+          Route.push("/")
+        })
+      })
+    },
+
+    latestItems({commit}){
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:9000/api/admin/latesitems`)
+        .then(Response => {
+          console.log('Response data를 받았습니다.')
+          console.log(Response.data)
+          console.log('Items data를 받았습니다')
+          console.log(Response.data.list)
+          // console.log(Response.data.pagination)
+          commit('READ_PRODUCT_LIST', Response.data)
+        })
+        .catch(Error => {
+          console.log(Error)
+          Route.push("/")
+        })
+      })
+    },
+
   BoardList({commit, state}, payload){
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
@@ -309,6 +354,8 @@ export default new Vuex.Store({
           })
       })
     },
+
+   
     
     BoardDelete({commit, state}, payload){
       return new Promise((resolve, reject) => {

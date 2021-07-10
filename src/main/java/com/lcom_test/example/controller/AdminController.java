@@ -74,12 +74,20 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 	
-	@PostMapping("/productinsert")
+	@PostMapping("/insertproduct")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> productinsert(@RequestBody Product product){
-		boardService.insertProduct(product);
+	public ResponseEntity<?> insertproduct(@RequestBody Product product){
+		productService.insertProduct(product);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+	
+	@GetMapping("/latesitems")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> latestitems(Product product){
+		List<Product> itemslist = productService.selectProductList();
+		logger.info(itemslist.toString());
+		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+	} // auth로 옮겨야됨
 	
 	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

@@ -18,7 +18,14 @@
               v-model="fileinput"
             >
             </v-file-input>
-            <v-btn outlined>등록</v-btn>
+            <v-btn outlined
+            @click="insertProduct({
+              pName: pName,
+              pPrice: pPrice,
+              pFrom: pFrom,
+              pBrand: pBrand
+            })"
+            >등록</v-btn>
         </v-card>
       </v-col>
       <v-col cols="9" md="9">
@@ -100,7 +107,7 @@
                   ></v-text-field>
                   </v-col>
                 </v-row>
-             
+      
             </v-col>
           </v-row>
         </v-card>
@@ -110,7 +117,27 @@
 </template>
 
 <script>
+import axios from 'axios'
+import {mapState,mapActions } from 'vuex'
+import Route from '../router/index'
+
 export default {
-  
+  data(){
+    return{
+      pName: null,
+      pPrice: null,
+      pFrom: null,
+      pBrand: null,
+      fileinput: null
+    }
+  },
+
+  methods:{
+    ...mapActions(['insertProduct'])
+  },
+
+  computed:{
+    ...mapState(['Userinfo'])
+  },
 }
 </script>

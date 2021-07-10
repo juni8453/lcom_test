@@ -71,22 +71,6 @@
 	WHERE 		b_id = #{bId}	
 </update>
 
-<!-- board insert -->
-<insert id="insertBoard" parameterType="Board">
-	      INSERT INTO vue_board(
-			b_title,
-			b_content,
-			u_id
-			
-		)VALUES(
-			#{bTitle},
-			#{bContent},
-			#{username}
-		)
-	<selectKey keyProperty="bId" resultType="int">
-		SELECT LAST_INSERT_ID() 
-	</selectKey>
-</insert>
 
 <insert id="insertComment" parameterType="Comment">
 	      INSERT INTO vue_comment(

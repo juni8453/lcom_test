@@ -61,7 +61,9 @@
                           </v-btn>
                       </v-col>
                       <v-col cols="2">
-                          <v-btn text>
+                          <v-btn text
+                          router :to="{name:'LatestItems'}"
+                          >
                               최신상품
                           </v-btn>
                       </v-col>

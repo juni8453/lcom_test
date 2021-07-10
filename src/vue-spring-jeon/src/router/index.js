@@ -17,6 +17,7 @@ import HotItems from '../views/HotItems'
 import SaleItems from '../views/SaleItems'
 import BwBar from '../components/BwBar'
 import ProductInsert from '../views/ProductInsert'
+import LatestItems from '../views/LatestItems'
 
 
 Vue.use(VueRouter)
@@ -112,6 +113,11 @@ const routes = [
     path: '/productinsert',
     name: 'ProductInsert',
     component: ProductInsert,
+  },
+  {
+    path: '/latestitems',
+    name: 'LatestItems',
+    component: LatestItems,
   },
 ]
 

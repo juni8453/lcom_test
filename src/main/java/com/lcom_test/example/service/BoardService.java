@@ -5,6 +5,7 @@ import java.util.List;
 import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Pagination;
+import com.lcom_test.example.domain.Product;
 import com.lcom_test.example.domain.Images;
 
 public interface BoardService {
@@ -39,4 +40,5 @@ public interface BoardService {
 	public void insertImage(Images images);
 
 	public List<Images> selectImagesList();
+
 }
