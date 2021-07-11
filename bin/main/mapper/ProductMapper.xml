@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcom_test.example.mapper.ProductMapper">
+<!--  
 <select id="selectProductList" resultType="Product">
      SELECT 		p_id		as pId,
      				p_name		as pName,
@@ -10,6 +11,59 @@
      				
      					
 	 FROM 			vue_product
+</select>
+ -->
+ <!-- 
+ <select id="selectProductList" resultType="Product">
+SELECT        	p.p_id,
+				p.p_name, 
+				p.p_date, 
+				p.p_price, 
+				p.p_from, 
+				p.p_brand, 
+		      	i.i_id, 
+		      	i.p_id,
+		      	i.i_name,
+		      	i.i_pk
+FROM           	vue_product p
+LEFT JOIN	   	vue_img   	i 
+ON 			   	p.p_id = i.p_id
+
+</select>
+  --> 
+  
+<resultMap type = "Images" id="Images1">
+		<result column="i_id" property="iId"/>
+		<result column="i_name" property="iName"/>
+		<result column="i_pk" property="iPk"/>
+		<result column="p_id" property="pId"/>
+	</resultMap>
+	
+	<resultMap type = "Product" id="Product1">
+		<result column="p_id" property="pId"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_date" property="pDate"/>
+		<result column="p_price" property="pPrice"/>
+		<result column="p_from" property="pFrom"/>
+		<result column="p_brand" property="pBrand"/>
+		<collection property="listImages" resultMap="Images1"/>
+</resultMap>
+ 
+<select id="selectProductList" resultType="Product">
+SELECT        	p.p_id,
+				p.p_name, 
+				p.p_date, 
+				p.p_price, 
+				p.p_from, 
+				p.p_brand, 
+		      	i.i_id, 
+		      	i.p_id,
+		      	i.i_name,
+		      	i.i_pk
+FROM           	vue_product p
+LEFT JOIN	   	vue_img   	i 
+ON 			   	p.p_id = i.p_id
+
 </select>
 
 <insert id="insertProduct" parameterType="Product">

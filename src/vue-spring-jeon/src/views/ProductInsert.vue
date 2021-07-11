@@ -23,7 +23,8 @@
               pName: pName,
               pPrice: pPrice,
               pFrom: pFrom,
-              pBrand: pBrand
+              pBrand: pBrand,
+              fileinput: fileinput
             })"
             >등록</v-btn>
         </v-card>

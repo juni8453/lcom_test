@@ -76,51 +76,17 @@ public class AdminController {
 	
 	@PostMapping("/insertproduct")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> insertproduct(@RequestBody Product product){
-		productService.insertProduct(product);
-		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
-	
-	@GetMapping("/latesitems")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> latestitems(Product product){
-		List<Product> itemslist = productService.selectProductList();
-		logger.info(itemslist.toString());
-		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
-	} // auth로 옮겨야됨
-	
-	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, 
-		@PathVariable Optional<Integer> pageOpt){
+	public ResponseEntity<?> insertproduct(Product product,
+			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
+		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		
-		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
-		int usercount = userService.getUserCount();
-		
-		Pagination pagination = new Pagination(page, usercount);
-		
-		logger.info(request.toString());			
-			List<UserInfo> userlist = userService.read_user_list(pagination);
-			logger.info(userlist.toString());	
-			return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
-	}
-	
-//업로드
-	@RequestMapping(value="/logoupload", method=RequestMethod.POST)
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> logoupload(@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
-//				String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/"; 
-//				String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
-//				String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/"; 데탑
-				String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		String filename = images.getiPk() + multipartFile.getOriginalFilename();
 		String ext = filename.substring(filename.lastIndexOf(".")+1);
 		
 		File file = new File(path + filename);
 		File thmbFile = new File(thumbPath + filename);
+		
 		
 		try {
 		// 원본파일 저장
@@ -140,16 +106,79 @@ public class AdminController {
 			g.dispose();
 			ImageIO.write(thumbImageBf, ext, thmbFile);
 			
-			boardService.insertImage(images);
 			
 		} catch(IOException e) {
 			FileUtils.deleteQuietly(file);
 			e.printStackTrace();
 		}
-		List<Images> imageslist = boardService.selectImagesList();
-		return ResponseEntity.ok(new ListResponse<Images>(imageslist));
-//		return new ResponseEntity<>("success", HttpStatus.OK);
+		
+		productService.insertProduct(product);
+		boardService.insertImage(images);
+		boardService.updatepId(images);
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+	
+	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, 
+		@PathVariable Optional<Integer> pageOpt){
+		
+		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
+		int usercount = userService.getUserCount();
+		
+		Pagination pagination = new Pagination(page, usercount);
+		
+		logger.info(request.toString());			
+			List<UserInfo> userlist = userService.read_user_list(pagination);
+			logger.info(userlist.toString());	
+			return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
+	}
+	
+////업로드
+//	@RequestMapping(value="/logoupload", method=RequestMethod.POST)
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	public ResponseEntity<?> logoupload(@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
+////				String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/"; 
+////				String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
+////				String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/"; 데탑
+//				String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+////		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+////		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String thumbPath = path + "thumb/";
+//		String filename = images.getiPk() + multipartFile.getOriginalFilename();
+//		String ext = filename.substring(filename.lastIndexOf(".")+1);
+//		
+//		File file = new File(path + filename);
+//		File thmbFile = new File(thumbPath + filename);
+//		
+//		try {
+//		// 원본파일 저장
+//			InputStream input = multipartFile.getInputStream();
+//			FileUtils.copyInputStreamToFile(input, file);
+//			
+//		// 썸네일 생성
+//			BufferedImage imageBuf = ImageIO.read(file);
+//			int fixWidth =  500;
+//			double ratio = imageBuf.getWidth() / (double)fixWidth;
+//			int thumbWidth = fixWidth;
+//			int thumbHeight = (int)(imageBuf.getHeight() / ratio);
+//			BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
+//			Graphics2D g  = thumbImageBf.createGraphics();
+//			Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
+//			g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
+//			g.dispose();
+//			ImageIO.write(thumbImageBf, ext, thmbFile);
+//			
+//			boardService.insertImage(images);
+//			
+//		} catch(IOException e) {
+//			FileUtils.deleteQuietly(file);
+//			e.printStackTrace();
+//		}
+//		List<Images> imageslist = boardService.selectImagesList();
+//		return ResponseEntity.ok(new ListResponse<Images>(imageslist));
+////		return new ResponseEntity<>("success", HttpStatus.OK);
+//	}
 
 	@PostMapping({"/userdelete", "/userdelete/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")

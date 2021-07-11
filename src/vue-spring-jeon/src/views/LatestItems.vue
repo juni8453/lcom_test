@@ -2,76 +2,42 @@
     <v-container fluid>
         <v-row dense>
             <v-col cols="12" md="12" sm="12">
-                <BwBar></BwBar>
-                <v-row dense>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 1-1
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 1-2
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 1-3
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 1-4
-                    </v-card>
-                  </v-col>
-                </v-row>
+                <BwBar></BwBar>  
+                
+                <v-card class="text-center">
+                  <v-row>
+                    <v-col cols="3" v-for="item in productlist" :key="item.pId">
+                      <v-card>
+                        <v-row>
+                          <v-col>
+                            <v-col>
+                              <v-card>
+                                {{item.pId}}번째 상품
+                              </v-card>
+                            </v-col>    
+                            <v-col>
+                              <v-card>
+                                {{item.pName}}
+                              </v-card>
+                            </v-col>
+                            <v-col>
+                              <v-card>
+                                <v-img
+                                    height="250"
+                                    :src="`/images/thumb/2.jpg`"
+                                ></v-img> 
+                                <!-- src부분에는 item.iImag가 들어가야한다. 
+                                  즉 state.productlist에 image가 있어야함-->
+                              </v-card>
+                            </v-col>    
 
-                <v-row dense>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 2-1
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 2-2
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 2-3
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 2-4
-                    </v-card>
-                  </v-col>
-                </v-row>
-
-                 <v-row dense>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 3-1
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 3-2
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 3-3
-                    </v-card>
-                  </v-col>
-                  <v-col cols="3" md="3" sm="3">
-                    <v-card class="text-center pa-3" outlined>
-                      상품 3-4
-                    </v-card>
-                  </v-col>
-                </v-row>
-
+                          </v-col>    
+                        </v-row>
+                      </v-card>
+                    </v-col>
+                  </v-row>
+                </v-card>
+              
                 <v-row dense>
                   <v-col cols="12" md="12">
                     <v-card class="text-center pa-3">

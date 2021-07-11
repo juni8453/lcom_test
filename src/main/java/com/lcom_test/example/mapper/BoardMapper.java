@@ -54,6 +54,8 @@ public interface BoardMapper {
 
 	public List<Images> selectImagesList();
 
+	public void updatepId(Images images);
+
 	
 
 }

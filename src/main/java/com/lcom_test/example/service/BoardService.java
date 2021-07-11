@@ -41,4 +41,6 @@ public interface BoardService {
 
 	public List<Images> selectImagesList();
 
+	public void updatepId(Images images);
+
 }

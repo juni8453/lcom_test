@@ -6,6 +6,7 @@ public class Images {
 	private int iId;
 	private String iName;
 	private String iPk;
+	private int pId;
 	
 	public String getiPk() {
 		return iPk;
@@ -24,5 +25,11 @@ public class Images {
 	}
 	public void setiName(String iName) {
 		this.iName = iName;
+	}
+	public int getpId() {
+		return pId;
+	}
+	public void setpId(int pId) {
+		this.pId = pId;
 	}
 }

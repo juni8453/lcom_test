@@ -92,11 +92,22 @@
 	INSERT INTO vue_img(
 		i_name,
 		i_pk
+
 	)VALUES(
 		#{iName},
 		#{iPk}
+		
+	<selectKey keyProperty="iId" resultType="int">
+		SELECT LAST_INSERT_ID() 
+	</selectKey>
 	)
 </insert>
+
+<update id="updatepId" parameterType="Images">
+	UPDATE		vue_img
+	SET			p_id = #{iId}
+	WHERE 		i_id = #{iId}	
+</update>
 
 <select id="getCommentCount" resultType="int">
 	SELECT		COUNT(*)					as count

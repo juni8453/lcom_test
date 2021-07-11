@@ -119,4 +119,10 @@ public class BoardServiceImpl implements BoardService {
 	public List<Images> selectImagesList() {
 		return boardMapper.selectImagesList();
 	}
+
+	@Override
+	public void updatepId(Images images) {
+		boardMapper.updatepId(images);
+		
+	}
 }

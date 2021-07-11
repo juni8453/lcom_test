@@ -55,6 +55,7 @@ import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Pagination;
+import com.lcom_test.example.domain.Product;
 import com.lcom_test.example.domain.User;
 import com.lcom_test.example.domain.UserInfo;
 import com.lcom_test.example.request.JoinRequest;
@@ -351,4 +352,12 @@ public class AuthController {
 		logger.info(commentlist.toString());
 		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
 	}
+	
+	@GetMapping("/latesitems")
+	public ResponseEntity<?> latestitems(Product product){
+		List<Product> itemslist = productService.selectProductList();
+		logger.info(itemslist.toString());
+		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+	} // 최신 상품 리스트
+	
 }

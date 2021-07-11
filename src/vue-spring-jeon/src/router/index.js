@@ -98,26 +98,31 @@ const routes = [
     path: '/hotitems',
     name: 'HotItems',
     component: HotItems,
+    props: true
   },
   {
     path: '/saleitems',
     name: 'SaleItems',
     component: SaleItems,
+    props: true
   },
   {
     path: '/bwbar',
     name: 'BwBar',
     component: BwBar,
+    props: true
   },
   {
     path: '/productinsert',
     name: 'ProductInsert',
     component: ProductInsert,
+    props: true
   },
   {
     path: '/latestitems',
     name: 'LatestItems',
     component: LatestItems,
+    props: true
   },
 ]
 

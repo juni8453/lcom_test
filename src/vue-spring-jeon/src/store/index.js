@@ -199,17 +199,56 @@ export default new Vuex.Store({
     })
   },
 
+  // insertProduct({commit, state},payload){
+  //   console.log('produtInsert Run')
+  //   console.log('payload를 받았습니다')
+  //   console.log(payload)
+  //   return new Promise((resolve, reject) => {
+  //     axios.post('http://localhost:9000/api/admin/insertproduct', payload)
+  //       .then(Response => {
+  //         console.log(Response.data)
+  //         console.log(payload)
+  //         if(Response.data === "success") {
+  //           Route.push("/latestitems")
+  //         } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
+  //     })
+  //     .catch(Error => {
+  //         console.log('error')
+  //         reject(Error)
+  //         alert("Error!")
+  //         Route.push("/")
+  //       })
+  //     })
+  //   }, // 제품 등록
+
   insertProduct({commit, state},payload){
     console.log('produtInsert Run')
+    console.log('payload를 받았습니다')
     console.log(payload)
+    console.log('payload.name:' +payload.fileinput.name)
+    console.log('payload.lastModified:' +payload.fileinput.lastModified)
     return new Promise((resolve, reject) => {
-      axios.post('http://localhost:9000/api/admin/insertproduct', payload)
+      let formData = new FormData();
+      formData.append('uploadFile', payload.fileinput)
+      formData.append('pName', payload.pName)                   // 제품 이름
+      formData.append('pPrice', payload.pPrice)                 // 제품 가격
+      formData.append('pFrom', payload.pFrom)                   // 제품 원산지
+      formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
+      formData.append('iName',payload.fileinput.name)           // 이미지 이름
+      formData.append('iPk', payload.fileinput.lastModified)    // 이미지 고유번호
+
+      axios.post('http://localhost:9000/api/admin/insertproduct', formData,
+        {
+          headers: {
+            'Content-Type': 'multipart/form-data',
+            'Access-Control-Allow-Origin': '*'
+        }
+      })
         .then(Response => {
-          console.log(Response.data)
-          console.log(payload)
+                console.log('Resonse.data를 받았습니다.')
           if(Response.data === "success") {
             Route.push("/latestitems")
-          }
+          } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
       })
       .catch(Error => {
           console.log('error')
@@ -218,11 +257,11 @@ export default new Vuex.Store({
           Route.push("/")
         })
       })
-    },
+    }, // 제품 등록
 
     latestItems({commit}){
       return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:9000/api/admin/latesitems`)
+        axios.get(`http://localhost:9000/api/auth/latesitems`)
         .then(Response => {
           console.log('Response data를 받았습니다.')
           console.log(Response.data)
@@ -230,13 +269,14 @@ export default new Vuex.Store({
           console.log(Response.data.list)
           // console.log(Response.data.pagination)
           commit('READ_PRODUCT_LIST', Response.data)
+          console.log('정상적으로 latestItems가 작동되었습니다.')
         })
         .catch(Error => {
           console.log(Error)
           Route.push("/")
         })
       })
-    },
+    }, // 최신 상품 리스트
 
   BoardList({commit, state}, payload){
     return new Promise((resolve, reject) => {
