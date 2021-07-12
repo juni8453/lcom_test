@@ -7,6 +7,7 @@ public class Images {
 	private String iName;
 	private String iPk;
 	private int pId;
+	private String pName;
 	
 	public String getiPk() {
 		return iPk;
@@ -31,5 +32,11 @@ public class Images {
 	}
 	public void setpId(int pId) {
 		this.pId = pId;
+	}
+	public String getpName() {
+		return pName;
+	}
+	public void setpName(String pName) {
+		this.pName = pName;
 	}
 }

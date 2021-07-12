@@ -89,23 +89,5 @@ export default {
     components:{
         BwBar
     },
-    created() {
-        // new Promise((resolve, reject) => {
-        // axios.get(`http://localhost:9000/api/auth/home`)
-        // .then(Response => {
-        //     console.log('Home의 created Response.data를 받았습니다.')
-        //     console.log(Response.data)
-        //     this.$store.commit('SET_IMAGES_LIST', Response.data)
-        // })
-        // .catch(Error => {
-        //     console.log(Error)
-        // })
-        // })
-    },
-    
-    // computed:{
-    //     ...mapState(['imageslist'])
-    // },
-
 }
 </script>

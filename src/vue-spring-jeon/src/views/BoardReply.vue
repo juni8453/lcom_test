@@ -72,7 +72,6 @@ props:['bId','bGroup', 'bOrder', 'bDepth'],
   methods: {
     BoardReply(payload){ 
             new Promise((resolve, reject) => {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
                 axios.post(`http://localhost:9000/api/auth/boardreply`, payload)
                 .then(Response => {
                     console.log('답글 작성')            

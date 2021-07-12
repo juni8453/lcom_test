@@ -51,6 +51,21 @@
 	WHERE			b_id = #{bId}
 </select>
 
+<insert id="insertBoard" parameterType="Board">
+	      INSERT INTO vue_board(
+			b_title,
+			b_content,
+			u_id
+			
+		)VALUES(
+			#{bTitle},
+			#{bContent},
+			#{username}
+		)
+	<selectKey keyProperty="bId" resultType="int">
+		SELECT LAST_INSERT_ID() 
+	</selectKey>
+</insert>
 
 <select id="getBoard" resultType="Board">
      SELECT 		b_id		as bId,
@@ -91,11 +106,13 @@
 <insert id="insertImage" parameterType="Images">
 	INSERT INTO vue_img(
 		i_name,
-		i_pk
+		i_pk,
+		p_name
 
 	)VALUES(
 		#{iName},
-		#{iPk}
+		#{iPk},
+		#{pName}
 		
 	<selectKey keyProperty="iId" resultType="int">
 		SELECT LAST_INSERT_ID() 

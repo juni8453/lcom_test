@@ -25,7 +25,6 @@
 
                             <thead>
                                 <tr>
-                                    <!-- <th class="text-left">댓글 번호</th> -->
                                     <th class="text-left">ID</th>
                                     <th class="text-left">Content</th>
                                     <th class="text-left">작성일자</th>
@@ -201,13 +200,10 @@ export default {
             pageUnit:5,
             perPage:5,
             
-            // commentList: null,
-            
         }
     },
     created(){
         new Promise((resolve, reject) => {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
             axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}/${this.page}`)
             .then(Response => {
                 console.log('return board vo')
@@ -223,21 +219,6 @@ export default {
                 Route.push("/")
             })
         })
-
-        // new Promise((resolve, reject) =>{
-        //     axios.get(`http://localhost:9000/api/auth/commentlist/${this.bId}`)
-        //     .then(Response => {
-        //         console.log('Comm'entList 뿌리기')
-        //         console.log(this.bId)
-        //         console.log(Response.data)
-        //         this.$store.commit('READ_COMMENT_LIST', Response.data)
-        //         //state의 Pagination 값을 변화시키고 사용할 수 있게 값 셋팅            
-        //     })
-        //     .catch(Error => {
-        //         console.log('Error')
-        //     })
-        // })
-
     },
 
     methods: {
@@ -245,7 +226,6 @@ export default {
             console.log('CommentReply Run')
             console.log(payload)
             new Promise((resolve,reject) => {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
             axios.post(`http://localhost:9000/api/auth/commentwrite/${payload.page}`, payload)
             .then(Response => {
                 console.log("Response Data를 받았습니다")
@@ -268,7 +248,6 @@ export default {
             payload.cShow =! payload.cShow //cShow 다시 true > false로 조정
             console.log(payload.cShow)
             new Promise((resolve,reject) => {
-            axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
             axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
             .then(Response => {
                 console.log("Response Data를 받았습니다")
@@ -287,7 +266,6 @@ export default {
 
         CommentWrite(payload) {
             new Promise((resolve, reject) => {
-                axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
                 axios.post(`http://localhost:9000/api/auth/commentwrite/${payload.page}`, payload)
                 .then(Response => {
                     console.log('CommentWrite Run')
@@ -313,11 +291,8 @@ export default {
         },
 
         CommentDelete(payload){
-            // if(item.username !== Userinfo.User_Id || Userinfo.User_auth.includes('ROLE_ADMIN') != 'ROLE_ADMIN') 
-            //     alert('삭제가 불가능합니다.')
             if(confirm('정말로 글을 삭제하시겠습니까?')===true){
                 new Promise((resolve, reject) => {
-                    axios.defaults.headers.common['Authoriztion'] = `Bearer ${this.$store.state.Userinfo.User_token}`
                     axios.post(`http://localhost:9000/api/auth/commentdelete/${payload.page}`, payload)
                     .then(Response => {
                         console.log('payload')

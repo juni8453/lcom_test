@@ -11,12 +11,12 @@
                         <v-row>
                           <v-col>
                             <v-col>
-                              <v-card>
-                                {{item.pId}}번째 상품
+                              <v-card outlined>
+                                {{item.pId}}
                               </v-card>
                             </v-col>    
                             <v-col>
-                              <v-card>
+                              <v-card outlined>
                                 {{item.pName}}
                               </v-card>
                             </v-col>
@@ -24,10 +24,9 @@
                               <v-card>
                                 <v-img
                                     height="250"
-                                    :src="`/images/thumb/2.jpg`"
+                                    :src="`/images/thumb/${item.iPk}${item.iName}`"
                                 ></v-img> 
-                                <!-- src부분에는 item.iImag가 들어가야한다. 
-                                  즉 state.productlist에 image가 있어야함-->
+                                <!--productlist Array에 pName, pBrand 등 안뽑혀나옴 -->
                               </v-card>
                             </v-col>    
 
@@ -37,6 +36,9 @@
                     </v-col>
                   </v-row>
                 </v-card>
+                <!-- <v-card>
+                  {{new Date().getFullYear() + new Date().getMonth() + "/" + new Date().getDate()}}
+                </v-card> -->
               
                 <v-row dense>
                   <v-col cols="12" md="12">
@@ -76,7 +78,7 @@ import { mapState } from 'vuex'
 export default {
   data(){
     return{
-      page:1
+      page:1,
     }
   },
 
@@ -90,6 +92,23 @@ export default {
 
   components:{
     BwBar
+  },
+  methods:{
+    // Time(){
+    //   let date = new Date()
+    //   let year = date.getFullYear
+    //   let month = date.getMonth() + 1 
+    //   month = month >= 10 ? month : '0' + month
+    //   let day = date.getDate()
+    //   day = day >= 10 ? day : '0' + day
+    //   let hour = date.getHours()
+    //   hour = hour >= 10 ? hour : '0' + hour
+    //   let min = date.getMinutes()
+    //   let sec = date.getSeconds()
+    //   sec = sec >= 10 ? sec : '0' + sec
+
+    //   let purchaseDay = year + month + day + "_" + hour + min + sec
+    // }
   }
 }
 </script>

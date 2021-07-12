@@ -62,68 +62,63 @@ export default new Vuex.Store({
       state.Userinfo.User_auth = data.roles
       state.Userinfo.User_token = data.token
       Route.push("/")
-   },
-   READ_USER_LIST(state,data) {
-    state.UserList = data.list
-    state.Pagination = data.pagination
-   },
-   READ_BOARD_LIST(state,data) {
-    state.boardlist = data.list
-    state.Pagination = data.pagination
-   },
-   READ_COMMENT_LIST(state, data){
-    state.commentlist = data.commentList
-    state.Pagination = data.pagination
-   },
-   READ_PRODUCT_LIST(state, data){
-    state.productlist = data.list
-   },
-
-   INSERT_TOKEN(state) {
-     state.Userinfo.User_token = localStorage.getItem("token")
-   },
-   SET_USER_REFRESH(state,data) {
-    state.Userinfo.User_Id = data.username
-    state.Userinfo.User_Name = data.name
-    state.Userinfo.User_auth = data.authorities
-    state.Userinfo.User_token = data.token
-   },
-   logout(state) {
-    state.Userinfo.User_Id = null
-    state.Userinfo.User_Name = null
-    state.Userinfo.User_auth = null
-    state.Userinfo.User_token = null
-    state.isLogin = false,
-    state.isLoginError = false
-    localStorage.removeItem("token")
-    console.log(state.Userinfo)
-    console.log("로그아웃됐니?"+localStorage.getItem("token"))
-    Route.push('/login')
-   },
-   SET_SHOW(state,data){
-    state.Show = data
-   },
-   loginSuccess(state){
-    state.isLoginError = false
-    state.isLogin = true
-   },
-   loginError(state){
-     state.isLogin = false
-     state.isLoginError = true
-   },
-   SET_BOARD(state, data){
-     state.board = data
-   },
-  //  SET_IMAGES(state, data){
-  //   state.setImages = data
-  //  },
-  SET_IMAGES_LIST(state, data){
-    state.imageslist = data
-   },
-
+    },
+    READ_USER_LIST(state,data) {
+      state.UserList = data.list
+      state.Pagination = data.pagination
+    },
+    READ_BOARD_LIST(state,data) {
+      state.boardlist = data.list
+      state.Pagination = data.pagination
+    },
+    READ_COMMENT_LIST(state, data){
+      state.commentlist = data.commentList
+      state.Pagination = data.pagination
+    },
+    READ_PRODUCT_LIST(state, data){
+      state.productlist = data.list
+    },
+    INSERT_TOKEN(state) {
+      state.Userinfo.User_token = localStorage.getItem("token")
+    },
+    SET_USER_REFRESH(state,data) {
+      state.Userinfo.User_Id = data.username
+      state.Userinfo.User_Name = data.name
+      state.Userinfo.User_auth = data.authorities
+      state.Userinfo.User_token = data.token
+    },
+    logout(state) {
+      state.Userinfo.User_Id = null
+      state.Userinfo.User_Name = null
+      state.Userinfo.User_auth = null
+      state.Userinfo.User_token = null
+      state.isLogin = false,
+      state.isLoginError = false
+      localStorage.removeItem("token")
+      console.log(state.Userinfo)
+      console.log("로그아웃됐니?"+localStorage.getItem("token"))
+      Route.push('/login')
+    },
+    SET_SHOW(state,data){
+      state.Show = data
+    },
+    loginSuccess(state){
+      state.isLoginError = false
+      state.isLogin = true
+    },
+    loginError(state){
+      state.isLogin = false
+      state.isLoginError = true
+    },
+    SET_BOARD(state, data){
+      state.board = data
+    },
+    SET_IMAGES_LIST(state, data){
+      state.imageslist = data
+    },
   },
-  actions: {
   
+  actions: {
     loginProcess({ commit }, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {
@@ -199,88 +194,27 @@ export default new Vuex.Store({
     })
   },
 
-  // insertProduct({commit, state},payload){
-  //   console.log('produtInsert Run')
-  //   console.log('payload를 받았습니다')
-  //   console.log(payload)
-  //   return new Promise((resolve, reject) => {
-  //     axios.post('http://localhost:9000/api/admin/insertproduct', payload)
-  //       .then(Response => {
-  //         console.log(Response.data)
-  //         console.log(payload)
-  //         if(Response.data === "success") {
-  //           Route.push("/latestitems")
-  //         } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
-  //     })
-  //     .catch(Error => {
-  //         console.log('error')
-  //         reject(Error)
-  //         alert("Error!")
-  //         Route.push("/")
-  //       })
-  //     })
-  //   }, // 제품 등록
-
-  insertProduct({commit, state},payload){
-    console.log('produtInsert Run')
-    console.log('payload를 받았습니다')
-    console.log(payload)
-    console.log('payload.name:' +payload.fileinput.name)
-    console.log('payload.lastModified:' +payload.fileinput.lastModified)
-    return new Promise((resolve, reject) => {
-      let formData = new FormData();
-      formData.append('uploadFile', payload.fileinput)
-      formData.append('pName', payload.pName)                   // 제품 이름
-      formData.append('pPrice', payload.pPrice)                 // 제품 가격
-      formData.append('pFrom', payload.pFrom)                   // 제품 원산지
-      formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
-      formData.append('iName',payload.fileinput.name)           // 이미지 이름
-      formData.append('iPk', payload.fileinput.lastModified)    // 이미지 고유번호
-
-      axios.post('http://localhost:9000/api/admin/insertproduct', formData,
-        {
-          headers: {
-            'Content-Type': 'multipart/form-data',
-            'Access-Control-Allow-Origin': '*'
-        }
-      })
+  UserDelete({commit, state}, payload){
+    return new Promise((resolve,reject) => {
+      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+      axios.post(`http://localhost:9000/api/admin/userdelete/${payload.page}`)
         .then(Response => {
-                console.log('Resonse.data를 받았습니다.')
-          if(Response.data === "success") {
-            Route.push("/latestitems")
-          } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
-      })
-      .catch(Error => {
-          console.log('error')
-          reject(Error)
-          alert("Error!")
-          Route.push("/")
-        })
-      })
-    }, // 제품 등록
-
-    latestItems({commit}){
-      return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:9000/api/auth/latesitems`)
-        .then(Response => {
-          console.log('Response data를 받았습니다.')
+          console.log(payload)
+          console.log(payload.page)
+          console.log(payload.username)
           console.log(Response.data)
-          console.log('Items data를 받았습니다')
-          console.log(Response.data.list)
-          // console.log(Response.data.pagination)
-          commit('READ_PRODUCT_LIST', Response.data)
-          console.log('정상적으로 latestItems가 작동되었습니다.')
+          commit('READ_USER_LIST', Response.data)
+            alert('유저가 삭제되었습니다.')
         })
         .catch(Error => {
-          console.log(Error)
+          console.log('error')
           Route.push("/")
         })
-      })
-    }, // 최신 상품 리스트
+    })
+  },
 
   BoardList({commit, state}, payload){
     return new Promise((resolve, reject) => {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
       axios.get(`http://localhost:9000/api/auth/boardlist/${payload.page}`)
       .then(Response => {
         console.log(payload)
@@ -299,28 +233,6 @@ export default new Vuex.Store({
     })
   },
 
-  CommentPaginationList({commit, state}, payload){
-    return new Promise((resolve, reject) => {
-      axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-      axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}/${payload.page}`)
-      .then(Response => {
-        console.log(Response.data)
-        
-        console.log('commentlist data를 받았습니다')
-        console.log(Response.data.commentList)
-        console.log(Response.data.pagination)
-
-        commit('READ_COMMENT_LIST', Response.data)
-        console.log('코멘트리스트')
-        console.log(Response.data.commentList)
-      })
-      .catch(Error => {
-        console.log(Error)
-        Route.push("/")
-      })
-    })
-  },
-
   BoardWrite({commit, state}, payload){
     console.log('BoardWrite Run')
     console.log('payload를 받았습니다')
@@ -329,7 +241,6 @@ export default new Vuex.Store({
     // 파일 업로드 X
     if(payload.fileinput === null){
       return new Promise((resolve, reject) => {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
         axios.post('http://localhost:9000/api/auth/boardwrite', payload)
           .then(Response => {
             console.log(Response.data)
@@ -376,30 +287,8 @@ export default new Vuex.Store({
       }
     },
 
-    UserDelete({commit, state}, payload){
-      return new Promise((resolve,reject) => {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-        axios.post(`http://localhost:9000/api/admin/userdelete/${payload.page}`)
-          .then(Response => {
-            console.log(payload)
-            console.log(payload.page)
-            console.log(payload.username)
-            console.log(Response.data)
-            commit('READ_USER_LIST', Response.data)
-              alert('유저가 삭제되었습니다.')
-          })
-          .catch(Error => {
-            console.log('error')
-            Route.push("/")
-          })
-      })
-    },
-
-   
-    
     BoardDelete({commit, state}, payload){
       return new Promise((resolve, reject) => {
-        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
         axios.post(`http://localhost:9000/api/auth/boarddelete/${payload.page}`, payload)
         .then(Response => {
           console.log(payload)
@@ -415,31 +304,84 @@ export default new Vuex.Store({
         })
       })
     },
+
+    CommentPaginationList({commit, state}, payload){
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:9000/api/auth/boarddetail/${payload.bId}/${payload.page}`)
+        .then(Response => {
+          console.log(Response.data)
+          
+          console.log('commentlist data를 받았습니다')
+          console.log(Response.data.commentList)
+          console.log(Response.data.pagination)
+  
+          commit('READ_COMMENT_LIST', Response.data)
+          console.log('코멘트리스트')
+          console.log(Response.data.commentList)
+        })
+        .catch(Error => {
+          console.log(Error)
+          Route.push("/")
+        })
+      })
+    },
    
-    // insertLogo(payload){
-    //   console.log('insetLogo')
-    //   console.log('payload를 받았습니다.')
-    //   console.log('payload.name:'+payload.fileinput.name)
-    //   new Promise((resolve, reject) => {
-    //     let formData = new FormData(); // 페이지 전환 없이 폼 데이터를 제출 하고 싶을 때 FormData 객체를 사용
-    //     formData.append('uploadFile', payload.fileinput) // key(uploadFile), value(payload)
-    //     formData.append('iName',payload.fileinput.name)
-    //     axios.post('http://localhost:9000/api/admin/logoupload', formData)
-    //     .then(Response => {
-    //       console.log(Response.data)
-    //       console.log(payload)
-    //       if(Response.data === "success"){
-    //         this.$store.commit('SET_IMAGES', payload)
-    //         Route.push("/")
-    //       }
-    //     })
-    //     .catch(Error => {
-    //       console.log(Error)
-    //       alert('Error 발생 !')
-    //     })
-    //   })
-    // },
-    
+    insertProduct({commit, state},payload){
+      console.log('produtInsert Run')
+      console.log('payload를 받았습니다')
+      console.log(payload)
+      console.log('payload.name:' +payload.fileinput.name)
+      console.log('payload.lastModified:' +payload.fileinput.lastModified)
+      return new Promise((resolve, reject) => {
+        let formData = new FormData();
+        formData.append('uploadFile', payload.fileinput)
+        formData.append('pName', payload.pName)                   // 제품 이름
+        formData.append('pPrice', payload.pPrice)                 // 제품 가격
+        formData.append('pFrom', payload.pFrom)                   // 제품 원산지
+        formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
+        formData.append('iName',payload.fileinput.name)           // 이미지 이름
+        formData.append('iPk', payload.fileinput.lastModified)    // 이미지 고유번호
+  
+        axios.post('http://localhost:9000/api/admin/insertproduct', formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Access-Control-Allow-Origin': '*'
+          }
+        })
+          .then(Response => {
+                  console.log('Resonse.data를 받았습니다.')
+            if(Response.data === "success") {
+              Route.push("/latestitems")
+            } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
+        })
+        .catch(Error => {
+            console.log('error')
+            reject(Error)
+            alert("Error!")
+            Route.push("/")
+          })
+        })
+      }, // 제품 등록
+  
+    latestItems({commit}){
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:9000/api/auth/latesitems`)
+        .then(Response => {
+          console.log('Response data를 받았습니다.')
+          console.log(Response.data)
+          console.log('Items data를 받았습니다')
+          console.log(Response.data.list)
+          // console.log(Response.data.pagination)
+          commit('READ_PRODUCT_LIST', Response.data)
+          console.log('정상적으로 latestItems가 작동되었습니다.')
+        })
+        .catch(Error => {
+          console.log(Error)
+          Route.push("/")
+        })
+      })
+    }, // 최신 상품 리스트
   }
 })
 

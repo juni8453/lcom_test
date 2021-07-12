@@ -1,0 +1,70 @@
+1. String filename = multipartFile.getOriginalFilename();
+ - 서버로부터 넘어오는 본래 파일 전체이름을 filename 참조변수에 저장
+
+2. Calendar cal = Calendar.getInstance();
+ - 원하는 날짜, 시간 정보 셋팅하기 위함
+ - Calendar 객체를 이용하기 위해 getInstance();
+
+3. SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmSS");
+ - 시간을 원하는 포맷 형식으로 출력하기 위함
+ - yyyy (년도)
+ - MM (1~12 월)
+ - dd (1~31 일)
+ - HH (0~23 시)
+ - mm (0~59 분)
+ - SS (0~999 초)
+
+4. String time = dateFormat.format(cal.getTime());
+ - String 타입 참조변수 time에 설정했던 형태로 시간 저장
+
+5. product.setImage(filename)
+ - 실제 product table에는 없는 칼럼이지만, 편의상 product vo에서 사용
+ - 본래 파일 전체이름을 product vo의 Image 변수에 저장
+
+6. product.setunique(time)
+ - 설정한 형태로 시간이 저장되어있는 참조변수 time을 product vo의 Image 변수에 저장	 
+
+7. File file = new File(path + time); / File thumbFile = new File(thumbPath + time);
+
+
+
+
+최신 상품 리스트 출력 순서
+
+1. insertProduct 실행 / payload로 name, price, from, brand, fileinput 받음
+
+2. formData.append 사용 > axios로 insertproduct controller로 전송 (GetMapping)
+ - formDate : {uploadFIle, pNaem, pPrice, pFrom, pBrand, iName, iPk}
+
+3. insertproduct Controller 에서 uploadFile 받아주고 Product Vo, Images Vo를 가져와서 나머지 값 받아줌
+
+4. 경로 설정 및 파일 이름 재 설정 거친 뒤 원본파일 저장 로직, 썸네일 생성 로직 거치기
+
+5. 이후 insertProduct, insertImage, updatepId 메서드 실행
+ - Images Table의 데이터인 pId는 iId와 항상 같아야 하기 때문에 updatepId 메서드 필요
+
+6. 모든 작업 성공 후 return 값으로는 "success" 반환
+
+7. .then 의 만일 return 값으로 "success"를 받았다면, 최신 상품 리스트 페이지로 자동 이동 (Route.push("/latestitems"))
+ - 최신 상품 리스트로 이동해서 created hook 바로 실행되야 하기 때문에 Route 설정한 것
+
+8. created hook latestItems 실행하여 latesitems Controller 실행
+ - axios URL 설정에서 일반 유저들도 볼 수 있어야하므로 admin이 아닌 auth로 설정함
+
+9. Product Vo list를 뽑아내기 위해 List<Product> 타입 itemslist에 selectProductList() 메서드 실행
+
+10. Product Vo와 Images Vo는 서로 연동되야하기 때문에 resultType이 아닌 resultMap 사용하여 MyBatis 쿼리문 작성
+ - Images Vo 컬럼 작성, Product Vo 컬럼 작성 / collection property로는 Product Vo에 Getter, Setter로 작성된 listImages 변수 작성
+
+11. 모든 작업 성공 후 return 값으로 itemslist 반환
+
+12. .then 의 commit READ_PRODUCT_LIST, Response.data Mutation 실행하여 받아온 list를 State의 productlist에 저장
+
+>> 결과
+ 1. 이미지 저장 경로에 iPk + iName 형태로 이미지 저장
+ 2. productlist에 저장된 iPk, iName을 조합하여 이미지 출력 가능
+
+>> 수정 필요 사항
+ 1. lastModified 값으로는 중복 이미지를 막을 수 없음
+  - 중복 이미지 업로드 시 오류 발생
+  - 이미지 파일 고유 이름에 (년도_월_일_시_분_초) 형태의 시간 추가 필요

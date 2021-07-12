@@ -6,7 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,14 +80,30 @@ public class AdminController {
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> insertproduct(Product product,
 			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
-		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String filename = multipartFile.getOriginalFilename();
+		
+		//고유한 파일 이름 만들기
+//		Calendar cal = Calendar.getInstance();
+//		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd_HHmmss");
+//		String time = dateFormat.format(cal.getTime());
+//		
+//		System.out.println(time);
+//		
+//		String thumbPath = path + "thumb/";
+//		String ext = filename.substring(filename.lastIndexOf(".")+1);
+//		File file = new File(path + time + ".png");
+//		File thumbFile = new File(thumbPath + time + ".png");
+//		
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		
 		String thumbPath = path + "thumb/";
 		String filename = images.getiPk() + multipartFile.getOriginalFilename();
 		String ext = filename.substring(filename.lastIndexOf(".")+1);
 		
 		File file = new File(path + filename);
-		File thmbFile = new File(thumbPath + filename);
+		File thumbFile = new File(thumbPath + filename);
 		
 		
 		try {
@@ -104,7 +122,7 @@ public class AdminController {
 			Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
 			g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
 			g.dispose();
-			ImageIO.write(thumbImageBf, ext, thmbFile);
+			ImageIO.write(thumbImageBf, ext, thumbFile);
 			
 			
 		} catch(IOException e) {

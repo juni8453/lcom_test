@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcom_test.example.mapper.ProductMapper">
-<!--  
+<!--   
 <select id="selectProductList" resultType="Product">
      SELECT 		p_id		as pId,
      				p_name		as pName,
@@ -12,7 +12,7 @@
      					
 	 FROM 			vue_product
 </select>
- -->
+ --> 
  <!-- 
  <select id="selectProductList" resultType="Product">
 SELECT        	p.p_id,
@@ -37,9 +37,10 @@ ON 			   	p.p_id = i.p_id
 		<result column="i_name" property="iName"/>
 		<result column="i_pk" property="iPk"/>
 		<result column="p_id" property="pId"/>
-	</resultMap>
+		<result column="p_name" property="pName"/>
+</resultMap>
 	
-	<resultMap type = "Product" id="Product1">
+<resultMap type = "Product" id="Product1">
 		<result column="p_id" property="pId"/>
 		<result column="p_name" property="pName"/>
 		<result column="p_date" property="pDate"/>
@@ -49,7 +50,7 @@ ON 			   	p.p_id = i.p_id
 		<collection property="listImages" resultMap="Images1"/>
 </resultMap>
  
-<select id="selectProductList" resultType="Product">
+<select id="selectProductList" resultMap="Images1">
 SELECT        	p.p_id,
 				p.p_name, 
 				p.p_date, 
