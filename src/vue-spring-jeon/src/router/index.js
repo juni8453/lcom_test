@@ -56,7 +56,8 @@ const routes = [
   {
     path: '/test',
     name: 'test',
-    component: TestPage
+    component: TestPage,
+    props: true
   },
   {
     path: '/boardwrite',

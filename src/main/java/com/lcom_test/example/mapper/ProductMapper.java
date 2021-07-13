@@ -11,4 +11,6 @@ public interface ProductMapper {
 
 	public List<Product> selectProductList();
 
+	public List<Product> selectProductListTest(int pageOpt);
+
 }

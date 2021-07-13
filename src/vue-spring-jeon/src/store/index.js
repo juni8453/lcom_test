@@ -382,6 +382,26 @@ export default new Vuex.Store({
         })
       })
     }, // 최신 상품 리스트
+
+    test({commit}, payload){
+      return new Promise((resolve, reject) => {
+        console.log('payload:' + payload.limit)
+        axios.get(`http://localhost:9000/api/auth/test/${payload.limit}`)
+        .then(Response => {
+          console.log('Response data를 받았습니다.')
+          console.log(Response.data)
+          console.log('Items data를 받았습니다')
+          console.log(Response.data.list)
+          // console.log(Response.data.pagination)
+          commit('READ_PRODUCT_LIST', Response.data)
+          console.log('정상적으로 latestItems가 작동되었습니다.')
+        })
+        .catch(Error => {
+          console.log(Error)
+          Route.push("/")
+        })
+      })
+    }, // 최신 상품 리스트
   }
 })
 

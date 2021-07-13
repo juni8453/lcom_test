@@ -10,4 +10,6 @@ public interface ProductService {
 
 	public List<Product> selectProductList();
 
+	public List<Product> selectProductListTest(int pageOpt);
+
 }

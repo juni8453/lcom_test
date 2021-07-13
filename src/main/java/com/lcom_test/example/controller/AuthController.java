@@ -360,4 +360,12 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신 상품 리스트
 	
+	@GetMapping({"/test", "/test/{pageOpt}"})
+	public ResponseEntity<?> test(Product product,
+			@PathVariable int pageOpt){
+		List<Product> itemslist = productService.selectProductListTest(pageOpt);
+		logger.info(itemslist.toString());
+		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+	} // 최신 상품 리스트
+	
 }
