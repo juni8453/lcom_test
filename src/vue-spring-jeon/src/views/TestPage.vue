@@ -68,12 +68,14 @@ import axios from 'axios'
 export default {
 data() {
   return {
-    limit:0
+    limit:0,
+    testArray:[]
   }
 },
 
 created(){
-  this.$store.dispatch('test', {limit:this.limit})
+  console.log('created 시작')
+  this.$store.dispatch('test', {limit:this.limit}) // mutation으로 productlist에 저장 해줘야함
 },
 
 computed:{
@@ -82,16 +84,18 @@ computed:{
 
 methods: {
   infiniteHandler($state){
-    axios.get(`http://localhost:9000/api/auth/test/${this.limit + 10}`)
+    axios.get(`http://localhost:9000/api/auth/test/${this.limit + 8}`)
     .then(Response => {
-      console.log('inginiteHandler Response.data를 받았습니다.')
-      console.log(Response.data)
+      console.log('infiniteHandler Response.data를 받았습니다.')
+      console.log('Return 값'+Response.data) // limit 8,8 인 Response.data
+      console.log('Return 값 길이'+Response.data.list.length)
       setTimeout(() => {
-        if(Response.data.length) {
-          this.productlist = this.productlist.concat(Response.data) // 기존 productlist에 Response.data 합치기
+        if(Response.data.list.length) {
+          this.productlist = this.productlist.concat(Response.data.list) // 기존 productlist에 Response.data 합치기
+          console.log('this.productlist:'+this.productlist)
+          this.$store.commit('READ_PRODUCT_LIST', this.productlist)
           $state.loaded()
-          this.limit += 1
-          if(this.productlist.length / 4 == 0) {
+          if(this.productlist.list.length / 8 == 0) {
             $state.complete()
           }
         } else {

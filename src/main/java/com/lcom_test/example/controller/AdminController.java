@@ -96,9 +96,9 @@ public class AdminController {
 //		File file = new File(path + time + ".png");
 //		File thumbFile = new File(thumbPath + time + ".png");
 //		
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-		
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+//		
 		String thumbPath = path + "thumb/";
 		String filename = images.getiPk() + multipartFile.getOriginalFilename();
 		String ext = filename.substring(filename.lastIndexOf(".")+1);

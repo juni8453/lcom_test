@@ -366,6 +366,6 @@ public class AuthController {
 		List<Product> itemslist = productService.selectProductListTest(pageOpt);
 		logger.info(itemslist.toString());
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
-	} // 최신 상품 리스트
+	} // 최신상품리스트 무한스크롤 적용 테스트 페이지
 	
 }

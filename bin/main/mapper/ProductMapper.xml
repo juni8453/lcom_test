@@ -37,7 +37,7 @@ LEFT JOIN	   	vue_img   	i
 ON 			   	p.p_id = i.p_id
 LIMIT			#{pageOpt},8
 
-</select>  
+</select>  <!-- 최초 실행 시 1행부터 8개의 리스트 뽑아내기 -->
 
 
 
