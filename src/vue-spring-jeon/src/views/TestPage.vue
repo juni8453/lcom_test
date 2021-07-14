@@ -5,7 +5,7 @@
         <BwBar></BwBar>  
         <v-card class="text-center">
           <v-row>
-            <v-col cols="3" v-for="item in $store.state.productlist" :key="item.pId">
+            <v-col cols="3" v-for="item in productlist" :key="item.pId">
               <v-card>
                 <v-row>
                   <v-col>
@@ -51,7 +51,7 @@
 <script>
 import InfiniteLoading from 'vue-infinite-loading'
 import BwBar from '../components/BwBar.vue'
-// import { mapState } from 'vuex'
+import { mapState } from 'vuex'
 import axios from 'axios'
 
 export default {
@@ -59,7 +59,6 @@ data() {
   return {
     limit:0,
     pageOpt:8,
-    productlist:[]
   }
 },
 
@@ -69,14 +68,15 @@ created(){
 },
 
 computed:{
-    // ...mapState(['productlist'])
-    name:{
-      set: function() {
-      },
-      get: function() {
-        return this.$store.state.productlist
-      }
-    } // Computed property was assigned to but it has no setter 오류 때문에 setter 추가
+    ...mapState(['productlist'])
+    // name:{
+    //   set: function() {
+    //   },
+    //   get: function() {
+    //     return this.$store.state.productlist
+    //   }
+    //   Computed property was assigned to but it has no setter 오류 때문에 setter 추가
+    //   state 값은 mutation을 거쳐서 값을 수정해야하는데, 직접 수정이 이뤄진다면 setter가 없다는 오류 발생
 },
 
 methods: {
@@ -90,19 +90,15 @@ methods: {
       console.log('Response.data.list.length:', JSON.stringify(Response.data.list.length)) // 나머지 데이터 길이
 
       setTimeout(() => {
-        alert('무한스크롤 시작')
-
         if(Response.data.list.length) {
-          console.log('현재 productlist' + JSON.stringify(this.$store.state.productlist)) // 0,8까지의 데이터
-          console.log('현재 productlist 길이' + JSON.stringify(this.$store.state.productlist.length)) // 8
-          this.$store.state.productlist = this.$store.state.productlist.concat(Response.data.list) 
-          // concat을 찾을 수 없음
-          // this.productlist.push(Response.data.list)
-          this.$store.commit('READ_PRODUCT_LIST', this.$store.state.productlist)
+          console.log('현재 productlist' + JSON.stringify(this.productlist))
+          console.log('현재 productlist 길이' + JSON.stringify(this.productlist.length))
+          console.log(Response.data.list)
+          this.$store.commit('SET_PRODUCT_LIST', Response.data)
           $state.loaded()
+          this.limit += 8
 
-          if(this.$store.state.productlist.length / this.pageOpt == 0) {
-            //list를 찾을 수 없음
+          if(this.productlist.length / this.pageOpt == 0) {  
             $state.complete()
           }
 

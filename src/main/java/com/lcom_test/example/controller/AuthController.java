@@ -353,19 +353,19 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
 	}
 	
-	@GetMapping("/latesitems")
-	public ResponseEntity<?> latestitems(Product product){
-		List<Product> itemslist = productService.selectProductList();
-		logger.info(itemslist.toString());
-		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
-	} // 최신 상품 리스트
+//	@GetMapping("/latesitems")
+//	public ResponseEntity<?> latestitems(Product product){
+//		List<Product> itemslist = productService.selectProductList();
+//		logger.info(itemslist.toString());
+//		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+//	} // 최신 상품 리스트
 	
-	@GetMapping({"/test", "/test/{pageOpt}"})
+	@GetMapping({"/latestitems", "/latestitems/{pageOpt}"})
 	public ResponseEntity<?> test(Product product,
 			@PathVariable int pageOpt){
 		List<Product> itemslist = productService.selectProductListTest(pageOpt);
 		logger.info(itemslist.toString());
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
-	} // 최신상품리스트 무한스크롤 적용 테스트 페이지
+	} // 최신상품리스트
 	
 }

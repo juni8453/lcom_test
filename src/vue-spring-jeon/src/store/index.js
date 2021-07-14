@@ -78,6 +78,9 @@ export default new Vuex.Store({
     READ_PRODUCT_LIST(state, data){
       state.productlist = data.list
     },
+    SET_PRODUCT_LIST(state, data){
+      state.productlist = state.productlist.concat(data.list)
+    },
     INSERT_TOKEN(state) {
       state.Userinfo.User_token = localStorage.getItem("token")
     },
@@ -125,10 +128,14 @@ export default new Vuex.Store({
           axios.post('http://localhost:9000/api/auth/signin', payload)
               .then(Response => {
                   console.log(Response.data)
-                  //console.log(Response.data.roles[0])
                   if (Response.data.username != null) {
                       axios.defaults.headers.common['Authorization'] = `Bearer ${Response.data.token}`
                       localStorage.setItem("token",Response.data.token)
+                      /* localStorage에 얻어온 token 저장 > 이후 getItem으로 저장된 토큰 사용 가능
+                         새로고침시 state에는 token이 저장되어있지만 Authorization이 날라가서 인증안됨
+                         토큰 인증이 필요한 action의 경우에는
+                         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}` 삽입 필요
+                      */
                       commit('SET_USER', Response.data)  
                       commit('loginSuccess')    
                   }
@@ -178,9 +185,10 @@ export default new Vuex.Store({
           })
       })
   },
-  UnpackToken({commit}) {
+  UnpackToken({commit}) { // 새로고침 방지 메서드
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
+      // localStorage에 저장된 token 사용
       axios.get('http://localhost:9000/api/auth/unpackToken')
           .then(Response => {
             console.log(Response.data)
@@ -332,7 +340,12 @@ export default new Vuex.Store({
       console.log(payload)
       console.log('payload.name:' +payload.fileinput.name)
       console.log('payload.lastModified:' +payload.fileinput.lastModified)
+      // let date = new Date()
+      // let iPk = payload.fileinput.lastModified + `${date.getFullYear()}/${date.getMonth}/${date.getDate}/${date.getSeconds}`
+      console.log(iPk)
       return new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        // 
         let formData = new FormData();
         formData.append('uploadFile', payload.fileinput)
         formData.append('pName', payload.pName)                   // 제품 이름
@@ -351,6 +364,7 @@ export default new Vuex.Store({
         })
           .then(Response => {
                   console.log('Resonse.data를 받았습니다.')
+                  
             if(Response.data === "success") {
               Route.push("/latestitems")
             } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
@@ -363,30 +377,14 @@ export default new Vuex.Store({
           })
         })
       }, // 제품 등록
-  
-    latestItems({commit}){
-      return new Promise((resolve, reject) => {
-        axios.get(`http://localhost:9000/api/auth/latesitems`)
-        .then(Response => {
-          console.log('Response data를 받았습니다.')
-          console.log(Response.data)
-          console.log('Items data를 받았습니다')
-          console.log(Response.data.list)
-          // console.log(Response.data.pagination)
-          commit('READ_PRODUCT_LIST', Response.data)
-          console.log('정상적으로 latestItems가 작동되었습니다.')
-        })
-        .catch(Error => {
-          console.log(Error)
-          Route.push("/")
-        })
-      })
-    }, // 최신 상품 리스트
 
-    test({commit}, payload){
+    latestItems({commit}, payload){
       return new Promise((resolve, reject) => {
         console.log('payload:' + payload.limit)
-        axios.get(`http://localhost:9000/api/auth/test/${payload.limit}`)
+        let date = new Date()
+        console.log(`${date.getFullYear()} ${date.getMonth()} ${date.getDate()}`)
+        axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}`)
+        
         .then(Response => {
           console.log('Response data를 받았습니다.')
           console.log(Response.data)
@@ -401,7 +399,7 @@ export default new Vuex.Store({
           Route.push("/")
         })
       })
-    }, // 최신 상품 리스트
+    }, // 최신 상품 리스트 Test
   }
 })
 

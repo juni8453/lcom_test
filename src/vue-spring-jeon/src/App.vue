@@ -96,7 +96,11 @@
       color="primary"
       dark
     >
-      <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon 
+      @click.stop="drawer = !drawer"
+      v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')" 
+      >
+      </v-app-bar-nav-icon>
       <v-toolbar-title>Jeon Board Page</v-toolbar-title>
       <v-spacer></v-spacer>
       <div
@@ -195,9 +199,17 @@ import Route from '../src/router/index'
      
     },
     created() {
+      console.log('App.vue 실행')
       if(this.Userinfo.User_token === null && localStorage.getItem("token") !== null) {
+        // 저장된 token이 없고, 로컬에 저장된 토큰이 있을 때 if 실행
         this.$store.commit("INSERT_TOKEN"),
         this.$store.dispatch('UnpackToken')
+      }
+      if(localStorage.getItem('token') != null){
+        console.log('localStorage에 토큰이 있습니다.')
+      }
+      if(localStorage.getItem('token') == null){
+        console.log('localStorage에 토큰이 없습니다.')
       }
     }
   }
