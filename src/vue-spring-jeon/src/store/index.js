@@ -340,9 +340,11 @@ export default new Vuex.Store({
       console.log(payload)
       console.log('payload.name:' +payload.fileinput.name)
       console.log('payload.lastModified:' +payload.fileinput.lastModified)
-      // let date = new Date()
-      // let iPk = payload.fileinput.lastModified + `${date.getFullYear()}/${date.getMonth}/${date.getDate}/${date.getSeconds}`
-      console.log(iPk)
+
+      let date = new Date()
+      let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ payload.fileinput.lastModified 
+      console.log('iPk는?'+iPk)
+
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
         // 
@@ -353,7 +355,7 @@ export default new Vuex.Store({
         formData.append('pFrom', payload.pFrom)                   // 제품 원산지
         formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
         formData.append('iName',payload.fileinput.name)           // 이미지 이름
-        formData.append('iPk', payload.fileinput.lastModified)    // 이미지 고유번호
+        formData.append('iPk', iPk)    // 이미지 고유번호
   
         axios.post('http://localhost:9000/api/admin/insertproduct', formData,
           {
@@ -381,8 +383,8 @@ export default new Vuex.Store({
     latestItems({commit}, payload){
       return new Promise((resolve, reject) => {
         console.log('payload:' + payload.limit)
-        let date = new Date()
-        console.log(`${date.getFullYear()} ${date.getMonth()} ${date.getDate()}`)
+        // let date = new Date()
+        // console.log(`${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`)
         axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}`)
         
         .then(Response => {

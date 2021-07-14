@@ -363,7 +363,7 @@ public class AuthController {
 	@GetMapping({"/latestitems", "/latestitems/{pageOpt}"})
 	public ResponseEntity<?> test(Product product,
 			@PathVariable int pageOpt){
-		List<Product> itemslist = productService.selectProductListTest(pageOpt);
+		List<Product> itemslist = productService.selectProductList(pageOpt);
 		logger.info(itemslist.toString());
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트

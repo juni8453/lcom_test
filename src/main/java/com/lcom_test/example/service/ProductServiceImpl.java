@@ -22,12 +22,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> selectProductList() {
-		return productMapper.selectProductList();
-	}
-
-	@Override
-	public List<Product> selectProductListTest(int pageOpt) {
-		return productMapper.selectProductListTest(pageOpt);
+	public List<Product> selectProductList(int pageOpt) {
+		return productMapper.selectProductList(pageOpt);
 	}
 }

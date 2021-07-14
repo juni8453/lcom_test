@@ -2,7 +2,7 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcom_test.example.mapper.ProductMapper">
 
-<!-- 무한스크롤 Test MyBatis -->
+<!-- 무한스크롤 Test MyBatis 
 <resultMap type = "Images" id="Images2">
 		<result column="i_id" property="iId"/>
 		<result column="i_name" property="iName"/>
@@ -37,7 +37,8 @@ LEFT JOIN	   	vue_img   	i
 ON 			   	p.p_id = i.p_id
 LIMIT			#{pageOpt},8
 
-</select>  <!-- 최초 실행 시 1행부터 8개의 리스트 뽑아내기 -->
+</select>  
+-->
 
 
 
@@ -76,6 +77,7 @@ SELECT        	p.p_id,
 FROM           	vue_product p
 LEFT JOIN	   	vue_img   	i 
 ON 			   	p.p_id = i.p_id
+LIMIT			#{pageOpt},8
 
 </select>
 

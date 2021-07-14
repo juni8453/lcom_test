@@ -31,11 +31,6 @@
                       </v-col>
                       <v-col cols="2">
                           <v-btn text color="white">
-                              개인결제
-                          </v-btn>
-                      </v-col>
-                      <v-col cols="2">
-                          <v-btn text color="white">
                               사용후기
                           </v-btn>
                       </v-col>
