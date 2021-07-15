@@ -18,7 +18,7 @@ import SaleItems from '../views/SaleItems'
 import BwBar from '../components/BwBar'
 import ProductInsert from '../views/ProductInsert'
 import LatestItems from '../views/LatestItems'
-
+import ItemDetail from '../views/ItemDetail'
 
 Vue.use(VueRouter)
 
@@ -125,6 +125,13 @@ const routes = [
     component: LatestItems,
     props: true
   },
+  {
+    path: '/itemdetail',
+    name: 'ItemDetail',
+    component: ItemDetail,
+    props: true
+  },
+  
 ]
 
 const router = new VueRouter({

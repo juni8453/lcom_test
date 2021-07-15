@@ -353,12 +353,6 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
 	}
 	
-//	@GetMapping("/latesitems")
-//	public ResponseEntity<?> latestitems(Product product){
-//		List<Product> itemslist = productService.selectProductList();
-//		logger.info(itemslist.toString());
-//		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
-//	} // 최신 상품 리스트
 	
 	@GetMapping({"/latestitems", "/latestitems/{pageOpt}"})
 	public ResponseEntity<?> test(Product product,
@@ -368,4 +362,14 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
 	
+	@GetMapping({"/itemdetail", "/itemdetail/{pId}"})
+	public ResponseEntity<?> itemdetail(
+			@PathVariable int pId,
+			Product product){
+		
+		logger.debug("pId:"+pId);
+		product = productService.getProduct(pId);
+		
+		return new ResponseEntity<>(product, HttpStatus.OK);
+	}
 }

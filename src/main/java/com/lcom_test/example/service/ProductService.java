@@ -10,4 +10,6 @@ public interface ProductService {
 
 	public List<Product> selectProductList(int pageOpt);
 
+	public Product getProduct(int pId);
+
 }

@@ -16,10 +16,17 @@
                       {{item.pName}}
                     </v-card>
                     <v-card>
-                      <v-img
-                          height="250"
-                          :src="`/images/thumb/${item.iPk}${item.iName}`"
-                      ></v-img> 
+                      <router-link :to="{name:'ItemDetail',
+                        params:{
+                          pId:item.pId
+                        }
+                      }"
+                      >
+                        <v-img
+                            height="250"
+                            :src="`/images/thumb/${item.iPk}${item.iName}`"
+                        ></v-img> 
+                      </router-link>  
                     </v-card>
                   </v-col>    
                 </v-row>
@@ -53,6 +60,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 import BwBar from '../components/BwBar.vue'
 import { mapState } from 'vuex'
 import axios from 'axios'
+import Route from '../router/index'
 
 export default {
 data() {
@@ -111,6 +119,12 @@ methods: {
     .catch(error => {
       console.log(error)
     })
+  },
+
+  itemDetail(payload){
+    console.log('itemDetail method Run!')
+    console.log('iId, pId :' + JSON.stringify(payload))
+    Route.push('/itemdetail')
   }
 },
 
