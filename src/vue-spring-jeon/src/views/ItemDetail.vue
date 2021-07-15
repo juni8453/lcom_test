@@ -5,34 +5,98 @@
         <BwBar></BwBar>  
         <v-card class="text-center" outlined>
           <v-row>
-            <v-col cols="6">
-              <v-img
-                height="350"
+            <v-col cols="6" md="6" sm="6">
+              <!-- <v-img
+                height=""
                 :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
+              > 
+              </v-img> -->
+              <v-img
+                aspect-ratio="0.78"
+                :src="`/images/thumb/${itemdetaillist.listImages[0].iPk}${itemdetaillist.listImages[0].iName}`"
               >
               </v-img>
             </v-col>
+            <!-- <v-col cols="6" md="6" sm="6">
+              <v-card outlined>
+                <v-row class="pa-7">
+                  <v-col>제품 이름/ {{itemdetaillist.pName}}</v-col>
+                </v-row>
+              </v-card>
+              <v-card outlined>  
+                <v-row class="pa-8">
+                  <v-col>Brand/ {{itemdetaillist.pBrand}}</v-col>
+                </v-row>
+              </v-card>
+              <v-card outlined>  
+                <v-row class="pa-8">
+                  <v-col>Price/ {{itemdetaillist.pPrice}}</v-col>
+                </v-row>
+              </v-card>
+              <v-card outlined>  
+                <v-row class="pa-8">
+                  <v-col>From/ {{itemdetaillist.pFrom}}</v-col>
+                </v-row>
+              </v-card>  
+            </v-col> -->
             <v-col cols="6">
-            <v-card outlined>
-              <v-row class="pa-7">
-                <v-col>제품 이름 //pName // {{item.pName}}</v-col>
-              </v-row>
-            </v-card>
-            <v-card outlined>  
-              <v-row class="pa-8">
-                <v-col>제품 브랜드 // {{item.pBrand}}</v-col>
-              </v-row>
-            </v-card>
-            <v-card outlined>  
-              <v-row class="pa-8">
-                <v-col>제품 가격 // {{item.pPrice}}</v-col>
-              </v-row>
-            </v-card>
-            <v-card outlined>  
-              <v-row class="pa-8">
-                <v-col>제품 원산지 // {{item.pFrom}}</v-col>
-              </v-row>
-            </v-card>  
+              <h2 class="mb-10 mt-6 text-center">Product Introduce</h2>
+              <v-card class="mb-4">
+                <v-row>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="3">
+                        Product Name
+                      </v-col>
+                      <v-col cols="3" class="mt-3 ml-8">
+                        {{itemdetaillist.pName}}
+                      </v-col>
+                    </v-row>              
+                  </v-card-text>
+                </v-row>
+              </v-card>
+              <v-card class="mb-4">
+                <v-row>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="3" class="mt-1">
+                        Price
+                      </v-col>
+                      <v-col cols="3" class="mt-1 ml-8">
+                        {{itemdetaillist.pPrice}}
+                      </v-col>
+                    </v-row>              
+                  </v-card-text>
+                </v-row>
+              </v-card>
+              <v-card class="mb-4">
+                <v-row>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="3" class="mt-1">
+                        Brand
+                      </v-col>
+                      <v-col cols="3" class="mt-1 ml-8">
+                        {{itemdetaillist.pBrand}}
+                      </v-col>
+                    </v-row>              
+                  </v-card-text>
+                </v-row>
+              </v-card>
+              <v-card class="mb-4">
+                <v-row>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="3" class="mt-1">
+                        From
+                      </v-col>
+                      <v-col cols="3" class="mt-1 ml-8">
+                        {{itemdetaillist.pFrom}}
+                      </v-col>
+                    </v-row>              
+                  </v-card-text>
+                </v-row>
+              </v-card>
             </v-col>
           </v-row>
         </v-card>
@@ -42,7 +106,7 @@
               <v-card-text class="indigo lighten-1 white--text text-center" flat tile>
                   <v-row>
                       <v-col>
-                          Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
+                        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
                       </v-col>
                   </v-row>
               </v-card-text>
@@ -60,16 +124,18 @@ import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Route from '../router/index'
 import axios from 'axios'
+
 export default {
+  
   props:['pId'],
   data(){
     return{
-      item:{}
+      // item:{}
     }
   },
   
   computed:{
-    ...mapState(['productlist'])
+    ...mapState(['productlist', 'itemdetaillist'])
   },
 
   created(){
@@ -78,8 +144,10 @@ export default {
     new Promise((resolve, reject) => {
       axios.get(`http://localhost:9000/api/auth/itemdetail/${this.pId}`)
       .then(Response => {
+        console.log('ItemDetail created Response data')
         console.log(Response.data)
-        this.item = Response.data  
+        // this.item = Response.data  
+        this.$store.commit('SET_ITEMDETAIL_LIST', Response.data)
       })
       .catch(Error => {
           console.log(Error)

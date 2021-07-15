@@ -36,7 +36,7 @@
             <v-icon>mdi-card-text-outline</v-icon>
           </v-list-item-action>
           <v-list-item-content>
-            <v-list-item-title>유저 목록 / 관리자 전용
+            <v-list-item-title>유저 목록 / 관리자 전용 {{Userinfo.User_auth}}
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

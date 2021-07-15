@@ -43,6 +43,7 @@ export default new Vuex.Store({
     // setImages: null,
     imageslist:[],
     productlist:[],
+    itemdetaillist:[]
 
   },
   mutations: {
@@ -119,6 +120,9 @@ export default new Vuex.Store({
     SET_IMAGES_LIST(state, data){
       state.imageslist = data
     },
+    SET_ITEMDETAIL_LIST(state, data){
+      state.itemdetaillist = data
+    }
   },
   
   actions: {

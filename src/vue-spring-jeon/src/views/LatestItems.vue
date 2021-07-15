@@ -23,7 +23,7 @@
                       }"
                       >
                         <v-img
-                            height="250"
+                            aspect-ratio="0.78"
                             :src="`/images/thumb/${item.iPk}${item.iName}`"
                         ></v-img> 
                       </router-link>  
