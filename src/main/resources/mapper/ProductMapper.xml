@@ -19,8 +19,11 @@
 		<result column="p_brand" property="pBrand"/>
 		<collection property="listImages" resultMap="Images1"/>
 </resultMap>
+<!-- Product Vo 내의 List인 listImages에 collection을 사용하여 구해온 Images Vo값을 넣는다 
+	 이후 select resultMap으로 부모 Table Product의 값을 뽑아낸다.
+ -->
  
-<select id="selectProductList" resultMap="Images1">
+<select id="selectProductList" resultMap="Product1">
 SELECT        	p.p_id,
 				p.p_name, 
 				p.p_date, 
@@ -41,6 +44,7 @@ LIMIT			#{pageOpt},8
 		<result column="i_name" property="iName"/>
 		<result column="i_pk" property="iPk"/>
 		<result column="p_id" property="pId"/>
+		<result column="p_name" property="pName"/>
 </resultMap>
 	
 <resultMap type = "Product" id="Product2">

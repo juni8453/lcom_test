@@ -68,3 +68,6 @@
  1. lastModified 값으로는 중복 이미지를 막을 수 없음
   - 중복 이미지 업로드 시 오류 발생
   - 이미지 파일 고유 이름에 (년도_월_일_시_분_초) 형태의 시간 추가 필요
+
+  https://donggu1105.tistory.com/23
+  https://www.daleseo.com/how-to-traverse-list-in-java/ 다중 업로드 참고 사이트

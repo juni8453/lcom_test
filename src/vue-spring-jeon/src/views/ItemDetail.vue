@@ -12,43 +12,23 @@
               > 
               </v-img> -->
               <v-img
-                aspect-ratio="0.78"
+                contain
+                height="350"
+                width="1000"
                 :src="`/images/thumb/${itemdetaillist.listImages[0].iPk}${itemdetaillist.listImages[0].iName}`"
               >
               </v-img>
             </v-col>
-            <!-- <v-col cols="6" md="6" sm="6">
-              <v-card outlined>
-                <v-row class="pa-7">
-                  <v-col>제품 이름/ {{itemdetaillist.pName}}</v-col>
-                </v-row>
-              </v-card>
-              <v-card outlined>  
-                <v-row class="pa-8">
-                  <v-col>Brand/ {{itemdetaillist.pBrand}}</v-col>
-                </v-row>
-              </v-card>
-              <v-card outlined>  
-                <v-row class="pa-8">
-                  <v-col>Price/ {{itemdetaillist.pPrice}}</v-col>
-                </v-row>
-              </v-card>
-              <v-card outlined>  
-                <v-row class="pa-8">
-                  <v-col>From/ {{itemdetaillist.pFrom}}</v-col>
-                </v-row>
-              </v-card>  
-            </v-col> -->
             <v-col cols="6">
               <h2 class="mb-10 mt-6 text-center">Product Introduce</h2>
               <v-card class="mb-4">
                 <v-row>
                   <v-card-text>
                     <v-row>
-                      <v-col cols="3">
+                      <v-col cols="3" class="mt-1">
                         Product Name
                       </v-col>
-                      <v-col cols="3" class="mt-3 ml-8">
+                      <v-col cols="3" class="mt-1 ml-8">
                         {{itemdetaillist.pName}}
                       </v-col>
                     </v-row>              
@@ -130,7 +110,7 @@ export default {
   props:['pId'],
   data(){
     return{
-      // item:{}
+      // item:{listImages:[]} []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
     }
   },
   

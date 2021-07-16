@@ -23,10 +23,11 @@
                       }"
                       >
                         <v-img
-                            aspect-ratio="0.78"
-                            :src="`/images/thumb/${item.iPk}${item.iName}`"
+                            contain
+                            height="250"
+                            :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
                         ></v-img> 
-                      </router-link>  
+                      </router-link> 
                     </v-card>
                   </v-col>    
                 </v-row>
@@ -60,7 +61,6 @@ import InfiniteLoading from 'vue-infinite-loading'
 import BwBar from '../components/BwBar.vue'
 import { mapState } from 'vuex'
 import axios from 'axios'
-import Route from '../router/index'
 
 export default {
 data() {
@@ -119,12 +119,6 @@ methods: {
     .catch(error => {
       console.log(error)
     })
-  },
-
-  itemDetail(payload){
-    console.log('itemDetail method Run!')
-    console.log('iId, pId :' + JSON.stringify(payload))
-    Route.push('/itemdetail')
   }
 },
 

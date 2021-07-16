@@ -11,23 +11,28 @@
 
     <v-row dense>
       <v-col cols="3" md="3">
-        <v-card class="pa-6 text-center" outlined height="140">
-          <v-file-input
-              id="uploadFile"
-              label="제품 이미지"
-              v-model="fileinput"
-            >
-            </v-file-input>
-            <v-btn outlined
-            @click="insertProduct({
-              pName: pName,
-              pPrice: pPrice,
-              pFrom: pFrom,
-              pBrand: pBrand,
-              fileinput: fileinput
-            })"
-            >등록</v-btn>
-        </v-card>
+        <v-row>
+          <v-col>
+            <v-card class="pa-3 text-center" outlined height="150">
+              <v-file-input
+                  id="uploadFile"
+                  label="클릭해서 이미지를 업로드하세요."
+                  v-model="fileinput"
+                  multiple
+                > <!-- 첫번째 파일 업로드 -->
+                </v-file-input>
+                <v-btn outlined 
+                @click="insertProduct({
+                  pName: pName,
+                  pPrice: pPrice,
+                  pFrom: pFrom,
+                  pBrand: pBrand,
+                  fileinput: fileinput
+                })"
+                >등록</v-btn>
+            </v-card>
+          </v-col>
+        </v-row>  
       </v-col>
       <v-col cols="9" md="9">
         <v-card class="pa-3 text-center" outlined>
