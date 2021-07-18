@@ -78,66 +78,67 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 	
-//	@PostMapping("/insertproduct")
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	public ResponseEntity<?> insertproduct(Product product,
-//			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){ //RequestPart of MutipartFile Array
-////		
-////		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-////		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-////		
-//		String thumbPath = path + "thumb/";
-//		String filename = images.getiPk() + multipartFile.getOriginalFilename();
-//		String ext = filename.substring(filename.lastIndexOf(".")+1);
-//		
-//		File file = new File(path + filename);
-//		File thumbFile = new File(thumbPath + filename);
-//		
-//		
-//		try {
-//		// 원본파일 저장
-//			InputStream input = multipartFile.getInputStream();
-//			FileUtils.copyInputStreamToFile(input, file);
-//			
-//		// 썸네일 생성
-//			BufferedImage imageBuf = ImageIO.read(file); // BufferedImage 클래스는 액세스 가능한 이미지 데이터 버퍼가 있는 이미지를 설명.
-//			int fixWidth =  300;
-//			double ratio = imageBuf.getWidth() / (double)fixWidth;
-//			int thumbWidth = fixWidth;
-//			int thumbHeight = (int)(imageBuf.getHeight() / ratio);
-//			BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
-//			Graphics2D g  = thumbImageBf.createGraphics();
-//			Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
-//			g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
-//			g.dispose();
-//			ImageIO.write(thumbImageBf, ext, thumbFile);
-//			
-//			
-//		} catch(IOException e) {
-//			FileUtils.deleteQuietly(file);
-//			e.printStackTrace();
-//		}
-//		
-//		productService.insertProduct(product);
-//		boardService.insertImage(images);
-//		boardService.updatepId(images);
-//		return new ResponseEntity<>("success", HttpStatus.OK);
-//	} // 단일 파일 업로드 컨트롤러
-	
 	@PostMapping("/insertproduct")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> insertproduct(Product product,
-			@RequestParam("uploadFile") List<MultipartFile> multipartFile, Images images){ //RequestPart of MutipartFile Array
+			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+//		
+		String thumbPath = path + "thumb/";
+		String filename = images.getiPk() + multipartFile.getOriginalFilename();
+		String ext = filename.substring(filename.lastIndexOf(".")+1);
+		
+		File file = new File(path + filename);
+		File thumbFile = new File(thumbPath + filename);
+		
+		
+		try {
+		// 원본파일 저장
+			InputStream input = multipartFile.getInputStream();
+			FileUtils.copyInputStreamToFile(input, file);
+			
+		// 썸네일 생성
+			BufferedImage imageBuf = ImageIO.read(file);
+			int fixWidth =  500;
+			double ratio = imageBuf.getWidth() / (double)fixWidth;
+			int thumbWidth = fixWidth;
+			int thumbHeight = (int)(imageBuf.getHeight() / ratio);
+			BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
+			Graphics2D g  = thumbImageBf.createGraphics();
+			Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
+			g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
+			g.dispose();
+			ImageIO.write(thumbImageBf, ext, thumbFile);
+			
+			
+		} catch(IOException e) {
+			FileUtils.deleteQuietly(file);
+			e.printStackTrace();
+		}
+		
+		productService.insertProduct(product);
+		boardService.insertImage(images);
+		boardService.updatepId(images);
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+
+//	@PostMapping("/insertproduct")
+//	@PreAuthorize("hasRole('ROLE_ADMIN')")
+//	public ResponseEntity<?> insertproduct(Product product,
+//			@RequestParam("uploadFile") List<MultipartFile> multipartFile, Images images){ //RequestPart of MutipartFile Array
 //		
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-		String thumbPath = path + "thumb/";
-		
-		for(MultipartFile multi : multipartFile) {
-			System.out.println(multi);
-		}	
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+//		String thumbPath = path + "thumb/";
+//		
+//		for(MultipartFile multi : multipartFile) {
+//			System.out.println(multi);
+//		}	
 //			String filename = images.getiPk() + multi.getOriginalFilename();
 //			String ext = filename.substring(filename.lastIndexOf(".")+1);
 //			
@@ -172,8 +173,8 @@ public class AdminController {
 //			boardService.insertImage(images);
 //			boardService.updatepId(images);
 //		
-		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
+//		return new ResponseEntity<>("success", HttpStatus.OK);
+//	} 다중 파일 업로드 (보류)
 	
 	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -190,52 +191,6 @@ public class AdminController {
 			logger.info(userlist.toString());	
 			return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
 	}
-	
-////업로드
-//	@RequestMapping(value="/logoupload", method=RequestMethod.POST)
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	public ResponseEntity<?> logoupload(@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
-////				String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/"; 
-////				String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
-////				String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/"; 데탑
-//				String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-////		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-////		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String thumbPath = path + "thumb/";
-//		String filename = images.getiPk() + multipartFile.getOriginalFilename();
-//		String ext = filename.substring(filename.lastIndexOf(".")+1);
-//		
-//		File file = new File(path + filename);
-//		File thmbFile = new File(thumbPath + filename);
-//		
-//		try {
-//		// 원본파일 저장
-//			InputStream input = multipartFile.getInputStream();
-//			FileUtils.copyInputStreamToFile(input, file);
-//			
-//		// 썸네일 생성
-//			BufferedImage imageBuf = ImageIO.read(file);
-//			int fixWidth =  500;
-//			double ratio = imageBuf.getWidth() / (double)fixWidth;
-//			int thumbWidth = fixWidth;
-//			int thumbHeight = (int)(imageBuf.getHeight() / ratio);
-//			BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
-//			Graphics2D g  = thumbImageBf.createGraphics();
-//			Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
-//			g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
-//			g.dispose();
-//			ImageIO.write(thumbImageBf, ext, thmbFile);
-//			
-//			boardService.insertImage(images);
-//			
-//		} catch(IOException e) {
-//			FileUtils.deleteQuietly(file);
-//			e.printStackTrace();
-//		}
-//		List<Images> imageslist = boardService.selectImagesList();
-//		return ResponseEntity.ok(new ListResponse<Images>(imageslist));
-////		return new ResponseEntity<>("success", HttpStatus.OK);
-//	}
 
 	@PostMapping({"/userdelete", "/userdelete/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
@@ -255,4 +210,19 @@ public class AdminController {
 						new ListResponse<UserInfo>(pagination, userlist));
 			
 	}
+	
+	@PostMapping("/deleteproduct") 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> deleteProduct(
+			@RequestBody Product product){
+		int pageOpt = 0; // 무한스크롤의 첫 스크롤로 가기위함
+		logger.info(product.toString());
+			productService.deleteProduct(product.getpId());
+//			productService.deleteimages(product.getListImages());
+			
+			List<Product> itemslist = productService.selectProductList(pageOpt);
+			logger.info(itemslist.toString());
+			return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+	}
+	
 }

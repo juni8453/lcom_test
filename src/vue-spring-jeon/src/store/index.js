@@ -337,32 +337,33 @@ export default new Vuex.Store({
         })
       })
     },
-   
+
+
     insertProduct({commit, state},payload){
+      if(payload.fileinput == null){
+        alert('파일을 등록해주세요.')
+      }
       console.log('produtInsert Run')
       console.log('payload를 받았습니다')
       console.log(payload)
-      // console.log('payload.name:' +payload.fileinput.name)
-      // console.log('payload.lastModified:' +payload.fileinput.lastModified)     
+      console.log('payload.name:' +payload.fileinput.name)
+      console.log('payload.lastModified:' +payload.fileinput.lastModified)
+
       let date = new Date()
       let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ payload.fileinput.lastModified 
       console.log('iPk는?'+iPk)
 
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        // 
         let formData = new FormData();
-        console.log(payload.fileinput[0])
-        console.log(payload.fileinput[1])
-        console.log(payload.fileinput.length)
-        // for(let i=0; i<fileinput.length; i++){
-          formData.append('uploadFile', payload.fileinput)
-          formData.append('pName', payload.pName)                   // 제품 이름
-          formData.append('pPrice', payload.pPrice)                 // 제품 가격
-          formData.append('pFrom', payload.pFrom)                   // 제품 원산지
-          formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
-          formData.append('iName',payload.fileinput.name)           // 이미지 이름
-          formData.append('iPk', iPk)    // 이미지 고유번호
-        // }
+        formData.append('uploadFile', payload.fileinput)
+        formData.append('pName', payload.pName)                   // 제품 이름
+        formData.append('pPrice', payload.pPrice)                 // 제품 가격
+        formData.append('pFrom', payload.pFrom)                   // 제품 원산지
+        formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
+        formData.append('iName',payload.fileinput.name)           // 이미지 이름
+        formData.append('iPk', iPk)    // 이미지 고유번호
   
         axios.post('http://localhost:9000/api/admin/insertproduct', formData,
           {

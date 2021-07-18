@@ -1,0 +1,830 @@
+20:38:49.649 INFO  --- [restartedMain] c.l.example.LcomTestApplication : Starting LcomTestApplication on DESKTOP-OPGPTQR with PID 16860 (C:\Users\82105\Documents\GitHub\lcom_test\bin\main started by 82105 in C:\Users\82105\Documents\GitHub\lcom_test) 
+20:38:49.665 DEBUG --- [restartedMain] c.l.example.LcomTestApplication : Running with Spring Boot v2.3.4.RELEASE, Spring v5.2.9.RELEASE 
+20:38:49.666 INFO  --- [restartedMain] c.l.example.LcomTestApplication : The following profiles are active: local 
+20:38:51.096 DEBUG --- [restartedMain] c.l.example.config.AuthTokenFilter : Filter 'authenticationJwtTokenFilter' configured for use 
+20:38:51.642 INFO  --- [restartedMain] c.l.example.LcomTestApplication : Started LcomTestApplication in 2.39 seconds (JVM running for 3.246) 
+20:39:09.818 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+20:39:09.818 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+20:39:09.843 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+20:39:09.843 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+20:39:09.868 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 0 
+20:39:09.868 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+20:39:09.869 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+20:39:09.871 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+20:39:09.871 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 2 
+20:39:09.872 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [] 
+20:39:09.872 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@50a01c74, com.lcom_test.example.domain.Images@571177d6] 
+20:39:11.464 DEBUG --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : pId:1 
+20:39:11.465 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+20:39:11.465 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+20:39:11.466 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+20:39:11.466 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+20:39:11.467 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:21:27.637 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+21:21:27.638 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:21:27.638 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:21:27.640 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:21:27.640 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:21:27.641 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:21:44.559 WARN  --- [http-nio-9000-exec-7] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:21:50.268 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:21:50.268 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:21:50.269 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:21:50.269 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:21:50.270 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:21:50.271 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:21:50.271 INFO  --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@78c3e5c9, com.lcom_test.example.domain.Images@7bec79b] 
+21:21:50.278 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:21:50.280 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:21:50.287 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:21:50.287 INFO  --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : [] 
+21:21:52.971 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:1 
+21:21:52.971 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:21:52.971 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:21:52.973 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:21:52.973 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:21:52.974 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:23:52.364 WARN  --- [http-nio-9000-exec-2] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:23:54.403 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:23:54.404 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:23:54.406 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:23:54.407 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:23:54.408 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:23:54.409 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:23:54.409 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@3e610154, com.lcom_test.example.domain.Images@1e335126] 
+21:23:54.412 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:23:54.413 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:23:54.415 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:23:54.415 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : [] 
+21:23:54.885 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:1 
+21:23:54.885 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:23:54.885 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:23:54.887 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:23:54.888 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:23:54.888 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:28:20.846 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:28:20.846 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:28:20.848 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:28:20.849 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:28:20.849 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:28:20.849 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:28:20.850 INFO  --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@699f941f, com.lcom_test.example.domain.Images@29e196fc] 
+21:28:20.858 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:28:20.858 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:28:20.900 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:28:20.900 INFO  --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : [] 
+21:28:22.279 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:1 
+21:28:22.280 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:28:22.281 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:28:22.281 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:28:22.281 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:28:22.282 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:29:15.391 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:29:15.391 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:29:15.396 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:29:15.397 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:29:15.397 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:29:15.398 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:29:15.398 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@6b11b173, com.lcom_test.example.domain.Images@3ce61b1c] 
+21:29:15.453 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:29:15.454 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:29:15.469 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:29:15.470 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [] 
+21:29:16.897 DEBUG --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : pId:1 
+21:29:16.898 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:29:16.898 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:29:16.900 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:29:16.900 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:29:16.901 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:29:43.506 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:29:43.508 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:29:43.510 TRACE --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:29:43.510 TRACE --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:29:43.512 TRACE --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:29:43.512 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:29:43.513 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@24b73dba, com.lcom_test.example.domain.Images@148de088] 
+21:29:43.513 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:29:43.515 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:29:43.516 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:29:43.516 INFO  --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : [] 
+21:29:45.371 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+21:29:45.371 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:29:45.371 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:29:45.372 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:29:45.372 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:29:45.373 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:30:44.171 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:30:44.172 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:30:44.176 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:30:44.176 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:30:44.177 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:30:44.177 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:30:44.177 INFO  --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@67434ecf, com.lcom_test.example.domain.Images@5d6a18b8] 
+21:30:44.183 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:30:44.183 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:30:44.186 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:30:44.186 INFO  --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : [] 
+21:30:47.848 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:1 
+21:30:47.848 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:30:47.849 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:30:47.849 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:30:47.849 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:30:47.850 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:34:52.562 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:34:52.563 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:34:52.566 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:34:52.567 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:34:52.567 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:34:52.569 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:34:52.569 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@7a29b002, com.lcom_test.example.domain.Images@31c0c799] 
+21:34:52.575 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:34:52.576 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:34:52.578 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:34:52.578 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [] 
+21:34:52.931 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+21:34:52.931 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:34:52.931 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:34:52.940 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:34:52.940 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:34:52.941 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:36:57.359 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:36:57.361 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:36:57.363 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:36:57.364 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:36:57.364 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:36:57.365 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:36:57.365 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@6375359, com.lcom_test.example.domain.Images@cf0fa9a] 
+21:36:57.373 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:36:57.373 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:36:57.386 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:36:57.386 INFO  --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : [] 
+21:36:58.863 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:1 
+21:36:58.864 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:36:58.864 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:36:58.865 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:36:58.865 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:36:58.865 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:37:02.537 WARN  --- [http-nio-9000-exec-9] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:37:06.387 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:37:06.387 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:37:06.388 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:37:06.388 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:37:06.389 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:37:06.389 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:37:06.389 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@7fd84f49, com.lcom_test.example.domain.Images@7293cdff] 
+21:37:06.396 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:37:06.397 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:37:06.398 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:37:06.398 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [] 
+21:37:10.418 DEBUG --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : pId:1 
+21:37:10.418 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:37:10.418 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:37:10.419 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:37:10.419 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:37:10.419 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:38:12.134 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+21:38:12.135 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:38:12.135 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:38:12.137 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:38:12.137 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:38:12.138 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:39:06.667 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:1 
+21:39:06.667 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:39:06.668 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:39:06.668 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:39:06.668 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:39:06.669 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:40:01.876 WARN  --- [http-nio-9000-exec-6] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:40:31.026 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:40:31.026 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:40:31.029 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:40:31.029 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:40:31.030 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:40:31.030 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:40:31.030 INFO  --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@56b1497d, com.lcom_test.example.domain.Images@5b1324cb] 
+21:40:31.046 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:40:31.046 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:40:31.071 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:40:31.071 INFO  --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : [] 
+21:40:32.867 DEBUG --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : pId:1 
+21:40:32.867 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:40:32.867 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:40:32.868 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:40:32.868 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:40:32.868 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:40:44.188 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:40:44.188 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:40:44.189 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:40:44.189 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:40:44.190 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:40:44.190 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:40:44.190 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@b5e401f, com.lcom_test.example.domain.Images@36c1e43a] 
+21:40:44.196 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:40:44.196 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:40:44.197 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:40:44.197 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [] 
+21:40:49.795 DEBUG --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : pId:1 
+21:40:49.795 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:40:49.796 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:40:49.796 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:40:49.796 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:40:49.797 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:41:11.219 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:41:11.219 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:41:11.220 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:41:11.220 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:41:11.221 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:41:11.222 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : [] 
+21:41:11.232 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:41:11.232 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:41:11.232 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:41:11.232 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:41:11.233 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@c7f9edb, com.lcom_test.example.domain.Images@1b6432f] 
+21:41:12.921 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:1 
+21:41:12.922 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:41:12.923 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:41:12.923 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:41:12.923 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:41:12.925 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:41:32.887 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+21:41:32.888 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:41:32.888 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:41:32.889 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:41:32.889 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:41:32.890 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:41:52.348 WARN  --- [http-nio-9000-exec-7] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:41:55.145 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:41:55.145 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:41:55.146 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:41:55.146 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:41:55.147 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:41:55.147 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:41:55.147 INFO  --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@5fad87d3, com.lcom_test.example.domain.Images@543226c3] 
+21:41:55.154 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:41:55.154 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:41:55.155 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:41:55.155 INFO  --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : [] 
+21:41:56.110 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:1 
+21:41:56.111 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:41:56.111 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:41:56.112 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:41:56.113 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:41:56.113 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:42:11.236 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:42:11.236 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:42:11.237 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:42:11.238 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:42:11.238 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:42:11.238 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:42:11.238 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@6650914e, com.lcom_test.example.domain.Images@d13d300] 
+21:42:11.245 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:42:11.245 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:42:11.247 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:42:11.247 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [] 
+21:42:12.251 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+21:42:12.252 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:42:12.252 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:42:12.252 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:42:12.252 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:42:12.253 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:42:14.726 WARN  --- [http-nio-9000-exec-3] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:42:16.474 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:42:16.474 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:42:16.476 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:42:16.476 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:42:16.476 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:42:16.477 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:42:16.477 INFO  --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@42de5, com.lcom_test.example.domain.Images@283697c9] 
+21:42:16.485 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:42:16.485 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:42:16.486 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:42:16.486 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [] 
+21:42:16.946 DEBUG --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : pId:1 
+21:42:16.947 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:42:16.947 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:42:16.948 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:42:16.948 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:42:16.948 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:43:45.715 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:43:45.715 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:43:45.716 TRACE --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:43:45.717 TRACE --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:43:45.717 TRACE --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:43:45.717 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:43:45.717 INFO  --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@7e8805ee, com.lcom_test.example.domain.Images@7117d4c9] 
+21:43:45.724 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:43:45.724 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:43:45.729 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:43:45.730 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [] 
+21:43:48.021 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:1 
+21:43:48.021 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:43:48.021 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:43:48.022 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:43:48.022 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:43:48.022 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:44:09.224 DEBUG --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : pId:1 
+21:44:09.224 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:44:09.224 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:44:09.226 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:44:09.226 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:44:09.226 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:44:23.843 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+21:44:23.844 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:44:23.845 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:44:23.846 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:44:23.847 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:44:23.847 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:44:50.145 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:44:50.145 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:44:50.147 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:44:50.147 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:44:50.148 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:44:50.148 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:44:50.149 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@409e43da, com.lcom_test.example.domain.Images@15cb798] 
+21:44:50.159 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:44:50.159 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:44:50.166 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:44:50.166 INFO  --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : [] 
+21:44:52.045 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+21:44:52.046 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:44:52.047 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:44:52.048 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:44:52.048 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:44:52.048 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:46:15.779 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:1 
+21:46:15.780 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:46:15.780 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:46:15.781 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:46:15.781 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:46:15.782 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:48:58.854 WARN  --- [http-nio-9000-exec-10] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:49:01.961 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:49:01.962 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:49:01.963 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:49:01.964 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:49:01.964 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:49:01.964 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:49:01.964 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@6cc26624, com.lcom_test.example.domain.Images@7f5a236f] 
+21:49:01.970 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:49:01.970 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:49:01.971 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:49:01.971 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [] 
+21:49:04.311 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+21:49:04.313 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:49:04.313 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:49:04.314 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:49:04.314 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:49:04.314 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:49:26.324 WARN  --- [http-nio-9000-exec-3] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+21:49:29.900 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:49:29.900 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+21:49:29.902 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+21:49:29.903 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+21:49:29.903 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+21:49:29.903 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==      Total: 2 
+21:49:29.903 INFO  --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@ade516, com.lcom_test.example.domain.Images@1cb9a215] 
+21:49:29.908 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+21:49:29.909 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+21:49:29.910 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 0 
+21:49:29.910 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [] 
+21:49:31.799 DEBUG --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : pId:1 
+21:49:31.800 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:49:31.801 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:49:31.801 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:49:31.802 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:49:31.802 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:50:32.671 DEBUG --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : pId:1 
+21:50:32.674 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:50:32.675 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:50:32.675 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:50:32.676 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:50:32.676 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:50:40.501 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:1 
+21:50:40.502 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:50:40.502 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:50:40.502 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:50:40.502 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:50:40.503 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:51:12.733 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:1 
+21:51:12.734 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:51:12.734 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:51:12.735 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:51:12.735 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:51:12.735 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:52:02.168 DEBUG --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : pId:1 
+21:52:02.176 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:52:02.177 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:52:02.182 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:52:02.182 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:52:02.183 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+21:52:28.049 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+21:52:28.049 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+21:52:28.050 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+21:52:28.051 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+21:52:28.051 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+21:52:28.051 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:06:36.150 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:1 
+22:06:36.151 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:06:36.151 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:06:36.153 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:06:36.153 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:06:36.153 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:06:38.161 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:06:38.162 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+22:06:38.164 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+22:06:38.165 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+22:06:38.165 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+22:06:38.165 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 2 
+22:06:38.165 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@74c5353, com.lcom_test.example.domain.Images@3752f69a] 
+22:06:38.172 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:06:38.172 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+22:06:38.180 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==      Total: 0 
+22:06:38.180 INFO  --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : [] 
+22:06:39.400 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:1 
+22:06:39.402 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:06:39.403 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:06:39.404 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:06:39.404 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:06:39.404 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:09:18.693 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:1 
+22:09:18.694 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:09:18.694 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:09:18.695 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:09:18.695 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:09:18.696 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:09:53.553 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:1 
+22:09:53.553 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:09:53.553 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:09:53.554 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:09:53.554 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:09:53.554 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:13:19.052 WARN  --- [http-nio-9000-exec-4] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+22:13:20.944 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:13:20.944 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+22:13:20.947 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+22:13:20.947 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+22:13:20.948 TRACE --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+22:13:20.948 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 2 
+22:13:20.948 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@69d2e7a7, com.lcom_test.example.domain.Images@437634c4] 
+22:13:20.952 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:13:20.952 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+22:13:20.955 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==      Total: 0 
+22:13:20.956 INFO  --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : [] 
+22:13:21.470 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+22:13:21.471 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:13:21.471 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:13:21.474 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:13:21.474 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:13:21.474 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:13:27.363 ERROR --- [http-nio-9000-exec-8] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:13:27Z, a difference of 84900363 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:13:27.386 ERROR --- [http-nio-9000-exec-8] c.l.e.config.AuthEntryPointJwt : Unauthorized error: Full authentication is required to access this resource 
+22:13:28.582 ERROR --- [http-nio-9000-exec-10] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:13:28Z, a difference of 84901581 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:13:28.589 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.getBoardCount : ==>  Preparing: SELECT COUNT(*) as count FROM vue_board 
+22:13:28.589 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.getBoardCount : ==> Parameters:  
+22:13:28.594 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.getBoardCount : <==    Columns: count 
+22:13:28.594 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.getBoardCount : <==        Row: 5 
+22:13:28.595 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.getBoardCount : <==      Total: 1 
+22:13:28.596 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : com.lcom_test.example.domain.Board@1023a14f 
+22:13:28.596 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : ==>  Preparing: SELECT b_id as bId, b_writer as bWriter, b_title as bTitle, b_content as bContent, b_datetime as bDateTime, b_views as bViews, b_group as bGroup, b_order as bOrder, b_depth as bDepth, u_id as username FROM vue_board ORDER BY b_group DESC, b_order ASC LIMIT ?,? 
+22:13:28.597 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : ==> Parameters: 0(Integer), 5(Integer) 
+22:13:28.601 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==    Columns: bId, bWriter, bTitle, bContent, bDateTime, bViews, bGroup, bOrder, bDepth, username 
+22:13:28.601 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==        Row: 37, null, upLoad Test, <<BLOB>>, 2021-07-01 21:08:48, 2, 37, 0, 0, jbj 
+22:13:28.603 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==        Row: 36, null, test 2, <<BLOB>>, 2021-07-01 21:05:08, 1, 36, 0, 0, jbj 
+22:13:28.603 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==        Row: 35, null, test, <<BLOB>>, 2021-07-01 20:59:50, 0, 35, 0, 0, jbj 
+22:13:28.604 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==        Row: 34, null, 2, <<BLOB>>, 2021-06-30 21:06:50, 3, 34, 0, 0, jbj 
+22:13:28.605 TRACE --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==        Row: 33, null, 1, <<BLOB>>, 2021-06-30 21:06:46, 19, 33, 0, 0, jbj 
+22:13:28.606 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.BoardMapper.selectBoardList : <==      Total: 5 
+22:13:28.606 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Board@77126ce9, com.lcom_test.example.domain.Board@1ee8860f, com.lcom_test.example.domain.Board@6930ae58, com.lcom_test.example.domain.Board@2f284ba2, com.lcom_test.example.domain.Board@4bb91f8a] 
+22:13:31.004 ERROR --- [http-nio-9000-exec-2] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:13:31Z, a difference of 84904003 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:13:31.005 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:13:31.005 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+22:13:31.007 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+22:13:31.007 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+22:13:31.008 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+22:13:31.008 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 2 
+22:13:31.008 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@3f88e618, com.lcom_test.example.domain.Images@49330c5b] 
+22:13:31.010 ERROR --- [http-nio-9000-exec-3] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:13:31Z, a difference of 84904010 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:13:31.011 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:13:31.011 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+22:13:31.014 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 0 
+22:13:31.015 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [] 
+22:13:44.246 ERROR --- [http-nio-9000-exec-6] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:13:44Z, a difference of 84917246 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:13:44.247 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+22:13:44.247 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:13:44.247 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:13:44.248 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:13:44.248 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:13:44.249 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:20:02.331 ERROR --- [http-nio-9000-exec-9] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:20:02Z, a difference of 85295331 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:20:02.341 ERROR --- [http-nio-9000-exec-10] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:20:02Z, a difference of 85295341 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:20:02.343 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:20:02.343 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+22:20:02.345 TRACE --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+22:20:02.345 TRACE --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+22:20:02.346 TRACE --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+22:20:02.346 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==      Total: 2 
+22:20:02.346 INFO  --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@7ac69fd7, com.lcom_test.example.domain.Images@3538bdda] 
+22:20:02.349 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:20:02.350 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+22:20:02.350 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==      Total: 0 
+22:20:02.350 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [] 
+22:20:34.569 ERROR --- [http-nio-9000-exec-1] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:20:34Z, a difference of 85327569 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:20:34.570 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:1 
+22:20:34.573 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:20:34.573 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:20:34.574 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:20:34.574 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:20:34.574 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:20:59.777 ERROR --- [http-nio-9000-exec-4] c.lcom_test.example.config.JwtUtils : JWT token is expired: JWT expired at 2021-07-14T22:38:27Z. Current time: 2021-07-15T22:20:59Z, a difference of 85352777 milliseconds.  Allowed clock skew: 0 milliseconds. 
+22:20:59.778 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:1 
+22:20:59.778 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:20:59.778 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:20:59.788 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:20:59.788 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:20:59.788 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:22:11.445 WARN  --- [http-nio-9000-exec-5] o.s.w.s.m.s.DefaultHandlerExceptionResolver : Resolved [org.springframework.web.method.annotation.MethodArgumentTypeMismatchException: Failed to convert value of type 'java.lang.String' to required type 'int'; nested exception is java.lang.NumberFormatException: For input string: "undefined"] 
+22:22:13.064 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:22:13.065 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+22:22:13.066 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+22:22:13.067 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+22:22:13.067 TRACE --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+22:22:13.067 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 2 
+22:22:13.068 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@5eb36e13, com.lcom_test.example.domain.Images@7d1b4c7e] 
+22:22:13.070 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:22:13.070 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+22:22:13.072 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 0 
+22:22:13.073 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [] 
+22:22:13.542 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:1 
+22:22:13.542 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:22:13.542 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:22:13.544 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:22:13.544 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:22:13.544 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:23:17.097 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:1 
+22:23:17.097 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:23:17.097 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+22:23:17.098 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:23:17.098 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+22:23:17.098 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:24:31.158 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:24:31.158 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+22:24:31.160 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+22:24:31.160 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+22:24:31.161 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 2, 중복 Test, 2021-07-14 22:38:05, 중복 Test, 중복 Test, 중복 Test, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+22:24:31.161 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 2 
+22:24:31.161 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@f63a196, com.lcom_test.example.domain.Images@77232e44] 
+22:24:31.166 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+22:24:31.167 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+22:24:31.169 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 0 
+22:24:31.170 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [] 
+22:25:10.759 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:2 
+22:25:10.763 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:25:10.763 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:25:10.765 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:25:10.765 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:25:10.765 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:33:36.990 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:2 
+22:33:36.991 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:33:36.991 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:33:36.992 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:33:36.992 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:33:36.993 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:34:08.523 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:2 
+22:34:08.523 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:34:08.524 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:34:08.524 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:34:08.524 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:34:08.524 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:34:18.476 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:2 
+22:34:18.476 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:34:18.477 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:34:18.477 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:34:18.477 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:34:18.477 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:34:32.127 DEBUG --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : pId:2 
+22:34:32.127 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:34:32.128 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:34:32.128 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:34:32.128 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:34:32.129 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:40:35.961 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:2 
+22:40:35.961 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:40:35.961 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:40:35.962 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:40:35.962 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:40:35.963 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:41:21.124 DEBUG --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : pId:2 
+22:41:21.124 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:41:21.125 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:41:21.125 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:41:21.125 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:41:21.125 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:47:14.247 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:2 
+22:47:14.248 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:47:14.249 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:47:14.249 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:47:14.250 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:47:14.250 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:47:41.211 DEBUG --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : pId:2 
+22:47:41.212 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:47:41.212 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:47:41.213 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:47:41.213 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:47:41.213 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:48:04.004 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:2 
+22:48:04.005 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:48:04.005 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:48:04.006 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:48:04.006 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:48:04.006 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:48:16.890 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:2 
+22:48:16.890 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:48:16.891 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:48:16.893 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:48:16.893 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:48:16.893 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:49:12.404 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:2 
+22:49:12.405 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:49:12.405 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:49:12.405 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:49:12.406 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:49:12.406 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:49:36.852 DEBUG --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : pId:2 
+22:49:36.852 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:49:36.853 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:49:36.854 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:49:36.854 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:49:36.854 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:56:43.767 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:2 
+22:56:43.767 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:56:43.768 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:56:43.769 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:56:43.769 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:56:43.769 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:57:09.258 DEBUG --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : pId:2 
+22:57:09.267 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:57:09.267 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:57:09.269 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:57:09.269 TRACE --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:57:09.269 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:57:09.283 DEBUG --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : pId:2 
+22:57:09.283 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:57:09.283 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:57:09.284 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:57:09.284 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:57:09.284 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:57:09.316 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:2 
+22:57:09.316 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:57:09.316 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:57:09.318 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:57:09.318 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:57:09.318 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:57:54.927 DEBUG --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : pId:2 
+22:57:54.928 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:57:54.928 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:57:54.928 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:57:54.928 TRACE --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:57:54.929 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:59:19.885 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:2 
+22:59:19.886 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:59:19.886 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:59:19.887 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:59:19.887 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:59:19.888 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+22:59:54.818 DEBUG --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : pId:2 
+22:59:54.819 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+22:59:54.819 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+22:59:54.820 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+22:59:54.820 TRACE --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+22:59:54.820 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:01:02.547 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:2 
+23:01:02.548 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:01:02.549 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:01:02.550 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:01:02.550 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:01:02.551 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:01:53.157 DEBUG --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : pId:2 
+23:01:53.157 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:01:53.158 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:01:53.158 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:01:53.158 TRACE --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:01:53.159 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:03:22.580 DEBUG --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : pId:2 
+23:03:22.580 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:03:22.580 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:03:22.581 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:03:22.581 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, 중복 Test, 중복 Test, 중복 Test, 중복 Test, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:03:22.581 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:07:04.515 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:04.515 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:04.515 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:04.516 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:04.516 TRACE --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:04.516 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:04.516 INFO  --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@9377bc4, com.lcom_test.example.domain.Images@4681bde7] 
+23:07:04.535 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:04.535 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:04.550 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:04.550 INFO  --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : [] 
+23:07:05.509 DEBUG --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : pId:1 
+23:07:05.509 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:07:05.510 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+23:07:05.511 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:07:05.511 TRACE --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+23:07:05.511 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:07:07.089 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:07.089 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:07.092 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:07.092 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:07.092 TRACE --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:07.093 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:07.093 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@e08d62b, com.lcom_test.example.domain.Images@77063f33] 
+23:07:07.098 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:07.098 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:07.099 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:07.099 INFO  --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : [] 
+23:07:08.077 DEBUG --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : pId:2 
+23:07:08.077 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:07:08.078 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:07:08.079 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:07:08.079 TRACE --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, T-Shirt, 30,000, Korea, Brand, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:07:08.079 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:07:21.412 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:21.413 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:21.413 TRACE --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:21.414 TRACE --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:21.414 TRACE --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:21.414 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:21.414 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@127659c4, com.lcom_test.example.domain.Images@3b75f7bb] 
+23:07:21.421 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:21.422 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:21.424 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:21.424 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [] 
+23:07:23.631 DEBUG --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : pId:2 
+23:07:23.632 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:07:23.632 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:07:23.634 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:07:23.634 TRACE --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, T-Shirt, 30,000, Korea, Brand, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:07:23.634 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:07:26.838 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:26.838 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:26.841 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:26.841 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:26.841 TRACE --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:26.841 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:26.841 INFO  --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@5c6da658, com.lcom_test.example.domain.Images@2040d566] 
+23:07:26.843 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:26.843 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:26.847 DEBUG --- [http-nio-9000-exec-7] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:26.847 INFO  --- [http-nio-9000-exec-7] c.l.e.controller.AuthController : [] 
+23:07:27.593 DEBUG --- [http-nio-9000-exec-6] c.l.e.controller.AuthController : pId:1 
+23:07:27.594 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:07:27.595 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 1(Integer) 
+23:07:27.597 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:07:27.597 TRACE --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==        Row: 1, Test, Test, Test, Test, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683, 1 
+23:07:27.597 DEBUG --- [http-nio-9000-exec-6] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:07:28.465 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:28.465 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:28.466 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:28.467 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:28.468 TRACE --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:28.468 DEBUG --- [http-nio-9000-exec-8] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:28.468 INFO  --- [http-nio-9000-exec-8] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@1bacc3d6, com.lcom_test.example.domain.Images@18cbe733] 
+23:07:28.473 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:28.473 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:28.475 DEBUG --- [http-nio-9000-exec-10] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:28.475 INFO  --- [http-nio-9000-exec-10] c.l.e.controller.AuthController : [] 
+23:07:28.969 DEBUG --- [http-nio-9000-exec-9] c.l.e.controller.AuthController : pId:2 
+23:07:28.970 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:07:28.970 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:07:28.970 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:07:28.970 TRACE --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, T-Shirt, 30,000, Korea, Brand, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:07:28.971 DEBUG --- [http-nio-9000-exec-9] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 
+23:07:31.114 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:31.115 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:31.115 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:31.116 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:31.116 TRACE --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:31.116 DEBUG --- [http-nio-9000-exec-1] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:31.116 INFO  --- [http-nio-9000-exec-1] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@55792d91, com.lcom_test.example.domain.Images@c7f8393] 
+23:07:31.121 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:31.121 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:31.121 DEBUG --- [http-nio-9000-exec-4] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:31.122 INFO  --- [http-nio-9000-exec-4] c.l.e.controller.AuthController : [] 
+23:07:50.788 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:50.788 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : ==> Parameters: 0(Integer) 
+23:07:50.789 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==    Columns: p_id, p_name, p_date, p_price, p_from, p_brand, i_id, p_id, i_name, i_pk 
+23:07:50.789 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 1, Test, 2021-07-14 22:37:38, Test, Test, Test, 1, 1, 1626158871024쇼핑몰 예시 1.PNG, 2021614381626177787683 
+23:07:50.790 TRACE --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==        Row: 2, T-Shirt, 2021-07-14 22:38:05, 30,000, Korea, Brand, 2, 2, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683 
+23:07:50.790 DEBUG --- [http-nio-9000-exec-2] c.l.e.m.P.selectProductList : <==      Total: 2 
+23:07:50.790 INFO  --- [http-nio-9000-exec-2] c.l.e.controller.AuthController : [com.lcom_test.example.domain.Images@2d40c250, com.lcom_test.example.domain.Images@5ea787d2] 
+23:07:50.799 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_date, p.p_price, p.p_from, p.p_brand, i.i_id, i.p_id, i.i_name, i.i_pk FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id LIMIT ?,8 
+23:07:50.799 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : ==> Parameters: 8(Integer) 
+23:07:50.801 DEBUG --- [http-nio-9000-exec-3] c.l.e.m.P.selectProductList : <==      Total: 0 
+23:07:50.801 INFO  --- [http-nio-9000-exec-3] c.l.e.controller.AuthController : [] 
+23:07:53.405 DEBUG --- [http-nio-9000-exec-5] c.l.e.controller.AuthController : pId:2 
+23:07:53.420 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==>  Preparing: SELECT p.p_id, p.p_name, p.p_price, p.p_from, p.p_brand, i.i_name, i.i_pk, i.p_id FROM vue_product p LEFT JOIN vue_img i ON p.p_id = i.p_id WHERE p.p_id = ? 
+23:07:53.420 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : ==> Parameters: 2(Integer) 
+23:07:53.421 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==    Columns: p_id, p_name, p_price, p_from, p_brand, i_name, i_pk, p_id 
+23:07:53.421 TRACE --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==        Row: 2, T-Shirt, 30,000, Korea, Brand, 1626158871024쇼핑몰 예시 1.PNG, 202161451626177787683, 2 
+23:07:53.421 DEBUG --- [http-nio-9000-exec-5] c.l.e.m.ProductMapper.getProduct : <==      Total: 1 

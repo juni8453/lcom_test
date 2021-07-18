@@ -58,18 +58,18 @@ LIMIT			#{pageOpt},8
 </resultMap>
 
 <select id="getProduct" resultMap="Product2">
-SELECT 			p.p_id,		
-				p.p_name,		
-				p.p_price, 	
-				p.p_from,		
-				p.p_brand,
-				i.i_name,
-				i.i_pk,
-				i.p_id
-FROM 			vue_product p
-LEFT JOIN		vue_img		i
-ON 				p.p_id = i.p_id
-WHERE			p.p_id = #{pId}
+	SELECT 			p.p_id,		
+					p.p_name,		
+					p.p_price, 	
+					p.p_from,		
+					p.p_brand,
+					i.i_name,
+					i.i_pk,
+					i.p_id
+	FROM 			vue_product p
+	LEFT JOIN		vue_img		i
+	ON 				p.p_id = i.p_id
+	WHERE			p.p_id = #{pId}
 </select>
 
 <insert id="insertProduct" parameterType="Product">
@@ -87,17 +87,13 @@ WHERE			p.p_id = #{pId}
 		)
 </insert>
 
-<!-- 비상용 
-<select id="getProduct" resultType="Product">
-     SELECT 		p_id		as pId,
-     				p_name		as pName,
-     				p_price 	as pPrice,
-     				p_from		as pFrom,
-     				p_brand 	as pBrand
-     					
-	 FROM 			vue_product
-	 WHERE			p_id = #{pId}
-</select>
--->
+<delete id="deleteProduct" parameterType="Product">
+	DELETE 		a,b
+	FROM 	 	vue_product a
+	LEFT JOIN 	vue_img b
+	ON			a.p_id = b.i_id
+	WHERE		a.p_id = #{pId}
+</delete>
+
 
 </mapper>

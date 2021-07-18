@@ -18,7 +18,7 @@
                   id="uploadFile"
                   label="클릭해서 이미지를 업로드하세요."
                   v-model="fileinput"
-                  multiple
+      
                 > <!-- 첫번째 파일 업로드 -->
                 </v-file-input>
                 <v-btn outlined 

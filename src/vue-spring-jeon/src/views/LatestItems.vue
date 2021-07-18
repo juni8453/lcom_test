@@ -15,7 +15,20 @@
                     <v-card outlined>
                       {{item.pName}}
                     </v-card>
-                    <v-card>
+                    <v-card outlined
+                     v-if="Userinfo.User_auth.includes('ROLE_ADMIN')"
+                     @click="deleteProduct(
+                      {
+                        pId:item.pId,
+                        iId:item.listImages[0].iId
+                      }
+                     )">
+                      <v-btn small>
+                        해당 제품 삭제
+                      </v-btn>
+                    </v-card>
+                    <v-card
+                     >
                       <router-link :to="{name:'ItemDetail',
                         params:{
                           pId:item.pId
@@ -76,7 +89,7 @@ created(){
 },
 
 computed:{
-    ...mapState(['productlist'])
+    ...mapState(['productlist','Userinfo'])
     // name:{
     //   set: function() {
     //   },
@@ -91,7 +104,6 @@ methods: {
   infiniteHandler($state){
     axios.get(`http://localhost:9000/api/auth/latestitems/${this.limit + this.pageOpt}`)
     .then(Response => {
-
       console.log('infiniteHandler Response.data를 받았습니다.')
       console.log('Response.data:', JSON.stringify(Response.data))
       console.log('Response.data.list:', JSON.stringify(Response.data.list)) // 받아온 나머지 데이터
@@ -119,6 +131,26 @@ methods: {
     .catch(error => {
       console.log(error)
     })
+  },
+
+  deleteProduct(payload){
+    if(confirm('정말로 글을 삭제하시겠습니까?')===true){
+      console.log('deleteProduct Run')
+      console.log('deleteProduct의 payload =' + JSON.stringify(payload))
+      new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+        axios.post('http://localhost:9000/api/admin/deleteproduct', payload)
+        .then(Response => {
+            console.log(Response.data)
+            this.$store.commit('READ_PRODUCT_LIST', Response.data)
+        })
+        .catch(Error => {
+            console.log('error')
+            reject(Error)
+            alert("Error!")        
+        })
+      })
+    }
   }
 },
 

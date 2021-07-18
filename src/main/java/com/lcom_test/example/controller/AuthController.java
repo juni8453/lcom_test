@@ -362,6 +362,7 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
 	
+	
 	@GetMapping({"/itemdetail", "/itemdetail/{pId}"})
 	public ResponseEntity<?> itemdetail(
 			@PathVariable int pId,

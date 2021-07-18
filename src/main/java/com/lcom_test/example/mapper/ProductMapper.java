@@ -3,6 +3,8 @@ package com.lcom_test.example.mapper;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
+
+import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Product;
 
 @Mapper
@@ -12,5 +14,8 @@ public interface ProductMapper {
 	public List<Product> selectProductList(int pageOpt);
 
 	public Product getProduct(int pId);
+
+	public void deleteProduct(int pId);
+
 
 }
