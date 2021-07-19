@@ -43,8 +43,8 @@ export default new Vuex.Store({
     // setImages: null,
     imageslist:[],
     productlist:[],
-    itemdetaillist:[]
-
+    itemdetaillist:[],
+    cartlist:[]
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -122,7 +122,10 @@ export default new Vuex.Store({
     },
     SET_ITEMDETAIL_LIST(state, data){
       state.itemdetaillist = data
-    }
+    },
+    SET_CART_LIST(state, data){
+      state.cartlist = data
+    },
   },
   
   actions: {
@@ -337,12 +340,8 @@ export default new Vuex.Store({
         })
       })
     },
-
-
+   
     insertProduct({commit, state},payload){
-      if(payload.fileinput == null){
-        alert('파일을 등록해주세요.')
-      }
       console.log('produtInsert Run')
       console.log('payload를 받았습니다')
       console.log(payload)
@@ -408,6 +407,10 @@ export default new Vuex.Store({
         })
       })
     }, // 최신 상품 리스트 Test
+
+    itemDetail(){
+      console.log()
+    }
   }
 })
 

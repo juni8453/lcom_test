@@ -19,6 +19,7 @@ import BwBar from '../components/BwBar'
 import ProductInsert from '../views/ProductInsert'
 import LatestItems from '../views/LatestItems'
 import ItemDetail from '../views/ItemDetail'
+import PutCart from '../views/PutCart'
 
 Vue.use(VueRouter)
 
@@ -129,6 +130,12 @@ const routes = [
     path: '/itemdetail',
     name: 'ItemDetail',
     component: ItemDetail,
+    props: true
+  },
+  {
+    path: '/putcart',
+    name: 'PutCart',
+    component: PutCart,
     props: true
   },
   

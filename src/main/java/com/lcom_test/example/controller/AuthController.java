@@ -370,7 +370,21 @@ public class AuthController {
 		
 		logger.debug("pId:"+pId);
 		product = productService.getProduct(pId);
-		
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
+	
+	@PostMapping("/putcart")
+	public ResponseEntity<?> putcart(@RequestBody Product product){
+		return null;
+	}
+		
+	
+//	@GetMapping({"/putcart", "/putcart/{pId}"})
+//	public ResponseEntity<?> putcart(
+//			@PathVariable int pId, Product product){
+//		
+//		logger.debug("pId:" + pId);
+//		product = productService.getProduct(pId);
+//		return new ResponseEntity<>(product, HttpStatus.OK);
+//	}
 }

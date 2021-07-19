@@ -74,6 +74,7 @@ import InfiniteLoading from 'vue-infinite-loading'
 import BwBar from '../components/BwBar.vue'
 import { mapState } from 'vuex'
 import axios from 'axios'
+import Route from '../router/index'
 
 export default {
 data() {
@@ -142,7 +143,13 @@ methods: {
         axios.post('http://localhost:9000/api/admin/deleteproduct', payload)
         .then(Response => {
             console.log(Response.data)
-            this.$store.commit('READ_PRODUCT_LIST', Response.data)
+            // this.$store.commit('READ_PRODUCT_LIST', Response.data)
+            if(Response.data === "success"){
+              console.log('deleteProduct 메서드가 성공적으로 실행되었습니다.')
+              /* Route.push('latestitems') 같은 페이지로 다시 push할 수 없기 때문에
+                 새로고침 개념을 가진 Route.go(Route.currentRoute) 사용*/
+              Route.go(Route.currentRoute)
+            }
         })
         .catch(Error => {
             console.log('error')

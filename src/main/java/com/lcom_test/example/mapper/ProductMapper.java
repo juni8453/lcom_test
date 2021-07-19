@@ -17,5 +17,4 @@ public interface ProductMapper {
 
 	public void deleteProduct(int pId);
 
-
 }

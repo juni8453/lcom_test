@@ -15,5 +15,4 @@ public interface ProductService {
 
 	public void deleteProduct(int pId);
 
-
 }

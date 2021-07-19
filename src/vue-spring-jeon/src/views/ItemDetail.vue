@@ -5,7 +5,7 @@
         <BwBar></BwBar>  
         <v-card class="text-center" outlined>
           <v-row>
-            <v-col cols="6" md="6" sm="6">
+            <v-col cols="6" md="6" sm="12">
               <!-- <v-img
                 height=""
                 :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
@@ -13,22 +13,38 @@
               </v-img> -->
               <v-img
                 contain
-                height="350"
-                width="1000"
                 :src="`/images/thumb/${itemdetaillist.listImages[0].iPk}${itemdetaillist.listImages[0].iName}`"
               >
               </v-img>
             </v-col>
-            <v-col cols="6">
-              <h2 class="mb-10 mt-6 text-center">Product Introduce</h2>
+            <v-col cols="6" md="6" sm="12">
+              <h2 class="mb-10 mt-6 text-center">
+                Product Introduce
+                <v-btn class="ml-3" small
+                @click="buyProduct()">
+                  구매하기
+                  <v-icon>
+                    mdi-cash
+                  </v-icon>
+                </v-btn>
+                 <v-btn class="ml-3" small
+                 @click="putCart({
+                  pId: itemdetaillist.pId
+                  })">
+                  장바구니
+                  <v-icon>
+                    mdi-cart-arrow-down
+                  </v-icon>
+                </v-btn>
+              </h2>
               <v-card class="mb-4">
                 <v-row>
                   <v-card-text>
                     <v-row>
-                      <v-col cols="3" class="mt-1">
+                      <v-col cols="3" class="mt-1" sm="3">
                         Product Name
                       </v-col>
-                      <v-col cols="3" class="mt-1 ml-8">
+                      <v-col cols="3" class="mt-1 ml-8" sm="7">
                         {{itemdetaillist.pName}}
                       </v-col>
                     </v-row>              
@@ -39,10 +55,10 @@
                 <v-row>
                   <v-card-text>
                     <v-row>
-                      <v-col cols="3" class="mt-1">
+                      <v-col cols="3" class="mt-1" sm="3">
                         Price
                       </v-col>
-                      <v-col cols="3" class="mt-1 ml-8">
+                      <v-col cols="3" class="mt-1 ml-8" sm="7">
                         {{itemdetaillist.pPrice}}
                       </v-col>
                     </v-row>              
@@ -53,10 +69,10 @@
                 <v-row>
                   <v-card-text>
                     <v-row>
-                      <v-col cols="3" class="mt-1">
+                      <v-col cols="3" class="mt-1" sm="3">
                         Brand
                       </v-col>
-                      <v-col cols="3" class="mt-1 ml-8">
+                      <v-col cols="3" class="mt-1 ml-8" sm="7">
                         {{itemdetaillist.pBrand}}
                       </v-col>
                     </v-row>              
@@ -67,16 +83,17 @@
                 <v-row>
                   <v-card-text>
                     <v-row>
-                      <v-col cols="3" class="mt-1">
+                      <v-col cols="3" class="mt-1" sm="3">
                         From
                       </v-col>
-                      <v-col cols="3" class="mt-1 ml-8">
+                      <v-col cols="3" class="mt-1 ml-8" sm="7">
                         {{itemdetaillist.pFrom}}
                       </v-col>
                     </v-row>              
                   </v-card-text>
                 </v-row>
               </v-card>
+  
             </v-col>
           </v-row>
         </v-card>
@@ -110,7 +127,7 @@ export default {
   props:['pId'],
   data(){
     return{
-      // item:{listImages:[]} []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
+      // item:{listImages:[]} // []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
     }
   },
   
@@ -135,6 +152,33 @@ export default {
           Route.push("/")
       })
     })
+  },
+
+  methods:{
+    buyProduct(){
+      console.log('buyProduct Run')
+    },
+
+    putCart(payload){
+      console.log('putCart Run')
+      console.log(payload)
+      new Promise((resolve, reject => {
+        axios.post(`http://localhost:9000/api/auth/putcart`, payload)
+        .then(Response => {
+          console.log('putCart Response.data를 받았습니다.')
+          console.log(Response.data)
+          this.$store.commit('SET_CART_LIST', Response.data)
+          alert('제품을 장바구니에 담았습니다.')
+        })
+        .catch(Error => {
+          console.log(Error)
+          alert('Error !')
+        })
+      }))
+      if(confirm('제품을 장바구니에 담았습니다. 장바구니 사이트로 이동하시겠습니까?')===true){
+        Route.push('/putcart')
+      }  
+    }
   },
 
   components:{
