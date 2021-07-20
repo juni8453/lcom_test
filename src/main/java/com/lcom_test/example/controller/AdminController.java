@@ -84,8 +84,8 @@ public class AdminController {
 			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 //		
 		String thumbPath = path + "thumb/";
