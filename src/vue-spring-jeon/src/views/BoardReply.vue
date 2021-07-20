@@ -71,21 +71,21 @@ props:['bId','bGroup', 'bOrder', 'bDepth'],
   },
   methods: {
     BoardReply(payload){ 
-            new Promise((resolve, reject) => {
-                axios.post(`http://localhost:9000/api/auth/boardreply`, payload)
-                .then(Response => {
-                    console.log('답글 작성')            
-                    console.log(payload)
-                    console.log(Response.data)
-                    if(Response.data === "success") {
-                        Route.push("/boardlist")
-                    }
-                })
-                .catch(Error => {
-                    console.log(Error)
-                })
-            })
-        }, 
+      new Promise((resolve, reject) => {
+        axios.post(`http://localhost:9000/api/auth/boardreply`, payload)
+        .then(Response => {
+            console.log('답글 작성')            
+            console.log(payload)
+            console.log(Response.data)
+            if(Response.data === "success") {
+                Route.push("/boardlist")
+            }
+        })
+        .catch(Error => {
+            console.log(Error)
+        })
+      })
+    }, 
   }
 }
 </script>

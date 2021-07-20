@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Product;
 import com.lcom_test.example.mapper.ProductMapper;
@@ -37,5 +38,10 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteProduct(int pId) {
 		productMapper.deleteProduct(pId);
 	}
-	
+
+	@Override
+	public void insertPutCart(Cart cart) {
+		productMapper.insertPutCart(cart);
+		
+	}
 }

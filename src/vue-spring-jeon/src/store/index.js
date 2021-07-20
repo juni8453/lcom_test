@@ -44,7 +44,7 @@ export default new Vuex.Store({
     imageslist:[],
     productlist:[],
     itemdetaillist:[],
-    cartlist:[]
+    // cartlist:[]
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -123,9 +123,9 @@ export default new Vuex.Store({
     SET_ITEMDETAIL_LIST(state, data){
       state.itemdetaillist = data
     },
-    SET_CART_LIST(state, data){
-      state.cartlist = data
-    },
+    // SET_CART_LIST(state, data){
+    //   state.cartlist = data
+    // },
   },
   
   actions: {

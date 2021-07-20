@@ -29,7 +29,8 @@
                 </v-btn>
                  <v-btn class="ml-3" small
                  @click="putCart({
-                  pId: itemdetaillist.pId
+                  pId: itemdetaillist.pId,
+                  username: Userinfo.User_Id,
                   })">
                   장바구니
                   <v-icon>
@@ -132,7 +133,7 @@ export default {
   },
   
   computed:{
-    ...mapState(['productlist', 'itemdetaillist'])
+    ...mapState(['productlist', 'itemdetaillist', 'Userinfo'])
   },
 
   created(){
@@ -162,23 +163,22 @@ export default {
     putCart(payload){
       console.log('putCart Run')
       console.log(payload)
-      new Promise((resolve, reject => {
-        axios.post(`http://localhost:9000/api/auth/putcart`, payload)
+      new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+        axios.post(`http://localhost:9000/api/auth/putcart/${payload.username}`, payload)
         .then(Response => {
           console.log('putCart Response.data를 받았습니다.')
           console.log(Response.data)
-          this.$store.commit('SET_CART_LIST', Response.data)
-          alert('제품을 장바구니에 담았습니다.')
+          if(Response.data === 'success'){
+            alert('제품을 장바구니에 담았습니다.')
+          }
         })
         .catch(Error => {
           console.log(Error)
           alert('Error !')
         })
-      }))
-      if(confirm('제품을 장바구니에 담았습니다. 장바구니 사이트로 이동하시겠습니까?')===true){
-        Route.push('/putcart')
-      }  
-    }
+      })
+    },
   },
 
   components:{

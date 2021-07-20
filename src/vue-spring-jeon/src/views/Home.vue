@@ -12,8 +12,9 @@
                                     :src="`/images/thumb/${imageslist.list[0].iPk}${imageslist.list[0].iName}`"
                                 ></v-img> -->
                                  <v-img
-                                    height="250"
-                                    :src="`/images/thumb/1.jpg`"
+                                    height="350"
+                                    contain
+                                    :src="`/images/thumb/202161691626134851400예시사진1.png`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -24,8 +25,9 @@
                                     :src="`/images/thumb/${imageslist.list[1].iPk}${imageslist.list[1].iName}`"
                                 ></v-img> -->
                                  <v-img
-                                    height="250"
-                                    :src="`/images/thumb/2.jpg`"
+                                    height="350"
+                                    contain
+                                    :src="`/images/thumb/202161961626158901268쇼핑몰 예시 3.png`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -37,8 +39,9 @@
                                 >
                                 </v-img> -->
                                  <v-img
-                                    height="250"
-                                    :src="`/images/thumb/3.jpg`"
+                                    height="350"
+                                    contain
+                                    :src="`/images/thumb/2021619271626158952165쇼핑몰 예시 6.png`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -49,8 +52,9 @@
                                     :src="`/images/thumb/${imageslist.list[3].iPk}${imageslist.list[3].iName}`"
                                 ></v-img> -->
                                  <v-img
-                                    height="250"
-                                    :src="`/images/thumb/4.png`"
+                                    height="350"
+                                    contain
+                                    :src="`/images/thumb/20216164316262243097033.png`"
                                 ></v-img>
                             </v-card>
                         </v-col>

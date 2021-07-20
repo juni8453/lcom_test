@@ -52,6 +52,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.Board;
+import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Pagination;
@@ -373,9 +374,16 @@ public class AuthController {
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 	
-	@PostMapping("/putcart")
-	public ResponseEntity<?> putcart(@RequestBody Product product){
-		return null;
+	@PostMapping({"/putcart", "/putcart/{username}"})
+	public ResponseEntity<?> putcart(@RequestBody Product product, Cart cart,
+			@PathVariable String username){
+		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
+		logger.debug("username:"+username);
+		cart.setpId(product.getpId());
+		
+		productService.insertPutCart(cart);
+		
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 		
 	

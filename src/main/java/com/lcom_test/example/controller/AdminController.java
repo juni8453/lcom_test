@@ -210,20 +210,6 @@ public class AdminController {
 						new ListResponse<UserInfo>(pagination, userlist));
 	}
 	
-//	@PostMapping("/deleteproduct") 
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	public ResponseEntity<?> deleteProduct(
-//			@RequestBody Product product){
-//		int pageOpt = 0; // 무한스크롤의 첫 스크롤로 가기위함
-//		logger.info(product.toString());
-//			productService.deleteProduct(product.getpId());
-////			productService.deleteimages(product.getListImages());
-//			
-//			List<Product> itemslist = productService.selectProductList(pageOpt);
-//			logger.info(itemslist.toString());
-//			return ResponseEntity.ok(new ListResponse<Product>(itemslist));
-//	}
-	
 	@PostMapping("/deleteproduct") 
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteProduct(

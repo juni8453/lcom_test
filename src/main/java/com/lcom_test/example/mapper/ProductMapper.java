@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Product;
 
@@ -16,5 +17,7 @@ public interface ProductMapper {
 	public Product getProduct(int pId);
 
 	public void deleteProduct(int pId);
+
+	public void insertPutCart(Cart cart);
 
 }
