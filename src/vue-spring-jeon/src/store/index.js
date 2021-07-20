@@ -44,7 +44,7 @@ export default new Vuex.Store({
     imageslist:[],
     productlist:[],
     itemdetaillist:[],
-    // cartlist:[]
+    cartlist:[]
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -78,6 +78,9 @@ export default new Vuex.Store({
     },
     READ_PRODUCT_LIST(state, data){
       state.productlist = data.list
+    },
+    READ_CART_LIST(state, data){
+      state.cartlist = data.list
     },
     SET_PRODUCT_LIST(state, data){
       state.productlist = state.productlist.concat(data.list)
@@ -117,15 +120,9 @@ export default new Vuex.Store({
     SET_BOARD(state, data){
       state.board = data
     },
-    SET_IMAGES_LIST(state, data){
-      state.imageslist = data
-    },
     SET_ITEMDETAIL_LIST(state, data){
       state.itemdetaillist = data
     },
-    // SET_CART_LIST(state, data){
-    //   state.cartlist = data
-    // },
   },
   
   actions: {
@@ -408,9 +405,25 @@ export default new Vuex.Store({
       })
     }, // 최신 상품 리스트 Test
 
-    itemDetail(){
-      console.log()
-    }
+    putCartList({commit,state}){
+      return new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        axios.get(`http://localhost:9000/api/auth/putcartlist/${state.Userinfo.User_Id}`)
+        .then(Response => {
+          console.log('PutCartList의 Response.data를 받았습니다.')
+          console.log(Response.data.list)
+          // this.cartlist = Response.data.list
+          commit('READ_CART_LIST', Response.data)  
+          console.log('정상적으로 putCartList가 작동되었습니다.')
+        })
+        .catch(Error => {
+          console.log(Error)
+          alert('Error!')
+          Route.push("/")
+        })
+      })
+    },
+
   }
 })
 

@@ -1,10 +1,13 @@
 package com.lcom_test.example.domain;
 
+import java.util.List;
+
 public class Cart {
 	
 	private int ctId;
 	private int pId;
 	private String username;
+	private List<Product> listCart;
 	
 	public int getCtId() {
 		return ctId;
@@ -23,5 +26,11 @@ public class Cart {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public List<Product> getListCart() {
+		return listCart;
+	}
+	public void setListCart(List<Product> listCart) {
+		this.listCart = listCart;
 	}
 }

@@ -86,15 +86,6 @@ LIMIT			#{pageOpt},8
 			#{pBrand}
 		)
 </insert>
-<!-- 
-<delete id="deleteProduct" parameterType="Product">
-	DELETE 		a,b
-	FROM 	 	vue_product a
-	LEFT JOIN 	vue_img b
-	ON			a.p_id = b.i_id
-	WHERE		a.p_id = #{pId}
-</delete>
-원래 delete mysql-->
 
 <delete id="deleteProduct" parameterType="Product">
 	DELETE 		a,b,c
@@ -120,5 +111,37 @@ LIMIT			#{pageOpt},8
 		WHERE	p_id = #{pId}
 	) 
 </insert>
+
+
+<resultMap type = "Product" id="Product3">
+	<result column="p_id" property="pId"/>
+	<result column="p_name" property="pName"/>
+	<result column="p_price" property="pPrice"/>
+	<result column="p_from" property="pFrom"/>
+	<result column="p_brand" property="pBrand"/>
+</resultMap>
+	
+<resultMap type = "Cart" id="Cart1">
+	<result column="ct_id" property="ctId"/>
+	<result column="p_id" property="pId"/>
+	<result column="u_id" property="username"/>	
+	<collection property="listCart" resultMap="Product3"/>
+</resultMap>
+
+<select id="selectCartList" resultMap="Cart1">
+	SELECT 
+		c.ct_id,
+		c.p_id,
+		c.u_id,
+		p.p_name,
+		p.p_price,
+		p.p_from,
+		p.p_brand
+		
+	FROM 			vue_cart c
+	LEFT JOIN 		vue_product p
+	ON				c.p_id = p.p_id
+	WHERE			u_id = #{username}
+</select>
 
 </mapper>

@@ -382,17 +382,16 @@ public class AuthController {
 		cart.setpId(product.getpId());
 		
 		productService.insertPutCart(cart);
-		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 		
+	@GetMapping({"/putcartlist", "putcartlist/{username}"})
+	public ResponseEntity<?> putcartlist(Cart cart,
+			@PathVariable String username){
+		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
+		List<Cart> cartlist = productService.selectCartList(username);
+		logger.debug("username:"+username);
+		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
+	}
 	
-//	@GetMapping({"/putcart", "/putcart/{pId}"})
-//	public ResponseEntity<?> putcart(
-//			@PathVariable int pId, Product product){
-//		
-//		logger.debug("pId:" + pId);
-//		product = productService.getProduct(pId);
-//		return new ResponseEntity<>(product, HttpStatus.OK);
-//	}
 }

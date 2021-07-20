@@ -17,6 +17,8 @@ public interface ProductService {
 	public void deleteProduct(int pId);
 
 	public void insertPutCart(Cart cart);
+
+	public List<Cart> selectCartList(String username);
 		
 	}
 
