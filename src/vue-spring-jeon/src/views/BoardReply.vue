@@ -1,5 +1,6 @@
 <template>
-<v-container style="max-width:1000px">
+<v-container fluid> 
+  <BwBar></BwBar>
     <v-layout>
         <v-flex xs12>
             <v-card class="elevation-12">
@@ -50,6 +51,7 @@
             </v-card>
         </v-flex>
     </v-layout>
+    <Footer></Footer>
 </v-container>
 </template>
 
@@ -57,6 +59,8 @@
 import {mapState } from 'vuex'
 import axios from 'axios'
 import Route from '../router/index'
+import BwBar from '../components/BwBar.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
 props:['bId','bGroup', 'bOrder', 'bDepth'],
@@ -68,6 +72,10 @@ props:['bId','bGroup', 'bOrder', 'bDepth'],
   },
   computed:{
     ...mapState(['Userinfo'])
+  },
+  components:{
+    BwBar,
+    Footer
   },
   methods: {
     BoardReply(payload){ 

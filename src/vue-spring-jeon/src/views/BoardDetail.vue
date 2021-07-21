@@ -1,5 +1,6 @@
 <template>
     <v-container fluid>
+        <BwBar></BwBar>
         <v-row dense>
             <v-col v-for="n in 1" :key="n" cols="12" md="12" sm="12">
                 <v-card class="text-center pa-3" outlined shaped style="height: 40px;" color="White">
@@ -122,7 +123,6 @@
                                     })"
                                     >mdi-file-document-edit</v-icon>
                                 </td>
-                                
                             </tr>
                                                      
                             </tbody>
@@ -180,12 +180,17 @@
                 </v-card>
             </v-col>
         </v-row>
+            <v-col>
+                <Footer></Footer>
+            </v-col>    
     </v-container>
 </template>
 
 <script>
 import axios from 'axios'
 import Route from '../router/index'
+import Footer from '../components/Footer.vue'
+import BwBar from '../components/BwBar.vue'
 
 import { mapState } from 'vuex'
 
@@ -326,6 +331,11 @@ export default {
 
     computed:{
         ...mapState(['Userinfo', 'Pagination','commentlist'])
+    },
+
+    components:{
+        Footer,
+        BwBar
     }
 }    
 </script>

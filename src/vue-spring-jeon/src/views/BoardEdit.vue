@@ -1,5 +1,6 @@
 <template>
-<v-container style="max-width:1000px">
+<v-container>
+    <BwBar></BwBar>
     <v-layout>
         <v-flex xs12>
             <v-card class="elevation-12">
@@ -44,6 +45,7 @@
             </v-card>
         </v-flex>
     </v-layout>
+    <Footer></Footer>
 </v-container>
 </template>
 
@@ -51,6 +53,8 @@
 import axios from 'axios'
 import Route from '../router/index'
 import { mapActions, mapState } from 'vuex'
+import BwBar from '../components/BwBar.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
     props:['bId'], //BoardList.vue에서 params로 넘긴 값 (item.bId)
@@ -68,6 +72,10 @@ export default {
     },
     computed:{
         ...mapState(['Userinfo'])
+    },
+    components:{
+        BwBar,
+        Footer
     },
     methods: {
         BoardEdit(payload){ 

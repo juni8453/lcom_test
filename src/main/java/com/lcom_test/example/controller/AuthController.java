@@ -386,7 +386,7 @@ public class AuthController {
 	}
 		
 	@GetMapping({"/putcartlist", "putcartlist/{username}"})
-	public ResponseEntity<?> putcartlist(Cart cart,
+	public ResponseEntity<?> putcartlist(Cart cart, Images images,
 			@PathVariable String username){
 		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
 		List<Cart> cartlist = productService.selectCartList(username);

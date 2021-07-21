@@ -1,5 +1,6 @@
 <template>
-<v-container style="max-width:1000px">
+<v-container>
+  <BwBar></BwBar>
     <v-layout>
         <v-flex xs12>
             <v-card class="elevation-12">
@@ -56,13 +57,14 @@
             </v-card>
         </v-flex>
     </v-layout>
+    <Footer></Footer>
 </v-container>
 </template>
 
 <script>
 import { mapActions, mapState } from 'vuex'
-// import axios from 'axios';
-// import Route from '../router/index'
+import Footer from '../components/Footer.vue'
+import BwBar from '../components/BwBar.vue'
 
 export default {
   data(){
@@ -75,6 +77,11 @@ export default {
   },
   computed:{
     ...mapState(['Userinfo'])
+  },
+
+  components:{
+    BwBar,
+    Footer
   },
 
   methods: {

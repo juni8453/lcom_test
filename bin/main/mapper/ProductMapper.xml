@@ -119,6 +119,12 @@ LIMIT			#{pageOpt},8
 	<result column="p_price" property="pPrice"/>
 	<result column="p_from" property="pFrom"/>
 	<result column="p_brand" property="pBrand"/>
+	<collection property="listImages" resultMap="Images3"/>
+</resultMap>
+
+<resultMap type = "Images" id="Images3">	
+	<result column="i_name" property="iName"/>
+	<result column="i_pk" property="iPk"/>
 </resultMap>
 	
 <resultMap type = "Cart" id="Cart1">
@@ -136,11 +142,15 @@ LIMIT			#{pageOpt},8
 		p.p_name,
 		p.p_price,
 		p.p_from,
-		p.p_brand
-		
+		p.p_brand,
+		i.i_name,
+		i.i_pk
+
 	FROM 			vue_cart c
-	LEFT JOIN 		vue_product p
+	LEFT JOIN 		vue_product p 
 	ON				c.p_id = p.p_id
+	LEFT JOIN		vue_img i
+	ON				i.p_id = p.p_id
 	WHERE			u_id = #{username}
 </select>
 
