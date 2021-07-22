@@ -125,6 +125,7 @@ LIMIT			#{pageOpt},8
 <resultMap type = "Images" id="Images3">	
 	<result column="i_name" property="iName"/>
 	<result column="i_pk" property="iPk"/>
+	<result column="i_id" property="iId"/>
 </resultMap>
 	
 <resultMap type = "Cart" id="Cart1">
@@ -144,7 +145,8 @@ LIMIT			#{pageOpt},8
 		p.p_from,
 		p.p_brand,
 		i.i_name,
-		i.i_pk
+		i.i_pk,
+		i.i_id
 
 	FROM 			vue_cart c
 	LEFT JOIN 		vue_product p 

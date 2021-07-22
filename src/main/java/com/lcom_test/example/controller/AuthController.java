@@ -394,4 +394,13 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
 	}
 	
+	@PostMapping("/deletecart") 
+	public ResponseEntity<?> deleteCart(
+			@RequestBody Product product){
+		logger.info(product.toString());
+			productService.deleteProduct(product.getpId());
+		
+			return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+	
 }

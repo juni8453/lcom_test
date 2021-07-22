@@ -11,19 +11,13 @@
           <v-card-text>
             <v-row>
               <v-col cols="1" class="Center">
-                <v-checkbox
-                  v-model="boxArray"    
-                  value="Jack"                                                 
-                ></v-checkbox> <!-- checkbox Test-->
+                <!-- checkbox Test-->       
               </v-col>
               <v-col cols="2" class="Center">
-                상품 사진 {{boxArray}}
+                상품 사진
               </v-col>
               <v-col cols="3" class="Center">
                 상품명
-              </v-col>
-              <v-col cols="2" class="Center">
-                총 수량
               </v-col>
               <v-col cols="2" class="Center">
                 판매가
@@ -31,12 +25,13 @@
               <v-col cols="2" class="Center">
                 소계
               </v-col>
+              <v-col cols="2" class="Center">
+                비고
+              </v-col>
             </v-row>
             <v-row v-for="item in cartlist" :key="item.ctId"> <!-- 여기 v-for해서 리스트 돌려뽑기-->
-               <v-col cols="1" class="Center">
-                <v-checkbox
-                  
-                ></v-checkbox>
+              <v-col cols="1" class="Center">
+                
               </v-col>
               <v-col cols="2">
                 <v-card outlined>
@@ -58,13 +53,31 @@
                 {{item.listCart[0].pName}}
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
-                미구현
-              </v-col>
-              <v-col cols="2" md="2" sm="2" class="Center">
                 {{item.listCart[0].pPrice}}
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
                 {{item.listCart[0].pPrice}}
+              </v-col>
+              <v-col cols="2" md="2" sm="2" class="Center">
+                <v-btn small
+                
+                >
+                  개별 구매
+                  <v-icon>
+                    mdi-cash
+                  </v-icon>
+                </v-btn>
+                <v-btn small
+                  @click="deleteCart({
+                    pId:item.pId,
+                    iId:item.listCart[0].listImages[0].iId
+                  })"
+                >
+                  장바구니 삭제
+                  <v-icon>
+                    mdi-delete
+                  </v-icon>
+                </v-btn>
               </v-col>
             </v-row>
           </v-card-text>  
@@ -106,6 +119,14 @@ export default {
     console.log('PutCartList Run!')
     console.log('this.Userinfo.User_Id:' + this.$store.state.Userinfo.User_Id)
     this.$store.dispatch('putCartList')
+  },
+  
+  methods:{
+    deleteCart(payload){
+      console.log('deleteCart Run')
+      console.log(payload)
+      this.$store.dispatch('deleteCart', payload)
+    }
   },
 
   computed:{

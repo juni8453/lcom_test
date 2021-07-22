@@ -49,4 +49,10 @@ public class ProductServiceImpl implements ProductService {
 	public List<Cart> selectCartList(String username) {
 		return productMapper.selectCartList(username);
 	}
+
+	@Override
+	public void deleteCart(int pId) {
+		productMapper.deleteCart(pId);
+		
+	}
 }

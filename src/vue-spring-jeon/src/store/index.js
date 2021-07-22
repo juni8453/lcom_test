@@ -424,6 +424,31 @@ export default new Vuex.Store({
       })
     },
 
+    deleteCart({state},payload){
+      if(confirm('정말로 제품을 삭제하시겠습니까?')===true){
+        console.log('deleteCart Run')
+        console.log('deleteCart의 payload =' + JSON.stringify(payload))
+        new Promise((resolve, reject) => {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+          axios.post('http://localhost:9000/api/auth/deletecart', payload)
+          .then(Response => {
+              console.log(Response.data)
+              if(Response.data === "success"){
+                console.log('deleteCart 메서드가 성공적으로 실행되었습니다.')
+                /* Route.push('latestitems') 같은 페이지로 다시 push할 수 없기 때문에
+                   새로고침 개념을 가진 Route.go(Route.currentRoute) 사용*/
+                Route.go(Route.currentRoute)
+              }
+          })
+          .catch(Error => {
+              console.log('error')
+              reject(Error)
+              alert("Error!")        
+          })
+        })
+      }
+    }
+
   }
 })
 

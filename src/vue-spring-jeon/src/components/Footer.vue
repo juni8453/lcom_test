@@ -21,7 +21,7 @@
             </v-col>
             <v-col cols="4" md="4" sm="4" class="text-center">
               <v-card-text>
-                1599-3120 <br>
+                1599 - 3120 <br>
                 MON-FRI : 10:00 ~ 17:00 <br>
                 LUNCH: 13:00 ~ 14:00 <br>
                 SAT, SUN, HOLIDAY OFF
