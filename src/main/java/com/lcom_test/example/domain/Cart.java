@@ -7,6 +7,7 @@ public class Cart {
 	private int ctId;
 	private int pId;
 	private String username;
+	private boolean check;
 	private List<Product> listCart;
 	
 	public int getCtId() {
@@ -32,5 +33,11 @@ public class Cart {
 	}
 	public void setListCart(List<Product> listCart) {
 		this.listCart = listCart;
+	}
+	public boolean isCheck() {
+		return check;
+	}
+	public void setCheck(boolean check) {
+		this.check = check;
 	}
 }

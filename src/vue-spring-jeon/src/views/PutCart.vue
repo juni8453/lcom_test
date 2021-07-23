@@ -11,7 +11,12 @@
           <v-card-text>
             <v-row>
               <v-col cols="1" class="Center">
-                <!-- checkbox Test-->       
+              <v-checkbox
+                v-model="checkedAll"
+                :label="`${checkedAll.toString()}`"
+                @click="selectAllProduct({item:cartlist})"
+              > 전체선택
+              </v-checkbox>
               </v-col>
               <v-col cols="2" class="Center">
                 상품 사진
@@ -26,12 +31,16 @@
                 소계
               </v-col>
               <v-col cols="2" class="Center">
-                비고
+                비고 
               </v-col>
             </v-row>
             <v-row v-for="item in cartlist" :key="item.ctId"> <!-- 여기 v-for해서 리스트 돌려뽑기-->
               <v-col cols="1" class="Center">
-                
+                <v-checkbox
+                  v-model="item.check"
+                  @click="checkedOne(item.check)"
+                >
+                </v-checkbox>
               </v-col>
               <v-col cols="2">
                 <v-card outlined>
@@ -50,7 +59,9 @@
                 </v-card>
               </v-col>
               <v-col cols="3" md="3" sm="3" class="Center">
-                {{item.listCart[0].pName}}
+                {{item.listCart[0].pName}} <br>
+                cartlist(item) check = {{item.check}} <br>
+              
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
                 {{item.listCart[0].pPrice}}
@@ -107,7 +118,7 @@ import Footer from '../components/Footer.vue'
 export default {
   data(){
     return{
-      boxArray: []
+      checkedAll:false,
     }
   },
   components:{
@@ -126,11 +137,26 @@ export default {
       console.log('deleteCart Run')
       console.log(payload)
       this.$store.dispatch('deleteCart', payload)
+    },
+
+    selectAllProduct(payload){
+      console.log(JSON.stringify(payload))
+      // if(this.checkedAll === true){
+      //   payload.check = true
+      // } else {
+      //   payload.Cceck = false
+      // } 
+      // for문 돌면서 item Array의 check 값 바꿔주기
+    },
+
+    checkedOne(payload){
+      console.log('payload.check = '+ JSON.stringify(payload))
+      // this.$store.commit('SET_CHECK', payload) 
     }
   },
 
   computed:{
-    ...mapState(['Userinfo', 'cartlist'])
+    ...mapState(['Userinfo', 'cartlist','Check'])
   }
 }
 </script>

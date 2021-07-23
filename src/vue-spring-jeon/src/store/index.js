@@ -38,6 +38,7 @@ export default new Vuex.Store({
       // pageNum:null
     },
     Show: false,
+    // Check: false,
     isLogin: false,
     isLoginError: false,
     // setImages: null,
@@ -123,6 +124,9 @@ export default new Vuex.Store({
     SET_ITEMDETAIL_LIST(state, data){
       state.itemdetaillist = data
     },
+    // SET_CHECK(state, data){
+    //   state.Check = data
+    // },
   },
   
   actions: {
