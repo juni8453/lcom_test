@@ -139,14 +139,15 @@ export default {
       this.$store.dispatch('deleteCart', payload)
     },
 
-    selectAllProduct(payload){
-      console.log(JSON.stringify(payload))
-      // if(this.checkedAll === true){
-      //   payload.check = true
-      // } else {
-      //   payload.Cceck = false
-      // } 
-      // for문 돌면서 item Array의 check 값 바꿔주기
+   selectAllProduct(payload){
+      console.log(payload.item) 
+      for(let i=0; i<payload.item.length; i++){
+        console.log('item는?='+JSON.stringify(payload.item[i]))
+        console.log('item.check는?='+JSON.stringify(payload.item[i].check))
+        payload.item[i].check = true
+        this.$store.commit('SET_CHECK', payload.item[i].check)
+        console.log('Check = ' + this.Check)
+      }
     },
 
     checkedOne(payload){
