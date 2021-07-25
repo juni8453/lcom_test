@@ -11,11 +11,11 @@
           <v-card-text>
             <v-row>
               <v-col cols="1" class="Center">
-              <v-checkbox
-                v-model="checkedAll"
-                @click="selectAllProduct({item:cartlist})"
-              > 전체선택
-              </v-checkbox>
+                <v-checkbox
+                  v-model="checkedAll"
+                  @click="selectAllProduct({item:cartlist})"
+                > 전체선택
+                </v-checkbox>
               </v-col>
               <v-col cols="2" class="Center">
                 상품 사진
@@ -33,6 +33,7 @@
                 비고 
               </v-col>
             </v-row>
+
             <v-row v-for="item in cartlist" :key="item.ctId"> <!-- 여기 v-for해서 리스트 돌려뽑기-->
               <v-col cols="1" class="Center">
                 <v-checkbox
@@ -89,6 +90,7 @@
                 </v-btn>
               </v-col>
             </v-row>
+            
           </v-card-text>  
         </v-card>
       <v-row>
@@ -116,9 +118,7 @@
               총 결제가격
             </v-col>
           </v-row>
-          <v-row
-           
-          >
+          <v-row>
             <v-col cols="3" class="text-center">
               {{totalprice}}원
             </v-col>
@@ -129,10 +129,10 @@
               {{post}}원
             </v-col>
             <v-col cols="1" class="text-center">
-              =
+              = 
             </v-col>
             <v-col cols="4" class="text-center">
-             {{totalprice + 3000}}원
+             {{totalprice + post}}원
             </v-col>
           </v-row>
         </v-card-text>    
@@ -163,7 +163,7 @@ export default {
   data(){
     return{
       checkedAll:false,
-      post:0,
+      post:3000,
     }
   },
   components:{
@@ -197,7 +197,8 @@ export default {
           if(payload.item[i].check === true){ // 모든 제품의 check = true 상태며,
             if(this.totalprice === 0){ // 아무런 제품도 선택되지 않았을 때              
             console.log('pPrice:'+payload.item[i].listCart[0].pPrice)
-            console.log(sum += payload.item[i].listCart[0].pPrice)
+            // console.log(sum += payload.item[i].listCart[0].pPrice)
+            sum += payload.item[i].listCart[0].pPrice
             console.log('모든 제품의 가격 합계는?'+sum)
             
             }
@@ -205,6 +206,7 @@ export default {
         } else {
           payload.item[i].check = false
           console.log('payload.item[i].check는?'+ payload.item[i].check)
+          // let sum 값이 0이 되어 SET_TOTALPRICE로 넘어가기 때문에 state.totalprice 값은 0이다.
         }
       }
       this.$store.commit('SET_TOTALPRICE',sum)
@@ -228,7 +230,7 @@ export default {
         console.log('check 확인 결과 false 입니다.')        
         this.$store.commit('SET_TOTALPRICE', this.totalprice - payload.listCart.pPrice)
       }
-    }
+    },
   },
 
   computed:{
