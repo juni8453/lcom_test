@@ -38,14 +38,15 @@ export default new Vuex.Store({
       // pageNum:null
     },
     Show: false,
-    Check: false,
+    // Check: false,
     isLogin: false,
     isLoginError: false,
     // setImages: null,
     imageslist:[],
     productlist:[],
     itemdetaillist:[],
-    cartlist:[]
+    cartlist:[],
+    totalprice:0
   },
   mutations: {
     NewUsers: (state,payload) => {
@@ -124,9 +125,10 @@ export default new Vuex.Store({
     SET_ITEMDETAIL_LIST(state, data){
       state.itemdetaillist = data
     },
-    SET_CHECK(state, data){
-      state.Check = data
-    },
+    SET_TOTALPRICE(state, data){
+      console.log('SET_TOTALPRICE:'+data)
+      state.totalprice = data
+    }
   },
   
   actions: {
@@ -418,6 +420,7 @@ export default new Vuex.Store({
           console.log(Response.data.list)
           // this.cartlist = Response.data.list
           commit('READ_CART_LIST', Response.data)  
+          state.totalprice = 0 // 장바구니 페이지 초기화 때마다 총 상품금액 0원으로 초기화
           console.log('정상적으로 putCartList가 작동되었습니다.')
         })
         .catch(Error => {

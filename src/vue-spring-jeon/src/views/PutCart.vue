@@ -13,7 +13,6 @@
               <v-col cols="1" class="Center">
               <v-checkbox
                 v-model="checkedAll"
-                :label="`${checkedAll.toString()}`"
                 @click="selectAllProduct({item:cartlist})"
               > 전체선택
               </v-checkbox>
@@ -38,7 +37,7 @@
               <v-col cols="1" class="Center">
                 <v-checkbox
                   v-model="item.check"
-                  @click="checkedOne(item.check)"
+                  @click="selectOneProduct({item:item, listCart:item.listCart[0]})"
                 >
                 </v-checkbox>
               </v-col>
@@ -60,7 +59,7 @@
               </v-col>
               <v-col cols="3" md="3" sm="3" class="Center">
                 {{item.listCart[0].pName}} <br>
-                cartlist(item) check = {{item.check}} <br>
+                <!-- cartlist(item) check = {{item.check}} <br> -->
               
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
@@ -80,8 +79,7 @@
                 </v-btn>
                 <v-btn small
                   @click="deleteCart({
-                    pId:item.pId,
-                    iId:item.listCart[0].listImages[0].iId
+                    ctId:item.ctId,
                   })"
                 >
                   장바구니 삭제
@@ -93,7 +91,53 @@
             </v-row>
           </v-card-text>  
         </v-card>
+      <v-row>
+      </v-row>
       </v-col>
+    </v-row>
+    <v-row>
+      <v-col cols="12" md="12" sm="12">
+        <v-card outlined>
+        <v-card-text>
+          <v-row>
+            <v-col cols="3" class="text-center">
+              총 상품금액
+            </v-col>
+            <v-col cols="1" class="text-center">
+              +
+            </v-col>
+            <v-col cols="3" class="text-center">
+              기본 배송비
+            </v-col>
+            <v-col cols="1" class="text-center">
+              =
+            </v-col>
+            <v-col cols="4" class="text-center">
+              총 결제가격
+            </v-col>
+          </v-row>
+          <v-row
+           
+          >
+            <v-col cols="3" class="text-center">
+              {{totalprice}}원
+            </v-col>
+            <v-col cols="1" class="text-center">
+              +
+            </v-col>
+            <v-col cols="3" class="text-center">
+              {{post}}원
+            </v-col>
+            <v-col cols="1" class="text-center">
+              =
+            </v-col>
+            <v-col cols="4" class="text-center">
+             {{totalprice + 3000}}원
+            </v-col>
+          </v-row>
+        </v-card-text>    
+        </v-card>
+      </v-col>  
     </v-row>
     <v-row>
       <v-col cols="12" md="12" sm="12">
@@ -119,6 +163,7 @@ export default {
   data(){
     return{
       checkedAll:false,
+      post:0,
     }
   },
   components:{
@@ -139,25 +184,55 @@ export default {
       this.$store.dispatch('deleteCart', payload)
     },
 
-   selectAllProduct(payload){
+    selectAllProduct(payload){ // payload = {item:cartlist}
+      console.log('payload.item은?')
       console.log(payload.item) 
-      for(let i=0; i<payload.item.length; i++){
-        console.log('item는?='+JSON.stringify(payload.item[i]))
-        console.log('item.check는?='+JSON.stringify(payload.item[i].check))
-        payload.item[i].check = true
-        this.$store.commit('SET_CHECK', payload.item[i].check)
-        console.log('Check = ' + this.Check)
-      }
-    },
+      let sum = 0
 
-    checkedOne(payload){
-      console.log('payload.check = '+ JSON.stringify(payload))
-      // this.$store.commit('SET_CHECK', payload) 
+      for(let i=0; i<payload.item.length; i++){
+        if(payload.item[i].check == false){
+          payload.item[i].check = true
+          console.log('payload.item[i].check는?'+ payload.item[i].check)
+
+          if(payload.item[i].check === true){ // 모든 제품의 check = true 상태며,
+            if(this.totalprice === 0){ // 아무런 제품도 선택되지 않았을 때              
+            console.log('pPrice:'+payload.item[i].listCart[0].pPrice)
+            console.log(sum += payload.item[i].listCart[0].pPrice)
+            console.log('모든 제품의 가격 합계는?'+sum)
+            
+            }
+          }
+        } else {
+          payload.item[i].check = false
+          console.log('payload.item[i].check는?'+ payload.item[i].check)
+        }
+      }
+      this.$store.commit('SET_TOTALPRICE',sum)
+    },
+    
+    selectOneProduct(payload){ // payload = {item:item(cartlist), listCart:item.listCart[0]}
+      console.log(payload)
+
+      if(payload.item.check === true){ // 제품 가격 더하는 if
+        console.log('check 확인 결과 true 입니다.')
+        if(this.totalprice === 0){ // 아무 제품도 선택되어있지 않는 상태일 때,
+          this.post = 3000
+          this.$store.commit('SET_TOTALPRICE', payload.listCart.pPrice)
+        }
+        else { // 제품이 하나 이상 선택되어 값이 들어가 있을 때,
+          this.$store.commit('SET_TOTALPRICE',this.totalprice + payload.listCart.pPrice) 
+        }
+
+      } 
+      if(payload.item.check === false){ // 제품 가격 빼는 if
+        console.log('check 확인 결과 false 입니다.')        
+        this.$store.commit('SET_TOTALPRICE', this.totalprice - payload.listCart.pPrice)
+      }
     }
   },
 
   computed:{
-    ...mapState(['Userinfo', 'cartlist','Check'])
+    ...mapState(['Userinfo', 'cartlist','Check', 'totalprice'])
   }
 }
 </script>

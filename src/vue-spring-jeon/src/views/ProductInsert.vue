@@ -27,6 +27,7 @@
                   pPrice: pPrice,
                   pFrom: pFrom,
                   pBrand: pBrand,
+                  pPost: pPost,
                   fileinput: fileinput
                 })"
                 >등록</v-btn>
@@ -113,7 +114,7 @@
                   ></v-text-field>
                   </v-col>
                 </v-row>
-      
+
             </v-col>
           </v-row>
         </v-card>

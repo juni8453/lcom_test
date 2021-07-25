@@ -20,7 +20,9 @@ public interface ProductService {
 
 	public List<Cart> selectCartList(String username);
 
-	public void deleteCart(int pId);
+	public void deleteCart(int ctId);
+
+	
 		
 	}
 

@@ -7,7 +7,7 @@ public class Product {
 	private int pId;		// 제품 번호
 	private String pName;	// 제품 이름
 	private String pDate;	// 제품 등록일자
-	private String pPrice;	// 제품 가격
+	private int pPrice;	// 제품 가격
 	private String pFrom;	// 제품 원산지
 	private String pBrand;	// 제품 브랜드
 	private List<Images> listImages;
@@ -30,10 +30,10 @@ public class Product {
 	public void setpDate(String pDate) {
 		this.pDate = pDate;
 	}
-	public String getpPrice() {
+	public int getpPrice() {
 		return pPrice;
 	}
-	public void setpPrice(String pPrice) {
+	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
 	public String getpFrom() {

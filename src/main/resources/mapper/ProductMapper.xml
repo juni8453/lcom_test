@@ -87,6 +87,16 @@ LIMIT			#{pageOpt},8
 		)
 </insert>
 
+<!-- 
+<delete id="deleteProduct" parameterType="Product">
+	DELETE 		a,b,c
+	FROM 	 	vue_product a
+	LEFT JOIN 	vue_img b	ON a.p_id = b.i_id
+	LEFT JOIN	vue_cart c 	ON a.p_id = c.p_id
+	WHERE		a.p_id = #{pId}
+</delete>
+ -->
+ 
 <delete id="deleteProduct" parameterType="Product">
 	DELETE 		a,b,c
 	FROM 	 	vue_product a
@@ -95,6 +105,12 @@ LIMIT			#{pageOpt},8
 	WHERE		a.p_id = #{pId}
 </delete>
 
+<delete id="deleteCart" parameterType="Cart">
+	DELETE 		
+	FROM 	 	vue_cart 
+	WHERE		ct_id = #{ctId}
+</delete>
+ 
 <!-- vue_cart 테이블에서 조건절에 맞는 부분을 SELECT했을때 해당 값이 존재하지 않는다면 INSERT 하는 구문 -->
 <insert id="insertPutCart" parameterType="Cart">
    INSERT INTO vue_cart(
@@ -109,6 +125,7 @@ LIMIT			#{pageOpt},8
 		SELECT 	*
 		FROM	vue_cart
 		WHERE	p_id = #{pId}
+		AND		u_id = #{username}
 	) 
 </insert>
 
