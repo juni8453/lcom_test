@@ -385,14 +385,27 @@ public class AuthController {
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 		
-	@GetMapping({"/putcartlist", "putcartlist/{username}"})
-	public ResponseEntity<?> putcartlist(Cart cart, Images images,
-			@PathVariable String username){
+//	@GetMapping({"/putcartlist", "putcartlist/{username}"})
+//	public ResponseEntity<?> putcartlist(Cart cart, 
+//			@PathVariable String username){
+//		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
+//		List<Cart> cartlist = productService.selectCartList(username);
+//		logger.debug("username:"+username);
+//		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
+//	}
+	
+	@GetMapping({"/putcartlist", "putcartlist/{username}", "putcartlist/{username}/{pageOpt}"})
+	public ResponseEntity<?> putcartlist(Cart cart, 
+			@PathVariable String username,
+			@PathVariable int pageOpt){ //pageOpt는 Optional 을 뜻하므로 그냥 page라고 쓰는게 나음
 		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
-		List<Cart> cartlist = productService.selectCartList(username);
-		logger.debug("username:"+username);
+		cart.setPageOpt(pageOpt);
+		cart.setUsername(username);
+		List<Cart> cartlist = productService.selectCartList(cart);		
+		logger.debug("username:"+cart.getUsername());
 		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
 	}
+	
 	
 	@PostMapping("/deletecart") 
 	public ResponseEntity<?> deleteCart(

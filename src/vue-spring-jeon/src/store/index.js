@@ -87,6 +87,9 @@ export default new Vuex.Store({
     SET_PRODUCT_LIST(state, data){
       state.productlist = state.productlist.concat(data.list)
     },
+    SET_CART_LIST(state, data){
+      state.cartlist = state.cartlist.concat(data.list)
+    },
     INSERT_TOKEN(state) {
       state.Userinfo.User_token = localStorage.getItem("token")
     },
@@ -411,10 +414,10 @@ export default new Vuex.Store({
       })
     }, // 최신 상품 리스트 Test
 
-    putCartList({commit,state}){
+    putCartList({commit,state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-        axios.get(`http://localhost:9000/api/auth/putcartlist/${state.Userinfo.User_Id}`)
+        axios.get(`http://localhost:9000/api/auth/putcartlist/${state.Userinfo.User_Id}/${payload.limit}`)
         .then(Response => {
           console.log('PutCartList의 Response.data를 받았습니다.')
           console.log(Response.data.list)

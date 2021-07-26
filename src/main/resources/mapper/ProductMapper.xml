@@ -171,6 +171,7 @@ LIMIT			#{pageOpt},8
 	LEFT JOIN		vue_img i
 	ON				i.p_id = p.p_id
 	WHERE			u_id = #{username}
+	LIMIT			#{pageOpt},8
 </select>
 
 </mapper>

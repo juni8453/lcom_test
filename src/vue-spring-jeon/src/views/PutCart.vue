@@ -59,12 +59,10 @@
                 </v-card>
               </v-col>
               <v-col cols="3" md="3" sm="3" class="Center">
-                {{item.listCart[0].pName}} <br>
-                <!-- cartlist(item) check = {{item.check}} <br> -->
-              
+                {{item.listCart[0].pName}}
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
-                {{item.listCart[0].pPrice}}
+                {{item.listCart[0].pPrice | comma}}
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
                 {{item.listCart[0].pPrice}}
@@ -90,7 +88,7 @@
                 </v-btn>
               </v-col>
             </v-row>
-            
+            <infinite-loading @infinite="infiniteHandler"></infinite-loading>
           </v-card-text>  
         </v-card>
       <v-row>
@@ -120,19 +118,19 @@
           </v-row>
           <v-row>
             <v-col cols="3" class="text-center">
-              {{totalprice}}원
+              {{totalprice | comma}}원
             </v-col>
             <v-col cols="1" class="text-center">
               +
             </v-col>
             <v-col cols="3" class="text-center">
-              {{post}}원
+              {{post | comma}}원
             </v-col>
             <v-col cols="1" class="text-center">
               = 
             </v-col>
             <v-col cols="4" class="text-center">
-             {{totalprice + post}}원
+             {{totalprice + post | comma}}원
             </v-col>
           </v-row>
         </v-card-text>    
@@ -158,23 +156,35 @@
 import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
+import InfiniteLoading from 'vue-infinite-loading'
+import axios from 'axios'
 
 export default {
   data(){
     return{
       checkedAll:false,
       post:3000,
+      limit:0,
+      pageOpt:8,
     }
   },
+
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },
+
   components:{
     BwBar,
-    Footer
+    Footer,
+    InfiniteLoading,
   },
 
   created(){
     console.log('PutCartList Run!')
     console.log('this.Userinfo.User_Id:' + this.$store.state.Userinfo.User_Id)
-    this.$store.dispatch('putCartList')
+    this.$store.dispatch('putCartList', {limit:this.limit})
   },
   
   methods:{
@@ -189,28 +199,25 @@ export default {
       console.log(payload.item) 
       let sum = 0
 
-      for(let i=0; i<payload.item.length; i++){
-        if(payload.item[i].check == false){
+      if(this.checkedAll === true){
+        for(let i=0; i<payload.item.length; i++){
           payload.item[i].check = true
           console.log('payload.item[i].check는?'+ payload.item[i].check)
-
-          if(payload.item[i].check === true){ // 모든 제품의 check = true 상태며,
-            if(this.totalprice === 0){ // 아무런 제품도 선택되지 않았을 때              
-            console.log('pPrice:'+payload.item[i].listCart[0].pPrice)
-            // console.log(sum += payload.item[i].listCart[0].pPrice)
-            sum += payload.item[i].listCart[0].pPrice
-            console.log('모든 제품의 가격 합계는?'+sum)
-            
-            }
+          console.log(payload.item[i].listCart[0].pPrice)
+          sum += payload.item[i].listCart[0].pPrice
+        }
+      } else {
+        for(let i=0; i<payload.item.length; i++){
+          if(payload.item[i].check == true){
+            payload.item[i].check = false
+            console.log('payload.item[i].check는?'+ payload.item[i].check)
           }
-        } else {
-          payload.item[i].check = false
-          console.log('payload.item[i].check는?'+ payload.item[i].check)
-          // let sum 값이 0이 되어 SET_TOTALPRICE로 넘어가기 때문에 state.totalprice 값은 0이다.
         }
       }
       this.$store.commit('SET_TOTALPRICE',sum)
     },
+  
+     
     
     selectOneProduct(payload){ // payload = {item:item(cartlist), listCart:item.listCart[0]}
       console.log(payload)
@@ -231,6 +238,39 @@ export default {
         this.$store.commit('SET_TOTALPRICE', this.totalprice - payload.listCart.pPrice)
       }
     },
+
+    infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
+    console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
+    axios.get(`http://localhost:9000/api/auth/putcartlist/${this.$store.state.Userinfo.User_Id}/${this.limit + this.pageOpt}`)
+    .then(Response => {
+      console.log('infiniteHandler Response.data를 받았습니다.')
+      console.log('Response.data:', JSON.stringify(Response.data))
+      console.log('Response.data.list:', JSON.stringify(Response.data.list)) // 받아온 나머지 데이터
+      console.log('Response.data.list.length:', JSON.stringify(Response.data.list.length)) // 나머지 데이터 길이
+
+      setTimeout(() => {
+        if(Response.data.list.length) {
+          console.log('setTimeout의 Response.data.list는?')
+          console.log(Response.data.list)
+          this.$store.commit('SET_CART_LIST', Response.data)
+          $state.loaded()
+          this.limit += 8
+
+          if(this.cartlist.length / this.pageOpt == 0) {  
+            $state.complete()
+          }
+
+        } else {
+          $state.complete()
+        }
+      },1000)
+    })
+    
+    .catch(error => {
+      console.log(error)
+    })
+  },
+
   },
 
   computed:{

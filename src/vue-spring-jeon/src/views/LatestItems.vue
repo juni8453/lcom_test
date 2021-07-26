@@ -94,6 +94,7 @@ computed:{
 
 methods: {
   infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
+    console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
     axios.get(`http://localhost:9000/api/auth/latestitems/${this.limit + this.pageOpt}`)
     .then(Response => {
       console.log('infiniteHandler Response.data를 받았습니다.')

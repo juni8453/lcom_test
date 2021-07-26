@@ -8,6 +8,7 @@ public class Cart {
 	private int pId;
 	private String username;
 	private boolean check;
+	private int pageOpt;
 	private List<Product> listCart;
 	
 	public int getCtId() {
@@ -39,5 +40,11 @@ public class Cart {
 	}
 	public void setCheck(boolean check) {
 		this.check = check;
+	}
+	public int getPageOpt() {
+		return pageOpt;
+	}
+	public void setPageOpt(int pageOpt) {
+		this.pageOpt = pageOpt;
 	}
 }

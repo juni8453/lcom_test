@@ -46,8 +46,8 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Cart> selectCartList(String username) {
-		return productMapper.selectCartList(username);
+	public List<Cart> selectCartList(Cart cart) {
+		return productMapper.selectCartList(cart);
 	}
 
 	@Override

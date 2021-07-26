@@ -20,7 +20,7 @@ public interface ProductMapper {
 
 	public void insertPutCart(Cart cart);
 
-	public List<Cart> selectCartList(String username);
+	public List<Cart> selectCartList(Cart cart);
 
 	public void deleteCart(int ctId);
 
