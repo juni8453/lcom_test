@@ -122,6 +122,7 @@ import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Route from '../router/index'
 import axios from 'axios'
+import Vue from 'vue'
 
 export default {
   
@@ -129,6 +130,7 @@ export default {
   data(){
     return{
       // item:{listImages:[]} // []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
+      
     }
   },
   
@@ -158,7 +160,47 @@ export default {
   methods:{
     buyProduct(){
       console.log('buyProduct Run')
-    },
+      Vue.IMP().request_pay(
+      {
+        pg : 'kakao',
+        pay_method: 'card',
+        merchant_uid: 'merchand_' + new Date().getTime(),
+        name: '주문명 : 결제테스트',
+        amount: '100',
+        buyer_email: "juni8453@naver.com",
+        buyer_name: "전병준",
+        buyer_tel: "010-5592-9710",
+        buyer_addr: "대구광역시 동구 신서동 446-3",
+        buyer_postcode: "123-456"
+      }, rsp => {
+        if(rsp.success) {
+          console.log('결제 요청이 성공적일때 Response는 ?')
+          console.log(rsp)
+          axios.post('https://www.myservice.com/payments/complete', // 가맹점 서버 URL
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': '*'
+            },
+            data: {
+              imp_uid: rsp.imp_uid,           // rsp.imp_uid : imp_400492023457
+              merchant_uid: rsp.merchant_uid  // res.merchant_uid : merchand_1627287491924
+            }
+          })  
+          .then(rsp => {
+            // 가맹점 서버 결제 API 성공시 로직 추가
+            let msg = "결제가 완료되었습니다."
+            msg += '고유ID : ' + rsp.imp_uid;
+            msg += '상점 거래ID : ' + rsp.merchant_uid;
+            msg += '결제 금액 : ' + rsp.paid_amount;
+            msg += '카드 승인번호 : ' + rsp.apply_num;
+            alert(msg);
+          }) 
+        }else {
+          alert('결제에 실패하였습니다. 에러내용:'+rsp.error_msg)
+        }
+      }   
+      )},
 
     putCart(payload){
       console.log('putCart Run')
@@ -185,4 +227,4 @@ export default {
     BwBar
   }
 }
-</script>
+</script>/

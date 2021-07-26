@@ -6,6 +6,9 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 
 import javax.imageio.ImageIO;
 
@@ -406,7 +409,6 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
 	}
 	
-	
 	@PostMapping("/deletecart") 
 	public ResponseEntity<?> deleteCart(
 			@RequestBody Cart cart){
@@ -415,5 +417,11 @@ public class AuthController {
 		
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+	
+//	@PostMapping("/kakaopay")
+//	public ResponseEntity<?> kakaopay(){
+//		
+//		return null;
+//	}
 	
 }
