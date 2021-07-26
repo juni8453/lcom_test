@@ -158,49 +158,91 @@ export default {
   },
 
   methods:{
+    // buyProduct(){
+    //   console.log('buyProduct Run')
+      // Vue.IMP().request_pay(
+      // {
+      //   pg : 'kakao', // 사용할 pg사 (필수)
+      //   pay_method: 'card', // 결제수단 (필수)
+      //   merchant_uid: 'merchand_' + new Date().getTime(), // 가맹점에서 생성, 관하는 고유 주문번호(필수)
+      //   name: '주문명 : 결제테스트',  // 주문명 (선택)
+      //   amount: '100', // 결제할 금액 (필수)
+      //   buyer_email: "juni8453@naver.com", // 구매자 이메일 (선택)
+      //   buyer_name: "전병준", // 구매자 이름 (선택)
+      //   buyer_tel: "010-5592-9710", // 구매자 연락처 (필수)
+      //   buyer_addr: "대구광역시 동구 신서동 446-3", // 구매자 주소 (선택)
+      //   buyer_postcode: "123-456" // 주문자 우편번호 (선택)
+      // }, rsp => {
+      //   if(rsp.success) { // 결제처리가 성공적이었다면,
+      //     console.log('결제 요청이 성공적일때 Response는 ?')
+      //     console.log(rsp)
+      //     axios.post('https://www.myservice.com/payments/complete', // 가맹점 서버 URL
+      //     {
+      //       headers: {
+      //         'Content-Type': 'application/json',
+      //         'Access-Control-Allow-Origin': '*'
+      //       },
+      //       data: {
+      //         imp_uid: rsp.imp_uid,           // rsp.imp_uid : imp_400492023457 (아임포트 거래건 당 고유 번호)
+      //         merchant_uid: rsp.merchant_uid  // res.merchant_uid : merchand_1627287491924 (고유 주문번호)
+      //       }
+      //     })  
+      //     .then(rsp => {
+      //       // 가맹점 서버 결제 API 성공시 로직 추가
+      //       let msg = "결제가 완료되었습니다."
+      //       msg += '고유ID : ' + rsp.imp_uid;
+      //       msg += '상점 거래ID : ' + rsp.merchant_uid;
+      //       msg += '결제 금액 : ' + rsp.paid_amount; // 실제 결제승인된 금액 or 가상계좌 입금예정 금액
+      //       msg += '카드 승인번호 : ' + rsp.apply_num; // 카드사 승인번호 (신용카드결제에 한해 제공)
+      //       alert(msg);
+      //       console.log('msg는?')
+      //       console.log(msg)
+      //     }) 
+      //   }else {
+      //     alert('결제에 실패하였습니다. 에러내용:'+rsp.error_msg) // 상세 에러 메세지
+      //   }
+      // }   
+      // )
+      // },
+    
     buyProduct(){
-      console.log('buyProduct Run')
-      Vue.IMP().request_pay(
-      {
-        pg : 'kakao',
-        pay_method: 'card',
-        merchant_uid: 'merchand_' + new Date().getTime(),
-        name: '주문명 : 결제테스트',
-        amount: '100',
-        buyer_email: "juni8453@naver.com",
-        buyer_name: "전병준",
-        buyer_tel: "010-5592-9710",
-        buyer_addr: "대구광역시 동구 신서동 446-3",
-        buyer_postcode: "123-456"
-      }, rsp => {
-        if(rsp.success) {
-          console.log('결제 요청이 성공적일때 Response는 ?')
-          console.log(rsp)
-          axios.post('https://www.myservice.com/payments/complete', // 가맹점 서버 URL
+      console.log('buyProduct Run!')
+      const adminKey = '9ebd839a995a6df19b86b9dd787e0b87'
+      new Promise((resolve, reject) => {  
+        axios.post('/v1/payment/ready',
+        // vue.config.js proxy 설정 > http://kapi.kakao.com 설정했기 때문에 뒷 URL만 작성
           {
             headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': '*'
-            },
-            data: {
-              imp_uid: rsp.imp_uid,           // rsp.imp_uid : imp_400492023457
-              merchant_uid: rsp.merchant_uid  // res.merchant_uid : merchand_1627287491924
+              'Content-Type': 'application/x-www-form-urlencoded;charset=utf-8',
+              'Access-Control-Allow-Origin': '*',
+              'Authrozation': 'KakaoAK {adminKey}'
             }
-          })  
-          .then(rsp => {
-            // 가맹점 서버 결제 API 성공시 로직 추가
-            let msg = "결제가 완료되었습니다."
-            msg += '고유ID : ' + rsp.imp_uid;
-            msg += '상점 거래ID : ' + rsp.merchant_uid;
-            msg += '결제 금액 : ' + rsp.paid_amount;
-            msg += '카드 승인번호 : ' + rsp.apply_num;
-            alert(msg);
-          }) 
-        }else {
-          alert('결제에 실패하였습니다. 에러내용:'+rsp.error_msg)
-        }
-      }   
-      )},
+          },
+          {
+            params: {
+              cid:"TC0ONETIME",
+              partner_order_id:"partner_order_id",
+              partner_user_id:"partner_user_id",
+              item_name:"테스트 상품",
+              quantity:1,
+              total_amount:30000,
+              tax_free_amount:0,
+              approval_url:"https://developers.kakao.com/success",
+              fail_url:"https://developers.kakao.com/fail",
+              cancel_url:"https://developers.kakao.com/cancel"
+            },
+          }
+        )
+        .then(Reponse => {
+          console.log(Reponse.data)
+        })
+        .catch(Error => {
+          console.log(Error)
+          alert("error 발생")
+          Route.push("/")
+        })
+      })
+    },
 
     putCart(payload){
       console.log('putCart Run')

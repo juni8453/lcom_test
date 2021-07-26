@@ -4,11 +4,14 @@ module.exports = {
     "vuetify"
   ],
 
-  // configureWebpack: {
-  //   resolve: {
-  //     alias: {
-  //         '@': path.join(__dirname, 'public/')
-  //     }
-  //   }
-  // }
+  devServer: {
+    proxy: {
+      '/':{
+        "target":'https://kapi.kakao.com',
+        "pathRewrite":{'^/':''},
+        "changeOrigin":true,
+        "secure":false
+      }
+    }
+  }
 }    
