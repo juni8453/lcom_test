@@ -14,7 +14,7 @@
                                  <v-img
                                     height="350"
                                     contain
-                                    :src="`/images/thumb/202161691626134851400예시사진1.png`"
+                                    :src="`/images/thumb/20216163216262242969992.PNG`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -27,7 +27,7 @@
                                  <v-img
                                     height="350"
                                     contain
-                                    :src="`/images/thumb/202161961626158901268쇼핑몰 예시 3.png`"
+                                    :src="`/images/thumb/20216165216262243202644.PNG`"
                                 ></v-img>
                             </v-card>
                         </v-col>
@@ -41,7 +41,7 @@
                                  <v-img
                                     height="350"
                                     contain
-                                    :src="`/images/thumb/2021619271626158952165쇼핑몰 예시 6.png`"
+                                    :src="`/images/thumb/20216165216262243202644.PNG`"
                                 ></v-img>
                             </v-card>
                         </v-col>

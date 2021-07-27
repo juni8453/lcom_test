@@ -2,7 +2,6 @@
   "name": "vue-spring-jeon",
   "version": "0.1.0",
   "private": true,
-  
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build"
@@ -10,6 +9,7 @@
   "dependencies": {
     "axios": "^0.21.1",
     "core-js": "^3.14.0",
+    
     "iamport": "^0.3.4",
     "jquery": "^3.6.0",
     "vue": "^2.6.11",
@@ -31,7 +31,6 @@
     "vue-cli-plugin-vuetify": "~2.4.0",
     "vue-template-compiler": "^2.6.11",
     "vuetify-loader": "^1.7.0"
-    
   },
   "browserslist": [
     "> 1%",
