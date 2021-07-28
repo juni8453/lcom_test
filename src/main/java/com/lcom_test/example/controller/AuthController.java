@@ -3,9 +3,13 @@ package com.lcom_test.example.controller;
 import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
+import java.io.BufferedReader;
+import java.io.DataOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -39,6 +43,8 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.ui.Model;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.util.StringUtils;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -50,6 +56,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RequestPart;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -418,10 +425,51 @@ public class AuthController {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
-//	@PostMapping("/kakaopay")
-//	public ResponseEntity<?> kakaopay(){
-//		
-//		return null;
-//	}
+	@PostMapping("/kakaopay")
+	@ResponseBody
+	public String kakaopay(@RequestBody Product product){
+		try {
+			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+			HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+			huc.setRequestMethod("POST");
+			huc.setRequestProperty("Authorization", "KakaoAK 9ebd839a995a6df19b86b9dd787e0b87");
+			huc.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+			huc.setDoOutput(true);
+			logger.debug("Product="+product);
+			String parameter = 
+					"cid=TC0ONETIME&"
+					+ "partner_order_id=partner_order_id"
+					+ "&partner_user_id=partner_user_id&"
+					+ "item_name=초코파이&"
+					+ "quantity=1&"
+					+ "total_amount=2200&"
+					+ "vat_amount=200&"
+					+ "tax_free_amount=0&"
+					+ "approval_url=http://localhost:8080/success&"
+					+ "fail_url=http://localhost:8080/fail&"
+					+ "cancel_url=http://localhost:8080/cancel";
+			OutputStream output = huc.getOutputStream();
+			DataOutputStream dataoutput = new DataOutputStream(output); 
+			dataoutput.writeBytes(parameter);
+			dataoutput.close();
+			
+			int result = huc.getResponseCode();
+			
+			InputStream input;
+			if(result == 200) {
+				input = huc.getInputStream();
+			} else {
+				input = huc.getErrorStream();
+			}
+			InputStreamReader inputread = new InputStreamReader(input);
+			BufferedReader buffer = new BufferedReader(inputread);
+			return buffer.readLine();
+		} catch (MalformedURLException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return "(\"result\":\"NO\")";
+	}
 	
 }

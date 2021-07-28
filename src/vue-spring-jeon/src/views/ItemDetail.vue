@@ -21,7 +21,13 @@
               <h2 class="mb-10 mt-6 text-center">
                 Product Introduce
                 <v-btn class="ml-3" small
-                @click="buyProduct()">
+                @click="buyProduct({
+                  pId:itemdetaillist.pId,
+                  pName:itemdetaillist.pName,
+                  pPrice:itemdetaillist.pPrice,
+                  pBrand:itemdetaillist.pBrand,
+                  pFrom:itemdetaillist.pFrom,
+                })">
                   구매하기
                   <v-icon>
                     mdi-cash
@@ -157,39 +163,22 @@ export default {
   },
 
   methods:{
-    buyProduct(){
-      // console.log('buyProduct Run!')
-      // const adminKey = '9ebd839a995a6df19b86b9dd787e0b87'
-      // const url = '/v1/payment/ready'
-      // axios.defaults.headers.common['Access-Control-Allow-Origin'] = '*';
-
-      // const config = {
-      //   headers: {
-      //     'Access-Control-Allow-Origin': '*',
-      //     'Content-Type': 'application/x-www-form-urlencoded',
-      //     'Authorization': `KakaoAK ${adminKey}`
-      //   }  
-      // }
-
-      // const params = new URLSearchParams()
-      // params.append('cid', 'TC0ONETIME')
-      // params.append('partner_order_id', 'partner_order_id')
-      // params.append('partner_user_id', 'partner_user_id')
-      // params.append('item_name', '테스트 상품')
-      // params.append('quantity', '1')
-      // params.append('total_amount', '300000')
-      // params.append('tax_free_amount', '0')
-      // params.append('approval_url', 'https://developers.kakao.com/success')
-      // params.append('fail_url', 'https://developers.kakao.com/fail')
-      // params.append('cancel_url', 'https://developers.kakao.com/cancel')
-
-      // axios.post(url, params, config)
-      // .then(Response => {
-      //   console.log(Response.data)
-      // })
-      // .catch(Error => {
-      //   console.log(Error)
-      // })
+    buyProduct(payload){     
+      console.log('buyProduct Run!')
+      new Promise((resolve, reject) => {
+        axios.post('http://localhost:9000/api/auth/kakaopay', payload)
+        .then(Response => {
+          console.log(payload)
+          console.log(Response.data)
+          console.log(Response.data.tid)
+          console.log(Response.data.next_redirect_pc_url)
+          window.open(Response.data.next_redirect_pc_url)
+        })
+        .catch(Error => {
+          console.log('Error 발생')
+          alert(Error)
+        })
+      })
     },
 
     putCart(payload){
