@@ -40,6 +40,7 @@ ON 			   	p.p_id = i.p_id
 LIMIT			#{pageOpt},8
 </select>
 
+
 <resultMap type = "Images" id="Images2">
 		<result column="i_name" property="iName"/>
 		<result column="i_pk" property="iPk"/>
@@ -63,6 +64,7 @@ LIMIT			#{pageOpt},8
 					p.p_price, 	
 					p.p_from,		
 					p.p_brand,
+					p.p_like,
 					i.i_name,
 					i.i_pk,
 					i.p_id
@@ -129,6 +131,11 @@ LIMIT			#{pageOpt},8
 	) 
 </insert>
 
+<update id="likeProduct" parameterType="Product">
+	UPDATE		vue_product
+	SET			p_like = p_like+1
+	WHERE 		p_id = #{pId}
+</update>
 
 <resultMap type = "Product" id="Product3">
 	<result column="p_id" property="pId"/>

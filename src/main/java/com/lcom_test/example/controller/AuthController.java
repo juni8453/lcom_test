@@ -366,7 +366,7 @@ public class AuthController {
 	
 	
 	@GetMapping({"/latestitems", "/latestitems/{pageOpt}"})
-	public ResponseEntity<?> test(Product product,
+	public ResponseEntity<?> test(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
 			@PathVariable int pageOpt){
 		List<Product> itemslist = productService.selectProductList(pageOpt);
 		logger.info(itemslist.toString());
@@ -394,15 +394,6 @@ public class AuthController {
 		productService.insertPutCart(cart);
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
-		
-//	@GetMapping({"/putcartlist", "putcartlist/{username}"})
-//	public ResponseEntity<?> putcartlist(Cart cart, 
-//			@PathVariable String username){
-//		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
-//		List<Cart> cartlist = productService.selectCartList(username);
-//		logger.debug("username:"+username);
-//		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
-//	}
 	
 	@GetMapping({"/putcartlist", "putcartlist/{username}", "putcartlist/{username}/{pageOpt}"})
 	public ResponseEntity<?> putcartlist(Cart cart, 
@@ -425,51 +416,64 @@ public class AuthController {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
-	@PostMapping("/kakaopay")
-	@ResponseBody
-	public String kakaopay(@RequestBody Product product){
-		try {
-			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
-			HttpURLConnection huc = (HttpURLConnection) url.openConnection();
-			huc.setRequestMethod("POST");
-			huc.setRequestProperty("Authorization", "KakaoAK 9ebd839a995a6df19b86b9dd787e0b87");
-			huc.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
-			huc.setDoOutput(true);
-			logger.debug("Product="+product);
-			String parameter = 
-					"cid=TC0ONETIME&"
-					+ "partner_order_id=partner_order_id"
-					+ "&partner_user_id=partner_user_id&"
-					+ "item_name=초코파이&"
-					+ "quantity=1&"
-					+ "total_amount=2200&"
-					+ "vat_amount=200&"
-					+ "tax_free_amount=0&"
-					+ "approval_url=http://localhost:8080/success&"
-					+ "fail_url=http://localhost:8080/fail&"
-					+ "cancel_url=http://localhost:8080/cancel";
-			OutputStream output = huc.getOutputStream();
-			DataOutputStream dataoutput = new DataOutputStream(output); 
-			dataoutput.writeBytes(parameter);
-			dataoutput.close();
-			
-			int result = huc.getResponseCode();
-			
-			InputStream input;
-			if(result == 200) {
-				input = huc.getInputStream();
-			} else {
-				input = huc.getErrorStream();
-			}
-			InputStreamReader inputread = new InputStreamReader(input);
-			BufferedReader buffer = new BufferedReader(inputread);
-			return buffer.readLine();
-		} catch (MalformedURLException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-		return "(\"result\":\"NO\")";
+	@PostMapping("/likeproduct")
+	public ResponseEntity<?> likeproduct(@RequestBody Product product){
+		productService.likeProduct(product.getpId());
+		product = productService.getProduct(product.getpId()); // 여기서 pHeart와 pLike를 구해줘야함
+//		product.setpHeart(!product.ispHeart()); // pHeart가 true라면 false로, false라면 true로 전환
+		return new ResponseEntity<>(product, HttpStatus.OK);
+		
+//		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
+//	@PostMapping("/kakaopay")
+//	@ResponseBody
+//	public String kakaopay(@RequestBody Product product){
+//		try {
+//			URL url = new URL("https://kapi.kakao.com/v1/payment/ready");
+//			HttpURLConnection huc = (HttpURLConnection) url.openConnection();
+//			huc.setRequestMethod("POST");
+//			huc.setRequestProperty("Authorization", "KakaoAK 9ebd839a995a6df19b86b9dd787e0b87");
+//			huc.setRequestProperty("Content-type", "application/x-www-form-urlencoded;charset=utf-8");
+//			huc.setDoOutput(true);
+//			logger.debug("Product="+product);
+//			String parameter = 
+//					"cid=TC0ONETIME&"
+//					+ "partner_order_id=partner_order_id"
+//					+ "&partner_user_id=partner_user_id&"
+//					+ "item_name=초코파이&"
+//					+ "quantity=1&"
+//					+ "total_amount=2200&"
+//					+ "vat_amount=200&"
+//					+ "tax_free_amount=0&"
+//					+ "approval_url=http://localhost:8080/success&"
+//					+ "fail_url=http://localhost:8080/fail&"
+//					+ "cancel_url=http://localhost:8080/cancel";
+//			
+//			OutputStream output = huc.getOutputStream();
+//			DataOutputStream dataoutput = new DataOutputStream(output); 
+//			dataoutput.writeBytes(parameter);
+//			dataoutput.close();
+//			
+//			int result = huc.getResponseCode();
+//			
+//			InputStream input;
+//			if(result == 200) {
+//				input = huc.getInputStream();
+//			} else {
+//				input = huc.getErrorStream();
+//			}
+//			InputStreamReader inputread = new InputStreamReader(input);
+//			BufferedReader buffer = new BufferedReader(inputread);
+//			return buffer.readLine();
+//		} catch (MalformedURLException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		return "(\"result\":\"NO\")";
+//	}
+//	
+//	
+//	
 }

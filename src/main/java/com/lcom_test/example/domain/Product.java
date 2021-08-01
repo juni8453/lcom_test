@@ -10,6 +10,9 @@ public class Product {
 	private int pPrice;	// 제품 가격
 	private String pFrom;	// 제품 원산지
 	private String pBrand;	// 제품 브랜드
+	private int pLike; 		// 제품 추천수
+	private boolean pHeart; // 제품의 추천을 눌렸는지 구분
+	private String username;
 	private List<Images> listImages;
 	
 	public int getpId() {
@@ -54,6 +57,23 @@ public class Product {
 	public void setListImages(List<Images> listImages) {
 		this.listImages = listImages;
 	}
-	
-	
+	public int getpLike() {
+		return pLike;
+	}
+	public void setpLike(int pLike) {
+		this.pLike = pLike;
+	}
+	public boolean ispHeart() {
+		return pHeart;
+	}
+	public void setpHeart(boolean pHeart) {
+		this.pHeart = pHeart;
+	}
+	public String getUsername() {
+		return username;
+	}
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 }

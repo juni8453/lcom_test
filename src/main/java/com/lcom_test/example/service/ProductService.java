@@ -22,7 +22,7 @@ public interface ProductService {
 
 	public void deleteCart(int ctId);
 
-	
-		
+	public void likeProduct(int pId);
+
 	}
 

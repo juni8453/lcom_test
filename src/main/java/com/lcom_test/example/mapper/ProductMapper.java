@@ -24,4 +24,6 @@ public interface ProductMapper {
 
 	public void deleteCart(int ctId);
 
+	public void likeProduct(int pId);
+
 }

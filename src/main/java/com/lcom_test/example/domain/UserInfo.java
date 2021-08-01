@@ -17,6 +17,7 @@ public class UserInfo {
 	private String phone;
 	private Collection<? extends GrantedAuthority> authorities;
 	private String auth;
+
 	
 	public String getUsername() {
 		return username;

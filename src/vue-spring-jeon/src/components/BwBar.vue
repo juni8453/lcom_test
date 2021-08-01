@@ -25,16 +25,6 @@
                               내 장바구니
                           </v-btn>
                       </v-col>
-                      <v-col cols="2">
-                          <v-btn text color="white" exact>
-                              1:1문의
-                          </v-btn>
-                      </v-col>
-                      <v-col cols="2">
-                          <v-btn text color="white" exact>
-                              사용후기
-                          </v-btn>
-                      </v-col>
                   </v-row>
               </v-card>
 
@@ -49,13 +39,7 @@
                               인기상품
                           </v-btn>
                       </v-col>
-                      <v-col cols="2">
-                          <v-btn text exact
-                          router :to="{name:'SaleItems'}"
-                          >
-                              할인상품
-                          </v-btn>
-                      </v-col>
+                      
                       <v-col cols="2">
                           <v-btn text exact
                           router :to="{name:'LatestItems'}"
@@ -63,11 +47,7 @@
                               최신상품
                           </v-btn>
                       </v-col>
-                      <v-col cols="2">
-                          <v-btn text exact>
-                              추천상품
-                          </v-btn>
-                      </v-col>    
+                          
                   </v-row>
               </v-card> 
 

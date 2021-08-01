@@ -42,6 +42,18 @@
                         ></v-img> 
                       </router-link> 
                     </v-card>
+                    <!-- <v-card outlined>
+                      <v-icon
+                        @click="likeProduct(
+                          {
+                            pId:item.pId,
+                            pHeart: item.pHeart
+                          }
+                        )"
+                      >mdi-heart-outline</v-icon>
+                       {{Heart}}
+                      {{item.pHeart}}
+                    </v-card> -->
                   </v-col>    
                 </v-row>
               </v-card>
@@ -72,6 +84,7 @@ data() {
   return {
     limit:0,
     pageOpt:8,
+    // Heart:false
   }
 },
 
@@ -93,6 +106,29 @@ computed:{
 },
 
 methods: {
+  // likeProduct(payload){
+  //   console.log('likeProduct Run')
+  //   console.log(payload) // payload = {pId}
+  //   payload.pHeart =! payload.pHeart
+  //   console.log(payload.pHeart)
+  //   if(confirm('해당 제품을 추천하시겠습니까?')===true){
+  //     new Promise((resolve, reject) => {
+  //       axios.post(`http://localhost:9000/api/auth/likeproduct`, payload)
+  //       .then(Response => {
+  //       console.log('putCart Response.data를 받았습니다.')  
+  //       alert('제품을 추천하셨습니다.')
+  //       console.log('likeProduct의 Response.data는?')
+  //       console.log(Response.data) // 백엔드에서 직접 pHeart 값 조정
+  //       this.Heart = Response.data.pHeart
+  //     })
+  //       .catch(Error => {
+  //         console.log(Error)
+  //         alert('Error !')
+  //       })
+  //     })
+  //   }
+  // },
+
   infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
     console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
     axios.get(`http://localhost:9000/api/auth/latestitems/${this.limit + this.pageOpt}`)

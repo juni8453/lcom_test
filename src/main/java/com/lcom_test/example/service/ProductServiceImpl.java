@@ -25,6 +25,7 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> selectProductList(int pageOpt) {
+		
 		return productMapper.selectProductList(pageOpt);
 	}
 	
@@ -54,5 +55,10 @@ public class ProductServiceImpl implements ProductService {
 	public void deleteCart(int ctId) {
 		productMapper.deleteCart(ctId);
 		
+	}
+
+	@Override
+	public void likeProduct(int pId) {
+		productMapper.likeProduct(pId);
 	}
 }

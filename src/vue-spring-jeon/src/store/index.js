@@ -114,6 +114,7 @@ export default new Vuex.Store({
     SET_SHOW(state,data){
       state.Show = data
     },
+    
     loginSuccess(state){
       state.isLoginError = false
       state.isLogin = true
@@ -131,7 +132,12 @@ export default new Vuex.Store({
     SET_TOTALPRICE(state, data){
       console.log('SET_TOTALPRICE:'+data)
       state.totalprice = data
-    }
+    },
+    SET_HEART(state, data){
+      console.log(data)
+        // state.productlist[i].pHeart = data
+      state.productlist.pHeart = data
+    },
   },
   
   actions: {
@@ -168,6 +174,8 @@ export default new Vuex.Store({
                 console.log(payload)
                 console.log(Response.data)
                 if(Response.data === "success") {
+                  console.log('회원가입 완료')
+                  alert('회원가입이 완료되었습니다.')
                   Route.push("/login")
                 }
             })
@@ -404,7 +412,8 @@ export default new Vuex.Store({
           console.log('Items data를 받았습니다')
           console.log(Response.data.list)
           // console.log(Response.data.pagination)
-          commit('READ_PRODUCT_LIST', Response.data)
+          commit('READ_PRODUCT_LIST', Response.data) 
+          // pHeart = fasle가 뮤테이션에 삽입
           console.log('정상적으로 latestItems가 작동되었습니다.')
         })
         .catch(Error => {

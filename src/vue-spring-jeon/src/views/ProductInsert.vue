@@ -4,7 +4,9 @@
     <v-row dense>
       <v-col cols="12" md="12" sm="12">
         <v-card class="text-center pa-3" outlined>
-          제품 등록 테스트 Form
+          <v-card-text>
+            INSERT PRODUCT
+          </v-card-text>
         </v-card>
       </v-col>
     </v-row>
@@ -35,17 +37,19 @@
           </v-col>
         </v-row>  
       </v-col>
-      <v-col cols="9" md="9">
+      <v-col cols="9" md="9" sm="9">
         <v-card class="pa-3 text-center" outlined>
           <v-row>
             <v-col>
                 <v-row>
-                  <v-col cols="3" md="3" class="pa-8">
+                  <v-col cols="4" md="4" sm="4" class="pa-8">
                     <v-card outlined>
-                      제품 이름
+                      <v-card-text>
+                        제품 이름
+                      </v-card-text>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" md="9">
+                  <v-col cols="5" md="5" sm="5">
                        <v-text-field
                         label="제품 이름을 입력하세요."
                         name="pName"
@@ -60,12 +64,14 @@
           <v-row>
             <v-col>
                 <v-row>
-                  <v-col cols="3" md="3" class="pa-8">
+                  <v-col cols="4" md="4" sm="4" class="pa-8">
                     <v-card outlined>
-                      판매 가격
+                      <v-card-text>
+                        판매 가격
+                      </v-card-text>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" md="9">
+                  <v-col cols="5" md="55" sm="5">
                       <v-text-field
                         label="판매가격을 입력하세요."
                         name="pPrice"
@@ -80,12 +86,14 @@
           <v-row>
             <v-col>
                 <v-row>
-                  <v-col cols="3" md="3" class="pa-8">
+                  <v-col cols="4" md="4" sm="4" class="pa-8">
                     <v-card outlined>
-                      원산지
+                      <v-card-text>
+                        원산지
+                      </v-card-text>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" md="9">
+                  <v-col cols="5" md="5" sm="5">
                     <v-text-field
                         label="원산지를 입력하세요."
                         name="pFrom"
@@ -100,12 +108,14 @@
          <v-row>
             <v-col>            
                 <v-row>
-                  <v-col cols="3" md="3" class="pa-8">
+                  <v-col cols="4" md="4" sm="4" class="pa-8">
                     <v-card outlined>
-                      브랜드
+                      <v-card-text>
+                        브랜드
+                      </v-card-text>
                     </v-card>
                   </v-col>
-                  <v-col cols="9" md="9">
+                  <v-col cols="5" md="5" sm="5">
                     <v-text-field
                         label="브랜드를 입력하세요."
                         name="pBrand"
@@ -122,6 +132,13 @@
     </v-row>      
   </v-container>
 </template>
+<style>
+  .Center { 
+  display: grid;
+  align-items: center;      /* 수직 중앙 정렬*/
+  justify-content: center;  /* 수평 중앙 정렬*/
+}
+</style>
 
 <script>
 import axios from 'axios'

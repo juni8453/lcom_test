@@ -64,7 +64,7 @@
             <v-list-item-title>글 작성</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
+        <!--
         <v-list-item 
           router :to="{name:'BoardOption'}"
           >
@@ -75,7 +75,7 @@
             <v-list-item-title>설정</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-
+        -->
         <v-list-item 
           router :to="{name:'ProductInsert'}"
           >
@@ -86,7 +86,7 @@
             <v-list-item-title>상품등록</v-list-item-title>
           </v-list-item-content>
         </v-list-item>  
-
+      
       </v-list>
       
     </v-navigation-drawer>
@@ -108,7 +108,7 @@
       >
         {{Userinfo.User_Id}}님 환영합니다.
       </div>  
-      <v-btn
+      <v-btn class="ml-5"
        v-if="isLogin === true"
        @click="logout()"
        small
@@ -117,21 +117,21 @@
       </v-btn>
       <div class="text-center">
         <v-menu offset-y>
-          <template v-slot:activator="{ on,attrs }">
-            <v-btn
+          <template>
+          <!--  <v-btn
               color="primary"
               dark
               v-bind="attrs"
               v-on="on"
             >상세 메뉴
-            </v-btn>
-            <v-btn 
+            </v-btn> -->
+          <!--  <v-btn 
               class="ma-2" 
               outlined 
               href="/images/thumb/ㅁㅁㅁ.png"
               download>
              테스트용 첨부파일 다운로드
-          </v-btn>
+          </v-btn> -->
           </template>
 
           <v-list>

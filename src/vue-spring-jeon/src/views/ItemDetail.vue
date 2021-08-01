@@ -44,20 +44,22 @@
                   </v-icon>
                 </v-btn>
               </h2>
+
               <v-card class="mb-4">
                 <v-row>
                   <v-card-text>
                     <v-row>
-                      <v-col cols="3" class="mt-1" sm="3">
+                      <v-col cols="3"  sm="3">
                         Product Name
                       </v-col>
-                      <v-col cols="3" class="mt-1 ml-8" sm="7">
+                      <v-col cols="3" class="ml-8" sm="7">
                         {{itemdetaillist.pName}}
                       </v-col>
                     </v-row>              
                   </v-card-text>
                 </v-row>
               </v-card>
+
               <v-card class="mb-4">
                 <v-row>
                   <v-card-text>
@@ -66,12 +68,13 @@
                         Price
                       </v-col>
                       <v-col cols="3" class="mt-1 ml-8" sm="7">
-                        {{itemdetaillist.pPrice}}
+                        {{itemdetaillist.pPrice | comma}}
                       </v-col>
                     </v-row>              
                   </v-card-text>
                 </v-row>
               </v-card>
+
               <v-card class="mb-4">
                 <v-row>
                   <v-card-text>
@@ -86,6 +89,7 @@
                   </v-card-text>
                 </v-row>
               </v-card>
+
               <v-card class="mb-4">
                 <v-row>
                   <v-card-text>
@@ -100,32 +104,63 @@
                   </v-card-text>
                 </v-row>
               </v-card>
-  
+
+              <v-card class="mb-4">
+                <v-row>
+                  <v-card-text>
+                    <v-row>
+                      <v-col cols="3" sm="3" class="mt-1">
+                        제품 추천하기
+                      </v-col>
+                      <v-col cols="3" class="mt-1 ml-8" sm="7">
+                        <v-icon
+                         v-if="Heart === false" 
+                          @click="likeProduct(
+                            {
+                              pId: itemdetaillist.pId,
+                              pHeart : itemdetaillist.pHeart
+                            })"
+                        >mdi-heart-outline</v-icon>
+                        <v-icon
+                          v-else
+                        >mdi-heart</v-icon>
+                      </v-col>
+                    </v-row>              
+                  </v-card-text>
+                </v-row>
+              </v-card> 
+
+              <v-card class="mb-4">
+                <v-row>
+                  <v-card-text> 
+                    <v-row>
+                      <v-col cols="3" sm="3" class="mt-1">
+                        전체 추천수
+                      </v-col>
+                      <v-col cols="3" class="mt-1 ml-8" sm="7">
+                        {{itemdetaillist.pLike}}  
+                      </v-col>
+                    </v-row>              
+                  </v-card-text>
+                </v-row>
+              </v-card>
+
             </v-col>
           </v-row>
         </v-card>
       </v-col>
-      <v-footer>
-          <v-card>
-              <v-card-text class="indigo lighten-1 white--text text-center" flat tile>
-                  <v-row>
-                      <v-col>
-                        Phasellus feugiat arcu sapien, et iaculis ipsum elementum sit amet. Mauris cursus commodo interdum. Praesent ut risus eget metus luctus accumsan id ultrices nunc. Sed at orci sed massa consectetur dignissim a sit amet dui. Duis commodo vitae velit et faucibus. Morbi vehicula lacinia malesuada. Nulla placerat augue vel ipsum ultrices, cursus iaculis dui sollicitudin. Vestibulum eu ipsum vel diam elementum tempor vel ut orci. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.
-                      </v-col>
-                  </v-row>
-              </v-card-text>
-              <v-divider></v-divider>
-              <v-card-text class="black--text">
-                  {{ new Date().getFullYear() }} — <strong>Jeon Shopping Mall</strong>
-              </v-card-text>
-          </v-card>
-      </v-footer>   
     </v-row>
+    <v-row>
+        <v-col>
+          <Footer></Footer>
+        </v-col>
+      </v-row>
   </v-container>
 </template>
 <script>
 import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
+import Footer from '../components/Footer.vue'
 import Route from '../router/index'
 import axios from 'axios'
 
@@ -140,19 +175,21 @@ export default {
   },
   
   computed:{
-    ...mapState(['productlist', 'itemdetaillist', 'Userinfo'])
+    ...mapState(['productlist', 'itemdetaillist', 'Userinfo', 'Heart'])
   },
 
   created(){
     console.log('ItemDetail Created Run!')
     console.log('받아온 props pId:'+this.pId)
     new Promise((resolve, reject) => {
+      console.log(this.$store.state.Userinfo.User_Id)
       axios.get(`http://localhost:9000/api/auth/itemdetail/${this.pId}`)
       .then(Response => {
         console.log('ItemDetail created Response data')
         console.log(Response.data)
         // this.item = Response.data  
         this.$store.commit('SET_ITEMDETAIL_LIST', Response.data)
+        // this.$store.commit('SET_HEART', Response.data.pHeart)
       })
       .catch(Error => {
           console.log(Error)
@@ -165,13 +202,12 @@ export default {
   methods:{
     buyProduct(payload){     
       console.log('buyProduct Run!')
+      console.log(payload) // payload = {pName, pPrice, pBrand, pFrom, pId}
       new Promise((resolve, reject) => {
         axios.post('http://localhost:9000/api/auth/kakaopay', payload)
         .then(Response => {
-          console.log(payload)
           console.log(Response.data)
           console.log(Response.data.tid)
-          console.log(Response.data.next_redirect_pc_url)
           window.open(Response.data.next_redirect_pc_url)
         })
         .catch(Error => {
@@ -200,10 +236,41 @@ export default {
         })
       })
     },
+
+   likeProduct(payload){ // payload = {pId, pHeart} 제품 추천
+      console.log('likeProduct Run!')
+      console.log(payload)
+      payload.pHeart =! payload.pHeart
+      console.log('payload.pHeart는?')
+      console.log(payload.pHeart)
+      // if(confirm('해당 제품을 추천하시겠습니까?')===true){
+      //   new Promise((resolve, reject) => {
+      //     axios.post(`http://localhost:9000/api/auth/likeproduct`, payload)
+      //     .then(Response => {
+      //     console.log('putCart Response.data를 받았습니다.')
+      //     console.log(Response.data)
+      //     alert('제품을 추천하셨습니다.')
+      //     this.$store.commit('SET_ITEMDETAIL_LIST', Response.data)
+      //     this.$store.commit('SET_HEART', payload.item.pHeart)
+      //   })
+      //     .catch(Error => {
+      //       console.log(Error)
+      //       alert('Error !')
+      //     })
+      //   })
+      // }
+    }
   },
 
   components:{
-    BwBar
-  }
+    BwBar,
+    Footer
+  },
+  
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },  
 }
-</script>/
+</script>
