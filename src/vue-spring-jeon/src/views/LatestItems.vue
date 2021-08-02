@@ -43,7 +43,7 @@
                       </router-link> 
                     </v-card>
                      <v-card outlined>
-                      {{productlist}}
+                      {{item}}
                       <v-icon
                         @click="likeProduct(
                           {
@@ -90,7 +90,7 @@ data() {
 
 created(){
   console.log('created 시작')
-  this.$store.dispatch('latestItems', {limit:this.limit}) 
+  this.$store.dispatch('latestItems', {limit:this.limit, username:this.$store.state.Userinfo.User_Id}) 
 },
 
 computed:{
@@ -105,47 +105,45 @@ computed:{
     //   state 값은 mutation을 거쳐서 값을 수정해야하는데, 직접 수정이 이뤄진다면 setter가 없다는 오류 발생
 },
 
-methods: {
-  likeProduct(payload){ // payload = {pId, username}
-    console.log('likeProduct Run')
-    console.log(payload)
-    if(confirm('제품을 추천하시겠습니까?')===true){
-      axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
-      .then(Response => {         
-        if(Response.data === "success"){
-          console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
-        }
-      })
-      .catch(Error => {
-        console.log('error')
-        console(Error)
-      })
-    }
-  },
-
-
+methods: { // 메서드 실행 시 vue_heart 테이블에 h_id, u_id, p_id 등록
   // likeProduct(payload){ // payload = {pId, username}
   //   console.log('likeProduct Run')
   //   console.log(payload)
   //   if(confirm('제품을 추천하시겠습니까?')===true){
-  //     axios.post(`http://localhost:9000/api/auth/likeProduct` ,payload)
+  //     axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
   //     .then(Response => {         
-  //       console.log('likeProduct의 Response')
-  //       console.log(Response.data)
-  //       console.log(Response.data.list)
-  //       this.$store.commit('SET_HEART', Response.data)
-  //       console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
+  //       if(Response.data === "success"){
+  //         console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
+  //       }
   //     })
   //     .catch(Error => {
   //       console.log('error')
   //       console(Error)
   //     })
   //   }
-  // },
+  // }, 원래 메서드
+ 
+
+  likeProduct(payload){ // payload = {pId, username}
+    console.log('likeProduct Run')
+    console.log(payload)
+    if(confirm('제품을 추천하시겠습니까?')===true){
+      axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
+      .then(Response => {         
+        console.log(Response.data)
+        this.$store.commit('SET_HEART_LIST', Response.data)
+        console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
+      })
+      .catch(Error => {
+        console.log('error')
+        console.log(Error)
+      })
+    }
+  },
 
   infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
     console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
-    axios.get(`http://localhost:9000/api/auth/latestitems/${this.limit + this.pageOpt}`)
+    axios.get(`http://localhost:9000/api/auth/latestitems/${this.limit + this.pageOpt}/${this.$store.state.Userinfo.User_Id}`)
     .then(Response => {
       console.log('infiniteHandler Response.data를 받았습니다.')
       console.log('Response.data:', JSON.stringify(Response.data))

@@ -10,7 +10,7 @@ public interface ProductService {
 
 	public void insertProduct(Product product);
 
-	public List<Product> selectProductList(int pageOpt);
+	public List<Product> selectProductList(Product product);
 
 	public Product getProduct(int pId);
 
@@ -26,7 +26,7 @@ public interface ProductService {
 
 	public void insertHeart(Product product);
 
-	public List<Product> selectHeartList();
+	public List<Product> selectHeartList(String username);
 
 	}
 

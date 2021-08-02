@@ -12,8 +12,6 @@ ex) 1번 제품을 좋아하는 유저들의 목록이 나와야 비교가 가�
 
 즉, selectProductList 시 state.productlist에 listHeart(hId, listProduct, pId, username) 리스트가 JOIN되어 들어와야한다.
 
-v-if="heartlist[0].listHeart[0].username !== Userinfo.User_Id"
-
 
 <resultMap type = "Heart" id="Heart1">
 		<result column="h_id" property="hId"/>

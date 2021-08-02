@@ -13,8 +13,10 @@ public class Product {
 	private int pLike; 		// 제품 추천수
 	private boolean pHeart; // 제품의 추천을 눌렸는지 구분
 	private String username;
+	private int pageOpt;
 	private List<Images> listImages;
 	private List<Heart> listHeart;
+	private List<UserInfo> listUserInfo;
 	
 	public int getpId() {
 		return pId;
@@ -81,6 +83,18 @@ public class Product {
 	}
 	public void setListHeart(List<Heart> listHeart) {
 		this.listHeart = listHeart;
+	}
+	public List<UserInfo> getListUserInfo() {
+		return listUserInfo;
+	}
+	public void setListUserInfo(List<UserInfo> listUserInfo) {
+		this.listUserInfo = listUserInfo;
+	}
+	public int getPageOpt() {
+		return pageOpt;
+	}
+	public void setPageOpt(int pageOpt) {
+		this.pageOpt = pageOpt;
 	}
 
 }

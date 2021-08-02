@@ -89,9 +89,12 @@ export default new Vuex.Store({
     SET_CART_LIST(state, data){
       state.cartlist = state.cartlist.concat(data.list)
     },
-    SET_HEART(state, data){
-      state.heartlist = data.list
-    },
+    // SET_HEART_LIST(state, data){
+    //   console.log(state.productlist.length)
+    //  for(let i=0; i<state.productlist.length; i++){
+      
+    //  }
+    // },
     INSERT_TOKEN(state) {
       state.Userinfo.User_token = localStorage.getItem("token")
     },
@@ -398,10 +401,12 @@ export default new Vuex.Store({
         })
       }, // 제품 등록
 
-    latestItems({commit}, payload){
+    latestItems({commit, state}, payload){
       return new Promise((resolve, reject) => {
-        console.log('payload:' + payload.limit)
-        axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}`)
+        console.log('payload.limit:' + payload.limit)
+        console.log('payload.username:' + payload.username)
+        console.log('state.Userinfo.User_Id' + state.Userinfo.User_Id)
+        axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}/${state.Userinfo.User_Id}`)
         
         .then(Response => {
           console.log('Response data를 받았습니다.')
@@ -410,7 +415,6 @@ export default new Vuex.Store({
           console.log(Response.data.list)
           // console.log(Response.data.pagination)
           commit('READ_PRODUCT_LIST', Response.data) 
-          // pHeart = fasle가 뮤테이션에 삽입
           console.log('정상적으로 latestItems가 작동되었습니다.')
         })
         .catch(Error => {
@@ -419,6 +423,28 @@ export default new Vuex.Store({
         })
       })
     }, // 최신 상품 리스트 Test
+
+    // latestItems({commit}, payload){
+    //   return new Promise((resolve, reject) => {
+    //     console.log('payload:' + payload.limit)
+    //     axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}/${payload.username}`)
+        
+    //     .then(Response => {
+    //       console.log('Response data를 받았습니다.')
+    //       console.log(Response.data)
+    //       console.log('Items data를 받았습니다')
+    //       console.log(Response.data.list)
+    //       // console.log(Response.data.pagination)
+    //       commit('READ_PRODUCT_LIST', Response.data) 
+    //       // pHeart = fasle가 뮤테이션에 삽입
+    //       console.log('정상적으로 latestItems가 작동되었습니다.')
+    //     })
+    //     .catch(Error => {
+    //       console.log(Error)
+    //       Route.push("/")
+    //     })
+    //   })
+    // }, // 최신 상품 리스트 Test
 
     putCartList({commit,state}, payload){
       return new Promise((resolve, reject) => {
