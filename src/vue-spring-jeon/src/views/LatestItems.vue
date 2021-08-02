@@ -42,18 +42,19 @@
                         ></v-img> 
                       </router-link> 
                     </v-card>
-                    <!-- <v-card outlined>
+                     <v-card outlined>
+                      {{productlist}}
                       <v-icon
                         @click="likeProduct(
                           {
-                            pId:item.pId,
-                            pHeart: item.pHeart
-                          }
-                        )"
+                            pId: item.pId,
+                            username: Userinfo.User_Id
+                          })"
                       >mdi-heart-outline</v-icon>
-                       {{Heart}}
-                      {{item.pHeart}}
-                    </v-card> -->
+                      <!-- <v-icon
+                       
+                      >mdi-heart</v-icon>  -->
+                    </v-card>
                   </v-col>    
                 </v-row>
               </v-card>
@@ -84,7 +85,6 @@ data() {
   return {
     limit:0,
     pageOpt:8,
-    // Heart:false
   }
 },
 
@@ -94,7 +94,7 @@ created(){
 },
 
 computed:{
-    ...mapState(['productlist','Userinfo'])
+    ...mapState(['productlist','Userinfo','heartlist'])
     // name:{
     //   set: function() {
     //   },
@@ -106,25 +106,39 @@ computed:{
 },
 
 methods: {
-  // likeProduct(payload){
+  likeProduct(payload){ // payload = {pId, username}
+    console.log('likeProduct Run')
+    console.log(payload)
+    if(confirm('제품을 추천하시겠습니까?')===true){
+      axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
+      .then(Response => {         
+        if(Response.data === "success"){
+          console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
+        }
+      })
+      .catch(Error => {
+        console.log('error')
+        console(Error)
+      })
+    }
+  },
+
+
+  // likeProduct(payload){ // payload = {pId, username}
   //   console.log('likeProduct Run')
-  //   console.log(payload) // payload = {pId}
-  //   payload.pHeart =! payload.pHeart
-  //   console.log(payload.pHeart)
-  //   if(confirm('해당 제품을 추천하시겠습니까?')===true){
-  //     new Promise((resolve, reject) => {
-  //       axios.post(`http://localhost:9000/api/auth/likeproduct`, payload)
-  //       .then(Response => {
-  //       console.log('putCart Response.data를 받았습니다.')  
-  //       alert('제품을 추천하셨습니다.')
-  //       console.log('likeProduct의 Response.data는?')
-  //       console.log(Response.data) // 백엔드에서 직접 pHeart 값 조정
-  //       this.Heart = Response.data.pHeart
+  //   console.log(payload)
+  //   if(confirm('제품을 추천하시겠습니까?')===true){
+  //     axios.post(`http://localhost:9000/api/auth/likeProduct` ,payload)
+  //     .then(Response => {         
+  //       console.log('likeProduct의 Response')
+  //       console.log(Response.data)
+  //       console.log(Response.data.list)
+  //       this.$store.commit('SET_HEART', Response.data)
+  //       console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
   //     })
-  //       .catch(Error => {
-  //         console.log(Error)
-  //         alert('Error !')
-  //       })
+  //     .catch(Error => {
+  //       console.log('error')
+  //       console(Error)
   //     })
   //   }
   // },

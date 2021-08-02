@@ -24,5 +24,9 @@ public interface ProductService {
 
 	public void likeProduct(int pId);
 
+	public void insertHeart(Product product);
+
+	public List<Product> selectHeartList();
+
 	}
 

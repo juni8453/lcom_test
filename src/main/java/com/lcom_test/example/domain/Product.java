@@ -14,6 +14,7 @@ public class Product {
 	private boolean pHeart; // 제품의 추천을 눌렸는지 구분
 	private String username;
 	private List<Images> listImages;
+	private List<Heart> listHeart;
 	
 	public int getpId() {
 		return pId;
@@ -74,6 +75,12 @@ public class Product {
 	}
 	public void setUsername(String username) {
 		this.username = username;
+	}
+	public List<Heart> getListHeart() {
+		return listHeart;
+	}
+	public void setListHeart(List<Heart> listHeart) {
+		this.listHeart = listHeart;
 	}
 
 }

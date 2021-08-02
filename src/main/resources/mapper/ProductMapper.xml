@@ -55,6 +55,7 @@ LIMIT			#{pageOpt},8
 		<result column="p_price" property="pPrice"/>
 		<result column="p_from" property="pFrom"/>
 		<result column="p_brand" property="pBrand"/>
+		<result column="p_like" property="pLike"/> 
 		<collection property="listImages" resultMap="Images2"/>
 </resultMap>
 
@@ -73,6 +74,41 @@ LIMIT			#{pageOpt},8
 	ON 				p.p_id = i.p_id
 	WHERE			p.p_id = #{pId}
 </select>
+ 
+<!-- 
+<resultMap type = "Heart" id="Heart1">
+		<result column="h_id" property="hId"/>
+		<result column="u_id" property="username"/>
+		<result column="p_id" property="pId"/>
+		<collection property="listProduct" resultMap="Product4"/>
+</resultMap>
+	
+<resultMap type = "Product" id="Product4">
+		<result column="p_id" property="pId"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_date" property="pDate"/>
+		<result column="p_price" property="pPrice"/>
+		<result column="p_from" property="pFrom"/>
+		<result column="p_brand" property="pBrand"/>
+		<result column="p_like" property="pLike"/>  
+</resultMap>
+
+<select id="selectHeartList" resultMap="Heart1">
+	SELECT 			p.p_id,
+					p.p_name,
+					p.p_price,
+					p.p_from,
+					p.p_brand,
+					p.p_like,
+					h.h_id,
+					h.u_id,
+					h.p_id		
+	FROM 			vue_product p
+	LEFT JOIN		vue_heart	h
+	ON 				p.p_id = h.p_id
+	WHERE			p.p_like != 0
+</select>
+ -->
 
 <insert id="insertProduct" parameterType="Product">
 	      INSERT INTO vue_product(
@@ -88,16 +124,6 @@ LIMIT			#{pageOpt},8
 			#{pBrand}
 		)
 </insert>
-
-<!-- 
-<delete id="deleteProduct" parameterType="Product">
-	DELETE 		a,b,c
-	FROM 	 	vue_product a
-	LEFT JOIN 	vue_img b	ON a.p_id = b.i_id
-	LEFT JOIN	vue_cart c 	ON a.p_id = c.p_id
-	WHERE		a.p_id = #{pId}
-</delete>
- -->
  
 <delete id="deleteProduct" parameterType="Product">
 	DELETE 		a,b,c
@@ -129,6 +155,23 @@ LIMIT			#{pageOpt},8
 		WHERE	p_id = #{pId}
 		AND		u_id = #{username}
 	) 
+</insert>
+
+<insert id="insertHeart" parameterType="Heart">
+	INSERT INTO vue_heart(
+		p_id,
+		u_id
+	)
+	SELECT
+		#{pId},
+		#{username}
+	FROM 	dual
+	WHERE	NOT EXISTS(
+		SELECT	*
+		FROM	vue_heart
+		WHERE	p_id = #{pId}
+		AND		u_id = #{username}
+	)
 </insert>
 
 <update id="likeProduct" parameterType="Product">

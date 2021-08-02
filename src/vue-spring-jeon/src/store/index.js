@@ -38,13 +38,12 @@ export default new Vuex.Store({
       // pageNum:null
     },
     Show: false,
-    // Check: false,
     isLogin: false,
     isLoginError: false,
-    // setImages: null,
     imageslist:[],
     productlist:[],
     itemdetaillist:[],
+    heartlist:[],
     cartlist:[],
     totalprice:0
   },
@@ -90,6 +89,9 @@ export default new Vuex.Store({
     SET_CART_LIST(state, data){
       state.cartlist = state.cartlist.concat(data.list)
     },
+    SET_HEART(state, data){
+      state.heartlist = data.list
+    },
     INSERT_TOKEN(state) {
       state.Userinfo.User_token = localStorage.getItem("token")
     },
@@ -132,11 +134,6 @@ export default new Vuex.Store({
     SET_TOTALPRICE(state, data){
       console.log('SET_TOTALPRICE:'+data)
       state.totalprice = data
-    },
-    SET_HEART(state, data){
-      console.log(data)
-        // state.productlist[i].pHeart = data
-      state.productlist.pHeart = data
     },
   },
   

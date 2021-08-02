@@ -107,31 +107,6 @@
 
               <v-card class="mb-4">
                 <v-row>
-                  <v-card-text>
-                    <v-row>
-                      <v-col cols="3" sm="3" class="mt-1">
-                        제품 추천하기
-                      </v-col>
-                      <v-col cols="3" class="mt-1 ml-8" sm="7">
-                        <v-icon
-                         v-if="Heart === false" 
-                          @click="likeProduct(
-                            {
-                              pId: itemdetaillist.pId,
-                              pHeart : itemdetaillist.pHeart
-                            })"
-                        >mdi-heart-outline</v-icon>
-                        <v-icon
-                          v-else
-                        >mdi-heart</v-icon>
-                      </v-col>
-                    </v-row>              
-                  </v-card-text>
-                </v-row>
-              </v-card> 
-
-              <v-card class="mb-4">
-                <v-row>
                   <v-card-text> 
                     <v-row>
                       <v-col cols="3" sm="3" class="mt-1">
@@ -189,7 +164,6 @@ export default {
         console.log(Response.data)
         // this.item = Response.data  
         this.$store.commit('SET_ITEMDETAIL_LIST', Response.data)
-        // this.$store.commit('SET_HEART', Response.data.pHeart)
       })
       .catch(Error => {
           console.log(Error)

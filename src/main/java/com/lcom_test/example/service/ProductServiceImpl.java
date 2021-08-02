@@ -61,4 +61,15 @@ public class ProductServiceImpl implements ProductService {
 	public void likeProduct(int pId) {
 		productMapper.likeProduct(pId);
 	}
+
+	@Override
+	public void insertHeart(Product product) {
+		productMapper.insertHeart(product);
+		
+	}
+
+	@Override
+	public List<Product> selectHeartList() {
+		return productMapper.selectHeartList();
+	}
 }

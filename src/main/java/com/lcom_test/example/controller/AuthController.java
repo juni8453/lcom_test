@@ -414,17 +414,29 @@ public class AuthController {
 			productService.deleteCart(cart.getCtId());
 		
 			return new ResponseEntity<>("success", HttpStatus.OK);
-	}
+	}	
 	
-	@PostMapping("/likeproduct")
-	public ResponseEntity<?> likeproduct(@RequestBody Product product){
-		productService.likeProduct(product.getpId());
-		product = productService.getProduct(product.getpId()); // 여기서 pHeart와 pLike를 구해줘야함
-//		product.setpHeart(!product.ispHeart()); // pHeart가 true라면 false로, false라면 true로 전환
-		return new ResponseEntity<>(product, HttpStatus.OK);
-		
-//		return new ResponseEntity<>("success", HttpStatus.OK);
+	@PostMapping({"/likeProduct","/likeProduct/{username}"})
+	public ResponseEntity<?> likeproduct(@RequestBody Product product,
+			@PathVariable String username){
+		productService.likeProduct(product.getpId()); // product pLike + 1
+		product.setUsername(username);
+		productService.insertHeart(product); //pId, username 보내주기 위해 객체 전송, vue_heart에 insert
+	return new ResponseEntity<>("success", HttpStatus.OK);
+//		List<Product> heartlist = productService.selectHeartList();
+//		return ResponseEntity.ok(new ListResponse<Product>(heartlist));
 	}
+
+
+//	@PostMapping("/likeproduct")
+//	public ResponseEntity<?> likeproduct(@RequestBody Product product){
+//		productService.likeProduct(product.getpId());
+//		product = productService.getProduct(product.getpId()); // 여기서 pHeart와 pLike를 구해줘야함
+////		product.setpHeart(!product.ispHeart()); // pHeart가 true라면 false로, false라면 true로 전환
+//		return new ResponseEntity<>(product, HttpStatus.OK);
+//		
+////		return new ResponseEntity<>("success", HttpStatus.OK);
+//	}
 	
 //	@PostMapping("/kakaopay")
 //	@ResponseBody

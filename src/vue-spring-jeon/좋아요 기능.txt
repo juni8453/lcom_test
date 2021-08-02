@@ -1,0 +1,49 @@
+사용자 탈퇴 > 하트 사라짐
+
+게시물 삭제 > 하트 사라짐
+
+하나의 상품 테이블 데이터에 여러개의 좋아요 테이블 JOIN
+
+받아온 아이디에 해당하는 게시물의 하트는 교체
+
+heartlist에는 해당 유저가 하트를 누른 목록이 들어가있음 > 모든 유저의 하트리스트를 가지고 와야함
+
+ex) 1번 제품을 좋아하는 유저들의 목록이 나와야 비교가 가능하다.
+
+즉, selectProductList 시 state.productlist에 listHeart(hId, listProduct, pId, username) 리스트가 JOIN되어 들어와야한다.
+
+v-if="heartlist[0].listHeart[0].username !== Userinfo.User_Id"
+
+
+<resultMap type = "Heart" id="Heart1">
+		<result column="h_id" property="hId"/>
+		<result column="u_id" property="username"/>
+		<result column="p_id" property="pId"/>
+</resultMap>
+	
+<resultMap type = "Product" id="Product4">
+		<result column="p_id" property="pId"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_date" property="pDate"/>
+		<result column="p_price" property="pPrice"/>
+		<result column="p_from" property="pFrom"/>
+		<result column="p_brand" property="pBrand"/>
+		<result column="p_like" property="pLike"/> 
+		<collection property="listHeart" resultMap="Heart1"/>
+</resultMap>
+
+<select id="selectHeartList" resultMap="Product4">
+	SELECT 			p.p_id,
+					p.p_name,
+					p.p_price,
+					p.p_from,
+					p.p_brand,
+					p.p_like,
+					h.h_id,
+					h.u_id,
+					h.p_id		
+	FROM 			vue_product p
+	LEFT JOIN		vue_heart	h
+	ON 				p.p_id = h.p_id
+	WHERE			p.p_like != 0
+</select>
