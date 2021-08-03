@@ -425,12 +425,10 @@ public class AuthController {
 		productService.likeProduct(product.getpId()); // product pLike + 1
 		product.setUsername(username);
 		productService.insertHeart(product); //pId, username 보내주기 위해 객체 전송, vue_heart에 insert
+		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
+		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 		
-	return new ResponseEntity<>("success", HttpStatus.OK);
-	
-	
-//		List<Product> heartlist = productService.selectHeartList(username); // listHeart에 객체 삽입
-//		return ResponseEntity.ok(new ListResponse<Product>(heartlist));
+//	return new ResponseEntity<>("success", HttpStatus.OK); // 원래 로직
 	}
 	
 	

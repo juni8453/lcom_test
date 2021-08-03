@@ -7,10 +7,6 @@
                     <v-row dense align="center" justify="space-around">   
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
-                                <!-- <v-img
-                                    height="250"
-                                    :src="`/images/thumb/${imageslist.list[0].iPk}${imageslist.list[0].iName}`"
-                                ></v-img> -->
                                  <v-img
                                     height="350"
                                     contain
@@ -20,10 +16,6 @@
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
-                                <!-- <v-img
-                                    height="250"
-                                    :src="`/images/thumb/${imageslist.list[1].iPk}${imageslist.list[1].iName}`"
-                                ></v-img> -->
                                  <v-img
                                     height="350"
                                     contain
@@ -33,11 +25,6 @@
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
-                                <!-- <v-img 
-                                    height="250"
-                                    :src="`/images/thumb/${imageslist.list[2].iPk}${imageslist.list[2].iName}`"
-                                >
-                                </v-img> -->
                                  <v-img
                                     height="350"
                                     contain
@@ -47,10 +34,6 @@
                         </v-col>
                         <v-col cols="12" md="6">
                             <v-card class="pd-3">
-                                <!-- <v-img
-                                    height="250"
-                                    :src="`/images/thumb/${imageslist.list[3].iPk}${imageslist.list[3].iName}`"
-                                ></v-img> -->
                                  <v-img
                                     height="350"
                                     contain

@@ -1,4 +1,6 @@
 import Vue from 'vue'
+import store from '../store/index'
+import Route from '/src/router/index'
 import VueRouter from 'vue-router'
 import Home from '../views/Home.vue'
 import Login from '../views/Login.vue'
@@ -27,7 +29,7 @@ const routes = [
   {
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
   },
   {
     path: '/login',
@@ -42,7 +44,15 @@ const routes = [
   {
     path: '/boardlist',
     name: 'BoardList',
-    component: BoardList
+    component: BoardList,
+    beforeEnter(to, from, next){
+      if(store.state.isLogin === false){
+        alert('로그인이 필요합니다.')
+        Route.push('/login')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/user',
@@ -100,7 +110,15 @@ const routes = [
     path: '/hotitems',
     name: 'HotItems',
     component: HotItems,
-    props: true
+    props: true,
+    beforeEnter(to, from, next){
+      if(store.state.isLogin === false){
+        alert('로그인이 필요합니다.')
+        Route.push('/login')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/saleitems',
@@ -124,7 +142,15 @@ const routes = [
     path: '/latestitems',
     name: 'LatestItems',
     component: LatestItems,
-    props: true
+    props: true,
+    beforeEnter(to, from, next){
+      if(store.state.isLogin === false){
+        alert('로그인이 필요합니다.')
+        Route.push('/login')
+      } else {
+        next()
+      }
+    }
   },
   {
     path: '/itemdetail',
@@ -136,7 +162,15 @@ const routes = [
     path: '/putcart',
     name: 'PutCart',
     component: PutCart,
-    props: true
+    props: true,
+    beforeEnter(to, from, next){
+      if(store.state.isLogin === false){
+        alert('로그인이 필요합니다.')
+        Route.push('/login')
+      } else {
+        next()
+      }
+    }
   },
   
 ]

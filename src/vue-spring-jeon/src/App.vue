@@ -43,6 +43,7 @@
 
         <v-list-item 
           router :to="{name:'BoardList'}"
+          v-if="isLogin === true"
           @click="BoardList()"
           >
           <v-list-item-action>
@@ -55,6 +56,7 @@
 
         <v-list-item 
           router :to="{name:'BoardWrite'}"
+          v-if="isLogin === true"
           @click="BoardWrite()"
           >
           <v-list-item-action>
@@ -64,20 +66,9 @@
             <v-list-item-title>글 작성</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
-        <!--
-        <v-list-item 
-          router :to="{name:'BoardOption'}"
-          >
-          <v-list-item-action>
-            <v-icon>mdi-cog</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>설정</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-        -->
         <v-list-item 
           router :to="{name:'ProductInsert'}"
+          v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')"
           >
           <v-list-item-action>
             <v-icon>mdi-cog</v-icon>
@@ -115,39 +106,13 @@
       >
         로그아웃
       </v-btn>
-      <div class="text-center">
-        <v-menu offset-y>
-          <template>
-          <!--  <v-btn
-              color="primary"
-              dark
-              v-bind="attrs"
-              v-on="on"
-            >상세 메뉴
-            </v-btn> -->
-          <!--  <v-btn 
-              class="ma-2" 
-              outlined 
-              href="/images/thumb/ㅁㅁㅁ.png"
-              download>
-             테스트용 첨부파일 다운로드
-          </v-btn> -->
-          </template>
-
-          <v-list>
-            <v-list-item
-              v-for="(item,index) in items"
-              :key="index"
-            >
-              <v-list-item-title
-              >
-                {{item.title}}
-              </v-list-item-title>
-            </v-list-item>
-          </v-list>
-
-        </v-menu>
-      </div>
+      <v-btn class="ml-5"
+       v-if="isLogin === false"
+       @click="login()"
+       small
+      >
+        로그인
+      </v-btn>
     </v-app-bar>
 
     <v-main>
@@ -174,10 +139,6 @@ import Route from '../src/router/index'
   export default {
     data: () => ({
       drawer: null,
-      items:[
-        {title: '마이페이지'},
-        {title: '로그아웃'}
-      ]
     }),
     computed: {
       ...mapState(["Userinfo", 'isLogin', 'isLoginError']),
@@ -196,6 +157,9 @@ import Route from '../src/router/index'
           Route.push("/login")
         }
       },
+      login(){
+        Route.push('/login')
+      }
     },
     created() {
       console.log('App.vue 실행')

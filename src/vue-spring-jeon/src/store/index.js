@@ -106,13 +106,23 @@ export default new Vuex.Store({
       state.Userinfo.User_Name = null
       state.Userinfo.User_auth = null
       state.Userinfo.User_token = null
-      state.isLogin = false,
+      state.isLogin = false
       state.isLoginError = false
-      state.productlist = null
+      state.productlist = []
+      state.boardlist = []
+      state.commentlist = []
+      state.UserList = []
+      state.board = []
+      state.Pagination = null 
+      state.Show = false
+      state.imageslist = [] 
+      state.itemdetaillist = [] 
+      state.cartlist = []
+      state.totalprice = 0
       localStorage.removeItem("token")
       console.log(state.Userinfo)
       console.log("로그아웃됐니?"+localStorage.getItem("token"))
-      Route.push('/login')
+      Route.push('/')
     },
     SET_SHOW(state,data){
       state.Show = data

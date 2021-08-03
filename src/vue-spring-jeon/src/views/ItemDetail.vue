@@ -210,30 +210,6 @@ export default {
         })
       })
     },
-
-   likeProduct(payload){ // payload = {pId, pHeart} 제품 추천
-      console.log('likeProduct Run!')
-      console.log(payload)
-      payload.pHeart =! payload.pHeart
-      console.log('payload.pHeart는?')
-      console.log(payload.pHeart)
-      // if(confirm('해당 제품을 추천하시겠습니까?')===true){
-      //   new Promise((resolve, reject) => {
-      //     axios.post(`http://localhost:9000/api/auth/likeproduct`, payload)
-      //     .then(Response => {
-      //     console.log('putCart Response.data를 받았습니다.')
-      //     console.log(Response.data)
-      //     alert('제품을 추천하셨습니다.')
-      //     this.$store.commit('SET_ITEMDETAIL_LIST', Response.data)
-      //     this.$store.commit('SET_HEART', payload.item.pHeart)
-      //   })
-      //     .catch(Error => {
-      //       console.log(Error)
-      //       alert('Error !')
-      //     })
-      //   })
-      // }
-    }
   },
 
   components:{

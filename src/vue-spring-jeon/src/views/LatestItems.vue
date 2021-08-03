@@ -43,8 +43,6 @@
                       </router-link> 
                     </v-card>
                      <v-card outlined>
-                      {{item.listHeart}}
-                      {{item.listHeart.find(heart => heart.username === Userinfo.User_Id)}}
                       <v-icon
                         v-if="item.listHeart.find(heart => heart.username !== Userinfo.User_Id)"
                         @click="likeProduct(
@@ -107,25 +105,7 @@ computed:{
     //   state 값은 mutation을 거쳐서 값을 수정해야하는데, 직접 수정이 이뤄진다면 setter가 없다는 오류 발생
 },
 
-methods: { // 메서드 실행 시 vue_heart 테이블에 h_id, u_id, p_id 등록
-  // likeProduct(payload){ // payload = {pId, username}
-  //   console.log('likeProduct Run')
-  //   console.log(payload)
-  //   if(confirm('제품을 추천하시겠습니까?')===true){
-  //     axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
-  //     .then(Response => {         
-  //       if(Response.data === "success"){
-  //         console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
-  //       }
-  //     })
-  //     .catch(Error => {
-  //       console.log('error')
-  //       console(Error)
-  //     })
-  //   }
-  // }, 원래 로직
- 
-
+methods: { 
   likeProduct(payload){ // payload = {pId, username}
     console.log('likeProduct Run')
     console.log(payload)
@@ -133,15 +113,17 @@ methods: { // 메서드 실행 시 vue_heart 테이블에 h_id, u_id, p_id 등�
       axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
       .then(Response => {         
         console.log(Response.data)
-        this.$store.commit('SET_HEART_LIST', Response.data)
+        this.$store.commit('READ_PRODUCT_LIST', Response.data)
         console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
+        /* 좋아요 현황을 즉각 반영하기 위해 succss를 return 받지 않고 insertHeart 이후의 리스트를 다시 SELECT 하여 
+           최신 리스트를 다시 뽑아준다. */
       })
       .catch(Error => {
         console.log('error')
         console.log(Error)
       })
     }
-  }, //테스트 로직
+  }, 
 
   infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
     console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
