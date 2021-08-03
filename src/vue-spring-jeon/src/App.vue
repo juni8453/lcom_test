@@ -184,19 +184,18 @@ import Route from '../src/router/index'
     },
     methods: {
       ...mapMutations(["logout"]),
-       BoardList(){
+      BoardList(){
          if(this.isLogin === false){
           alert('로그인이 필요한 서비스입니다.')
           Route.push("/login")
          }
-       },
-       BoardWrite(){
-         if(this.isLogin === false){
-           alert('로그인이 필요한 서비스입니다.')
-           Route.push("/login")
-         }
-       }
-     
+      },
+      BoardWrite(){
+        if(this.isLogin === false){
+          alert('로그인이 필요한 서비스입니다.')
+          Route.push("/login")
+        }
+      },
     },
     created() {
       console.log('App.vue 실행')

@@ -32,78 +32,21 @@
 		<collection property="listHeart" resultMap="Heart1"/>
 		<collection property="listUserInfo" resultMap="UserInfo1"/>
 </resultMap>
-<!-- Product Vo 내의 List인 listImages에 collection을 사용하여 구해온 Images Vo값을 넣는다 
-	 이후 select resultMap으로 부모 Table Product의 값을 뽑아낸다.
- -->
- 
+
 <select id="selectProductList" resultMap="Product1">
-SELECT        	p.p_id,
-				p.p_name, 
-				p.p_date, 
-				p.p_price, 
-				p.p_from, 
-				p.p_brand, 
-				p.p_like,
-		      	i.i_id, 
-		      	i.p_id,
-		      	i.i_name,
-		      	i.i_pk,
-		      	h.h_id,
-		      	h.p_id,
-		      	h.u_id,
-		      	u.u_id
-FROM          	vue_product p
-LEFT JOIN	    vue_img   	i 
-ON 			    p.p_id = i.p_id
-LEFT JOIN 		vue_heart 	h 
-ON 				p.p_id = h.p_id
-LEFT JOIN       userlist	u
-ON				u.u_id = h.u_id
-GROUP BY		p.p_id
-LIMIT			#{pageOpt},8
+SELECT		*
+FROM		vue_product	ta
+LEFT JOIN	(
+			SELECT		*
+			FROM		vue_heart
+			WHERE 		u_id = #{username}
+			) 
+			tb ON ta.p_id = tb.p_id
+LEFT JOIN 	vue_img	tc ON ta.p_id = tc.p_id
+LEFT JOIN	userlist td ON tb.u_id = td.u_id
+LIMIT		#{pageOpt},8
 </select>
 
-
-
-
-<!--   
-<resultMap type = "Images" id="Images1">
-		<result column="i_id" property="iId"/>
-		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
-		<result column="p_name" property="pName"/>
-</resultMap>
-	
-<resultMap type = "Product" id="Product1">
-		<result column="p_id" property="pId"/>
-		<result column="p_name" property="pName"/>
-		<result column="p_date" property="pDate"/>
-		<result column="p_price" property="pPrice"/>
-		<result column="p_from" property="pFrom"/>
-		<result column="p_brand" property="pBrand"/>
-		<collection property="listImages" resultMap="Images1"/>
-</resultMap>
- Product Vo 내의 List인 listImages에 collection을 사용하여 구해온 Images Vo값을 넣는다 
-	 이후 select resultMap으로 부모 Table Product의 값을 뽑아낸다.
-  
-<select id="selectProductList" resultMap="Product1">
-SELECT        	p.p_id,
-				p.p_name, 
-				p.p_date, 
-				p.p_price, 
-				p.p_from, 
-				p.p_brand, 
-		      	i.i_id, 
-		      	i.p_id,
-		      	i.i_name,
-		      	i.i_pk
-FROM           	vue_product p
-LEFT JOIN	   	vue_img   	i 
-ON 			   	p.p_id = i.p_id
-LIMIT			#{pageOpt},8
-</select>
--->
 
 <resultMap type = "Images" id="Images2">
 		<result column="i_name" property="iName"/>

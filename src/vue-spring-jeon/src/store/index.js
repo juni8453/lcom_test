@@ -43,8 +43,8 @@ export default new Vuex.Store({
     imageslist:[],
     productlist:[],
     itemdetaillist:[],
-    heartlist:[],
     cartlist:[],
+    // heartlist:[], // 테스트 state
     totalprice:0
   },
   mutations: {
@@ -90,11 +90,8 @@ export default new Vuex.Store({
       state.cartlist = state.cartlist.concat(data.list)
     },
     // SET_HEART_LIST(state, data){
-    //   console.log(state.productlist.length)
-    //  for(let i=0; i<state.productlist.length; i++){
-      
-    //  }
-    // },
+    //   state.heartlist = data.list
+    // }, // 테스트 뮤테이션
     INSERT_TOKEN(state) {
       state.Userinfo.User_token = localStorage.getItem("token")
     },
@@ -111,6 +108,7 @@ export default new Vuex.Store({
       state.Userinfo.User_token = null
       state.isLogin = false,
       state.isLoginError = false
+      state.productlist = null
       localStorage.removeItem("token")
       console.log(state.Userinfo)
       console.log("로그아웃됐니?"+localStorage.getItem("token"))
@@ -404,9 +402,7 @@ export default new Vuex.Store({
     latestItems({commit, state}, payload){
       return new Promise((resolve, reject) => {
         console.log('payload.limit:' + payload.limit)
-        console.log('payload.username:' + payload.username)
-        console.log('state.Userinfo.User_Id' + state.Userinfo.User_Id)
-        axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}/${state.Userinfo.User_Id}`)
+        axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}/${payload.username}`)
         
         .then(Response => {
           console.log('Response data를 받았습니다.')

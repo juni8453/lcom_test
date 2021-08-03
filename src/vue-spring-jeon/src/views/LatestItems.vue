@@ -43,17 +43,19 @@
                       </router-link> 
                     </v-card>
                      <v-card outlined>
-                      {{item}}
+                      {{item.listHeart}}
+                      {{item.listHeart.find(heart => heart.username === Userinfo.User_Id)}}
                       <v-icon
+                        v-if="item.listHeart.find(heart => heart.username !== Userinfo.User_Id)"
                         @click="likeProduct(
                           {
                             pId: item.pId,
                             username: Userinfo.User_Id
                           })"
                       >mdi-heart-outline</v-icon>
-                      <!-- <v-icon
-                       
-                      >mdi-heart</v-icon>  -->
+                      <v-icon
+                        v-else
+                      >mdi-heart</v-icon> 
                     </v-card>
                   </v-col>    
                 </v-row>
@@ -121,7 +123,7 @@ methods: { // 메서드 실행 시 vue_heart 테이블에 h_id, u_id, p_id 등�
   //       console(Error)
   //     })
   //   }
-  // }, 원래 메서드
+  // }, 원래 로직
  
 
   likeProduct(payload){ // payload = {pId, username}
@@ -139,7 +141,7 @@ methods: { // 메서드 실행 시 vue_heart 테이블에 h_id, u_id, p_id 등�
         console.log(Error)
       })
     }
-  },
+  }, //테스트 로직
 
   infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
     console.log('limit+pageOpt?'+ this.limit + this.pageOpt)

@@ -43,6 +43,7 @@
                       <v-col cols="2">
                           <v-btn text exact
                           router :to="{name:'LatestItems'}"
+                          @click="latestitems()"
                           >
                               최신상품
                           </v-btn>
@@ -57,8 +58,22 @@
 </template>
 
 <script>
+import Route from '../router/index'
+import { mapState } from 'vuex'
+
 export default {
-  
+    computed: {
+        ...mapState(['isLogin', 'isLoginError']),
+    },
+    methods:{
+        latestitems(){
+            console.log('latesitems Run')
+            if(this.isLogin === false){
+                alert('로그인이 필요한 서비스입니다.')
+                Route.push("/login")
+            }
+        },
+    }
 }
 </script>
     

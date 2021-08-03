@@ -365,7 +365,7 @@ public class AuthController {
 	}
 	
 	
-	@GetMapping({"/latestitems", "/latestitems/{pageOpt}","/latestitems/{pageOpt}/{username}"})
+	@GetMapping({"/latestitems", "/latestitems/{pageOpt}","//latestitems/{pageOpt}/{username}"})
 	public ResponseEntity<?> test(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
 			@PathVariable int pageOpt,
 			@PathVariable String username){
@@ -426,10 +426,26 @@ public class AuthController {
 		product.setUsername(username);
 		productService.insertHeart(product); //pId, username 보내주기 위해 객체 전송, vue_heart에 insert
 		
-//	return new ResponseEntity<>("success", HttpStatus.OK);
-		List<Product> heartlist = productService.selectHeartList(username);
-		return ResponseEntity.ok(new ListResponse<Product>(heartlist));
+	return new ResponseEntity<>("success", HttpStatus.OK);
+	
+	
+//		List<Product> heartlist = productService.selectHeartList(username); // listHeart에 객체 삽입
+//		return ResponseEntity.ok(new ListResponse<Product>(heartlist));
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 //	@PostMapping("/likeproduct")
