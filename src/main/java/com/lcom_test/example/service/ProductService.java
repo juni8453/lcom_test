@@ -34,4 +34,5 @@ public interface ProductService {
 
 	public List<Product> selectRankList(Product product);
 
+
 	}

@@ -376,6 +376,13 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
 	
+	@GetMapping({"/productrank"})
+	public ResponseEntity<?> productrank(Product product){
+		List<Product> itemslist = productService.selectProductList(product);
+		logger.info(itemslist.toString());
+		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+	} // 최신상품리스트
+	
 	
 	@GetMapping({"/itemdetail", "/itemdetail/{pId}"})
 	public ResponseEntity<?> itemdetail(
@@ -428,7 +435,20 @@ public class AuthController {
 		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 		
-	}
+	} // 원래 로직
+	
+//	@PostMapping({"/likeproduct","/likeproduct/{pageOpt}","/likeproduct/{pageOpt}/{username}"})
+//	public ResponseEntity<?> likeproduct(@RequestBody Product product,
+//			@PathVariable String username,
+//			@PathVariable int pageOpt){
+//		productService.likeProduct(product.getpId()); // product pLike + 1
+//		product.setUsername(username);
+//		product.setPageOpt(pageOpt);
+//		productService.insertHeart(product); //pId, username 보내주기 위해 객체 전송, vue_heart에 insert
+//		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
+//		return ResponseEntity.ok(new ListResponse<Product>(productlist));
+//		
+//	} // 테스트 로직
 	
 	@PostMapping({"/cancellike","/cancellike/{username}"})
 	public ResponseEntity<?> cancellike(@RequestBody Product product,

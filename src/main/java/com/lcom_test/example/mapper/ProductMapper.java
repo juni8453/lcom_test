@@ -36,4 +36,5 @@ public interface ProductMapper {
 
 	public List<Product> selectRankList(Product product);
 
+
 }

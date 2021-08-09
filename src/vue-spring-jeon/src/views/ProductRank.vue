@@ -10,31 +10,36 @@
         <v-card outlined>  
           <v-card-text>
             <v-row>
-              <v-col cols="2" class="Center">
-                제품 랭킹
-              </v-col>
               <v-col cols="4" class="Center">
                 상품 사진
               </v-col>
               <v-col cols="4" class="Center">
                 상품명
               </v-col>
-              <v-col cols="2" class="Center">
-                추천수
+              <v-col cols="4" class="Center">
+                제품 추천수
               </v-col>
             </v-row>
-            <v-row>
-              <v-col cols="2" class="Center">
-                {{itemdetaillist.list[0]}}
-              </v-col>
+            <v-row v-for="item in ranklist" :key="item.pId">
               <v-col cols="4" class="Center">
-                Img
+                <router-link :to="{name:'ItemDetail',
+                  params:{
+                    pId:item.pId
+                  }
+                }"
+                >
+                <v-img
+                  contain
+                  height="250"
+                  :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
+              ></v-img>
+                </router-link> 
               </v-col>             
               <v-col cols="4" class="Center">
-                
+                {{item.pName}}
               </v-col>
-              <v-col cols="2" class="Center">
-                
+              <v-col cols="4" class="Center">
+                {{item.pLike}}
               </v-col>
             </v-row>
           </v-card-text>
@@ -65,11 +70,11 @@ import Footer from '../components/Footer.vue'
 export default {
   data(){
     return{
-     
+    
     }
   },
   computed:{
-    ...mapState(['itemdetaillist'])
+    ...mapState(['ranklist'])
   },
 
   created(){

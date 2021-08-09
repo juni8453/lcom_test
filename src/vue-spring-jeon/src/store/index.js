@@ -25,6 +25,7 @@ export default new Vuex.Store({
     commentlist:[],
     board_detail:[],
     UserList:[],
+    ranklist:[],
     board:[],
     Pagination:
     {
@@ -79,6 +80,9 @@ export default new Vuex.Store({
     },
     READ_PRODUCT_LIST(state, data){
       state.productlist = data.list
+    },
+    READ_RANK_LIST(state, data){
+      state.ranklist = data.list
     },
     READ_CART_LIST(state, data){
       state.cartlist = data.list
@@ -457,7 +461,8 @@ export default new Vuex.Store({
         .then(Response => {
           console.log('ProductRank created Response data')
           console.log(Response.data)  
-          commit('SET_ITEMDETAIL_LIST', Response.data)
+          commit('READ_RANK_LIST', Response.data)
+          console.log('정상적으로 productRank가 작동되었습니다.')
         })
         .catch(Error => {
             console.log(Error)
