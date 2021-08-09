@@ -77,7 +77,17 @@
             <v-list-item-title>상품등록</v-list-item-title>
           </v-list-item-content>
         </v-list-item>  
-      
+        <v-list-item 
+          router :to="{name:'ProductRank'}"
+          v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')"
+          >
+          <v-list-item-action>
+            <v-icon>mdi-poll</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>상품랭킹</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
       
     </v-navigation-drawer>

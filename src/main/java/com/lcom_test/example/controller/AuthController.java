@@ -419,7 +419,7 @@ public class AuthController {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}	
 	
-	@PostMapping({"/likeProduct","/likeProduct/{username}"})
+	@PostMapping({"/likeproduct","/likeproduct/{username}"})
 	public ResponseEntity<?> likeproduct(@RequestBody Product product,
 			@PathVariable String username){
 		productService.likeProduct(product.getpId()); // product pLike + 1
@@ -428,12 +428,17 @@ public class AuthController {
 		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 		
-//	return new ResponseEntity<>("success", HttpStatus.OK); // 원래 로직
 	}
 	
-	
-	
-	
+	@PostMapping({"/cancellike","/cancellike/{username}"})
+	public ResponseEntity<?> cancellike(@RequestBody Product product,
+			@PathVariable String username){
+		productService.cancelLike(product.getpId()); // product pLike - 1
+		product.setUsername(username);
+		productService.deleteHeart(product);
+		List<Product> productlist = productService.selectProductList(product);
+		return ResponseEntity.ok(new ListResponse<Product>(productlist));
+	}
 	
 	
 	

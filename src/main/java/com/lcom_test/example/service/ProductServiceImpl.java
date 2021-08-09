@@ -25,7 +25,6 @@ public class ProductServiceImpl implements ProductService {
 
 	@Override
 	public List<Product> selectProductList(Product product) {
-		
 		return productMapper.selectProductList(product);
 	}
 	
@@ -71,5 +70,21 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> selectHeartList(String username) {
 		return productMapper.selectHeartList(username);
+	}
+
+	@Override
+	public void cancelLike(int pId) {
+		productMapper.cancelLike(pId);
+	}
+
+	@Override
+	public void deleteHeart(Product product) {
+		productMapper.deleteHeart(product);
+		
+	}
+
+	@Override
+	public List<Product> selectRankList(Product product) {
+		return productMapper.selectRankList(product);
 	}
 }

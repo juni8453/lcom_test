@@ -28,5 +28,10 @@ public interface ProductService {
 
 	public List<Product> selectHeartList(String username);
 
-	}
+	public void cancelLike(int pId);
 
+	public void deleteHeart(Product product);
+
+	public List<Product> selectRankList(Product product);
+
+	}

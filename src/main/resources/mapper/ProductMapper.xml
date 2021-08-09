@@ -81,13 +81,20 @@ LIMIT		#{pageOpt},8
 	ON 				p.p_id = i.p_id
 	WHERE			p.p_id = #{pId}
 </select>
+  
+<select id="selectHeartList" resultType="Heart">
+	SELECT 			h_id as hId,
+					u_id as username,
+					p_id as pId		
+	FROM 			vue_heart 
+	WHERE			u_id = #{username}
+</select>
  
-<!--  
-<resultMap type = "Heart" id="Heart1">
-		<result column="h_id" property="hId"/>
-		<result column="u_id" property="username"/>
+<resultMap type = "Images" id="Images4">
+		<result column="i_name" property="iName"/>
+		<result column="i_pk" property="iPk"/>
 		<result column="p_id" property="pId"/>
-		<collection property="listProduct" resultMap="Product4"/>
+		<result column="p_name" property="pName"/>
 </resultMap>
 	
 <resultMap type = "Product" id="Product4">
@@ -97,18 +104,25 @@ LIMIT		#{pageOpt},8
 		<result column="p_price" property="pPrice"/>
 		<result column="p_from" property="pFrom"/>
 		<result column="p_brand" property="pBrand"/>
-		<result column="p_like" property="pLike"/>  
+		<result column="p_like" property="pLike"/> 
+		<collection property="listImages" resultMap="Images4"/>
 </resultMap>
- -->
- 
-<select id="selectHeartList" resultType="Heart">
-	SELECT 			h_id as hId,
-					u_id as username,
-					p_id as pId		
-	FROM 			vue_heart 
-	WHERE			u_id = #{username}
+
+<select id="selectRankList" resultMap="Product4">
+	SELECT 			p.p_id,		
+					p.p_name,		
+					p.p_price, 	
+					p.p_from,		
+					p.p_brand,
+					p.p_like,
+					i.i_name,
+					i.i_pk,
+					i.p_id
+	FROM 			vue_product p
+	LEFT JOIN		vue_img		i
+	ON 				p.p_id = i.p_id
+	ORDER BY		p_like DESC
 </select>
- 
 
 <insert id="insertProduct" parameterType="Product">
 	      INSERT INTO vue_product(
@@ -132,6 +146,12 @@ LIMIT		#{pageOpt},8
 	LEFT JOIN	vue_cart c 	ON a.p_id = c.p_id
 	WHERE		a.p_id = #{pId}
 </delete>
+
+<update id="cancelLike" parameterType="Product">
+	UPDATE		vue_product
+	SET			p_like = p_like-1
+	WHERE 		p_id = #{pId}
+</update>
 
 <delete id="deleteCart" parameterType="Cart">
 	DELETE 		
@@ -173,6 +193,13 @@ LIMIT		#{pageOpt},8
 		AND		u_id = #{username}
 	)
 </insert>
+
+<delete id="deleteHeart" parameterType="Heart">
+	DELETE
+	FROM		vue_heart
+	WHERE		p_id = #{pId}
+	AND			u_id = #{username}
+</delete>
 
 <update id="likeProduct" parameterType="Product">
 	UPDATE		vue_product

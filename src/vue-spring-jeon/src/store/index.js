@@ -430,28 +430,6 @@ export default new Vuex.Store({
       })
     }, // 최신 상품 리스트 Test
 
-    // latestItems({commit}, payload){
-    //   return new Promise((resolve, reject) => {
-    //     console.log('payload:' + payload.limit)
-    //     axios.get(`http://localhost:9000/api/auth/latestitems/${payload.limit}/${payload.username}`)
-        
-    //     .then(Response => {
-    //       console.log('Response data를 받았습니다.')
-    //       console.log(Response.data)
-    //       console.log('Items data를 받았습니다')
-    //       console.log(Response.data.list)
-    //       // console.log(Response.data.pagination)
-    //       commit('READ_PRODUCT_LIST', Response.data) 
-    //       // pHeart = fasle가 뮤테이션에 삽입
-    //       console.log('정상적으로 latestItems가 작동되었습니다.')
-    //     })
-    //     .catch(Error => {
-    //       console.log(Error)
-    //       Route.push("/")
-    //     })
-    //   })
-    // }, // 최신 상품 리스트 Test
-
     putCartList({commit,state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
@@ -468,6 +446,23 @@ export default new Vuex.Store({
           console.log(Error)
           alert('Error!')
           Route.push("/")
+        })
+      })
+    },
+
+    productRank({commit,state}){
+      return new Promise((resolve, reject) => {
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+        axios.get(`http://localhost:9000/api/admin/productrank`)
+        .then(Response => {
+          console.log('ProductRank created Response data')
+          console.log(Response.data)  
+          commit('SET_ITEMDETAIL_LIST', Response.data)
+        })
+        .catch(Error => {
+            console.log(Error)
+            alert('새로고침 이후에는 홈으로 이동합니다.')
+            Route.push("/")
         })
       })
     },

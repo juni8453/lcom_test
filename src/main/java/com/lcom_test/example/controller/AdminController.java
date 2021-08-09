@@ -220,4 +220,11 @@ public class AdminController {
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
+	@GetMapping("/productrank")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> putcartlist(Product product){
+		List<Product> ranklist = productService.selectRankList(product);		
+		return ResponseEntity.ok(new ListResponse<Product>(ranklist));
+	}
+	
 }

@@ -53,6 +53,10 @@
                       >mdi-heart-outline</v-icon>
                       <v-icon
                         v-else
+                        @click="cancelLike({
+                          pId: item.pId,
+                          username: Userinfo.User_Id
+                        })"
                       >mdi-heart</v-icon> 
                     </v-card>
                   </v-col>    
@@ -110,13 +114,30 @@ methods: {
     console.log('likeProduct Run')
     console.log(payload)
     if(confirm('제품을 추천하시겠습니까?')===true){
-      axios.post(`http://localhost:9000/api/auth/likeProduct/${payload.username}` ,payload)
+      axios.post(`http://localhost:9000/api/auth/likeproduct/${payload.username}` ,payload)
       .then(Response => {         
         console.log(Response.data)
         this.$store.commit('READ_PRODUCT_LIST', Response.data)
         console.log('likeProduct 메서드가 성공적으로 실행되었습니다.')
         /* 좋아요 현황을 즉각 반영하기 위해 succss를 return 받지 않고 insertHeart 이후의 리스트를 다시 SELECT 하여 
            최신 리스트를 다시 뽑아준다. */
+      })
+      .catch(Error => {
+        console.log('error')
+        console.log(Error)
+      })
+    }
+  }, 
+
+  cancelLike(payload){
+    console.log('cancleLike Run')
+    console.log(payload)
+    if(confirm('제품 추천을 취소하시겠습니까?')===true){
+      axios.post(`http://localhost:9000/api/auth/cancellike/${payload.username}` ,payload)
+      .then(Response => {         
+        console.log(Response.data)
+        this.$store.commit('READ_PRODUCT_LIST', Response.data)
+        console.log('cancelLike 메서드가 성공적으로 실행되었습니다.')
       })
       .catch(Error => {
         console.log('error')

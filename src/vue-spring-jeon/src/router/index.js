@@ -22,6 +22,7 @@ import ProductInsert from '../views/ProductInsert'
 import LatestItems from '../views/LatestItems'
 import ItemDetail from '../views/ItemDetail'
 import PutCart from '../views/PutCart'
+import ProductRank from '../views/ProductRank'
 
 Vue.use(VueRouter)
 
@@ -171,6 +172,21 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/productrank',
+    name: 'ProductRank',
+    component: ProductRank,
+    props: true,
+    beforeEnter(to, from, next){
+      if(store.state.Userinfo.User_auth[0] !== 'ROLE_ADMIN'){
+        alert('관리자 아이디 이외에는 해당 도메인 접속이 불가합니다.')
+        Route.push('/login')
+      } else {
+        next()
+      }
+    }
+
   },
   
 ]
