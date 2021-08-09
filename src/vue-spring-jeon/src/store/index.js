@@ -372,21 +372,21 @@ export default new Vuex.Store({
     },
 
     insertProductTest({commit, state},payload){
-      console.log('produtInsert Run')
-      console.log('payload를 받았습니다')
       console.log(payload)
-      for(let i=0; i<payload.fileinput.length; i++){
-        console.log(i)
+      console.log('fileinput의 길이는?' + payload.fileinput.length)
+      for(let i=0; i<payload.fileinput.length; i++){       
         console.log('payload.name:' +payload.fileinput[i].name)
         console.log('payload.lastModified:' +payload.fileinput[i].lastModified)
         let date = new Date()
+        console.log(payload.fileinput[i].lastModified)
         let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ payload.fileinput[i].lastModified 
         console.log('iPk는?'+iPk)
         
         return new Promise((resolve, reject) => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
           let formData = new FormData();
-          formData.append('uploadFile', payload.fileinput[i])
+          // formData.append('uploadFile', payload.fileinput[i])
+          formData.append('uploadFile', payload.fileinput)
           formData.append('pName', payload.pName)                   // 제품 이름
           formData.append('pPrice', payload.pPrice)                 // 제품 가격
           formData.append('pFrom', payload.pFrom)                   // 제품 원산지

@@ -80,9 +80,12 @@ public class AdminController {
 	
 	@PostMapping("/insertproducttest")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> insertproducttest(Product product,
-			@RequestParam("uploadFile") List<MultipartFile> files, Images images){
-		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";		
+	public ResponseEntity<?> insertproducttest(
+			@RequestPart("uploadFile") List<MultipartFile> files, 
+			Product product,
+			Images images){
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";	
+		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		
 		for(MultipartFile file : files) {
@@ -120,7 +123,7 @@ public class AdminController {
 			
 		}
 		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
+	} // 다중 파일 업로드 Test
 
 	
 	@PostMapping("/insertproduct")
@@ -128,8 +131,8 @@ public class AdminController {
 	public ResponseEntity<?> insertproduct(Product product,
 			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 //		
@@ -171,55 +174,6 @@ public class AdminController {
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 
-//	@PostMapping("/insertproduct")
-//	@PreAuthorize("hasRole('ROLE_ADMIN')")
-//	public ResponseEntity<?> insertproduct(Product product,
-//			@RequestParam("uploadFile") List<MultipartFile> multipartFile, Images images){ //RequestPart of MutipartFile Array
-//		
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-//		String thumbPath = path + "thumb/";
-//		
-//		for(MultipartFile multi : multipartFile) {
-//			System.out.println(multi);
-//		}	
-//			String filename = images.getiPk() + multi.getOriginalFilename();
-//			String ext = filename.substring(filename.lastIndexOf(".")+1);
-//			
-//			File file = new File(path + filename);
-//			File thumbFile = new File(thumbPath + filename);
-//			
-//			try {
-//			// 원본파일 저장
-//				InputStream input = multi.getInputStream();
-//				FileUtils.copyInputStreamToFile(input, file);	
-//				
-//			// 썸네일 생성
-//				BufferedImage imageBuf = ImageIO.read(file); // BufferedImage 클래스는 액세스 가능한 이미지 데이터 버퍼가 있는 이미지를 설명.
-//				int fixWidth =  300;
-//				double ratio = imageBuf.getWidth() / (double)fixWidth;
-//				int thumbWidth = fixWidth;
-//				int thumbHeight = (int)(imageBuf.getHeight() / ratio);
-//				BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
-//				Graphics2D g  = thumbImageBf.createGraphics();
-//				Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
-//				g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
-//				g.dispose();
-//				ImageIO.write(thumbImageBf, ext, thumbFile);
-//				
-//				
-//			} catch(IOException e) {
-//				FileUtils.deleteQuietly(file);
-//				e.printStackTrace();
-//			}
-//			
-//			productService.insertProduct(product);
-//			boardService.insertImage(images);
-//			boardService.updatepId(images);
-//		
-//		return new ResponseEntity<>("success", HttpStatus.OK);
-//	} 다중 파일 업로드 (보류)
 	
 	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
