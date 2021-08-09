@@ -42,7 +42,7 @@
                   <v-icon>
                     mdi-cart-arrow-down
                   </v-icon>
-                </v-btn>
+                 </v-btn>
               </h2>
 
               <v-card class="mb-4">
@@ -150,7 +150,7 @@ export default {
   },
   
   computed:{
-    ...mapState(['productlist', 'itemdetaillist', 'Userinfo', 'Heart'])
+    ...mapState(['productlist', 'itemdetaillist', 'Userinfo', 'heart'])
   },
 
   created(){
@@ -174,6 +174,7 @@ export default {
   },
 
   methods:{
+
     buyProduct(payload){     
       console.log('buyProduct Run!')
       console.log(payload) // payload = {pName, pPrice, pBrand, pFrom, pId}

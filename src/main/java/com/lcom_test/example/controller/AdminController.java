@@ -78,15 +78,60 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 	
+	@PostMapping("/insertproducttest")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	public ResponseEntity<?> insertproducttest(Product product,
+			@RequestParam("uploadFile") List<MultipartFile> files, Images images){
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";		
+		String thumbPath = path + "thumb/";
+		
+		for(MultipartFile file : files) {
+			String filename = file.getOriginalFilename();
+			String ext = filename.substring(filename.lastIndexOf(".")+1);
+			File multifile = new File(path + filename);
+			File thumbFile = new File(thumbPath + filename);
+			
+			try {
+				// 원본 파일 저장
+				InputStream input = file.getInputStream();
+				FileUtils.copyInputStreamToFile(input, multifile);
+				
+				// 썸네일 생성
+				BufferedImage imageBuf = ImageIO.read(multifile);
+				int fixWidth =  500;
+				double ratio = imageBuf.getWidth() / (double)fixWidth;
+				int thumbWidth = fixWidth;
+				int thumbHeight = (int)(imageBuf.getHeight() / ratio);
+				BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
+				Graphics2D g  = thumbImageBf.createGraphics();
+				Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
+				g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
+				g.dispose();
+				ImageIO.write(thumbImageBf, ext, thumbFile);
+				
+			}  catch(IOException e) {
+				FileUtils.deleteQuietly(multifile);
+				e.printStackTrace();
+			}
+			
+			productService.insertProduct(product);
+			boardService.insertImage(images);
+			boardService.updatepId(images);
+			
+		}
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+
+	
 	@PostMapping("/insertproduct")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> insertproduct(Product product,
 			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 //		
 		String thumbPath = path + "thumb/";
 		String filename = images.getiPk() + multipartFile.getOriginalFilename();

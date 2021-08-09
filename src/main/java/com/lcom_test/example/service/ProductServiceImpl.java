@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.lcom_test.example.domain.Cart;
+import com.lcom_test.example.domain.Heart;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Product;
 import com.lcom_test.example.mapper.ProductMapper;
@@ -86,5 +87,10 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public List<Product> selectRankList(Product product) {
 		return productMapper.selectRankList(product);
+	}
+
+	@Override
+	public List<Product> selectHotList(Product product) {
+		return productMapper.selectHotList(product);
 	}
 }

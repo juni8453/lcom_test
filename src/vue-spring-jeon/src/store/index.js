@@ -45,6 +45,7 @@ export default new Vuex.Store({
     productlist:[],
     itemdetaillist:[],
     cartlist:[],
+    heart:[],
     // heartlist:[], // 테스트 state
     totalprice:0
   },
@@ -142,6 +143,9 @@ export default new Vuex.Store({
     },
     SET_BOARD(state, data){
       state.board = data
+    },
+    SET_HEART(state, data){
+      state.heart = data.list
     },
     SET_ITEMDETAIL_LIST(state, data){
       state.itemdetaillist = data
@@ -366,6 +370,53 @@ export default new Vuex.Store({
         })
       })
     },
+
+    insertProductTest({commit, state},payload){
+      console.log('produtInsert Run')
+      console.log('payload를 받았습니다')
+      console.log(payload)
+      for(let i=0; i<payload.fileinput.length; i++){
+        console.log(i)
+        console.log('payload.name:' +payload.fileinput[i].name)
+        console.log('payload.lastModified:' +payload.fileinput[i].lastModified)
+        let date = new Date()
+        let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ payload.fileinput[i].lastModified 
+        console.log('iPk는?'+iPk)
+        
+        return new Promise((resolve, reject) => {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
+          let formData = new FormData();
+          formData.append('uploadFile', payload.fileinput[i])
+          formData.append('pName', payload.pName)                   // 제품 이름
+          formData.append('pPrice', payload.pPrice)                 // 제품 가격
+          formData.append('pFrom', payload.pFrom)                   // 제품 원산지
+          formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
+          formData.append('iName',payload.fileinput[i].name)           // 이미지 이름
+          formData.append('iPk', iPk)    // 이미지 고유번호
+    
+          axios.post('http://localhost:9000/api/admin/insertproducttest', formData,
+            {
+              headers: {
+                'Content-Type': 'multipart/form-data',
+                'Access-Control-Allow-Origin': '*'
+            }
+          })
+            .then(Response => {
+                    console.log('Resonse.data를 받았습니다.')
+                    
+              if(Response.data === "success") {
+                Route.push("/latestitems")
+              } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
+          })
+          .catch(Error => {
+              console.log('error')
+              reject(Error)
+              alert("Error!")
+              Route.push("/")
+            })
+          })
+        }
+      }, // 다중 제품 테스트
    
     insertProduct({commit, state},payload){
       console.log('produtInsert Run')
@@ -433,6 +484,27 @@ export default new Vuex.Store({
         })
       })
     }, // 최신 상품 리스트 Test
+
+    hotItems({commit, state}, payload){
+      return new Promise((resolve, reject) => {
+        console.log('payload.limit:' + payload.limit)
+        axios.get(`http://localhost:9000/api/auth/hotitems/${payload.limit}/${payload.username}`)
+        
+        .then(Response => {
+          console.log('Response data를 받았습니다.')
+          console.log(Response.data)
+          console.log('Items data를 받았습니다')
+          console.log(Response.data.list)
+          // console.log(Response.data.pagination)
+          commit('READ_PRODUCT_LIST', Response.data) 
+          console.log('정상적으로 hotItems가 작동되었습니다.')
+        })
+        .catch(Error => {
+          console.log(Error)
+          Route.push("/")
+        })
+      })
+    }, // 인기 상품 리스트 Test
 
     putCartList({commit,state}, payload){
       return new Promise((resolve, reject) => {

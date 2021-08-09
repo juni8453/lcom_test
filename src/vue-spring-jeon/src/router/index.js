@@ -23,6 +23,7 @@ import LatestItems from '../views/LatestItems'
 import ItemDetail from '../views/ItemDetail'
 import PutCart from '../views/PutCart'
 import ProductRank from '../views/ProductRank'
+import MultiUploadTest from '../views/MultiUploadTest'
 
 Vue.use(VueRouter)
 
@@ -186,7 +187,21 @@ const routes = [
         next()
       }
     }
+  },
 
+  {
+    path: '/multiuploadtest',
+    name: 'MultiUploadTest',
+    component: MultiUploadTest,
+    props: true,
+    beforeEnter(to, from, next){
+      if(store.state.Userinfo.User_auth[0] !== 'ROLE_ADMIN'){
+        alert('관리자 아이디 이외에는 해당 도메인 접속이 불가합니다.')
+        Route.push('/login')
+      } else {
+        next()
+      }
+    }
   },
   
 ]

@@ -47,6 +47,51 @@ LEFT JOIN	userlist td ON tb.u_id = td.u_id
 LIMIT		#{pageOpt},8
 </select>
 
+<resultMap type = "Images" id="Images5">
+		<result column="i_id" property="iId"/>
+		<result column="i_name" property="iName"/>
+		<result column="i_pk" property="iPk"/>
+		<result column="p_id" property="pId"/>
+		<result column="p_name" property="pName"/>
+</resultMap>
+
+<resultMap type = "Heart" id="Heart5">
+		<result column="h_id" property="hId"/>
+		<result column="p_id" property="pId"/>
+		<result column="u_id" property="username"/>
+</resultMap>
+
+<resultMap type = "UserInfo" id="UserInfo5">
+		<result column="u_id" property="username"/>
+</resultMap>
+	
+<resultMap type = "Product" id="Product5">
+		<result column="p_id" property="pId"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_date" property="pDate"/>
+		<result column="p_price" property="pPrice"/>
+		<result column="p_from" property="pFrom"/>
+		<result column="p_brand" property="pBrand"/>
+		<result column="p_like" property="pLike"/>
+		<collection property="listImages" resultMap="Images5"/>
+		<collection property="listHeart" resultMap="Heart5"/>
+		<collection property="listUserInfo" resultMap="UserInfo5"/>
+</resultMap>
+
+<select id="selectHotList" resultMap="Product5">
+SELECT		*
+FROM		vue_product	ta
+LEFT JOIN	(
+			SELECT		*
+			FROM		vue_heart
+			WHERE 		u_id = #{username}
+			) 
+			tb ON ta.p_id = tb.p_id
+LEFT JOIN 	vue_img	tc ON ta.p_id = tc.p_id
+LEFT JOIN	userlist td ON tb.u_id = td.u_id ORDER BY p_like DESC
+LIMIT		#{pageOpt},8
+</select>
+
 <resultMap type = "Images" id="Images2">
 		<result column="i_name" property="iName"/>
 		<result column="i_pk" property="iPk"/>
@@ -79,14 +124,6 @@ LIMIT		#{pageOpt},8
 	LEFT JOIN		vue_img		i
 	ON 				p.p_id = i.p_id
 	WHERE			p.p_id = #{pId}
-</select>
-  
-<select id="selectHeartList" resultType="Heart">
-	SELECT 			h_id as hId,
-					u_id as username,
-					p_id as pId		
-	FROM 			vue_heart 
-	WHERE			u_id = #{username}
 </select>
  
 <resultMap type = "Images" id="Images4">

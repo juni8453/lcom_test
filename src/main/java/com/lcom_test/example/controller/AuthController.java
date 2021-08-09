@@ -64,6 +64,7 @@ import com.lcom_test.example.config.JwtUtils;
 import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Comment;
+import com.lcom_test.example.domain.Heart;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.Product;
@@ -365,8 +366,8 @@ public class AuthController {
 	}
 	
 	
-	@GetMapping({"/latestitems", "/latestitems/{pageOpt}","//latestitems/{pageOpt}/{username}"})
-	public ResponseEntity<?> test(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
+	@GetMapping({"/latestitems", "/latestitems/{pageOpt}","/latestitems/{pageOpt}/{username}"})
+	public ResponseEntity<?> latestitems(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
 			@PathVariable int pageOpt,
 			@PathVariable String username){
 		product.setPageOpt(pageOpt);
@@ -375,6 +376,17 @@ public class AuthController {
 		logger.info(itemslist.toString());
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
+	
+	@GetMapping({"/hotitems", "/hotitems/{pageOpt}","/hotitems/{pageOpt}/{username}"})
+	public ResponseEntity<?> hotitems(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
+			@PathVariable int pageOpt,
+			@PathVariable String username){
+		product.setPageOpt(pageOpt);
+		product.setUsername(username);
+		List<Product> itemslist = productService.selectHotList(product);
+		logger.info(itemslist.toString());
+		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
+	} // 인기상품리스트
 	
 	@GetMapping({"/productrank"})
 	public ResponseEntity<?> productrank(Product product){
@@ -424,7 +436,7 @@ public class AuthController {
 			productService.deleteCart(cart.getCtId());
 		
 			return new ResponseEntity<>("success", HttpStatus.OK);
-	}	
+	}
 	
 	@PostMapping({"/likeproduct","/likeproduct/{username}"})
 	public ResponseEntity<?> likeproduct(@RequestBody Product product,
@@ -435,20 +447,7 @@ public class AuthController {
 		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 		
-	} // 원래 로직
-	
-//	@PostMapping({"/likeproduct","/likeproduct/{pageOpt}","/likeproduct/{pageOpt}/{username}"})
-//	public ResponseEntity<?> likeproduct(@RequestBody Product product,
-//			@PathVariable String username,
-//			@PathVariable int pageOpt){
-//		productService.likeProduct(product.getpId()); // product pLike + 1
-//		product.setUsername(username);
-//		product.setPageOpt(pageOpt);
-//		productService.insertHeart(product); //pId, username 보내주기 위해 객체 전송, vue_heart에 insert
-//		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
-//		return ResponseEntity.ok(new ListResponse<Product>(productlist));
-//		
-//	} // 테스트 로직
+	}
 	
 	@PostMapping({"/cancellike","/cancellike/{username}"})
 	public ResponseEntity<?> cancellike(@RequestBody Product product,

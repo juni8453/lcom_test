@@ -45,7 +45,7 @@
                           <v-btn text exact
                           router :to="{name:'LatestItems'}"
                           >
-                              최신상품
+                              상품 리스트
                           </v-btn>
                       </v-col>
                           
