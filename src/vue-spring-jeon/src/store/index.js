@@ -383,15 +383,8 @@ export default new Vuex.Store({
         for(let i=0; i<payload.fileinput.length; i++){          
           let file = payload.fileinput[i]
           console.log(file)
-          let date = new Date()
-          let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ file.lastModified
-          console.log('iPk는?')
-          console.log(iPk)
 
           formData.append('uploadFile', file) 
-          formData.append('iName', file.name)                       // 이미지 이름
-          formData.append('iPk', iPk)                               // 이미지 고유번호
-          // 최종 결과값이 post를 타고 넘어감 (두개 이상 넘길 시 이름과 iPk가 합쳐져서 보내짐 (수정필요))
         }   
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`  
         axios.post('http://localhost:9000/api/admin/insertproducttest', formData,

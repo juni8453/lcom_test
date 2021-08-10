@@ -5,6 +5,8 @@
         <BwBar></BwBar>  
         <v-card class="text-center">
           <v-row>
+             <!-- v-for="item in itemdetaillist.listImages" :key="item.iName" -->
+             <!-- 밑에 코드 이런식으로 고쳐보자 8월 11일에 -->
             <v-col cols="3" v-for="item in productlist" :key="item.pId">
               <v-card>
                 <v-row>
@@ -30,16 +32,18 @@
                     </v-card>
                     <v-card
                      >
+                     {{item.pId}}
                       <router-link :to="{name:'ItemDetail',
                         params:{
-                          pId:item.pId
+                          pId:item.pId,
+                          pName:item.pName
                         }
                       }"
                       >
                         <v-img
                             contain
                             height="250"
-                            :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
+                            :src="`/images/thumb/${item.listImages[0].iName}`"
                         ></v-img> 
                       </router-link> 
                     </v-card>

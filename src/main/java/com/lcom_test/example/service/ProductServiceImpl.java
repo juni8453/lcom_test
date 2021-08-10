@@ -30,9 +30,14 @@ public class ProductServiceImpl implements ProductService {
 	}
 	
 
+//	@Override
+//	public Product getProduct(int pId) {
+//		return productMapper.getProduct(pId);
+//	}
+	
 	@Override
-	public Product getProduct(int pId) {
-		return productMapper.getProduct(pId);
+	public Product getProduct(String pName) {
+		return productMapper.getProduct(pName);
 	}
 
 	@Override
@@ -93,4 +98,18 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> selectHotList(Product product) {
 		return productMapper.selectHotList(product);
 	}
+
+	@Override
+	public void insertImage(Product product) {
+		productMapper.insertImage(product);
+		
+	}
+
+	@Override
+	public void updatepId(Images images) {
+		productMapper.updatepId(images);
+		
+	}
+
+	
 }

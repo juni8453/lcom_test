@@ -3,7 +3,7 @@
     <v-row dense>
       <v-col cols="12" md="12" sm="12">
         <BwBar></BwBar>
-      </v-col> 
+      </v-col>
     </v-row>
     <v-row>
       <v-col cols="12" md="12" sm="12">
@@ -50,9 +50,14 @@
                         }
                       }"
                     >
-                    <v-img
+                    <!-- <v-img
                     contain
                     :src="`/images/thumb/${item.listCart[0].listImages[0].iPk}${item.listCart[0].listImages[0].iName}`"                  
+                    >
+                    </v-img> -->
+                    <v-img
+                    contain
+                    :src="`/images/thumb/${item.listCart[0].listImages[0].iName}`"                  
                     >
                     </v-img>
                    </router-link>  
@@ -166,6 +171,7 @@ export default {
       post:3000,
       limit:0,
       pageOpt:8,
+      model:null
     }
   },
 

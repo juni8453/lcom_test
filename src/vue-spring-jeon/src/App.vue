@@ -67,7 +67,7 @@
           </v-list-item-content>
         </v-list-item>
         <v-list-item 
-          router :to="{name:'ProductInsert'}"
+          router :to="{name:'MultiUploadTest'}"
           v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')"
           >
           <v-list-item-action>

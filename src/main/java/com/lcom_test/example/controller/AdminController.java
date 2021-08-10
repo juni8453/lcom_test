@@ -9,6 +9,7 @@ import java.io.InputStream;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -84,17 +85,23 @@ public class AdminController {
 			@RequestPart("uploadFile") MultipartFile[] files,
 			Product product, Images images
 			){
-		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";	
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";	
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		
+		// 파일 이름 중복 방지 (년월일초 추가)
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date time = new Date();
+		String dateresult = dateFormat.format(time);
+		
 		for(MultipartFile file : files) {
-//			String filename = file.getOriginalFilename();
-			String filename = images.getiPk() + file.getOriginalFilename();
+//			String filename = images.getiPk() + file.getOriginalFilename();
+			String filename = dateresult + file.getOriginalFilename();
 			String ext = filename.substring(filename.lastIndexOf(".")+1);
 			File multifile = new File(path + filename);
 			File thumbFile = new File(thumbPath + filename);
+			System.out.println(filename);
 			
 			try {
 				// 원본 파일 저장
@@ -114,29 +121,30 @@ public class AdminController {
 				g.dispose();
 				ImageIO.write(thumbImageBf, ext, thumbFile);
 				
+				productService.insertProduct(product);		// 제품 내용 디비에 삽입 (중복방지 SQL문)
+				product.setiName(filename);					// DB의 i_name에 값을 넣기 위해 년월일초와 합친 파일 이름을 product에 넣어준다.
+				productService.insertImage(product); 		// 이미지 내용 디비에 삽입 (pName값 넘겨주기)
+				
 			}  catch(IOException e) {
 				FileUtils.deleteQuietly(multifile);
 				e.printStackTrace();
 			}
 		
 		}
-		boardService.insertImage(images);
-		boardService.updatepId(images);
-		productService.insertProduct(product);
-		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	} // 다중 파일 업로드 Test
 
 	
+	// 이 부분 삭제해보기 (8_11일에)
 	@PostMapping("/insertproduct")
 	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> insertproduct(Product product,
 			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 //		
 		String thumbPath = path + "thumb/";
 		String filename = images.getiPk() + multipartFile.getOriginalFilename();

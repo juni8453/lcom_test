@@ -395,14 +395,13 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
 	
-	
-	@GetMapping({"/itemdetail", "/itemdetail/{pId}"})
+	@GetMapping({"/itemdetail", "/itemdetail/{pName}"})
 	public ResponseEntity<?> itemdetail(
-			@PathVariable int pId,
+			@PathVariable String pName,
 			Product product){
 		
-		logger.debug("pId:"+pId);
-		product = productService.getProduct(pId);
+		logger.debug("pName:"+pName);
+		product = productService.getProduct(pName);
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 	

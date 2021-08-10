@@ -5,19 +5,57 @@
         <BwBar></BwBar>  
         <v-card class="text-center" outlined>
           <v-row>
-            <v-col cols="6" md="6" sm="12">
-              <!-- <v-img
-                height=""
-                :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
-              > 
-              </v-img> -->
-              <v-img
-                contain
-                :src="`/images/thumb/${itemdetaillist.listImages[0].iPk}${itemdetaillist.listImages[0].iName}`"
+            <v-col cols="12" md="12" sm="12">
+            <v-sheet
+                class="mx-auto"
+                elevation="8"
+                max-width="800"
               >
-              </v-img>
+                <v-slide-group
+                  v-model="model"
+                  class="pa-4 Center"
+                  active-class="success"
+                  show-arrows
+                >
+                  <v-slide-item
+                    v-for="item in itemdetaillist.listImages" :key="item.iName"
+                    v-slot="{ active, toggle }"
+                  >
+                    <v-card
+                      :color="active ? undefined : 'grey lighten-1'"
+                      class="ma-4 Center"
+                      height="500"
+                      width="300"
+                      @click="toggle"
+                    >
+                    <v-img
+                      contain
+                      :src="`/images/thumb/${item.iName}`"
+                    >
+                    </v-img>
+                      <v-row
+                        class="fill-height"
+                        align="center"
+                        justify="center"
+                      >
+                        <v-scale-transition>
+                          <v-icon
+                            v-if="active"
+                            color="white"
+                            size="48"
+                            v-text="'mdi-close-circle-outline'"
+                          ></v-icon>
+                        </v-scale-transition>
+                      </v-row>
+                    </v-card>
+                  </v-slide-item>
+                </v-slide-group>
+              </v-sheet>  
             </v-col>
-            <v-col cols="6" md="6" sm="12">
+            <v-col>
+              
+            </v-col>  
+            <v-col cols="12" md="12" sm="12">
               <h2 class="mb-10 mt-6 text-center">
                 Product Introduce
                 <v-btn class="ml-3" small
@@ -132,6 +170,15 @@
       </v-row>
   </v-container>
 </template>
+
+<style>
+  .Center { 
+  display: grid;
+  align-items: center;      /* 수직 중앙 정렬*/
+  justify-content: center;  /* 수평 중앙 정렬*/
+}
+</style>
+
 <script>
 import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
@@ -141,7 +188,7 @@ import axios from 'axios'
 
 export default {
   
-  props:['pId'],
+  props:['pId','pName'],
   data(){
     return{
       // item:{listImages:[]} // []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
@@ -155,10 +202,10 @@ export default {
 
   created(){
     console.log('ItemDetail Created Run!')
-    console.log('받아온 props pId:'+this.pId)
+    // console.log('받아온 props pId:'+this.pId)
     new Promise((resolve, reject) => {
       console.log(this.$store.state.Userinfo.User_Id)
-      axios.get(`http://localhost:9000/api/auth/itemdetail/${this.pId}`)
+      axios.get(`http://localhost:9000/api/auth/itemdetail/${this.pName}`)
       .then(Response => {
         console.log('ItemDetail created Response data')
         console.log(Response.data)

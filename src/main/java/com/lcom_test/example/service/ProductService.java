@@ -13,7 +13,9 @@ public interface ProductService {
 
 	public List<Product> selectProductList(Product product);
 
-	public Product getProduct(int pId);
+//	public Product getProduct(int pId);
+	
+	public Product getProduct(String pName);
 
 	public void deleteProduct(int pId);
 
@@ -36,6 +38,10 @@ public interface ProductService {
 	public List<Product> selectRankList(Product product);
 
 	public List<Product> selectHotList(Product product);
+
+	public void insertImage(Product product);
+
+	public void updatepId(Images images);
 
 
 	}
