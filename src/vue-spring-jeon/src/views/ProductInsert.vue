@@ -29,7 +29,6 @@
                   pPrice: pPrice,
                   pFrom: pFrom,
                   pBrand: pBrand,
-                  pPost: pPost,
                   fileinput: fileinput
                 })"
                 >등록</v-btn>

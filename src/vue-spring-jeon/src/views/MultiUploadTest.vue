@@ -31,7 +31,7 @@
                   pBrand: pBrand,
                   fileinput: fileinput
                 })"
-                >등록</v-btn>
+                >등록</v-btn>        
             </v-card>
           </v-col>
         </v-row>  

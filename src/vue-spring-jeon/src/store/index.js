@@ -372,51 +372,50 @@ export default new Vuex.Store({
     },
 
     insertProductTest({commit, state},payload){
-      console.log(payload)
-      console.log('fileinput의 길이는?' + payload.fileinput.length)
-      for(let i=0; i<payload.fileinput.length; i++){       
-        console.log('payload.name:' +payload.fileinput[i].name)
-        console.log('payload.lastModified:' +payload.fileinput[i].lastModified)
-        let date = new Date()
-        console.log(payload.fileinput[i].lastModified)
-        let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ payload.fileinput[i].lastModified 
-        console.log('iPk는?'+iPk)
+      return new Promise((resolve, reject) => {
+        console.log('insertProductTest Run')
+        let formData = new FormData();
+        formData.append('pName', payload.pName)                   // 제품 이름
+        formData.append('pPrice', payload.pPrice)                 // 제품 가격
+        formData.append('pFrom', payload.pFrom)                   // 제품 원산지
+        formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
         
-        return new Promise((resolve, reject) => {
-          axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
-          let formData = new FormData();
-          // formData.append('uploadFile', payload.fileinput[i])
-          formData.append('uploadFile', payload.fileinput)
-          formData.append('pName', payload.pName)                   // 제품 이름
-          formData.append('pPrice', payload.pPrice)                 // 제품 가격
-          formData.append('pFrom', payload.pFrom)                   // 제품 원산지
-          formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
-          formData.append('iName',payload.fileinput[i].name)           // 이미지 이름
-          formData.append('iPk', iPk)    // 이미지 고유번호
-    
-          axios.post('http://localhost:9000/api/admin/insertproducttest', formData,
-            {
-              headers: {
-                'Content-Type': 'multipart/form-data',
-                'Access-Control-Allow-Origin': '*'
-            }
+        for(let i=0; i<payload.fileinput.length; i++){          
+          let file = payload.fileinput[i]
+          console.log(file)
+          let date = new Date()
+          let iPk = `${date.getFullYear()}${date.getMonth()}${date.getDate()}${date.getSeconds()}`+ file.lastModified
+          console.log('iPk는?')
+          console.log(iPk)
+
+          formData.append('uploadFile', file) 
+          formData.append('iName', file.name)                       // 이미지 이름
+          formData.append('iPk', iPk)                               // 이미지 고유번호
+          // 최종 결과값이 post를 타고 넘어감 (두개 이상 넘길 시 이름과 iPk가 합쳐져서 보내짐 (수정필요))
+        }   
+        axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`  
+        axios.post('http://localhost:9000/api/admin/insertproducttest', formData,
+          {
+            headers: {
+              'Content-Type': 'multipart/form-data',
+              'Access-Control-Allow-Origin': '*'
+          }
+        })
+          .then(Response => {
+            console.log('Resonse.data를 받았습니다.')
+                  
+            if(Response.data === "success") {
+              Route.push("/latestitems")
+            } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
+        })
+        .catch(Error => {
+            console.log('error')
+            reject(Error)
+            alert("Error!")
+            Route.push("/")
           })
-            .then(Response => {
-                    console.log('Resonse.data를 받았습니다.')
-                    
-              if(Response.data === "success") {
-                Route.push("/latestitems")
-              } // 제품 등록 후 latestitems의 creted hook 실행을 위해 이동
-          })
-          .catch(Error => {
-              console.log('error')
-              reject(Error)
-              alert("Error!")
-              Route.push("/")
-            })
-          })
-        }
-      }, // 다중 제품 테스트
+        })
+    }, // 다중 제품 테스트
    
     insertProduct({commit, state},payload){
       console.log('produtInsert Run')
