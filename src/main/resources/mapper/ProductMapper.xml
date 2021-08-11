@@ -2,58 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.lcom_test.example.mapper.ProductMapper">
 
-<!-- 원래 로직
 <resultMap type = "Images" id="Images1">
 		<result column="i_id" property="iId"/>
 		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
-		<result column="p_name" property="pName"/>
-</resultMap>
-
-<resultMap type = "Heart" id="Heart1">
-		<result column="h_id" property="hId"/>
-		<result column="p_id" property="pId"/>
-		<result column="u_id" property="username"/>
-</resultMap>
-
-<resultMap type = "UserInfo" id="UserInfo1">
-		<result column="u_id" property="username"/>
-</resultMap>
-	
-<resultMap type = "Product" id="Product1">
-		<result column="p_id" property="pId"/>
-		<result column="p_name" property="pName"/>
-		<result column="p_date" property="pDate"/>
-		<result column="p_price" property="pPrice"/>
-		<result column="p_from" property="pFrom"/>
-		<result column="p_brand" property="pBrand"/>
-		<result column="p_like" property="pLike"/>
-		<collection property="listImages" resultMap="Images1"/>
-		<collection property="listHeart" resultMap="Heart1"/>
-		<collection property="listUserInfo" resultMap="UserInfo1"/>
-</resultMap>
-
-<select id="selectProductList" resultMap="Product1">
-SELECT		*
-FROM		vue_product	ta
-LEFT JOIN	(
-			SELECT		*
-			FROM		vue_heart
-			WHERE 		u_id = #{username}
-			) 
-			tb ON ta.p_id = tb.p_id
-LEFT JOIN 	vue_img	tc ON ta.p_id = tc.p_id
-LEFT JOIN	userlist td ON tb.u_id = td.u_id
-LIMIT		#{pageOpt},8
-</select>
--->
-
-<resultMap type = "Images" id="Images1">
-		<result column="i_id" property="iId"/>
-		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
 		<result column="p_name" property="pName"/>
 </resultMap>
 
@@ -97,8 +48,6 @@ LIMIT		#{pageOpt},8
 <resultMap type = "Images" id="Images5">
 		<result column="i_id" property="iId"/>
 		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
 		<result column="p_name" property="pName"/>
 </resultMap>
 
@@ -134,45 +83,14 @@ LEFT JOIN	(
 			WHERE 		u_id = #{username}
 			) 
 			tb ON ta.p_id = tb.p_id
-LEFT JOIN 	vue_img	tc ON ta.p_id = tc.p_id
+LEFT JOIN 	vue_img	tc ON ta.p_name = tc.p_name
 LEFT JOIN	userlist td ON tb.u_id = td.u_id ORDER BY p_like DESC
 LIMIT		#{pageOpt},8
 </select>
 
-<!-- 원래로직 
 <resultMap type = "Images" id="Images2">
+		<result column="i_id" property="iId"/>
 		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
-		<result column="p_name" property="pName"/>
-</resultMap>
-	
-<resultMap type = "Product" id="Product2">
-		<result column="p_id" property="pId"/>
-		<result column="p_name" property="pName"/>
-		<result column="p_date" property="pDate"/>
-		<result column="p_price" property="pPrice"/>
-		<result column="p_from" property="pFrom"/>
-		<result column="p_brand" property="pBrand"/>
-		<result column="p_like" property="pLike"/> 
-		<collection property="listImages" resultMap="Images2"/>
-</resultMap>
-
-<select id="getProduct" resultMap="Product2">
-	SELECT 			*
-	FROM 			vue_product p
-	LEFT JOIN		vue_img		i
-	ON 				p.p_id = i.p_id
-	WHERE			p.p_id = #{pId}
-</select>
--->
-
-
-<!-- itemDetail Test 로직 -->
-<resultMap type = "Images" id="Images2">
-		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
 		<result column="p_name" property="pName"/>
 </resultMap>
 	
@@ -197,9 +115,8 @@ LIMIT		#{pageOpt},8
 
  
 <resultMap type = "Images" id="Images4">
+		<result column="i_id" property="iId"/>
 		<result column="i_name" property="iName"/>
-		<result column="i_pk" property="iPk"/>
-		<result column="p_id" property="pId"/>
 		<result column="p_name" property="pName"/>
 </resultMap>
 	
@@ -230,7 +147,6 @@ LIMIT		#{pageOpt},8
 	ORDER BY		p_like DESC
 </select>
 
- <!-- 원래로직 
 <insert id="insertProduct" parameterType="Product">
 	      INSERT INTO vue_product(
 			p_name,
@@ -245,30 +161,7 @@ LIMIT		#{pageOpt},8
 			#{pBrand}
 		)
 </insert>
---> 
 
-<!-- 다중 업로드 테스트 로직 -->
-<insert id="insertProduct" parameterType="Product">
-	   INSERT INTO vue_product(
-		p_name,
-		p_price,
-		p_from,
-		p_brand
-	)
-	SELECT	
-		#{pName},
-		#{pPrice},
-		#{pFrom},
-		#{pBrand}
-		
-	FROM 	dual
-	WHERE	NOT EXISTS(
-		SELECT 	*
-		FROM	vue_product
-		WHERE	p_name = #{pName}
-	)
-	 
-</insert> 
 
 <insert id="insertImage" parameterType="Images">
 	INSERT INTO vue_img(
@@ -286,7 +179,7 @@ LIMIT		#{pageOpt},8
 <delete id="deleteProduct" parameterType="Product">
 	DELETE 		a,b,c
 	FROM 	 	vue_product a
-	LEFT JOIN 	vue_img b	ON a.p_id = b.i_id
+	LEFT JOIN 	vue_img b	ON a.p_name = b.p_name
 	LEFT JOIN	vue_cart c 	ON a.p_id = c.p_id
 	WHERE		a.p_id = #{pId}
 </delete>
@@ -360,48 +253,10 @@ LIMIT		#{pageOpt},8
 	<collection property="listImages" resultMap="Images3"/>
 </resultMap>
 
-<!-- 원래로직 
 <resultMap type = "Images" id="Images3">	
-	<result column="i_name" property="iName"/>
-	<result column="i_pk" property="iPk"/>
 	<result column="i_id" property="iId"/>
-</resultMap>
-	
-<resultMap type = "Cart" id="Cart1">
-	<result column="ct_id" property="ctId"/>
-	<result column="p_id" property="pId"/>
-	<result column="u_id" property="username"/>	
-	<collection property="listCart" resultMap="Product3"/>
-</resultMap>
-
-<select id="selectCartList" resultMap="Cart1">
-	SELECT 
-		c.ct_id,
-		c.p_id,
-		c.u_id,
-		p.p_name,
-		p.p_price,
-		p.p_from,
-		p.p_brand,
-		i.i_name,
-		i.i_pk,
-		i.i_id
-
-	FROM 			vue_cart c
-	LEFT JOIN 		vue_product p 
-	ON				c.p_id = p.p_id
-	LEFT JOIN		vue_img i
-	ON				i.p_id = p.p_id
-	WHERE			u_id = #{username}
-	LIMIT			#{pageOpt},8
-</select>
--->
-
-<!-- 테스트 로직 -->
-<resultMap type = "Images" id="Images3">	
 	<result column="i_name" property="iName"/>
-	<result column="i_pk" property="iPk"/>
-	<result column="i_id" property="iId"/>
+	<result column="p_name" property="pName"/>
 </resultMap>
 	
 <resultMap type = "Cart" id="Cart1">

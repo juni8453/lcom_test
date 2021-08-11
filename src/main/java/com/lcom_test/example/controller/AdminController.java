@@ -85,8 +85,8 @@ public class AdminController {
 			@RequestPart("uploadFile") MultipartFile[] files,
 			Product product, Images images
 			){
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";	
+		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";	
 //		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		
@@ -94,6 +94,7 @@ public class AdminController {
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
 		Date time = new Date();
 		String dateresult = dateFormat.format(time);
+		int runcount = 1;
 		
 		for(MultipartFile file : files) {
 //			String filename = images.getiPk() + file.getOriginalFilename();
@@ -120,8 +121,12 @@ public class AdminController {
 				g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
 				g.dispose();
 				ImageIO.write(thumbImageBf, ext, thumbFile);
+
+				if (runcount == 1) {
+					productService.insertProduct(product); // 제품 내용 디비에 삽입 (중복 INSERT 방지위해 count로 한번만 실행되도록 설정)
+					runcount++;
+				}
 				
-				productService.insertProduct(product);		// 제품 내용 디비에 삽입 (중복방지 SQL문)
 				product.setiName(filename);					// DB의 i_name에 값을 넣기 위해 년월일초와 합친 파일 이름을 product에 넣어준다.
 				productService.insertImage(product); 		// 이미지 내용 디비에 삽입 (pName값 넘겨주기)
 				
@@ -133,56 +138,6 @@ public class AdminController {
 		}
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	} // 다중 파일 업로드 Test
-
-	
-	// 이 부분 삭제해보기 (8_11일에)
-	@PostMapping("/insertproduct")
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
-	public ResponseEntity<?> insertproduct(Product product,
-			@RequestParam("uploadFile") MultipartFile multipartFile, Images images){
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
-//		
-		String thumbPath = path + "thumb/";
-		String filename = images.getiPk() + multipartFile.getOriginalFilename();
-		String ext = filename.substring(filename.lastIndexOf(".")+1);
-		
-		File file = new File(path + filename);
-		File thumbFile = new File(thumbPath + filename);
-		
-		
-		try {
-		// 원본파일 저장
-			InputStream input = multipartFile.getInputStream();
-			FileUtils.copyInputStreamToFile(input, file);
-			
-		// 썸네일 생성
-			BufferedImage imageBuf = ImageIO.read(file);
-			int fixWidth =  500;
-			double ratio = imageBuf.getWidth() / (double)fixWidth;
-			int thumbWidth = fixWidth;
-			int thumbHeight = (int)(imageBuf.getHeight() / ratio);
-			BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
-			Graphics2D g  = thumbImageBf.createGraphics();
-			Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
-			g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
-			g.dispose();
-			ImageIO.write(thumbImageBf, ext, thumbFile);
-			
-			
-		} catch(IOException e) {
-			FileUtils.deleteQuietly(file);
-			e.printStackTrace();
-		}
-		
-		productService.insertProduct(product);
-		boardService.insertImage(images);
-		boardService.updatepId(images);
-		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
 
 	
 	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
@@ -224,7 +179,7 @@ public class AdminController {
 	public ResponseEntity<?> deleteProduct(
 			@RequestBody Product product){
 		logger.info(product.toString());
-			productService.deleteProduct(product.getpId());
+			productService.deleteProduct(product);
 			
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}

@@ -23,6 +23,7 @@
                      @click="deleteProduct(
                       {
                         pId:item.pId,
+                        pName:item.pName,
                         iId:item.listImages[0].iId
                       }
                      )">
@@ -192,8 +193,7 @@ methods: {
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
         axios.post('http://localhost:9000/api/admin/deleteproduct', payload)
         .then(Response => {
-            console.log(Response.data)
-            // this.$store.commit('READ_PRODUCT_LIST', Response.data)
+            console.log(Response.data)          
             if(Response.data === "success"){
               console.log('deleteProduct 메서드가 성공적으로 실행되었습니다.')
               /* Route.push('latestitems') 같은 페이지로 다시 push할 수 없기 때문에

@@ -46,15 +46,10 @@
                 <v-card outlined>
                    <router-link :to="{name:'ItemDetail',
                         params:{
-                          pId:item.pId
+                          pName:item.listCart[0].pName
                         }
                       }"
                     >
-                    <!-- <v-img
-                    contain
-                    :src="`/images/thumb/${item.listCart[0].listImages[0].iPk}${item.listCart[0].listImages[0].iName}`"                  
-                    >
-                    </v-img> -->
                     <v-img
                     contain
                     :src="`/images/thumb/${item.listCart[0].listImages[0].iName}`"                  
@@ -70,7 +65,7 @@
                 {{item.listCart[0].pPrice | comma}}
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
-                {{item.listCart[0].pPrice}}
+                {{item.listCart[0].pPrice | comma}}
               </v-col>
               <v-col cols="2" md="2" sm="2" class="Center">
                 <v-btn small

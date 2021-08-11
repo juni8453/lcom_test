@@ -458,27 +458,6 @@ public class AuthController {
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
-
-//	@PostMapping("/likeproduct")
-//	public ResponseEntity<?> likeproduct(@RequestBody Product product){
-//		productService.likeProduct(product.getpId());
-//		product = productService.getProduct(product.getpId()); // 여기서 pHeart와 pLike를 구해줘야함
-////		product.setpHeart(!product.ispHeart()); // pHeart가 true라면 false로, false라면 true로 전환
-//		return new ResponseEntity<>(product, HttpStatus.OK);
-//		
-////		return new ResponseEntity<>("success", HttpStatus.OK);
-//	}
-	
 //	@PostMapping("/kakaopay")
 //	@ResponseBody
 //	public String kakaopay(@RequestBody Product product){

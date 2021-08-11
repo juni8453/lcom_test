@@ -24,6 +24,7 @@ import ItemDetail from '../views/ItemDetail'
 import PutCart from '../views/PutCart'
 import ProductRank from '../views/ProductRank'
 import MultiUploadTest from '../views/MultiUploadTest'
+import BuyProduct from '../views/BuyProduct'
 
 Vue.use(VueRouter)
 
@@ -188,7 +189,6 @@ const routes = [
       }
     }
   },
-
   {
     path: '/multiuploadtest',
     name: 'MultiUploadTest',
@@ -202,6 +202,12 @@ const routes = [
         next()
       }
     }
+  },
+  {
+    path: '/buyproduct',
+    name: 'BuyProduct',
+    component: BuyProduct,
+    props: true
   },
   
 ]

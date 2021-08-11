@@ -59,13 +59,8 @@
               <h2 class="mb-10 mt-6 text-center">
                 Product Introduce
                 <v-btn class="ml-3" small
-                @click="buyProduct({
-                  pId:itemdetaillist.pId,
-                  pName:itemdetaillist.pName,
-                  pPrice:itemdetaillist.pPrice,
-                  pBrand:itemdetaillist.pBrand,
-                  pFrom:itemdetaillist.pFrom,
-                })">
+                  router :to="{name:'BuyProduct'}"
+                >
                   구매하기
                   <v-icon>
                     mdi-cash
@@ -192,6 +187,7 @@ export default {
   data(){
     return{
       // item:{listImages:[]} // []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
+      model:null
       
     }
   },
@@ -202,7 +198,7 @@ export default {
 
   created(){
     console.log('ItemDetail Created Run!')
-    // console.log('받아온 props pId:'+this.pId)
+    console.log('받아온 props pName:'+this.pName)
     new Promise((resolve, reject) => {
       console.log(this.$store.state.Userinfo.User_Id)
       axios.get(`http://localhost:9000/api/auth/itemdetail/${this.pName}`)
@@ -221,24 +217,6 @@ export default {
   },
 
   methods:{
-
-    buyProduct(payload){     
-      console.log('buyProduct Run!')
-      console.log(payload) // payload = {pName, pPrice, pBrand, pFrom, pId}
-      new Promise((resolve, reject) => {
-        axios.post('http://localhost:9000/api/auth/kakaopay', payload)
-        .then(Response => {
-          console.log(Response.data)
-          console.log(Response.data.tid)
-          window.open(Response.data.next_redirect_pc_url)
-        })
-        .catch(Error => {
-          console.log('Error 발생')
-          alert(Error)
-        })
-      })
-    },
-
     putCart(payload){
       console.log('putCart Run')
       console.log(payload)

@@ -19,7 +19,7 @@ public interface ProductMapper {
 	
 	public Product getProduct(String pName);
 
-	public void deleteProduct(int pId);
+	public void deleteProduct(Product product);
 
 	public void insertPutCart(Cart cart);
 

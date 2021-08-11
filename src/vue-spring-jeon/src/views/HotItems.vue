@@ -37,7 +37,7 @@
                         <v-img
                             contain
                             height="250"
-                            :src="`/images/thumb/${item.listImages[0].iPk}${item.listImages[0].iName}`"
+                            :src="`/images/thumb/${item.listImages[0].iName}`"
                         ></v-img> 
                       </router-link> 
                     </v-card>

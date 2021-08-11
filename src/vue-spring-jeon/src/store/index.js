@@ -487,7 +487,6 @@ export default new Vuex.Store({
           console.log(Response.data)
           console.log('Items data를 받았습니다')
           console.log(Response.data.list)
-          // console.log(Response.data.pagination)
           commit('READ_PRODUCT_LIST', Response.data) 
           console.log('정상적으로 hotItems가 작동되었습니다.')
         })
