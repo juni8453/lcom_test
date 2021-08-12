@@ -30,12 +30,6 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.selectProductList(product);
 	}
 	
-
-//	@Override
-//	public Product getProduct(int pId) {
-//		return productMapper.getProduct(pId);
-//	}
-	
 	@Override
 	public Product getProduct(String pName) {
 		return productMapper.getProduct(pName);
@@ -115,6 +109,11 @@ public class ProductServiceImpl implements ProductService {
 	@Override
 	public void buyProduct(Order order) {
 		productMapper.buyProduct(order);
+	}
+
+	@Override
+	public List<Order> selectOrderList(Order order) {		
+		return productMapper.selectOrderList(order);
 	}
 
 	

@@ -25,6 +25,7 @@ import PutCart from '../views/PutCart'
 import ProductRank from '../views/ProductRank'
 import MultiUploadTest from '../views/MultiUploadTest'
 import BuyProduct from '../views/BuyProduct'
+import OrderList from '../views/OrderList'
 
 Vue.use(VueRouter)
 
@@ -207,6 +208,12 @@ const routes = [
     path: '/buyproduct',
     name: 'BuyProduct',
     component: BuyProduct,
+    props: true
+  },
+  {
+    path: '/orderlist',
+    name: 'OrderList',
+    component: OrderList,
     props: true
   },
   

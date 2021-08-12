@@ -19,7 +19,8 @@ export default new Vuex.Store({
       User_Id:null,
       User_Name:null,
       User_auth:null,
-      User_token:null
+      User_token:null,
+      User_Phone:null
     },
     boardlist:[],
     commentlist:[],
@@ -46,7 +47,7 @@ export default new Vuex.Store({
     itemdetaillist:[],
     cartlist:[],
     heart:[],
-    // heartlist:[], // 테스트 state
+    orderlist:[],
     totalprice:0
   },
   mutations: {
@@ -65,6 +66,9 @@ export default new Vuex.Store({
       state.Userinfo.User_Name = data.name
       state.Userinfo.User_auth = data.roles
       state.Userinfo.User_token = data.token
+      console.log('SET_USER의 data는?')
+      console.log(data)
+      state.Userinfo.User_Phone = data.uPhone
       Route.push("/")
     },
     READ_USER_LIST(state,data) {
@@ -154,6 +158,9 @@ export default new Vuex.Store({
       console.log('SET_TOTALPRICE:'+data)
       state.totalprice = data
     },
+    SET_ORDER_LIST(state, data){
+      state.orderlist = data.list
+    }
   },
   
   actions: {
@@ -530,6 +537,21 @@ export default new Vuex.Store({
         .catch(Error => {
             console.log(Error)
             alert('새로고침 이후에는 홈으로 이동합니다.')
+            Route.push("/")
+        })
+      })
+    },
+
+    orderList({commit,state}){
+      return new Promise((resolve, reject) => {
+        axios.get(`http://localhost:9000/api/auth/orderlist/${state.Userinfo.User_Id}`)
+        .then(Response => {
+          console.log(Response.data)
+          commit('SET_ORDER_LIST', Response.data)
+        })
+        .catch(Error => {
+            console.log(Error)
+            alert('Error!')
             Route.push("/")
         })
       })

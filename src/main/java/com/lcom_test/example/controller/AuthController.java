@@ -119,11 +119,17 @@ public class AuthController {
 		List<String> roles = user.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-
-		return ResponseEntity.ok(new JwtResponse(jwt, 
-												 user.getUsername(), 
-												 user.getName(),  
+		return ResponseEntity.ok(new JwtResponse(jwt,
+												 user.getUsername(),
+												 user.getName(),
+												 user.getPhone(),
 												 roles));
+
+//		return ResponseEntity.ok(new JwtResponse(jwt, 
+//												 user.getUsername(),
+//												 user.getName(),
+//												 user.getPhone(),
+//												 roles);
 	}
 	@PostMapping("/signup")
 	   public ResponseEntity<?> sinupUser(@Validated @RequestBody JoinRequest joinRequest) {
@@ -427,6 +433,14 @@ public class AuthController {
 		List<Cart> cartlist = productService.selectCartList(cart);		
 		logger.debug("username:"+cart.getUsername());
 		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
+	}
+	
+	@GetMapping({"/orderlist","/orderlist/{username}"})
+	public ResponseEntity<?> orderlist(Order order,
+			@PathVariable String username){
+		order.setUsername(username);
+		List<Order> orderlist = productService.selectOrderList(order);
+		return ResponseEntity.ok(new ListResponse<Order>(orderlist));		
 	}
 	
 	@PostMapping("/deletecart") 

@@ -139,6 +139,38 @@ LIMIT		#{pageOpt},8
 	ORDER BY		p_like DESC
 </select>
 
+<resultMap type = "Images" id="Images6">
+		<result column="i_id" property="iId"/>
+		<result column="i_name" property="iName"/>
+		<result column="p_name" property="pName"/>
+</resultMap>
+	
+<resultMap type = "Order" id="Order1">
+		<result column="o_num" property="oNum"/>
+		<result column="p_name" property="pName"/>
+		<result column="p_price" property="pPrice"/>
+		<result column="u_id" property="username"/>
+		<result column="r_name" property="rName"/>
+		<result column="o_name" property="oName"/>
+		<result column="o_address" property="oAddress"/>
+		<result column="o_detailaddress" property="oDetailAddress"/>
+		<result column="o_email" property="oEmail"/>
+		<result column="o_demand" property="oDemand"/>
+		<result column="o_date" property="oDate"/>
+		<collection property="listImages" resultMap="Images6"/>
+</resultMap>
+
+<select id="selectOrderList" resultMap="Order1">
+	SELECT 			*
+	FROM 			vue_order ta
+	LEFT JOIN		vue_img	 tb
+	ON 				ta.p_name = tb.p_name
+	WHERE			ta.u_id = #{username}
+	GROUP BY		ta.o_num
+</select>
+
+
+
 <insert id="insertProduct" parameterType="Product">
 	      INSERT INTO vue_product(
 			p_name,

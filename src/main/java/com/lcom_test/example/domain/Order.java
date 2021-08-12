@@ -1,5 +1,7 @@
 package com.lcom_test.example.domain;
 
+import java.util.List;
+
 public class Order {
 	
 	private int oNum; 				// 주문 번호
@@ -12,6 +14,8 @@ public class Order {
 	private String oDetailAddress;	// 상세 주소
 	private String oEmail;			// 주문자 이메일 주소
 	private String oDemand;			// 기타 요구사항
+	private String oDate;			// 주문 날짜
+	private List<Images> listImages; 
 	
 	public int getoNum() {
 		return oNum;
@@ -72,6 +76,18 @@ public class Order {
 	}
 	public void setoDemand(String oDemand) {
 		this.oDemand = oDemand;
+	}
+	public String getoDate() {
+		return oDate;
+	}
+	public void setoDate(String oDate) {
+		this.oDate = oDate;
+	}
+	public List<Images> getListImages() {
+		return listImages;
+	}
+	public void setListImages(List<Images> listImages) {
+		this.listImages = listImages;
 	}
 	
 	

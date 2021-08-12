@@ -57,7 +57,7 @@
             </v-col>  
             <v-col cols="12" md="12" sm="12">
               <h2 class="mb-10 mt-6 text-center">
-                Product Introduce
+                Product Introduce 
                 <v-btn class="ml-3" small
                   router :to="{name:'BuyProduct',
                     params:{

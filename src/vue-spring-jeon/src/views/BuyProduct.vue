@@ -5,10 +5,10 @@
       <v-col cols="12"> 
         <v-card shaped>
           <v-row>
-            <v-col cols="3" class="Center">
+            <v-col cols="3" class="Center mt-3">
               상품이름
             </v-col>
-            <v-col cols="9" class="Center">
+            <v-col cols="9" class="Center mt-3">
               {{pName}}
             </v-col>
           </v-row>
@@ -91,18 +91,18 @@
           </v-row>
           <v-row>
             <v-col cols="3" class="Center">
-              주문자 이름
+              주문자 아이디
             </v-col>
             <v-col cols="9" class="Center">
-              {{Userinfo.User_Name}}
+              {{Userinfo.User_Id}}
             </v-col>
           </v-row>
           <v-row>
-            <v-col cols="3" class="Center">
+            <v-col cols="3" class="Center mt-7">
               주문자 핸드폰 번호
             </v-col>
-            <v-col cols="9" class="Center">
-              {{}}
+            <v-col cols="9" class="Center mt-5">
+              {{Userinfo.User_Phone}}
             </v-col>
           </v-row>
           <v-row>
@@ -131,10 +131,10 @@
             </v-col>
           </v-row>
            <v-row>
-            <v-col cols="3" class="Center">
+            <v-col cols="3" class="Center mt-5">
               주문금액
             </v-col>
-            <v-col cols="9" class="Center">
+            <v-col cols="9" class="Center mt-2">
               {{pPrice | comma}}원
             </v-col>
           </v-row>
@@ -142,7 +142,7 @@
             <v-col cols="3" class="Center">
               입금자 명
             </v-col>
-            <v-col cols="9" class="Center">
+            <v-col cols="9" class="Center mt-3">
               <v-text-field
                 placeholder="필수항목입니다."
                 filled
@@ -163,7 +163,7 @@
                   oName:oName,
                   pName:pName,
                   pPrice:pPrice,
-                  username:Userinfo.User_Name
+                  username:Userinfo.User_Id
                 })"
               > 주문 완료
                 <v-icon>mdi-cash</v-icon>
@@ -239,7 +239,9 @@ export default {
             console.log(Response.data)
             if(Response.data === 'success'){
               alert('주문이 완료되었습니다.')
-              Route.push('/latestitems')
+              if(confirm('주문내역을 확인하시겠습니까?') === true){
+                Route.push('/orderlist')
+              }
             }
           })
           .catch(Error => {

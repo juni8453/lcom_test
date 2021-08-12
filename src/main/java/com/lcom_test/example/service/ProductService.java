@@ -46,5 +46,7 @@ public interface ProductService {
 
 	public void buyProduct(Order order);
 
+	public List<Order> selectOrderList(Order order);
+
 
 	}

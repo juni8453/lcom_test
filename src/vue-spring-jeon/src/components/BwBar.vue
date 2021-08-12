@@ -25,6 +25,12 @@
                               내 장바구니
                           </v-btn>
                       </v-col>
+                      <v-col cols="2">
+                          <v-btn text color="white" exact
+                          router :to="{name:'OrderList'}">
+                              내 주문내역
+                          </v-btn>
+                      </v-col>
                   </v-row>
               </v-card>
 
