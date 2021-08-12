@@ -53,13 +53,18 @@
               </v-sheet>  
             </v-col>
             <v-col>
-              
+
             </v-col>  
             <v-col cols="12" md="12" sm="12">
               <h2 class="mb-10 mt-6 text-center">
                 Product Introduce
                 <v-btn class="ml-3" small
-                  router :to="{name:'BuyProduct'}"
+                  router :to="{name:'BuyProduct',
+                    params:{
+                      pName:itemdetaillist.pName,
+                      pPrice:itemdetaillist.pPrice
+                    }
+                  }"
                 >
                   구매하기
                   <v-icon>
@@ -101,7 +106,7 @@
                         Price
                       </v-col>
                       <v-col cols="3" class="mt-1 ml-8" sm="7">
-                        {{itemdetaillist.pPrice | comma}}
+                        {{itemdetaillist.pPrice | comma}}원
                       </v-col>
                     </v-row>              
                   </v-card-text>

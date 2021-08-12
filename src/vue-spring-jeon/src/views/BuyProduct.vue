@@ -9,34 +9,9 @@
               상품이름
             </v-col>
             <v-col cols="9" class="Center">
-              [받아온 값]
+              {{pName}}
             </v-col>
           </v-row>
-          <v-row>
-            <v-col cols="3" class="Center">
-              수량
-            </v-col>
-            <v-col cols="9" class="Center">
-              [받아온 값]
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="Center">
-              사이즈
-            </v-col>
-            <v-col cols="9" class="Center">
-              [받아온 값]
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="Center">
-              옵션
-            </v-col>
-            <v-col cols="9" class="Center">
-              [받아온 값]
-            </v-col>
-          </v-row>
-          
           <v-row>
             <v-col cols="12">
               <v-card outlined>
@@ -58,32 +33,7 @@
                 placeholder="필수항목입니다."
                 filled
                 rounded
-              ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="Center">
-              집전화
-            </v-col>
-            <v-col cols="9" class="Center">
-              <v-text-field
-                label="선택항목입니다."
-                placeholder="-제외 입력해주세요."
-                filled
-                rounded
-              ></v-text-field>
-            </v-col>
-          </v-row>
-          <v-row>
-            <v-col cols="3" class="Center">
-              휴대폰 번호
-            </v-col>
-            <v-col cols="9" class="Center">
-              <v-text-field
-                label="필수항목입니다."
-                placeholder="-제외 입력해주세요."
-                filled
-                rounded
+                v-model="rName"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -96,6 +46,7 @@
                 placeholder="필수항목입니다."
                 filled
                 rounded
+                v-model="oAddress"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -108,6 +59,7 @@
                 placeholder="필수항목입니다."
                 filled
                 rounded
+                v-model="oDetailAddress"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -133,33 +85,24 @@
                 placeholder="필수항목입니다."
                 filled
                 rounded
+                v-model="oEmail"
               ></v-text-field>
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="3" class="Center">
-              집전화
+              주문자 이름
             </v-col>
             <v-col cols="9" class="Center">
-              <v-text-field
-                label="선택항목입니다."
-                placeholder="-제외 입력해주세요."
-                filled
-                rounded
-              ></v-text-field>
+              {{Userinfo.User_Name}}
             </v-col>
           </v-row>
           <v-row>
             <v-col cols="3" class="Center">
-              휴대폰 번호
+              주문자 핸드폰 번호
             </v-col>
             <v-col cols="9" class="Center">
-              <v-text-field
-                label="필수항목입니다."
-                placeholder="-제외 입력해주세요."
-                filled
-                rounded
-              ></v-text-field>
+              {{}}
             </v-col>
           </v-row>
           <v-row>
@@ -171,6 +114,7 @@
                 placeholder="필수항목입니다."
                 filled
                 rounded
+                v-model="oDemand"
               ></v-text-field>
             </v-col>
           </v-row>
@@ -188,10 +132,10 @@
           </v-row>
            <v-row>
             <v-col cols="3" class="Center">
-              주문 합계금액
+              주문금액
             </v-col>
             <v-col cols="9" class="Center">
-              [받아온 값]
+              {{pPrice | comma}}원
             </v-col>
           </v-row>
           <v-row>
@@ -203,7 +147,38 @@
                 placeholder="필수항목입니다."
                 filled
                 rounded
+                v-model="oName"
               ></v-text-field>
+            </v-col>  
+          </v-row>
+          <v-row>
+            <v-col cols="6" class="Center">
+              <v-btn large
+                @click="buyProduct({
+                  rName:rName,
+                  oAddress:oAddress,
+                  oDetailAddress:oDetailAddress,
+                  oEmail:oEmail,
+                  oDemand:oDemand,
+                  oName:oName,
+                  pName:pName,
+                  pPrice:pPrice,
+                  username:Userinfo.User_Name
+                })"
+              > 주문 완료
+                <v-icon>mdi-cash</v-icon>
+              </v-btn>  
+            </v-col>
+            <v-col cols="6" class="Center">
+              <v-btn large
+                router :to="{name:'ItemDetail',
+                  params:{
+                    pName:pName
+                  }
+                }"
+              > 되돌아가기
+                <v-icon>mdi-undo</v-icon>
+              </v-btn>
             </v-col>
           </v-row>
         </v-card>
@@ -222,15 +197,60 @@
 </style>
 
 <script>
+import { mapState } from 'vuex'
+import Route from '../router/index'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
+import axios from 'axios'
 
 export default {
-  data(){
-    return{
+  props:['pName','pPrice'],
 
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
     }
   },
+
+  data(){
+    return{
+      rName:null,
+      oAddress:null,
+      oDetailAddress:null,
+      oEmail:null,
+      oDemand:null,
+      oName:null
+    }
+  },
+
+  computed:{
+    ...mapState(['Userinfo'])
+  },
+
+  methods:{
+    buyProduct(payload){
+      console.log('buyProduct Run!')
+      console.log(payload)
+      if(confirm('주문하겠습니까?')===true){
+        new Promise((resolve, reject) => {
+          axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
+          axios.post(`http://localhost:9000/api/auth/buyproduct`, payload)
+          .then(Response => {
+            console.log(Response.data)
+            if(Response.data === 'success'){
+              alert('주문이 완료되었습니다.')
+              Route.push('/latestitems')
+            }
+          })
+          .catch(Error => {
+            console.log(Error)
+            alert('Error !')
+          })
+        })      
+      }
+    }
+  },
+
   components:{
     BwBar,
     Footer

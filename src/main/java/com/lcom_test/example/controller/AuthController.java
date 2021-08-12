@@ -66,6 +66,7 @@ import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Heart;
 import com.lcom_test.example.domain.Images;
+import com.lcom_test.example.domain.Order;
 import com.lcom_test.example.domain.Pagination;
 import com.lcom_test.example.domain.Product;
 import com.lcom_test.example.domain.User;
@@ -457,6 +458,16 @@ public class AuthController {
 		List<Product> productlist = productService.selectProductList(product);
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 	}
+	
+	@PostMapping("/buyproduct")
+	public ResponseEntity<?> buyproduct(@RequestBody Order order){
+		productService.buyProduct(order);
+		
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	}
+	
+	
+	
 	
 //	@PostMapping("/kakaopay")
 //	@ResponseBody

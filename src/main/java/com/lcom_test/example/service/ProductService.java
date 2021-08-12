@@ -5,6 +5,7 @@ import java.util.List;
 import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Heart;
 import com.lcom_test.example.domain.Images;
+import com.lcom_test.example.domain.Order;
 import com.lcom_test.example.domain.Product;
 
 public interface ProductService {
@@ -42,6 +43,8 @@ public interface ProductService {
 	public void insertImage(Product product);
 
 	public void updatepId(Images images);
+
+	public void buyProduct(Order order);
 
 
 	}

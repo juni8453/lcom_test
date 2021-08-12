@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Heart;
 import com.lcom_test.example.domain.Images;
+import com.lcom_test.example.domain.Order;
 import com.lcom_test.example.domain.Product;
 
 @Mapper
@@ -44,6 +45,8 @@ public interface ProductMapper {
 	public void insertImage(Product product);
 
 	public void updatepId(Images images);
+
+	public void buyProduct(Order order);
 
 
 }

@@ -132,18 +132,10 @@ LIMIT		#{pageOpt},8
 </resultMap>
 
 <select id="selectRankList" resultMap="Product4">
-	SELECT 			p.p_id,		
-					p.p_name,		
-					p.p_price, 	
-					p.p_from,		
-					p.p_brand,
-					p.p_like,
-					i.i_name,
-					i.i_pk,
-					i.p_id
+	SELECT 			*
 	FROM 			vue_product p
 	LEFT JOIN		vue_img		i
-	ON 				p.p_id = i.p_id
+	ON 				p.p_name = i.p_name
 	ORDER BY		p_like DESC
 </select>
 
@@ -212,6 +204,31 @@ LIMIT		#{pageOpt},8
 		WHERE	p_id = #{pId}
 		AND		u_id = #{username}
 	) 
+</insert>
+
+<insert id="buyProduct" parameterType="Order">
+	      INSERT INTO vue_order(
+			p_name,
+			p_price,
+			u_id,
+			r_name,
+			o_name,
+			o_address,
+			o_detailaddress,
+			o_email,
+			o_demand
+			
+		)VALUES(
+			#{pName},
+			#{pPrice},
+			#{username},
+			#{rName},
+			#{oName},
+			#{oAddress},
+			#{oDetailAddress},
+			#{oEmail},
+			#{oDemand}
+		)
 </insert>
 
 <insert id="insertHeart" parameterType="Heart">

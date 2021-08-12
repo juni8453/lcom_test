@@ -12,7 +12,7 @@
     </v-row>
 
     <v-row dense>
-      <v-col cols="3" md="3">
+      <v-col cols="12" md="12" sm="12">
         <v-row>
           <v-col>
             <v-card class="pa-3 text-center" outlined height="150">
@@ -36,7 +36,7 @@
           </v-col>
         </v-row>  
       </v-col>
-      <v-col cols="9" md="9" sm="9">
+      <v-col cols="12" md="12" sm="12">
         <v-card class="pa-3 text-center" outlined>
           <v-row>
             <v-col>
@@ -123,7 +123,6 @@
                   ></v-text-field>
                   </v-col>
                 </v-row>
-
             </v-col>
           </v-row>
         </v-card>
@@ -151,7 +150,8 @@ export default {
       pPrice: null,
       pFrom: null,
       pBrand: null,
-      fileinput: null
+      fileinput: null,
+      items:[{title:'Click me'},{title:'Click me2'},{title:'Click me3'}]
     }
   },
 
