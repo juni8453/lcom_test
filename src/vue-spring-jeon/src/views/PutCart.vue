@@ -34,7 +34,8 @@
               </v-col>
             </v-row>
 
-            <v-row v-for="item in cartlist" :key="item.ctId"> <!-- 여기 v-for해서 리스트 돌려뽑기-->
+            <v-row v-for="item in cartlist" :key="item.ctId"
+            > <!-- 여기 v-for해서 리스트 돌려뽑기-->  
               <v-col cols="1" class="Center">
                 <v-checkbox
                   v-model="item.check"

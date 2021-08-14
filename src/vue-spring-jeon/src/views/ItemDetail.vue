@@ -88,7 +88,7 @@
                   <v-card-text>
                     <v-row>
                       <v-col cols="3"  sm="3">
-                        Product Name
+                        Product Name 
                       </v-col>
                       <v-col cols="3" class="ml-8" sm="7">
                         {{itemdetaillist.pName}}

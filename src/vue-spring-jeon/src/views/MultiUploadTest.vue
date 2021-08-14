@@ -29,6 +29,7 @@
                   pPrice: pPrice,
                   pFrom: pFrom,
                   pBrand: pBrand,
+                  pQuantity:pQuantity,
                   fileinput: fileinput
                 })"
                 >등록</v-btn>        
@@ -125,6 +126,28 @@
                 </v-row>
             </v-col>
           </v-row>
+
+          <v-row>
+            <v-col>            
+                <v-row>
+                  <v-col cols="4" md="4" sm="4" class="pa-8">
+                    <v-card outlined>
+                      <v-card-text>
+                        수량 입력
+                      </v-card-text>
+                    </v-card>
+                  </v-col>
+                  <v-col cols="5" md="5" sm="5">
+                    <v-text-field
+                        label="수량을 입력하세요."
+                        name="pQuantity"
+                        v-model="pQuantity"
+                        type="number"
+                  ></v-text-field>
+                  </v-col>
+                </v-row>
+            </v-col>
+          </v-row>
         </v-card>
       </v-col>
     </v-row>      
@@ -139,9 +162,7 @@
 </style>
 
 <script>
-import axios from 'axios'
 import {mapState,mapActions } from 'vuex'
-import Route from '../router/index'
 
 export default {
   data(){
@@ -150,8 +171,8 @@ export default {
       pPrice: null,
       pFrom: null,
       pBrand: null,
+      pQuantity:null,
       fileinput: null,
-      items:[{title:'Click me'},{title:'Click me2'},{title:'Click me3'}]
     }
   },
 

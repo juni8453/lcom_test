@@ -386,6 +386,7 @@ export default new Vuex.Store({
         formData.append('pPrice', payload.pPrice)                 // 제품 가격
         formData.append('pFrom', payload.pFrom)                   // 제품 원산지
         formData.append('pBrand', payload.pBrand)                 // 제품 브랜드
+        formData.append('pQuantity', payload.pQuantity)           // 제품 수량
         
         for(let i=0; i<payload.fileinput.length; i++){          
           let file = payload.fileinput[i]

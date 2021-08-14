@@ -33,7 +33,10 @@
                     <v-card
                      >
                      {{item.pId}}
-                      <router-link :to="{name:'ItemDetail',
+                     <!-- router-link에 @click.native로 메서드 설정-->
+                      <router-link 
+                      @click.native="clickLink({item})"
+                      :to="{name:'ItemDetail',
                         params:{
                           pId:item.pId,
                           pName:item.pName
@@ -41,10 +44,25 @@
                       }"
                       >
                         <v-img
+                            v-if="item.pQuantity !== 0"
                             contain
                             height="250"
                             :src="`/images/thumb/${item.listImages[0].iName}`"
-                        ></v-img> 
+                        ></v-img>
+                        <v-img
+                            v-else
+                            contain
+                            height="250"
+                            :src="`/images/thumb/${item.listImages[0].iName}`"
+                        >
+                          <!-- 이미지 내 다른 이미지 삽입 (매진되었을 때)-->
+                          <v-img
+                            contain
+                            height="100"
+                            :src="`/images/thumb/soldout.png`"
+                          >
+                          </v-img>
+                        </v-img> 
                       </router-link> 
                     </v-card>
                      <v-card outlined>
@@ -115,6 +133,17 @@ computed:{
 },
 
 methods: { 
+  clickLink(payload){
+    console.log('link의 payload는?')
+    console.log(payload.item.pQuantity)
+    if(payload.item.pQuantity === 0){
+      alert('해당 제품은 매진되었습니다.')
+      Route.push('/latestitems')
+      Route.go(Route.currentRoute)
+      // push 이후 페이지 동작 안되서 새로고침 넣음
+    }
+  },
+
   likeProduct(payload){ // payload = {pId, username}
     console.log('likeProduct Run')
     console.log(payload)

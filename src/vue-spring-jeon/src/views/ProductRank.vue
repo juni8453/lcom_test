@@ -10,18 +10,21 @@
         <v-card outlined>  
           <v-card-text>
             <v-row>
-              <v-col cols="4" class="Center">
+              <v-col cols="3" class="Center">
                 상품 사진
               </v-col>
-              <v-col cols="4" class="Center">
+              <v-col cols="3" class="Center">
                 상품명
               </v-col>
-              <v-col cols="4" class="Center">
+              <v-col cols="3" class="Center">
                 제품 추천수
+              </v-col>
+              <v-col cols="3" class="Center">
+                남은 수량 (재고)
               </v-col>
             </v-row>
             <v-row v-for="item in ranklist" :key="item.pId">
-              <v-col cols="4" class="Center">
+              <v-col cols="3" class="Center">
                 <router-link :to="{name:'ItemDetail',
                   params:{
                     pId:item.pId,
@@ -36,11 +39,15 @@
               ></v-img>
                 </router-link> 
               </v-col>             
-              <v-col cols="4" class="Center">
+              <v-col cols="3" class="Center">
                 {{item.pName}}
+                
               </v-col>
-              <v-col cols="4" class="Center">
+              <v-col cols="3" class="Center">
                 {{item.pLike}}
+              </v-col>
+              <v-col cols="3" class="Center">
+                {{item.pQuantity}}
               </v-col>
             </v-row>
           </v-card-text>

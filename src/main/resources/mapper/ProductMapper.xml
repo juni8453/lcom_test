@@ -26,6 +26,7 @@
 		<result column="p_from" property="pFrom"/>
 		<result column="p_brand" property="pBrand"/>
 		<result column="p_like" property="pLike"/>
+		<result column="p_quantity" property="pQuantity"/>
 		<collection property="listImages" resultMap="Images1"/>
 		<collection property="listHeart" resultMap="Heart1"/>
 		<collection property="listUserInfo" resultMap="UserInfo1"/>
@@ -128,6 +129,7 @@ LIMIT		#{pageOpt},8
 		<result column="p_from" property="pFrom"/>
 		<result column="p_brand" property="pBrand"/>
 		<result column="p_like" property="pLike"/> 
+		<result column="p_quantity" property="pQuantity"/>
 		<collection property="listImages" resultMap="Images4"/>
 </resultMap>
 
@@ -176,13 +178,15 @@ LIMIT		#{pageOpt},8
 			p_name,
 			p_price,
 			p_from,
-			p_brand
+			p_brand,
+			p_quantity
 			
 		)VALUES(
 			#{pName},
 			#{pPrice},
 			#{pFrom},
-			#{pBrand}
+			#{pBrand},
+			#{pQuantity}
 		)
 </insert>
 
