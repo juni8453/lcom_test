@@ -62,7 +62,8 @@
                   router :to="{name:'BuyProduct',
                     params:{
                       pName:itemdetaillist.pName,
-                      pPrice:itemdetaillist.pPrice
+                      pPrice:itemdetaillist.pPrice,
+                      pQuantity: itemdetaillist.pQuantity
                     }
                   }"
                 >
@@ -204,6 +205,7 @@ export default {
   created(){
     console.log('ItemDetail Created Run!')
     console.log('받아온 props pName:'+this.pName)
+    console.log('받아온 props pQuantity:'+this.pQuantity)
     new Promise((resolve, reject) => {
       console.log(this.$store.state.Userinfo.User_Id)
       axios.get(`http://localhost:9000/api/auth/itemdetail/${this.pName}`)

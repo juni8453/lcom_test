@@ -116,5 +116,11 @@ public class ProductServiceImpl implements ProductService {
 		return productMapper.selectOrderList(order);
 	}
 
+	@Override
+	public void updateQuantity(Order order) {
+		productMapper.updateQuantity(order);
+		
+	}
+
 	
 }

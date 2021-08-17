@@ -163,9 +163,10 @@
                   oName:oName,
                   pName:pName,
                   pPrice:pPrice,
+                  pQuantity:pQuantity,
                   username:Userinfo.User_Id
                 })"
-              > 주문 완료
+              > 주문 완료 {{pQuantity}}
                 <v-icon>mdi-cash</v-icon>
               </v-btn>  
             </v-col>
@@ -204,7 +205,7 @@ import Footer from '../components/Footer.vue'
 import axios from 'axios'
 
 export default {
-  props:['pName','pPrice'],
+  props:['pName','pPrice','pQuantity'],
 
   filters:{
     comma(val){

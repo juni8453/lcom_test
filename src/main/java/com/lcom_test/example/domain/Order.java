@@ -7,6 +7,7 @@ public class Order {
 	private int oNum; 				// 주문 번호
 	private String pName;			// 제품 이름
 	private String pPrice;			// 제품 가격
+	private int pQuantity;			// 제품 재고
 	private String username;		// 주문자 명
 	private String rName;			// 받는사람 명
 	private String oName;			// 입금자 명
@@ -34,6 +35,12 @@ public class Order {
 	}
 	public void setpPrice(String pPrice) {
 		this.pPrice = pPrice;
+	}
+	public int getpQuantity() {
+		return pQuantity;
+	}
+	public void setpQuantity(int pQuantity) {
+		this.pQuantity = pQuantity;
 	}
 	public String getUsername() {
 		return username;

@@ -476,6 +476,7 @@ public class AuthController {
 	@PostMapping("/buyproduct")
 	public ResponseEntity<?> buyproduct(@RequestBody Order order){
 		productService.buyProduct(order);
+		productService.updateQuantity(order);
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
