@@ -26,103 +26,89 @@ public class Product {
 	public void setpId(int pId) {
 		this.pId = pId;
 	}
-	
 	public String getpName() {
 		return pName;
 	}
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-	
 	public String getpDate() {
 		return pDate;
 	}
 	public void setpDate(String pDate) {
 		this.pDate = pDate;
 	}
-	
 	public int getpPrice() {
 		return pPrice;
 	}
 	public void setpPrice(int pPrice) {
 		this.pPrice = pPrice;
 	}
-	
 	public String getpFrom() {
 		return pFrom;
 	}
 	public void setpFrom(String pFrom) {
 		this.pFrom = pFrom;
 	}
-	
 	public String getpBrand() {
 		return pBrand;
 	}
 	public void setpBrand(String pBrand) {
 		this.pBrand = pBrand;
 	}
-	
 	public List<Images> getListImages() {
 		return listImages;
 	}
 	public void setListImages(List<Images> listImages) {
 		this.listImages = listImages;
 	}
-	
 	public int getpLike() {
 		return pLike;
 	}
 	public void setpLike(int pLike) {
 		this.pLike = pLike;
 	}
-	
 	public boolean ispHeart() {
 		return pHeart;
 	}
 	public void setpHeart(boolean pHeart) {
 		this.pHeart = pHeart;
 	}
-	
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 	public List<Heart> getListHeart() {
 		return listHeart;
 	}
 	public void setListHeart(List<Heart> listHeart) {
 		this.listHeart = listHeart;
 	}
-	
 	public int getpQuantity() {
 		return pQuantity;
 	}
 	public void setpQuantity(int pQuantity) {
 		this.pQuantity = pQuantity;
 	}
-	
 	public List<UserInfo> getListUserInfo() {
 		return listUserInfo;
 	}
 	public void setListUserInfo(List<UserInfo> listUserInfo) {
 		this.listUserInfo = listUserInfo;
 	}
-	
 	public int getPageOpt() {
 		return pageOpt;
 	}
-	
 	public String getiName() {
 		return iName;
 	}
 	public void setiName(String iName) {
 		this.iName = iName;
 	}
-	
 	public void setPageOpt(int pageOpt) {
 		this.pageOpt = pageOpt;
 	}
+
 }

@@ -24,88 +24,79 @@ public class Order {
 	public void setoNum(int oNum) {
 		this.oNum = oNum;
 	}
-	
 	public String getpName() {
 		return pName;
 	}
 	public void setpName(String pName) {
 		this.pName = pName;
 	}
-	
 	public String getpPrice() {
 		return pPrice;
 	}
 	public void setpPrice(String pPrice) {
 		this.pPrice = pPrice;
 	}
-	
 	public int getpQuantity() {
 		return pQuantity;
 	}
 	public void setpQuantity(int pQuantity) {
 		this.pQuantity = pQuantity;
 	}
-	
 	public String getUsername() {
 		return username;
 	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
-	
 	public String getrName() {
 		return rName;
 	}
 	public void setrName(String rName) {
 		this.rName = rName;
 	}
-	
 	public String getoName() {
 		return oName;
 	}
 	public void setoName(String oName) {
 		this.oName = oName;
 	}
-	
 	public String getoAddress() {
 		return oAddress;
 	}
 	public void setoAddress(String oAddress) {
 		this.oAddress = oAddress;
 	}
-	
 	public String getoDetailAddress() {
 		return oDetailAddress;
 	}
 	public void setoDetailAddress(String oDetailAddress) {
 		this.oDetailAddress = oDetailAddress;
 	}
-	
 	public String getoEmail() {
 		return oEmail;
 	}
 	public void setoEmail(String oEmail) {
 		this.oEmail = oEmail;
 	}
-	
 	public String getoDemand() {
 		return oDemand;
 	}
 	public void setoDemand(String oDemand) {
 		this.oDemand = oDemand;
 	}
-	
 	public String getoDate() {
 		return oDate;
 	}
 	public void setoDate(String oDate) {
 		this.oDate = oDate;
 	}
-	
 	public List<Images> getListImages() {
 		return listImages;
 	}
 	public void setListImages(List<Images> listImages) {
 		this.listImages = listImages;
 	}
+	
+	
+	
 }

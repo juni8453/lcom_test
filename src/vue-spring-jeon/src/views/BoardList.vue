@@ -108,21 +108,21 @@
     </v-row>
     <v-row>
       <v-col cols="12" md="12" sm="12">
-        <v-card outlined>
+       
           <v-pagination
             v-model="page"
             :length="Pagination.lastPage" 
             circle
             @input="move({page:page})"
           ></v-pagination>
-        </v-card>
+       
       </v-col>
     </v-row>
-    <v-row>
+    <!-- <v-row>
       <v-col>
         <Footer></Footer>
       </v-col>
-    </v-row>
+    </v-row> -->
   </v-container> 
 </template>
 <style scoped>

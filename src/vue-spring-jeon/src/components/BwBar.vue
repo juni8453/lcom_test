@@ -1,8 +1,7 @@
 <template>
-    <v-container fluid>
+    <v-container fluid class="fixed-bar">
         <v-row dense>
             <v-col cols="12" md="12" sm="12">
-
               <v-card class="text-center pa-3" outlined color="black">
                   <v-row dense align="center" justify="space-around">
                       <v-col cols="2">

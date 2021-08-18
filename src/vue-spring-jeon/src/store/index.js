@@ -1,9 +1,9 @@
-
 import Vue from 'vue'
 import Vuex from 'vuex'
 import Route from '../router/index'
 import axios from 'axios'
 import createPersistedState from 'vuex-persistedstate'
+
 
 Vue.use(Vuex)
 
@@ -29,8 +29,14 @@ export default new Vuex.Store({
     board:[],
     Pagination:
     {
-      page:null,        // 현재 페이지
+      page:null, // 현재 페이지
       lastPage:null,    // 총 페이지 사이즈
+      // count:null,
+      // startPage: null,
+      // endPage: null,
+      // nextPage:null,
+      // prevPage:null,
+      // pageNum:null
     },
     Show: false,
     isLogin: false,
@@ -91,6 +97,9 @@ export default new Vuex.Store({
     SET_CART_LIST(state, data){
       state.cartlist = state.cartlist.concat(data.list)
     },
+    // SET_HEART_LIST(state, data){
+    //   state.heartlist = data.list
+    // }, // 테스트 뮤테이션
     INSERT_TOKEN(state) {
       state.Userinfo.User_token = localStorage.getItem("token")
     },
@@ -157,85 +166,82 @@ export default new Vuex.Store({
     loginProcess({ commit }, payload) {
       console.log(payload)
       return new Promise((resolve, reject) => {
-        axios.post('http://localhost:9000/api/auth/signin', payload)
-          .then(Response => {
-            console.log(Response.data)
-            if (Response.data.username != null) {
-                axios.defaults.headers.common['Authorization'] = `Bearer ${Response.data.token}`
-                localStorage.setItem("token",Response.data.token)
-                /* localStorage에 얻어온 token 저장 > 이후 getItem으로 저장된 토큰 사용 가능
-                    새로고침시 state에는 token이 저장되어있지만 Authorization이 날라가서 인증안됨
-                    토큰 인증이 필요한 action의 경우에는
-                    axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}` 삽입 필요
-                */
-                commit('SET_USER', Response.data)  
-                commit('loginSuccess')    
-            }
-        })
-        .catch(Error => {
-            console.log('error')
-            reject(Error)
-            commit('loginError')
-        })
+          axios.post('http://localhost:9000/api/auth/signin', payload)
+              .then(Response => {
+                  console.log(Response.data)
+                  if (Response.data.username != null) {
+                      axios.defaults.headers.common['Authorization'] = `Bearer ${Response.data.token}`
+                      localStorage.setItem("token",Response.data.token)
+                      /* localStorage에 얻어온 token 저장 > 이후 getItem으로 저장된 토큰 사용 가능
+                         새로고침시 state에는 token이 저장되어있지만 Authorization이 날라가서 인증안됨
+                         토큰 인증이 필요한 action의 경우에는
+                         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}` 삽입 필요
+                      */
+                      commit('SET_USER', Response.data)  
+                      commit('loginSuccess')    
+                  }
+              })
+              .catch(Error => {
+                  console.log('error')
+                  reject(Error)
+                  commit('loginError')
+              })
       })
    },
-
-   SignUp(payload) {
+   SignUp({commit},payload) {
     console.log(payload)
     return new Promise((resolve, reject) => {
         axios.post('http://localhost:9000/api/auth/signup', payload)
-        .then(Response => {
-            console.log(payload)
-            console.log(Response.data)
-            if(Response.data === "success") {
-              console.log('회원가입 완료')
-              alert('회원가입이 완료되었습니다.')
-              Route.push("/login")
-            }
-        })
-        .catch(Error => {
-            console.log('error')
-            reject(Error)
-            alert("아이디가 중복")
-            Route.push("/signup")
-        })
+            .then(Response => {
+                console.log(payload)
+                console.log(Response.data)
+                if(Response.data === "success") {
+                  console.log('회원가입 완료')
+                  alert('회원가입이 완료되었습니다.')
+                  Route.push("/login")
+                }
+            })
+            .catch(Error => {
+                console.log('error')
+                reject(Error)
+                alert("아이디가 중복")
+                Route.push("/signup")
+            })
     })
-  },
-
+   },
   admin({commit,state}, payload) {
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`
       axios.get(`http://localhost:9000/api/admin/adminPage/${payload.page}`)
-        .then(Response => {
-          console.log(payload) 
-          console.log(Response.data)
-          // console.log(Response.data.userlist)
-          console.log(Response.data.list)
-          console.log(Response.data.pagination)
-          commit('READ_USER_LIST',Response.data)
-        })
-        .catch(Error => {
-          // console.log(Error)
-            console.log('admin_error')
-            Route.push("/")
-        })
-    })
+          .then(Response => {
+            console.log(payload) 
+            console.log(Response.data)
+            // console.log(Response.data.userlist)
+            console.log(Response.data.list)
+            console.log(Response.data.pagination)
+            commit('READ_USER_LIST',Response.data)
+          })
+          .catch(Error => {
+            // console.log(Error)
+              console.log('admin_error')
+              Route.push("/")
+          })
+      })
   },
-
   UnpackToken({commit}) { // 새로고침 방지 메서드
     return new Promise((resolve, reject) => {
       axios.defaults.headers.common['Authorization'] = `Bearer ${localStorage.getItem("token")}`
       // localStorage에 저장된 token 사용
       axios.get('http://localhost:9000/api/auth/unpackToken')
-        .then(Response => {
-          console.log(Response.data)
-          commit('SET_USER_REFRESH',Response.data)
-          
-        })
-        .catch(Error => {
-          console.log(Error)
-            console.log('unpackToken_error')
-        })
+          .then(Response => {
+            console.log(Response.data)
+            commit('SET_USER_REFRESH',Response.data)
+            
+          })
+          .catch(Error => {
+            console.log(Error)
+              console.log('unpackToken_error')
+          })
     })
   },
 
@@ -258,7 +264,7 @@ export default new Vuex.Store({
     })
   },
 
-  BoardList({commit}, payload){
+  BoardList({commit, state}, payload){
     return new Promise((resolve, reject) => {
       axios.get(`http://localhost:9000/api/auth/boardlist/${payload.page}`)
       .then(Response => {
@@ -305,7 +311,7 @@ export default new Vuex.Store({
       // 파일 업로드 O
       else {
         return new Promise((resolve, reject) => {
-          let formData = new FormData(); 
+          let formData = new FormData(); // 페이지 전환 없이 폼 데이터를 제출 하고 싶을 때 FormData 객체를 사용
           formData.append('bTitle', payload.bTitle)
           formData.append('bContent', payload.bContent)
           formData.append('username', payload.username)
@@ -578,4 +584,3 @@ export default new Vuex.Store({
 
   }
 })
-

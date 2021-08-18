@@ -7,7 +7,7 @@ import Login from '../views/Login.vue'
 import SignUp from '../views/SignUp.vue'
 import admin from '../views/admin.vue'
 import BoardList from '../views/BoardList.vue'
-// import BoardWrite from '../views/BoardWrite'
+import BoardWrite from '../views/BoardWrite'
 import UserDetail from '../views/UserDetail'
 import BoardDetail from '../views/BoardDetail'
 import BoardEdit from '../views/BoardEdit'
@@ -22,7 +22,6 @@ import ProductRank from '../views/ProductRank'
 import MultiUploadTest from '../views/MultiUploadTest'
 import BuyProduct from '../views/BuyProduct'
 import OrderList from '../views/OrderList'
-import WriteTest from '../views/WriteTest'
 
 Vue.use(VueRouter)
 
@@ -32,19 +31,16 @@ const routes = [
     name: 'Home',
     component: Home,
   },
-
   {
     path: '/login',
     name: 'Login',
     component: Login
   },
-
   {
     path: '/signup',
     name: 'SignUp',
     component: SignUp
   },
-
   {
     path: '/boardlist',
     name: 'BoardList',
@@ -58,25 +54,21 @@ const routes = [
       }
     }
   },
-
   {
     path: '/admin',
     name: 'admin',
     component: admin
   },
-
-  // {
-  //   path: '/boardwrite',
-  //   name: 'BoardWrite',
-  //   component: BoardWrite
-  // },
-
+  {
+    path: '/boardwrite',
+    name: 'BoardWrite',
+    component: BoardWrite
+  },
   {
     path: '/userdetail',
     name: 'UserDetail',
     component: UserDetail
   },
-
   {
     path: '/boarddetail',
     name: 'BoardDetail',
@@ -84,7 +76,6 @@ const routes = [
     props: true
      // params로 데이터 전달할 경우 props:ture 설정 필수
   },
-
   {
     path: '/boardedit',
     name: 'BoardEdit',
@@ -92,14 +83,12 @@ const routes = [
     props: true
     // params로 데이터 전달할 경우 props:ture 설정 필수
   },
-
   {
     path: '/boardreply',
     name: 'BoardReply',
     component: BoardReply,
     props: true
   },
-
   {
     path: '/hotitems',
     name: 'HotItems',
@@ -114,21 +103,18 @@ const routes = [
       }
     }
   },
-
   {
     path: '/bwbar',
     name: 'BwBar',
     component: BwBar,
     props: true
   },
-
   {
     path: '/productinsert',
     name: 'ProductInsert',
     component: ProductInsert,
     props: true
   },
-
   {
     path: '/latestitems',
     name: 'LatestItems',
@@ -143,14 +129,12 @@ const routes = [
       }
     }
   },
-
   {
     path: '/itemdetail',
     name: 'ItemDetail',
     component: ItemDetail,
     props: true
   },
-
   {
     path: '/putcart',
     name: 'PutCart',
@@ -165,7 +149,6 @@ const routes = [
       }
     }
   },
-
   {
     path: '/productrank',
     name: 'ProductRank',
@@ -180,7 +163,6 @@ const routes = [
       }
     }
   },
-
   {
     path: '/multiuploadtest',
     name: 'MultiUploadTest',
@@ -195,27 +177,19 @@ const routes = [
       }
     }
   },
-
   {
     path: '/buyproduct',
     name: 'BuyProduct',
     component: BuyProduct,
     props: true
   },
-
   {
     path: '/orderlist',
     name: 'OrderList',
     component: OrderList,
     props: true
   },
-
-  {
-    path: '/writetest',
-    name: 'WriteTest',
-    component: WriteTest,
-    props: true
-  }
+  
 ]
 
 const router = new VueRouter({

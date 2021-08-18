@@ -56,7 +56,6 @@ public interface BoardMapper {
 
 	public void updatepId(Images images);
 
-	public void insertImage(Board board);
+	
 
-	public void insertImgBoard(Board board);
 }

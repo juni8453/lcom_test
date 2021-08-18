@@ -5,8 +5,6 @@
         <BwBar></BwBar>  
         <v-card class="text-center">
           <v-row>
-             <!-- v-for="item in itemdetaillist.listImages" :key="item.iName" -->
-             <!-- 밑에 코드 이런식으로 고쳐보자 8월 11일에 -->
             <v-col cols="3" v-for="item in productlist" :key="item.pId">
               <v-card>
                 <v-row>

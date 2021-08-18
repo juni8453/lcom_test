@@ -43,8 +43,4 @@ public interface BoardService {
 
 	public void updatepId(Images images);
 
-	public void insertImage(Board board);
-
-	public void insertImgBoard(Board board);
-
 }

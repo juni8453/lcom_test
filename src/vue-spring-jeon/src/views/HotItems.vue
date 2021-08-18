@@ -30,7 +30,7 @@
                      >
                       <router-link :to="{name:'ItemDetail',
                         params:{
-                          pId:item.pId
+                          pName:item.pName
                         }
                       }"
                       >

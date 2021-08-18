@@ -54,7 +54,7 @@
           </v-list-item-content>
         </v-list-item>
 
-        <!-- <v-list-item 
+        <v-list-item 
           router :to="{name:'BoardWrite'}"
           v-if="isLogin === true"
           @click="BoardWrite()"
@@ -65,8 +65,7 @@
           <v-list-item-content>
             <v-list-item-title>글 작성</v-list-item-title>
           </v-list-item-content>
-        </v-list-item> -->
-
+        </v-list-item>
         <v-list-item 
           router :to="{name:'MultiUploadTest'}"
           v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')"
@@ -78,7 +77,6 @@
             <v-list-item-title>상품등록</v-list-item-title>
           </v-list-item-content>
         </v-list-item>  
-
         <v-list-item 
           router :to="{name:'ProductRank'}"
           v-if="isLogin === true && Userinfo.User_auth.includes('ROLE_ADMIN')"
@@ -88,18 +86,6 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>상품랭킹</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-
-        <v-list-item 
-          router :to="{name:'WriteTest'}"
-          v-if="isLogin === true"
-          >
-          <v-list-item-action>
-            <v-icon>mdi-card-text-outline</v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>글 작성</v-list-item-title>
           </v-list-item-content>
         </v-list-item>
       </v-list>
@@ -157,53 +143,46 @@
 </template>
 
 <script>
-import Route from '../src/router/index'
 import {mapMutations, mapState} from "vuex"
-
-export default {
-  data: () => ({
-    drawer: null
-  }),
-
-  created() {
-    console.log('App.vue 실행')
-    if(this.Userinfo.User_token === null && localStorage.getItem("token") !== null) {
-      // 저장된 token이 없고, 로컬에 저장된 토큰이 있을 때 if 실행
-      this.$store.commit("INSERT_TOKEN"),
-      this.$store.dispatch('UnpackToken')
-    }
-    if(localStorage.getItem('token') != null){
-      console.log('localStorage에 토큰이 있습니다.')
-    }
-    if(localStorage.getItem('token') == null){
-      console.log('localStorage에 토큰이 없습니다.')
-    }
-  },
-
-  computed: {
-    ...mapState(["Userinfo", 'isLogin', 'isLoginError'])
-  },
-
-  methods: {
-    ...mapMutations(["logout"]),
-
-    BoardList(){
-      if(this.isLogin === false){
-      alert('로그인이 필요한 서비스입니다.')
-      Route.push("/login")
+import Route from '../src/router/index'
+  export default {
+    data: () => ({
+      drawer: null,
+    }),
+    computed: {
+      ...mapState(["Userinfo", 'isLogin', 'isLoginError']),
+    },
+    methods: {
+      ...mapMutations(["logout"]),
+      BoardList(){
+         if(this.isLogin === false){
+          alert('로그인이 필요한 서비스입니다.')
+          Route.push("/login")
+         }
+      },
+      BoardWrite(){
+        if(this.isLogin === false){
+          alert('로그인이 필요한 서비스입니다.')
+          Route.push("/login")
+        }
+      },
+      login(){
+        Route.push('/login')
       }
     },
-
-    BoardWrite(){
-      if(this.isLogin === false){
-        alert('로그인이 필요한 서비스입니다.')
-        Route.push("/login")
+    created() {
+      console.log('App.vue 실행')
+      if(this.Userinfo.User_token === null && localStorage.getItem("token") !== null) {
+        // 저장된 token이 없고, 로컬에 저장된 토큰이 있을 때 if 실행
+        this.$store.commit("INSERT_TOKEN"),
+        this.$store.dispatch('UnpackToken')
       }
-    },
-
-    login(){
-      Route.push('/login')
+      if(localStorage.getItem('token') != null){
+        console.log('localStorage에 토큰이 있습니다.')
+      }
+      if(localStorage.getItem('token') == null){
+        console.log('localStorage에 토큰이 없습니다.')
+      }
     }
   }
-}
 </script>

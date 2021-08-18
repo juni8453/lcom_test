@@ -79,12 +79,12 @@ public class AdminController {
 	@Autowired
 	ProductService productService;
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/insertproducttest")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> insertproducttest(
 			@RequestPart("uploadFile") MultipartFile[] files,
-			Product product, Images images){
-		
+			Product product, Images images
+			){
 //		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 //		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";	
 		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
@@ -137,60 +137,58 @@ public class AdminController {
 		
 		}
 		return new ResponseEntity<>("success", HttpStatus.OK);
-	} // 다중 파일 업로드
+	} // 다중 파일 업로드 Test
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
+	
 	@GetMapping({"/adminPage", "adminPage/{pageOpt}"})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?>  AccessAdmin(HttpServletRequest request, 
 		@PathVariable Optional<Integer> pageOpt){
 		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int usercount = userService.getUserCount();
+		
 		Pagination pagination = new Pagination(page, usercount);
 		
-		logger.info(request.toString());
-		
-		List<UserInfo> userlist = userService.read_user_list(pagination);	
-		
-		return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
+		logger.info(request.toString());			
+			List<UserInfo> userlist = userService.read_user_list(pagination);
+			logger.info(userlist.toString());	
+			return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
 	}
 
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping({"/userdelete", "/userdelete/{pageOpt}"})
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteUser(
 			@RequestBody User user,
 			@PathVariable Optional<Integer> pageOpt){
-		
-			logger.info(user.toString());
-			
+		logger.info(user.toString());
 			userService.deleteUser(user);
 			userService.deleteAuth(user);
 			
 			int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 			int usercount = userService.getUserCount();
+			
 			Pagination pagination = new Pagination(page, usercount);
 			List<UserInfo> userlist = userService.read_user_list(pagination);
-			
-			return ResponseEntity.ok(new ListResponse<UserInfo>(pagination, userlist));
+				return ResponseEntity.ok(
+						new ListResponse<UserInfo>(pagination, userlist));
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@PostMapping("/deleteproduct") 
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> deleteProduct(
 			@RequestBody Product product){
-		
-			logger.info(product.toString());
-			
+		logger.info(product.toString());
 			productService.deleteProduct(product);
 			
 			return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
-	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	@GetMapping("/productrank")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<?> putcartlist(Product product){
-		List<Product> ranklist = productService.selectRankList(product);	
-		
+		List<Product> ranklist = productService.selectRankList(product);		
 		return ResponseEntity.ok(new ListResponse<Product>(ranklist));
 	}
+	
 }
