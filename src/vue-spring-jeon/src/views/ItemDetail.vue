@@ -181,25 +181,22 @@
 </style>
 
 <script>
+import axios from 'axios'
+import Route from '../router/index'
 import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
-import Route from '../router/index'
-import axios from 'axios'
+
 
 export default {
-  
   props:['pId','pName'],
+
   data(){
     return{
       // item:{listImages:[]} // []를 초기화 시켜줘야 [0]을 못찾는다는 오류가 안뜸
       model:null
       
     }
-  },
-  
-  computed:{
-    ...mapState(['productlist', 'itemdetaillist', 'Userinfo', 'heart'])
   },
 
   created(){
@@ -222,6 +219,21 @@ export default {
       })
     })
   },
+  
+  computed:{
+    ...mapState(['productlist', 'itemdetaillist', 'Userinfo', 'heart'])
+  },
+
+  components:{
+    BwBar,
+    Footer
+  },
+
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
+  },  
 
   methods:{
     putCart(payload){
@@ -243,17 +255,6 @@ export default {
         })
       })
     },
-  },
-
-  components:{
-    BwBar,
-    Footer
-  },
-  
-  filters:{
-    comma(val){
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-  },  
+  }
 }
 </script>

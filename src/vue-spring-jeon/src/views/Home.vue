@@ -54,8 +54,9 @@
 </template>
 
 <script>
-import Footer from '../components/Footer.vue'
 import BwBar from '../components/BwBar.vue'
+import Footer from '../components/Footer.vue'
+
 export default {
     data(){
         return{      

@@ -13,11 +13,13 @@ import java.io.OutputStream;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.text.SimpleDateFormat;
 
 import javax.imageio.ImageIO;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -103,7 +105,9 @@ public class AuthController {
 	@Autowired ProductService productService;
 	
 	@PostMapping("/signin")
-	public ResponseEntity<?> authenticateUser(@Validated @RequestBody LoginRequest loginRequest) {
+	public ResponseEntity<?> authenticateUser(
+			@Validated 
+			@RequestBody LoginRequest loginRequest) {
 		
 		logger.info("test" + loginRequest);
 		
@@ -119,20 +123,14 @@ public class AuthController {
 		List<String> roles = user.getAuthorities().stream()
 				.map(item -> item.getAuthority())
 				.collect(Collectors.toList());
-		return ResponseEntity.ok(new JwtResponse(jwt,
-												 user.getUsername(),
-												 user.getName(),
-												 user.getPhone(),
-												 roles));
-
-//		return ResponseEntity.ok(new JwtResponse(jwt, 
-//												 user.getUsername(),
-//												 user.getName(),
-//												 user.getPhone(),
-//												 roles);
+		
+		return ResponseEntity.ok(new JwtResponse(jwt, user.getUsername(), user.getName(), user.getPhone(), roles));
 	}
+	
 	@PostMapping("/signup")
-	   public ResponseEntity<?> sinupUser(@Validated @RequestBody JoinRequest joinRequest) {
+	   public ResponseEntity<?> sinupUser(
+			   @Validated 
+			   @RequestBody JoinRequest joinRequest) {
 	      
 	      String encodedPassword = new BCryptPasswordEncoder().encode(joinRequest.getPassword());
 	      User user = new User();
@@ -165,33 +163,23 @@ public class AuthController {
 		if (StringUtils.hasText(token) && token.startsWith("Bearer ")) {
 			token =  token.substring(7, token.length());
 		}
+		
 		String username = JwtUtils.getUserEmailFromToken(token);
 		UserInfo user = userService.readUser_refresh(username);
 
-		 return new ResponseEntity<>(user, HttpStatus.OK);
+		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
 	
 	@GetMapping("/home")
 	public ResponseEntity<?> home(Images images) {
 			List<Images> imageslist = boardService.selectImagesList();
+			
 			return ResponseEntity.ok(new ListResponse<Images>(imageslist));
 	}
-	
-	@PostMapping("/boardwrite")
-	public ResponseEntity<?> boardwrite(@RequestBody Board board){
-		boardService.insertBoard(board);
-		return new ResponseEntity<>("success", HttpStatus.OK);
-	}
-	
-	
 	
 	//업로드
 	@RequestMapping(value="/upload", method=RequestMethod.POST)
 	public ResponseEntity<?> upload(@RequestParam("uploadFile") MultipartFile multipartFile, Board board){
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/main/resources/static/images/"; 
-//		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/main/resources/static/images/";	노트북
-//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/main/resources/static/images/"; 데탑
-//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
 		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
 		String thumbPath = path + "thumb/";
 		String filename = multipartFile.getOriginalFilename();
@@ -233,35 +221,31 @@ public class AuthController {
 		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int boardcount = boardService.getBoardCount();
-		
 		Pagination pagination = new Pagination(page, boardcount);
-		
 		logger.info(board.toString());
-			List<Board> boardlist = boardService.selectBoardList(pagination);
-			logger.info(boardlist.toString());
-			return ResponseEntity.ok(new ListResponse<Board>(
-					pagination,boardlist));
+		List<Board> boardlist = boardService.selectBoardList(pagination);
+		logger.info(boardlist.toString());
+		
+		return ResponseEntity.ok(new ListResponse<Board>(pagination,boardlist));
 	}
 	
 	@GetMapping({"/boarddetail", "/boarddetail/{bId}", "/boarddetail/{bId}/{pageOpt}"})
 	public ResponseEntity<?> boarddetail(
 			@PathVariable int bId,
-			@PathVariable Optional<Integer> pageOpt,
+			@PathVariable Optional<Integer> pageOpt, 
 			Board board, Comment comment){
 		
 		logger.debug("bId:"+bId);
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int commentcount = boardService.getCommentCount();
-		
 		Pagination pagination = new Pagination(page, commentcount);
-		
 		board = boardService.getBoard(bId);
 		comment.setPagination(pagination);
 		board.setPagination(pagination);
-		
 		List<Comment> commentlist = boardService.selectCommentList(comment);
 		board.setCommentList(commentlist);
-		logger.info(board.toString());		
+		logger.info(board.toString());	
+		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
@@ -270,43 +254,47 @@ public class AuthController {
 	public ResponseEntity<?> deleteBoard(
 			@RequestBody Board board,
 			@PathVariable Optional<Integer> pageOpt){
+		
 		logger.info(board.toString());
 		boardService.deleteBoard(board);
-		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int boardcount = boardService.getBoardCount();
-		
 		Pagination pagination = new Pagination(page, boardcount);
 		List<Board> boardlist = boardService.selectBoardList(pagination);
-			return ResponseEntity.ok(new ListResponse<Board>(
-					pagination,boardlist));
+		
+		return ResponseEntity.ok(new ListResponse<Board>(pagination,boardlist));
 	}
 	
 	@PostMapping({"/boardedit"})
-	public ResponseEntity<?> boardedit(@RequestBody Board board){
+	public ResponseEntity<?> boardedit(
+			@RequestBody Board board){
+		
 		boardService.insertEdit(board);
+		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
 	
 	@PostMapping("/boardreply")
-	public ResponseEntity<?> boardreply(@RequestBody Board board){		
+	public ResponseEntity<?> boardreply(
+			@RequestBody Board board){		
+		
 		boardService.insertBoard(board);
+		
 		return new ResponseEntity<>("success", HttpStatus.OK);
-	} // boardwrite와 합치기
+	} 
 	
 	
 	@PostMapping({"/commentwrite", "/commentwrite/{pageOpt}"})
-	public ResponseEntity<?> boardcomment(@RequestBody Comment comment, Board board,
+	public ResponseEntity<?> boardcomment(
+			@RequestBody Comment comment, Board board,
 			@PathVariable Optional<Integer> pageOpt){
 		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int commentcount = boardService.getCommentCount();
-		
 		Pagination pagination = new Pagination(page, commentcount);
 		comment.setPagination(pagination);
 		boardService.insertComment(comment);
 		List<Comment> commentlist = boardService.selectCommentList(comment); // insert 이후 Comment list를 보내주기 위해
-		
 		board.setCommentList(commentlist);
 		board.setPagination(pagination);
 		
@@ -314,46 +302,38 @@ public class AuthController {
 	}
 	
 	@PostMapping({"/commentdelete", "/commentdelete/{pageOpt}"})
-	public ResponseEntity<?> commentdelete(@RequestBody Comment comment, Board board,
+	public ResponseEntity<?> commentdelete(
+			@RequestBody Comment comment, Board board,
 			@PathVariable Optional<Integer> pageOpt){
 		
 		boardService.deleteComment(comment); // 1. 댓글 삭제
-		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int commentcount = boardService.getCommentCount();
-		
 		Pagination pagination = new Pagination(page, commentcount); // Pagination에 따라 삭제할 수 있도록 Pagination 객체 생성
 		comment.setPagination(pagination);	// selectCommentList의 ?,? 값 대입을 위해 설정
 		List<Comment> commentlist = boardService.selectCommentList(comment); // 2. 삭제된 댓글을 제외한 나머지 리스트 뽑기 위해 설정
-		
 		board.setPagination(pagination); 
 		board.setCommentList(commentlist); // board 내부의 Pagination, CommentList를 사용하기 위해 설정
 		
 		return new ResponseEntity<>(board, HttpStatus.OK); // board 객체 return
-		
 	}
 	
 	@PostMapping({"/commentedit", "/commentedit/{pageOpt}"})
-	public ResponseEntity<?> commentedit(@RequestBody Comment comment, Board board,
+	public ResponseEntity<?> commentedit(
+			@RequestBody Comment comment, Board board,
 			@PathVariable Optional<Integer> pageOpt){
 		
 		boardService.updateComment(comment);
-		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int commentcount = boardService.getCommentCount();
-		
 		Pagination pagination = new Pagination(page, commentcount);
-		
 		comment.setPagination(pagination);
-		
 		List<Comment> commentlist = boardService.selectCommentList(comment);
-		
 		board.setPagination(pagination);
 		board.setCommentList(commentlist);
 		
 		return new ResponseEntity<>(board, HttpStatus.OK);
 	}
-	
 	
 	@GetMapping({"/commentlist", "commentlist/{bId}", "commentlist/{bId}/{pageOpt}"})
 	public ResponseEntity<?> commentlist(Comment comment,
@@ -362,13 +342,12 @@ public class AuthController {
 		
 		int page = pageOpt.isPresent() ? pageOpt.get() : 1;
 		int commentcount = boardService.getCommentCount();
-		
 		Pagination pagination = new Pagination(page, commentcount);
 		comment.setPagination(pagination);
-		
 		logger.info(comment.toString());
 		List<Comment> commentlist = boardService.selectCommentList(comment);
 		logger.info(commentlist.toString());
+		
 		return ResponseEntity.ok(new ListResponse<Comment>(pagination,commentlist));
 	}
 	
@@ -377,10 +356,12 @@ public class AuthController {
 	public ResponseEntity<?> latestitems(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
 			@PathVariable int pageOpt,
 			@PathVariable String username){
+		
 		product.setPageOpt(pageOpt);
 		product.setUsername(username);
 		List<Product> itemslist = productService.selectProductList(product);
 		logger.info(itemslist.toString());
+		
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
 	
@@ -388,17 +369,21 @@ public class AuthController {
 	public ResponseEntity<?> hotitems(Product product, // 여기서 Vo에 입력한 pHeart의 기본값 false가 정의된다.
 			@PathVariable int pageOpt,
 			@PathVariable String username){
+		
 		product.setPageOpt(pageOpt);
 		product.setUsername(username);
 		List<Product> itemslist = productService.selectHotList(product);
 		logger.info(itemslist.toString());
+		
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 인기상품리스트
 	
 	@GetMapping({"/productrank"})
 	public ResponseEntity<?> productrank(Product product){
+		
 		List<Product> itemslist = productService.selectProductList(product);
 		logger.info(itemslist.toString());
+		
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 최신상품리스트
 	
@@ -409,77 +394,157 @@ public class AuthController {
 		
 		logger.debug("pName:"+pName);
 		product = productService.getProduct(pName);
+		
 		return new ResponseEntity<>(product, HttpStatus.OK);
 	}
 	
 	@PostMapping({"/putcart", "/putcart/{username}"})
-	public ResponseEntity<?> putcart(@RequestBody Product product, Cart cart,
+	public ResponseEntity<?> putcart(
+			@RequestBody Product product, Cart cart,
 			@PathVariable String username){
-		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
+		
 		logger.debug("username:"+username);
 		cart.setpId(product.getpId());
-		
 		productService.insertPutCart(cart);
+		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
 	@GetMapping({"/putcartlist", "putcartlist/{username}", "putcartlist/{username}/{pageOpt}"})
 	public ResponseEntity<?> putcartlist(Cart cart, 
 			@PathVariable String username,
-			@PathVariable int pageOpt){ //pageOpt는 Optional 을 뜻하므로 그냥 page라고 쓰는게 나음
-		// Cart cart의 username 에 받아온 username 값 들어감 (cart의 변수이름과 일치시켜야함)
+			@PathVariable int pageOpt){
+		
 		cart.setPageOpt(pageOpt);
 		cart.setUsername(username);
 		List<Cart> cartlist = productService.selectCartList(cart);		
 		logger.debug("username:"+cart.getUsername());
+		
 		return ResponseEntity.ok(new ListResponse<Cart>(cartlist));
 	}
 	
 	@GetMapping({"/orderlist","/orderlist/{username}"})
 	public ResponseEntity<?> orderlist(Order order,
 			@PathVariable String username){
+		
 		order.setUsername(username);
 		List<Order> orderlist = productService.selectOrderList(order);
+		
 		return ResponseEntity.ok(new ListResponse<Order>(orderlist));		
 	}
 	
 	@PostMapping("/deletecart") 
 	public ResponseEntity<?> deleteCart(
 			@RequestBody Cart cart){
-		logger.info(cart.toString());
-			productService.deleteCart(cart.getCtId());
 		
-			return new ResponseEntity<>("success", HttpStatus.OK);
+		logger.info(cart.toString());
+		productService.deleteCart(cart.getCtId());
+		
+		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
 	
 	@PostMapping({"/likeproduct","/likeproduct/{username}"})
-	public ResponseEntity<?> likeproduct(@RequestBody Product product,
+	public ResponseEntity<?> likeproduct(
+			@RequestBody Product product,
 			@PathVariable String username){
+		
 		productService.likeProduct(product.getpId()); // product pLike + 1
 		product.setUsername(username);
 		productService.insertHeart(product); //pId, username 보내주기 위해 객체 전송, vue_heart에 insert
 		List<Product> productlist = productService.selectProductList(product); // 테스트 로직
+		
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 		
 	}
 	
 	@PostMapping({"/cancellike","/cancellike/{username}"})
-	public ResponseEntity<?> cancellike(@RequestBody Product product,
+	public ResponseEntity<?> cancellike(
+			@RequestBody Product product,
 			@PathVariable String username){
+		
 		productService.cancelLike(product.getpId()); // product pLike - 1
 		product.setUsername(username);
 		productService.deleteHeart(product);
 		List<Product> productlist = productService.selectProductList(product);
+		
 		return ResponseEntity.ok(new ListResponse<Product>(productlist));
 	}
 	
 	@PostMapping("/buyproduct")
 	public ResponseEntity<?> buyproduct(@RequestBody Order order){
+		
 		productService.buyProduct(order);
 		productService.updateQuantity(order);
 		
 		return new ResponseEntity<>("success", HttpStatus.OK);
 	}
+	
+	@PostMapping("/boardwrite")
+	public ResponseEntity<?> boardwrite(
+			@RequestBody Board board){
+		boardService.insertBoard(board);
+		
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	} // 이미지 업로드 없을 시
+	
+	@PostMapping("/writetest")
+	public ResponseEntity<?> writetest(
+			@RequestPart("uploadFile") MultipartFile[] files,
+			Board board, Images images, UserInfo userinfo){
+		
+//		String path = "C:/Users/l9-morning/Documents/lcom_test/src/vue-spring-jeon/public/images/";
+		String path = "C:/Users/user/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/boardimages/";	
+//		String path = "C:/Users/82105/Documents/GitHub/lcom_test/src/vue-spring-jeon/public/images/";
+		String thumbPath = path + "thumb/";
+		
+		// 파일 이름 중복 방지 (년월일초 추가)
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMddHHmmss");
+		Date time = new Date();
+		String dateresult = dateFormat.format(time);
+		int runcount = 1;
+		
+		for(MultipartFile file : files) {
+			String filename = dateresult + file.getOriginalFilename();
+			String ext = filename.substring(filename.lastIndexOf(".")+1);
+			File multifile = new File(path + filename);
+			File thumbFile = new File(thumbPath + filename);
+			System.out.println(filename);
+			
+			try {
+				// 원본 파일 저장
+				InputStream input = file.getInputStream();
+				FileUtils.copyInputStreamToFile(input, multifile);
+				
+				// 썸네일 생성
+				BufferedImage imageBuf = ImageIO.read(multifile);
+				int fixWidth =  500;
+				double ratio = imageBuf.getWidth() / (double)fixWidth;
+				int thumbWidth = fixWidth;
+				int thumbHeight = (int)(imageBuf.getHeight() / ratio);
+				BufferedImage thumbImageBf = new BufferedImage(thumbWidth, thumbHeight, BufferedImage.TYPE_3BYTE_BGR);
+				Graphics2D g  = thumbImageBf.createGraphics();
+				Image thumbImage = imageBuf.getScaledInstance(thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
+				g.drawImage(thumbImage, 0,0,thumbWidth, thumbHeight, null);
+				g.dispose();
+				ImageIO.write(thumbImageBf, ext, thumbFile);
+
+				if (runcount == 1) {
+					board.setUsername(userinfo.getUsername());
+					boardService.insertImgBoard(board); // 제품 내용 디비에 삽입 (중복 INSERT 방지위해 count로 한번만 실행되도록 설정)
+					runcount++;
+				}
+				
+				board.setiName(filename);				// DB의 i_name에 값을 넣기 위해 년월일초와 합친 파일 이름을 product에 넣어준다.
+				boardService.insertImage(board); 		// 이미지 내용 디비에 삽입 (pName값 넘겨주기)
+				
+			}  catch(IOException e) {
+				FileUtils.deleteQuietly(multifile);
+				e.printStackTrace();
+			}
+		
+		}
+		return new ResponseEntity<>("success", HttpStatus.OK);
+	} // 이미지 업로드 있을 시
 	
 	
 	

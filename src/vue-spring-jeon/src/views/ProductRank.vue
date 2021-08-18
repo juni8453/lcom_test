@@ -81,13 +81,14 @@ export default {
     
     }
   },
-  computed:{
-    ...mapState(['ranklist'])
-  },
 
   created(){
     console.log('ProductRank Created Run!')
     this.$store.dispatch('productRank')
+  },
+
+  computed:{
+    ...mapState(['ranklist'])
   },
 
   components:{

@@ -125,4 +125,15 @@ public class BoardServiceImpl implements BoardService {
 		boardMapper.updatepId(images);
 		
 	}
+
+	@Override
+	public void insertImage(Board board) {
+		boardMapper.insertImage(board);
+	}
+
+	@Override
+	public void insertImgBoard(Board board) {
+		boardMapper.insertImgBoard(board);
+		
+	}
 }

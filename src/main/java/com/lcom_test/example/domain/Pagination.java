@@ -45,7 +45,6 @@ public class Pagination {
 	public int getCount() {
 		return count;
 	}
-
 	public void setCount(int count) {
 		this.count = count;
 	}
@@ -53,7 +52,6 @@ public class Pagination {
 	public int getPage() {
 		return page;
 	}
-
 	public void setPage(int page) {
 		this.page = page;
 	}
@@ -61,7 +59,6 @@ public class Pagination {
 	public int getPageNum() {
 		return pageNum;
 	}
-
 	public void setPageNum(int pageNum) {
 		this.pageNum = pageNum;
 	}
@@ -69,7 +66,6 @@ public class Pagination {
 	public int getStartPage() {
 		return startPage;
 	}
-
 	public void setStartPage(int startPage) {
 		this.startPage = startPage;
 	}
@@ -77,7 +73,6 @@ public class Pagination {
 	public int getEndPage() {
 		return endPage;
 	}
-
 	public void setEndPage(int endPage) {
 		this.endPage = endPage;
 	}
@@ -85,7 +80,6 @@ public class Pagination {
 	public int getLastPage() {
 		return lastPage;
 	}
-
 	public void setLastPage(int lastPage) {
 		this.lastPage = lastPage;
 	}
@@ -93,7 +87,6 @@ public class Pagination {
 	public int getPrevPage() {
 		return prevPage;
 	}
-
 	public void setPrevPage(int prevPage) {
 		this.prevPage = prevPage;
 	}
@@ -101,7 +94,6 @@ public class Pagination {
 	public int getNextPage() {
 		return nextPage;
 	}
-
 	public void setNextPage(int nextPage) {
 		this.nextPage = nextPage;
 	}
@@ -109,7 +101,7 @@ public class Pagination {
 	public static int getPageunit() {
 		return pageUnit;
 	}
-
+	
 	public static int getPerpage() {
 		return perPage;
 	}
@@ -117,9 +109,7 @@ public class Pagination {
 	public Search getSearch() {
 		return search;
 	}
-
 	public void setSearch(Search search) {
 		this.search = search;
 	}
-
 }

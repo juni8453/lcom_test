@@ -76,7 +76,6 @@
 import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
-import axios from 'axios'
 
 export default {
   data(){
@@ -89,10 +88,13 @@ export default {
     }
   },
 
-  filters:{
-    comma(val){
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+  created(){
+    console.log('OrderList Run!')
+    this.$store.dispatch('orderList')
+  },
+
+  computed:{
+    ...mapState(['Userinfo', 'cartlist','orderlist'])
   },
 
   components:{
@@ -100,9 +102,10 @@ export default {
     Footer
   },
 
-  created(){
-    console.log('OrderList Run!')
-    this.$store.dispatch('orderList')
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
   },
   
   methods:{
@@ -111,11 +114,6 @@ export default {
       console.log(payload)
       this.$store.dispatch('deleteCart', payload)
     }
-  },
-
-  computed:{
-    ...mapState(['Userinfo', 'cartlist','orderlist'])
-  },
-  
+  }
 }
 </script>

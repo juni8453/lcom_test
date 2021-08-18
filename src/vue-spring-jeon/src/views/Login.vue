@@ -60,23 +60,23 @@
 
 <script>
 import {mapState} from "vuex"
+
   export default {
     data() {
       return {
         username:null,
-        password:null,
+        password:null
       }
     },
+
     computed:{
       ...mapState(['isLogin', 'isLoginError'])
     },
 
     methods: {
-   // ...mapActions(["Login"])
-    login(payload) {
+      login(payload) {
         this.$store.dispatch('loginProcess', payload)
+      }
     }
-
   }
-}
 </script>

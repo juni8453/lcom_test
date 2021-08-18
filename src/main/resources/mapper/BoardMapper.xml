@@ -62,10 +62,25 @@
 			#{bContent},
 			#{username}
 		)
+</insert>
+
+<!-- Test 로직 -->
+<insert id="insertImgBoard" parameterType="Board">
+	      INSERT INTO vue_board(
+			b_title,
+			b_content,
+			u_id
+			
+		)VALUES(
+			#{bTitle},
+			#{bContent},
+			#{username}
+		)
 	<selectKey keyProperty="bId" resultType="int">
 		SELECT LAST_INSERT_ID() 
 	</selectKey>
 </insert>
+
 
 <select id="getBoard" resultType="Board">
      SELECT 		b_id		as bId,
@@ -104,19 +119,13 @@
 </insert>
 
 <insert id="insertImage" parameterType="Images">
-	INSERT INTO vue_img(
+	INSERT INTO vue_boardimg(
 		i_name,
-		i_pk,
-		p_name
+		b_title
 
 	)VALUES(
 		#{iName},
-		#{iPk},
-		#{pName}
-		
-	<selectKey keyProperty="iId" resultType="int">
-		SELECT LAST_INSERT_ID() 
-	</selectKey>
+		#{bTitle}
 	)
 </insert>
 
@@ -198,6 +207,19 @@
 			#{username}
 		)
 </insert>
+
+<!--  
+<insert id="insertImage" parameterType="Images">
+	INSERT INTO vue_img(
+		p_name,
+		i_name
+
+	)VALUES(
+		#{pName},
+		#{iName}
+	)
+</insert>
+-->
 	
 <select id="getBoardCount" resultType="int">
 	SELECT		COUNT(*)					as count
@@ -234,5 +256,6 @@
 	UPDATE	vue_comment
 	SET		c_content = #{cContent}
 	WHERE	c_id = #{cId}
-</update>				
+</update>		
+		
 </mapper>

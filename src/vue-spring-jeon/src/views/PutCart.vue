@@ -154,11 +154,11 @@
 </style>
 
 <script>
+import axios from 'axios'
 import { mapState } from 'vuex'
+import InfiniteLoading from 'vue-infinite-loading'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
-import InfiniteLoading from 'vue-infinite-loading'
-import axios from 'axios'
 
 export default {
   data(){
@@ -171,10 +171,14 @@ export default {
     }
   },
 
-  filters:{
-    comma(val){
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
+  created(){
+    console.log('PutCartList Run!')
+    console.log('this.Userinfo.User_Id:' + this.$store.state.Userinfo.User_Id)
+    this.$store.dispatch('putCartList', {limit:this.limit})
+  },
+
+  computed:{
+    ...mapState(['Userinfo', 'cartlist','Check', 'totalprice'])
   },
 
   components:{
@@ -183,12 +187,12 @@ export default {
     InfiniteLoading,
   },
 
-  created(){
-    console.log('PutCartList Run!')
-    console.log('this.Userinfo.User_Id:' + this.$store.state.Userinfo.User_Id)
-    this.$store.dispatch('putCartList', {limit:this.limit})
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
   },
-  
+
   methods:{
     deleteCart(payload){
       console.log('deleteCart Run')
@@ -219,8 +223,6 @@ export default {
       this.$store.commit('SET_TOTALPRICE',sum)
     },
   
-     
-    
     selectOneProduct(payload){ // payload = {item:item(cartlist), listCart:item.listCart[0]}
       console.log(payload)
 
@@ -244,39 +246,33 @@ export default {
     infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
     console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
     axios.get(`http://localhost:9000/api/auth/putcartlist/${this.$store.state.Userinfo.User_Id}/${this.limit + this.pageOpt}`)
-    .then(Response => {
-      console.log('infiniteHandler Response.data를 받았습니다.')
-      console.log('Response.data:', JSON.stringify(Response.data))
-      console.log('Response.data.list:', JSON.stringify(Response.data.list)) // 받아온 나머지 데이터
-      console.log('Response.data.list.length:', JSON.stringify(Response.data.list.length)) // 나머지 데이터 길이
+      .then(Response => {
+        console.log('infiniteHandler Response.data를 받았습니다.')
+        console.log('Response.data:', JSON.stringify(Response.data))
+        console.log('Response.data.list:', JSON.stringify(Response.data.list)) // 받아온 나머지 데이터
+        console.log('Response.data.list.length:', JSON.stringify(Response.data.list.length)) // 나머지 데이터 길이
 
-      setTimeout(() => {
-        if(Response.data.list.length) {
-          console.log('setTimeout의 Response.data.list는?')
-          console.log(Response.data.list)
-          this.$store.commit('SET_CART_LIST', Response.data)
-          $state.loaded()
-          this.limit += 8
+        setTimeout(() => {
+          if(Response.data.list.length) {
+            console.log('setTimeout의 Response.data.list는?')
+            console.log(Response.data.list)
+            this.$store.commit('SET_CART_LIST', Response.data)
+            $state.loaded()
+            this.limit += 8
 
-          if(this.cartlist.length / this.pageOpt == 0) {  
+            if(this.cartlist.length / this.pageOpt == 0) {  
+              $state.complete()
+            }
+
+          } else {
             $state.complete()
           }
-
-        } else {
-          $state.complete()
-        }
-      },1000)
-    })
-    
-    .catch(error => {
-      console.log(error)
-    })
-  },
-
-  },
-
-  computed:{
-    ...mapState(['Userinfo', 'cartlist','Check', 'totalprice'])
+        },1000)
+      })   
+      .catch(error => {
+        console.log(error)
+      })
+    }
   }
 }
 </script>

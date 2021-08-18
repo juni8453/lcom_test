@@ -140,9 +140,7 @@
 </style>
 
 <script>
-import axios from 'axios'
-import {mapState,mapActions } from 'vuex'
-import Route from '../router/index'
+import { mapState,mapActions } from 'vuex'
 
 export default {
   data(){
@@ -155,13 +153,12 @@ export default {
     }
   },
 
-  methods:{
-    ...mapActions(['insertProduct'])
-  },
-
   computed:{
     ...mapState(['Userinfo'])
   },
-  
+
+  methods:{
+    ...mapActions(['insertProduct'])
+  }
 }
 </script>

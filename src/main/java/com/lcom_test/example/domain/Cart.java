@@ -14,33 +14,38 @@ public class Cart {
 	public int getCtId() {
 		return ctId;
 	}
-	public int getpId() {
-		return pId;
-	}
-	public String getUsername() {
-		return username;
-	}
 	public void setCtId(int ctId) {
 		this.ctId = ctId;
+	}
+	
+	public int getpId() {
+		return pId;
 	}
 	public void setpId(int pId) {
 		this.pId = pId;
 	}
+	
+	public String getUsername() {
+		return username;
+	}
 	public void setUsername(String username) {
 		this.username = username;
 	}
+	
 	public List<Product> getListCart() {
 		return listCart;
 	}
 	public void setListCart(List<Product> listCart) {
 		this.listCart = listCart;
 	}
+	
 	public boolean isCheck() {
 		return check;
 	}
 	public void setCheck(boolean check) {
 		this.check = check;
 	}
+	
 	public int getPageOpt() {
 		return pageOpt;
 	}

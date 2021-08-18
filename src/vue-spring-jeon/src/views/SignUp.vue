@@ -64,17 +64,18 @@
 <script>
 import { mapActions } from 'vuex'
 
-  export default {
-    data() {
-      return {
-        username:null,
-        password:null,
-        name:null,
-        phone:null
-      }
-    },
-    methods: {
-      ...mapActions(['SignUp']),
+export default {
+  data() {
+    return {
+      username:null,
+      password:null,
+      name:null,
+      phone:null
     }
+  },
+
+  methods: {
+    ...mapActions(['SignUp'])
   }
+}
 </script>

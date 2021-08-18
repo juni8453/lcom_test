@@ -162,7 +162,7 @@
 </style>
 
 <script>
-import {mapState,mapActions } from 'vuex'
+import { mapState,mapActions } from 'vuex'
 
 export default {
   data(){
@@ -171,19 +171,18 @@ export default {
       pPrice: null,
       pFrom: null,
       pBrand: null,
-      pQuantity:null,
-      fileinput: null,
+      pQuantity: null,
+      fileinput: null
     }
-  },
-
-  methods:{
-    ...mapActions(['insertProductTest']),
-    
   },
 
   computed:{
     ...mapState(['Userinfo'])
   },
-  
+
+  methods:{
+    ...mapActions(['insertProductTest']),
+    
+  }
 }
 </script>

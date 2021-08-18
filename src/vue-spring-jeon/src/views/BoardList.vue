@@ -134,9 +134,9 @@ div {
 </style>
 
 <script>
-import { mapState, mapActions } from "vuex"
-import Footer from '../components/Footer.vue'
+import { mapState } from "vuex"
 import BwBar from '../components/BwBar.vue'
+import Footer from '../components/Footer.vue'
 
 export default {
   data(){
@@ -147,27 +147,32 @@ export default {
       perPage:5,
     }
   },
+
     created() {
       this.$store.dispatch('BoardList', {page:this.page})
     },
+
     computed: {
       ...mapState(["boardlist", 'Pagination', 'Userinfo']),
     },
+
     components:{
       Footer,
       BwBar
     },
+
     methods: {
       BoardDelete(payload){
         if(confirm('정말로 글을 삭제하시겠습니까?')===true){
           this.$store.dispatch('BoardDelete', payload)
         }
       },
+
       move(payload){
         console.log('next')
         console.log(payload)
         this.$store.dispatch('BoardList', payload)
-      },
+      }
     }
   }  
 </script>

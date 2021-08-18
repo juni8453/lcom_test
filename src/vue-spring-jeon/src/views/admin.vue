@@ -102,7 +102,7 @@ div {
 </style>
 
 <script>
-import { mapState, mapActions } from "vuex"
+import { mapState } from "vuex"
 
 
 export default {
@@ -124,13 +124,12 @@ export default {
   },
 
   methods: {
-    // ...mapActions(['UserDelete', 'admin']), 
-    // mapActions와 같은 헬퍼 사용 시 payload 정의 안해줘도 store에서 사용 가능
     UserDelete(payload){
       if(confirm('정말로 유저를 삭제하시겠습니까?')===true){
         this.$store.dispatch('UserDelete', payload)
       }
     },
+
     move(payload){
       console.log('next')
       console.log(payload)

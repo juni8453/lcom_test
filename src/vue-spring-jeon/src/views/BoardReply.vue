@@ -56,27 +56,31 @@
 </template>
 
 <script>
-import {mapState } from 'vuex'
 import axios from 'axios'
 import Route from '../router/index'
+import {mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
 props:['bId','bGroup', 'bOrder', 'bDepth'],
+
   data(){
     return {
       bTitle:null,
       bContent:null,
     }
   },
+
   computed:{
     ...mapState(['Userinfo'])
   },
+
   components:{
     BwBar,
     Footer
   },
+
   methods: {
     BoardReply(payload){ 
       new Promise((resolve, reject) => {
@@ -93,7 +97,7 @@ props:['bId','bGroup', 'bOrder', 'bDepth'],
             console.log(Error)
         })
       })
-    }, 
+    }
   }
 }
 </script>

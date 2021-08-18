@@ -52,17 +52,19 @@
 <script>
 import axios from 'axios'
 import Route from '../router/index'
-import { mapActions, mapState } from 'vuex'
+import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
 
 export default {
     props:['bId'], //BoardList.vue에서 params로 넘긴 값 (item.bId)
+
     data(){
         return {
             board: {}
         }
     },
+
     created(){
         console.log('BoardEdit Run')
         console.log(this.bId)       // props에서 bId 잘 가지고 오는지 확인
@@ -70,13 +72,16 @@ export default {
         console.log('BoardEidt Run end')
 
     },
+
     computed:{
         ...mapState(['Userinfo'])
     },
+
     components:{
         BwBar,
         Footer
     },
+
     methods: {
         BoardEdit(payload){ 
             console.log('BoardEdit Run')
@@ -93,7 +98,8 @@ export default {
                     console.log(Error)
                 })
             })
-        }, 
+        },
+
         getBoard() {
             new Promise((resolve,reject)=> {
                 axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`) // boarddetail 소스 재활용

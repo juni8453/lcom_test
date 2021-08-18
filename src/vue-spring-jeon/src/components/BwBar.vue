@@ -64,7 +64,6 @@
 </template>
 
 <script>
-import Route from '../router/index'
 import { mapState } from 'vuex'
 
 export default {
@@ -74,16 +73,16 @@ export default {
         }
     },
 
+    computed: {
+        ...mapState(['isLogin', 'isLoginError']),
+    },
+
     methods:{
         hotItems(){
             if(this.isLogin === false){
                 alert('로그인이 필요한 서비스입니다.')
             }
-        },
-    },
-
-    computed: {
-        ...mapState(['isLogin', 'isLoginError']),
-    },
+        }
+    }
 }
 </script>

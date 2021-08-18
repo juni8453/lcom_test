@@ -198,20 +198,14 @@
 </style>
 
 <script>
-import { mapState } from 'vuex'
+import axios from 'axios'
 import Route from '../router/index'
+import { mapState } from 'vuex'
 import BwBar from '../components/BwBar.vue'
 import Footer from '../components/Footer.vue'
-import axios from 'axios'
 
 export default {
   props:['pName','pPrice','pQuantity'],
-
-  filters:{
-    comma(val){
-      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
-    }
-  },
 
   data(){
     return{
@@ -226,6 +220,17 @@ export default {
 
   computed:{
     ...mapState(['Userinfo'])
+  },
+
+  components:{
+    BwBar,
+    Footer
+  },
+
+  filters:{
+    comma(val){
+      return String(val).replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    }
   },
 
   methods:{
@@ -252,11 +257,6 @@ export default {
         })      
       }
     }
-  },
-
-  components:{
-    BwBar,
-    Footer
   }
 }
 </script>
