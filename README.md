@@ -7,7 +7,7 @@
 
 * 참여자 : 전병준
 
-* 사용 스택 : Java Spring, Vue.js, Vuetify, JavaScript, HTML5, CSS, MySQL 등
+* 사용 스택 : Java Spring, Vue.js, Vuetify, JavaScript, HTML5, CSS, MySQL
   
 * 맡은 역할
   * Spring, Gradle, MyBatis3 등을 사용해 Back-End를 구현
