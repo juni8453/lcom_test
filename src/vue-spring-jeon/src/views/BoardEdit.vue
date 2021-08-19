@@ -87,7 +87,7 @@ export default {
             console.log('BoardEdit Run')
             console.log(payload)
             new Promise((resolve, reject) => {
-                axios.post(`http://localhost:9000/api/auth/boardedit`, payload)
+                axios.post(`http://3.38.87.14:9000/api/auth/boardedit`, payload)
                 .then(Response => {
                     console.log('return board vo')
                     console.log(payload)
@@ -102,7 +102,7 @@ export default {
 
         getBoard() {
             new Promise((resolve,reject)=> {
-                axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}`) // boarddetail 소스 재활용
+                axios.get(`http://3.38.87.14:9000/api/auth/boarddetail/${this.bId}`) // boarddetail 소스 재활용
                 .then(Response => {
                     console.log(Response.data)
                     this.board = Response.data

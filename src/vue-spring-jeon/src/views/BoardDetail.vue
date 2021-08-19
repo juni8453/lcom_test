@@ -207,7 +207,7 @@ export default {
     },
     created(){
         new Promise((resolve, reject) => {
-            axios.get(`http://localhost:9000/api/auth/boarddetail/${this.bId}/${this.page}`)
+            axios.get(`http://http://3.38.87.14:9000/api/auth/boarddetail/${this.bId}/${this.page}`)
             .then(Response => {
                 console.log('return board vo')
                 console.log(Response.data)
@@ -228,7 +228,7 @@ export default {
             console.log('CommentReply Run')
             console.log(payload)
             new Promise((resolve,reject) => {
-            axios.post(`http://localhost:9000/api/auth/commentwrite/${payload.page}`, payload)
+            axios.post(`http://http://3.38.87.14:9000/api/auth/commentwrite/${payload.page}`, payload)
             .then(Response => {
                 console.log("Response Data를 받았습니다")
                 console.log(Response.data)
@@ -249,7 +249,7 @@ export default {
             payload.cShow =! payload.cShow //cShow 다시 true > false로 조정
             console.log(payload.cShow)
             new Promise((resolve,reject) => {
-            axios.post(`http://localhost:9000/api/auth/commentedit/${payload.page}`, payload)
+            axios.post(`http://http://3.38.87.14:9000/api/auth/commentedit/${payload.page}`, payload)
             .then(Response => {
                 console.log("Response Data를 받았습니다")
                 console.log(Response.data)
@@ -266,7 +266,7 @@ export default {
         },
         CommentWrite(payload) {
             new Promise((resolve, reject) => {
-                axios.post(`http://localhost:9000/api/auth/commentwrite/${payload.page}`, payload)
+                axios.post(`http://3.38.87.14:9000/api/auth/commentwrite/${payload.page}`, payload)
                 .then(Response => {
                     console.log('CommentWrite Run')
                     console.log(payload)
@@ -292,7 +292,7 @@ export default {
         CommentDelete(payload){
             if(confirm('정말로 글을 삭제하시겠습니까?')===true){
                 new Promise((resolve, reject) => {
-                    axios.post(`http://localhost:9000/api/auth/commentdelete/${payload.page}`, payload)
+                    axios.post(`http://3.38.87.14:9000/api/auth/commentdelete/${payload.page}`, payload)
                     .then(Response => {
                         console.log('payload')
                         console.log(payload)

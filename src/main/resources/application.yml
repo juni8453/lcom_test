@@ -10,9 +10,9 @@ spring:
   - local
          
   datasource:
-    url: jdbc:mysql://127.0.0.1:3306/jeon?characterEncoding=UTF-8&serverTimezone=UTC
+    url: jdbc:mysql://3.38.87.14:3306/jeon?characterEncoding=UTF-8&serverTimezone=UTC
     username: root
-    password: 8453
+    password: wjsqudwns1!
     driver-class-name: com.mysql.cj.jdbc.Driver
   
   servlet:
