@@ -243,36 +243,39 @@ export default {
       }
     },
 
-    infiniteHandler($state){ //$state 한번 지워보기 (왜 있는지 모르겠음)
-    console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
-    axios.get(`http://3.38.87.14:9000/api/auth/putcartlist/${this.$store.state.Userinfo.User_Id}/${this.limit + this.pageOpt}`)
-      .then(Response => {
-        console.log('infiniteHandler Response.data를 받았습니다.')
-        console.log('Response.data:', JSON.stringify(Response.data))
-        console.log('Response.data.list:', JSON.stringify(Response.data.list)) // 받아온 나머지 데이터
-        console.log('Response.data.list.length:', JSON.stringify(Response.data.list.length)) // 나머지 데이터 길이
+    infiniteHandler($state){ 
+      let dev = 'localhost'
+      let sev = '3.38.87.14'
 
-        setTimeout(() => {
-          if(Response.data.list.length) {
-            console.log('setTimeout의 Response.data.list는?')
-            console.log(Response.data.list)
-            this.$store.commit('SET_CART_LIST', Response.data)
-            $state.loaded()
-            this.limit += 8
+      console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
+      axios.get(`http://${dev}:9000/api/auth/putcartlist/${this.$store.state.Userinfo.User_Id}/${this.limit + this.pageOpt}`)
+        .then(Response => {
+          console.log('infiniteHandler Response.data를 받았습니다.')
+          console.log('Response.data:', JSON.stringify(Response.data))
+          console.log('Response.data.list:', JSON.stringify(Response.data.list)) // 받아온 나머지 데이터
+          console.log('Response.data.list.length:', JSON.stringify(Response.data.list.length)) // 나머지 데이터 길이
 
-            if(this.cartlist.length / this.pageOpt == 0) {  
+          setTimeout(() => {
+            if(Response.data.list.length) {
+              console.log('setTimeout의 Response.data.list는?')
+              console.log(Response.data.list)
+              this.$store.commit('SET_CART_LIST', Response.data)
+              $state.loaded()
+              this.limit += 8
+
+              if(this.cartlist.length / this.pageOpt == 0) {  
+                $state.complete()
+              }
+
+            } else {
               $state.complete()
             }
-
-          } else {
-            $state.complete()
-          }
-        },1000)
-      })   
-      .catch(error => {
-        console.log(error)
-      })
+          },1000)
+        })   
+        .catch(error => {
+          console.log(error)
+        })
+      }
     }
   }
-}
 </script>

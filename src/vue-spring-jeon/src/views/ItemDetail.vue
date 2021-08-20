@@ -200,12 +200,15 @@ export default {
   },
 
   created(){
+    let dev = 'localhost'
+    let sev = '3.38.87.14'
+
     console.log('ItemDetail Created Run!')
     console.log('받아온 props pName:'+this.pName)
     console.log('받아온 props pQuantity:'+this.pQuantity)
     new Promise((resolve, reject) => {
       console.log(this.$store.state.Userinfo.User_Id)
-      axios.get(`http://3.38.87.14:9000/api/auth/itemdetail/${this.pName}`)
+      axios.get(`http://${dev}:9000/api/auth/itemdetail/${this.pName}`)
       .then(Response => {
         console.log('ItemDetail created Response data')
         console.log(Response.data)
@@ -237,11 +240,14 @@ export default {
 
   methods:{
     putCart(payload){
+      let dev = 'localhost'
+      let sev = '3.38.87.14'
+
       console.log('putCart Run')
       console.log(payload)
       new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-        axios.post(`http://3.38.87.14:9000/api/auth/putcart/${payload.username}`, payload)
+        axios.post(`http://${dev}:9000/api/auth/putcart/${payload.username}`, payload)
         .then(Response => {
           console.log('putCart Response.data를 받았습니다.')
           console.log(Response.data)

@@ -235,12 +235,15 @@ export default {
 
   methods:{
     buyProduct(payload){
+      let dev = 'localhost'
+      let sev = '3.38.87.14'
+
       console.log('buyProduct Run!')
       console.log(payload)
       if(confirm('주문하겠습니까?')===true){
         new Promise((resolve, reject) => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-          axios.post(`http://3.38.87.14:9000/api/auth/buyproduct`, payload)
+          axios.post(`http://${dev}:9000/api/auth/buyproduct`, payload)
           .then(Response => {
             console.log(Response.data)
             if(Response.data === 'success'){

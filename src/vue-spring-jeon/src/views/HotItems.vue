@@ -91,8 +91,11 @@ export default {
 
   methods: { 
     infiniteHandler($state){
+      let dev = 'localhost'
+      let sev = '3.38.87.14'
+
       console.log('limit+pageOpt?'+ this.limit + this.pageOpt)
-      axios.get(`http://3.38.87.14:9000/api/auth/hotitems/${this.limit + this.pageOpt}/${this.$store.state.Userinfo.User_Id}`)
+      axios.get(`http://${dev}:9000/api/auth/hotitems/${this.limit + this.pageOpt}/${this.$store.state.Userinfo.User_Id}`)
       .then(Response => {
         console.log('infiniteHandler Response.data를 받았습니다.')
         console.log('Response.data:', JSON.stringify(Response.data))
@@ -123,12 +126,15 @@ export default {
     },
 
     deleteProduct(payload){
+      let dev = 'localhost'
+      let sev = '3.38.87.14'
+
       if(confirm('정말로 글을 삭제하시겠습니까?')===true){
         console.log('deleteProduct Run')
         console.log('deleteProduct의 payload =' + JSON.stringify(payload))
         new Promise((resolve, reject) => {
           axios.defaults.headers.common['Authorization'] = `Bearer ${this.$store.state.Userinfo.User_token}`
-          axios.post('http://3.38.87.14:9000/api/admin/deleteproduct', payload)
+          axios.post(`http://${dev}:9000/api/admin/deleteproduct`, payload)
           .then(Response => {
               console.log(Response.data)
               // this.$store.commit('READ_PRODUCT_LIST', Response.data)
