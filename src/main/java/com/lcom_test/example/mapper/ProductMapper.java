@@ -6,6 +6,7 @@ import org.apache.ibatis.annotations.Mapper;
 
 import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Heart;
+import com.lcom_test.example.domain.HomeImg;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Order;
 import com.lcom_test.example.domain.Product;
@@ -51,6 +52,8 @@ public interface ProductMapper {
 	public List<Order> selectOrderList(Order order);
 
 	public void updateQuantity(Order order);
+
+	public List<HomeImg> selectHomeImgList(HomeImg homeimg);
 
 
 }

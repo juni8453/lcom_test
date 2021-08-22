@@ -509,6 +509,23 @@ export default new Vuex.Store({
       })
     }, // 인기 상품 리스트 Test
 
+    homePage({commit, state}){
+      return new Promise((resolve,reject) => {
+        axios.get(`http://${state.dev}:9000/api/auth/homePage`)
+        .then(Response => {
+          console.log('homePage의 Reponse.data를 받았습니다.')
+          console.log(Response.data)
+          console.log('Imgs data를 받았습니다.')
+          console.log(Response.data.list)
+          // commit('READ_HOMEIMG_LIST', Response.data)
+        })
+        .catch(Error => {
+          console.log(Error)
+          Route.push("/")
+        })
+      })
+    }, // 홈페이지 이미지 가져오기
+
     putCartList({commit,state}, payload){
       return new Promise((resolve, reject) => {
         axios.defaults.headers.common['Authorization'] = `Bearer ${state.Userinfo.User_token}`

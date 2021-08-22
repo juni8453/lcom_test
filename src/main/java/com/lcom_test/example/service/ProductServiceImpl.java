@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Heart;
+import com.lcom_test.example.domain.HomeImg;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Order;
 import com.lcom_test.example.domain.Product;
@@ -120,6 +121,11 @@ public class ProductServiceImpl implements ProductService {
 	public void updateQuantity(Order order) {
 		productMapper.updateQuantity(order);
 		
+	}
+
+	@Override
+	public List<HomeImg> selectHomeImgList(HomeImg homeimg) {
+		return productMapper.selectHomeImgList(homeimg);
 	}
 
 	

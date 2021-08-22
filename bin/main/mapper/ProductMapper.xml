@@ -89,6 +89,14 @@ LEFT JOIN	userlist td ON tb.u_id = td.u_id ORDER BY p_like DESC
 LIMIT		#{pageOpt},8
 </select>
 
+<select id="selectHomeImgList" resultType="HomeImg">
+	SELECT	hi_id as hiId,
+			hi_name as hiName
+			
+	FROM 	vue_homeimg
+	LIMIT   0,4
+</select>
+
 <resultMap type = "Images" id="Images2">
 		<result column="i_id" property="iId"/>
 		<result column="i_name" property="iName"/>

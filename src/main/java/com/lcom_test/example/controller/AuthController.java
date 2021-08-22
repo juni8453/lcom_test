@@ -65,6 +65,7 @@ import com.lcom_test.example.domain.Board;
 import com.lcom_test.example.domain.Cart;
 import com.lcom_test.example.domain.Comment;
 import com.lcom_test.example.domain.Heart;
+import com.lcom_test.example.domain.HomeImg;
 import com.lcom_test.example.domain.Images;
 import com.lcom_test.example.domain.Order;
 import com.lcom_test.example.domain.Pagination;
@@ -394,6 +395,12 @@ public class AuthController {
 		logger.info(itemslist.toString());
 		return ResponseEntity.ok(new ListResponse<Product>(itemslist));
 	} // 인기상품리스트
+	
+	@GetMapping("/homePage")
+	public ResponseEntity<?> homePage(HomeImg homeimg){
+		List<HomeImg> homeimglist = productService.selectHomeImgList(homeimg);
+		return ResponseEntity.ok(new ListResponse<HomeImg>(homeimglist));
+	} // 홈페이지 이미지 가져오기
 	
 	@GetMapping({"/productrank"})
 	public ResponseEntity<?> productrank(Product product){
